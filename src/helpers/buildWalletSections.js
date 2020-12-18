@@ -299,7 +299,14 @@ const withBalanceSection = (
     hiddenCoins,
     true
   );
-  let balanceSectionData = [...assets];
+
+  let balanceSectionData = [];
+
+  if (networkTypes.mainnet === network) {
+    balanceSectionData.push(savingsSection);
+  }
+
+  balanceSectionData.push(...assets);
 
   const totalBalanceWithSavingsValue = add(
     totalBalancesValue,
@@ -314,10 +321,6 @@ const withBalanceSection = (
     totalBalanceWithAllSectionValues,
     nativeCurrency
   );
-
-  if (networkTypes.mainnet === network) {
-    balanceSectionData.push(savingsSection);
-  }
 
   if (isLoadingAssets) {
     balanceSectionData = [{ item: { uniqueId: 'skeleton0' } }];
