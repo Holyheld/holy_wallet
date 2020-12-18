@@ -11,11 +11,11 @@ import Reanimated, {
 import { useValue } from 'react-native-redash';
 import styled from 'styled-components/native';
 import { useMemoOne } from 'use-memo-one';
-import RainbowGreyNeon from '../assets/rainbows/greyneon.png';
-import RainbowLight from '../assets/rainbows/light.png';
-import RainbowLiquid from '../assets/rainbows/liquid.png';
-import RainbowNeon from '../assets/rainbows/neon.png';
-import RainbowPixel from '../assets/rainbows/pixel.png';
+import HolyFiber from '../assets/holys/fiber.png';
+import HolyFur from '../assets/holys/fur.png';
+import HolyGlass from '../assets/holys/glass.png';
+import HolyGold from '../assets/holys/gold.png';
+import HolyStone from '../assets/holys/stone.png';
 import { ButtonPressAnimation } from '../components/animations';
 import RainbowText from '../components/icons/svg/RainbowText';
 import { RowWithMargins } from '../components/layout';
@@ -130,7 +130,7 @@ const RainbowButton = ({
 const Container = styled.View`
   ${StyleSheet.absoluteFillObject};
   align-items: center;
-  background-color: ${colors.white};
+  background-color: ${colors.black};
   justify-content: center;
 `;
 
@@ -158,55 +158,55 @@ export const useAnimatedValue = initialValue => {
   return value;
 };
 
-const rainbows = [
+const images = [
   {
     delay: 0,
-    id: 'grey',
-    rotate: '150deg',
+    id: 'glass',
+    rotate: '0deg',
     scale: 0.5066666667,
-    source: ios ? { uri: 'greyneon' } : RainbowGreyNeon,
+    source: ios ? { uri: 'glass' } : HolyGlass,
     x: -116,
     y: -202,
   },
   {
     delay: 20,
-    id: 'neon',
-    rotate: '394.75deg',
+    id: 'stone',
+    rotate: '0deg',
     scale: 0.3333333333,
-    source: ios ? { uri: 'neon' } : RainbowNeon,
+    source: ios ? { uri: 'stone' } : HolyStone,
     x: 149,
-    y: 380,
+    y: 350,
   },
   {
     delay: 40,
-    id: 'pixel',
-    rotate: '360deg',
-    scale: 0.6666666667,
-    source: ios ? { uri: 'pixel' } : RainbowPixel,
-    x: 173,
+    id: 'fur',
+    rotate: '0deg',
+    scale: 0.45,
+    source: ios ? { uri: 'fur' } : HolyFur,
+    x: 150,
     y: -263,
   },
   {
     delay: 60,
-    id: 'light',
-    rotate: '-33deg',
+    id: 'fiber',
+    rotate: '-360deg',
     scale: 0.2826666667,
-    source: ios ? { uri: 'light' } : RainbowLight,
+    source: ios ? { uri: 'fiber' } : HolyFiber,
     x: -172,
     y: 180,
   },
   {
     delay: 80,
-    id: 'liquid',
-    rotate: '75deg',
+    id: 'gold',
+    rotate: '360deg',
     scale: 0.42248,
-    source: ios ? { uri: 'liquid' } : RainbowLiquid,
+    source: ios ? { uri: 'gold' } : HolyGold,
     x: 40,
     y: 215,
   },
 ];
 
-const traversedRainbows = rainbows.map(
+const traversedImages = images.map(
   (
     {
       delay,
@@ -261,7 +261,7 @@ const traversedRainbows = rainbows.map(
   }
 );
 
-const RainbowImage = styled(Animated.Image)`
+const Image = styled(Animated.Image)`
   height: ${INITIAL_SIZE};
   position: absolute;
   width: ${INITIAL_SIZE};
@@ -364,7 +364,7 @@ export default function WelcomeScreen() {
       } finally {
         hideSplashScreen();
         Animated.parallel([
-          ...traversedRainbows.map(({ value, delay = 0 }) =>
+          ...traversedImages.map(({ value, delay = 0 }) =>
             Animated.spring(value, { ...springConfig, delay })
           ),
           Animated.sequence([
@@ -498,15 +498,15 @@ export default function WelcomeScreen() {
 
   return (
     <Container testID="welcome-screen">
-      {traversedRainbows.map(({ source, style, id }) => (
-        <RainbowImage key={`rainbow${id}`} source={source} style={style} />
+      {traversedImages.map(({ source, style, id }) => (
+        <Image key={`holy${id}`} source={source} style={style} />
       ))}
 
       <ContentWrapper style={contentStyle}>
         {android && IS_TESTING === 'true' ? (
-          <RainbowText />
+          <RainbowText color={colors.white} />
         ) : (
-          <MaskedView maskElement={<RainbowText />}>
+          <MaskedView maskElement={<RainbowText color={colors.white} />}>
             <RainbowTextMask style={textStyle} />
           </MaskedView>
         )}
