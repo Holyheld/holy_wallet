@@ -30,6 +30,7 @@ import {
   useWalletSectionsData,
 } from '../hooks';
 import { updateRefetchSavings } from '../redux/data';
+import colors from '../styles/colors';
 import { position } from '@rainbow-me/styles';
 
 const HeaderOpacityToggler = styled(OpacityToggler).attrs(({ isVisible }) => ({
@@ -94,7 +95,7 @@ export default function WalletScreen() {
 
   return (
     <WalletPage testID="wallet-screen">
-      <StatusBar barStyle="dark-content" />
+      <StatusBar barStyle="light-content" />
 
       {/* Line below appears to be needed for having scrollViewTracker persistent while
       reattaching of react subviews */}
@@ -105,7 +106,10 @@ export default function WalletScreen() {
         isReadOnlyWallet={isReadOnlyWallet}
       >
         <HeaderOpacityToggler isVisible={isCoinListEdited}>
-          <Header justify="space-between">
+          <Header
+            backgroundColor={colors.darkBackground}
+            justify="space-between"
+          >
             <ProfileHeaderButton />
             {discoverSheetAvailable ? (
               <DiscoverHeaderButton />

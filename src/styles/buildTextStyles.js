@@ -49,7 +49,7 @@ export function fontWithWidth(weight, family = 'SFProRounded', mono = false) {
 
 const buildTextStyles = css`
   /* Color */
-  color: ${({ color }) => colors.get(color) || colors.dark};
+  color: ${({ color }) => colors.get(color) || colors.white};
 
   /* Font Family */
   ${({ isEmoji, family = 'SFProRounded', mono, weight }) => {

@@ -1,5 +1,5 @@
 import React, { createElement, Fragment } from 'react';
-import LinearGradient from 'react-native-linear-gradient';
+// import LinearGradient from 'react-native-linear-gradient';
 import styled from 'styled-components/primitives';
 import { useDimensions } from '../../hooks';
 import Divider from '../Divider';
@@ -7,22 +7,23 @@ import { ContextMenu } from '../context-menu';
 import { Row } from '../layout';
 import SavingsListHeader from '../savings/SavingsListHeader';
 import { H1 } from '../text';
-import { colors, padding, position } from '@rainbow-me/styles';
+// import { colors, padding, position } from '@rainbow-me/styles';
+import { colors, padding } from '@rainbow-me/styles';
 
 export const ListHeaderHeight = 44;
 
-const BackgroundGradient = styled(LinearGradient).attrs({
-  colors: [
-    colors.listHeaders.firstGradient,
-    colors.listHeaders.secondGradient,
-    colors.listHeaders.thirdGradient,
-  ],
-  end: { x: 0, y: 0 },
-  pointerEvents: 'none',
-  start: { x: 0, y: 0.5 },
-})`
-  ${position.cover};
-`;
+// const BackgroundGradient = styled(LinearGradient).attrs({
+//   colors: [
+//     colors.listHeaders.firstGradient,
+//     colors.listHeaders.secondGradient,
+//     colors.listHeaders.thirdGradient,
+//   ],
+//   end: { x: 0, y: 0 },
+//   pointerEvents: 'none',
+//   start: { x: 0, y: 0.5 },
+// })`
+//   ${position.cover};
+// `;
 
 const Content = styled(Row).attrs({
   align: 'center',
@@ -68,7 +69,7 @@ export default function ListHeader({
   } else {
     return (
       <Fragment>
-        <BackgroundGradient />
+        {/* <BackgroundGradient /> */}
         <Content isSticky={isSticky}>
           <Row align="center">
             {createElement(titleRenderer, { children: title })}
@@ -76,7 +77,12 @@ export default function ListHeader({
           </Row>
           {children}
         </Content>
-        {showDivider && <Divider />}
+        {showDivider && (
+          <Divider
+            backgroundColor={colors.darkBackground}
+            color={colors.dividerColor}
+          />
+        )}
         {!isSticky && title !== 'Balances' && (
           <StickyBackgroundBlocker
             deviceDimensions={deviceDimensions}

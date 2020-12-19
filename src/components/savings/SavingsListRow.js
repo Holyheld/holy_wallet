@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { InteractionManager } from 'react-native';
 import { IS_TESTING } from 'react-native-dotenv';
-import LinearGradient from 'react-native-linear-gradient';
+// import LinearGradient from 'react-native-linear-gradient';
 import styled from 'styled-components/primitives';
 import {
   SavingsSheetEmptyHeight,
@@ -25,7 +25,8 @@ import {
 import { useDimensions } from '@rainbow-me/hooks';
 import { useNavigation } from '@rainbow-me/navigation';
 import Routes from '@rainbow-me/routes';
-import { colors, padding, position } from '@rainbow-me/styles';
+// import { colors, padding, position } from '@rainbow-me/styles';
+import { colors, padding } from '@rainbow-me/styles';
 import ShadowStack from 'react-native-shadow-stack';
 
 const MS_IN_1_DAY = 1000 * 60 * 60 * 24;
@@ -42,14 +43,15 @@ const neverRerender = () => true;
 // eslint-disable-next-line react/display-name
 const SavingsListRowGradient = React.memo(
   () => (
-    <LinearGradient
-      borderRadius={49}
-      colors={['#FFFFFF', '#F7F9FA']}
-      end={{ x: 0.5, y: 1 }}
-      pointerEvents="none"
-      start={{ x: 0.5, y: 0 }}
-      style={position.coverAsObject}
-    />
+    // <LinearGradient
+    //   borderRadius={49}
+    //   colors={['#FFFFFF', '#F7F9FA']}
+    //   end={{ x: 0.5, y: 1 }}
+    //   pointerEvents="none"
+    //   start={{ x: 0.5, y: 0 }}
+    //   style={position.coverAsObject}
+    // />
+    <></>
   ),
   neverRerender
 );

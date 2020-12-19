@@ -39,7 +39,7 @@ const QRIcon = styled(Icon).attrs({
 
 const Subtitle = styled(Text).attrs({
   align: 'center',
-  color: colors.alpha(colors.darkModeColors.blueGreyDark, 0.6),
+  color: colors.alpha(colors.blueGreyDark, 0.6),
   size: 'smedium',
   weight: 'semibold',
 })``;

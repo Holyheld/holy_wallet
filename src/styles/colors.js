@@ -1,7 +1,7 @@
 import chroma from 'chroma-js';
 import { toLower } from 'lodash';
 import PropTypes from 'prop-types';
-import { darkMode } from '../config/debug';
+// import { darkMode } from '../config/debug';
 
 const buildRgba = (color, alpha = 1) => `rgba(${chroma(color).rgb()},${alpha})`;
 
@@ -14,9 +14,12 @@ let base = {
   blueGreyDarker: '#0F0F11', // '15, 15, 17'
   blueGreyDarkLight: '#F3F4F5', // '243, 244, 245'
   brightRed: '#FF7171', // '255, 113, 113'
+  buttonBackgroundDark: '#25282D',
   chartGreen: '#66d28f', // '102, 210, 143'
   dark: '#25292E', // '37, 41, 46'
+  darkBackground: '#3B3E43',
   darkGrey: '#71778A', // '113, 119, 138'
+  dividerColor: 'rgba(255, 255, 255, 0.08)',
   flamingo: '#E540F1', // '229, 64, 241'
   green: '#2CCC00', // '58, 166, 134'
   grey: '#A9ADB9', // '169, 173, 185'
@@ -129,38 +132,38 @@ const transparent = {
   whiteTransparent: buildRgba(base.white, 0.8), // '255, 255, 255'
 };
 
-const darkModeColors = {
-  appleBlue: '#FFFFFF',
-  black: '#FFFFFF',
-  blueGreyDark: '#E0E8FF',
-  blueGreyDark50: '#FFFFFF',
-  blueGreyDarker: '#FFFFFF',
-  blueGreyDarkLight: '#0F0F0F',
-  dark: '#FFFFFF',
-  darkGrey: '#FFFFFF',
-  green: '#69D44D',
-  grey: '#FFFFFF',
-  grey20: '#FFFFFF',
-  lighterGrey: '#FFFFFF',
-  lightestGrey: '#FFFFFF',
-  lightGrey: '#FFFFFF',
-  purple: '#9C57FF',
-  skeleton: '#0F0F0F',
-  white: '#000000',
-};
+// const darkModeColors = {
+//   appleBlue: '#FFFFFF',
+//   black: '#FFFFFF',
+//   blueGreyDark: '#E0E8FF',
+//   blueGreyDark50: '#FFFFFF',
+//   blueGreyDarker: '#FFFFFF',
+//   blueGreyDarkLight: '#0F0F0F',
+//   dark: '#FFFFFF',
+//   darkGrey: '#FFFFFF',
+//   green: '#69D44D',
+//   grey: '#FFFFFF',
+//   grey20: '#FFFFFF',
+//   lighterGrey: '#FFFFFF',
+//   lightestGrey: '#FFFFFF',
+//   lightGrey: '#FFFFFF',
+//   purple: '#9C57FF',
+//   skeleton: '#0F0F0F',
+//   white: '#000000',
+// };
 
-if (darkMode) {
-  base = {
-    ...base,
-    ...darkModeColors,
-  };
+// if (darkMode) {
+//   base = {
+//     ...base,
+//     // ...darkModeColors,
+//   };
 
-  listHeaders = {
-    firstGradient: '#000000ff',
-    secondGradient: '#00000080',
-    thirdGradient: '#000000ff',
-  };
-}
+//   listHeaders = {
+//     firstGradient: '#000000ff',
+//     secondGradient: '#00000080',
+//     thirdGradient: '#000000ff',
+//   };
+// }
 
 const colors = {
   alpha: buildRgba,
@@ -190,7 +193,7 @@ const getRandomColor = () =>
 
 export default {
   ...colors,
-  darkModeColors,
+  // darkModeColors,
   get: getColorForString,
   getRandomColor,
   propType: PropTypes.oneOf([...Object.keys(colors), ...Object.values(colors)]),

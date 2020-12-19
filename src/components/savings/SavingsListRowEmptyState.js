@@ -21,9 +21,9 @@ const sx = StyleSheet.create({
 });
 
 const SavingsListRowEmptyState = ({ onPress }) => (
-  <RowWithMargins align="center" margin={8} paddingLeft={4}>
+  <RowWithMargins align="center" margin={8} paddingLeft={10} paddingRight={10}>
     <Text
-      color={colors.blueGreyDark}
+      color={colors.white}
       letterSpacing="roundedTightest"
       opacity={0.5}
       size="lmedium"
@@ -31,7 +31,7 @@ const SavingsListRowEmptyState = ({ onPress }) => (
     >
       $0.00
     </Text>
-    <ButtonPressAnimation onPress={onPress} scaleTo={0.92} style={sx.button}>
+    <ButtonPressAnimation onPress={onPress} scaleTo={0.9} style={sx.button}>
       <Text
         color={colors.white}
         letterSpacing="roundedTight"

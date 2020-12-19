@@ -17,7 +17,7 @@ import HolyGlass from '../assets/holys/glass.png';
 import HolyGold from '../assets/holys/gold.png';
 import HolyStone from '../assets/holys/stone.png';
 import { ButtonPressAnimation } from '../components/animations';
-import RainbowText from '../components/icons/svg/RainbowText';
+import HolyText from '../components/icons/svg/HolyText';
 import { RowWithMargins } from '../components/layout';
 import { Emoji, Text } from '../components/text';
 
@@ -119,7 +119,7 @@ const RainbowButton = ({
       {ios && <Shadow style={shadowStyle} />}
       <ButtonContainer height={height} style={style}>
         <ButtonContent>
-          <ButtonEmoji name={emoji} />
+          {!!emoji && <ButtonEmoji name={emoji} />}
           <ButtonLabel textColor={textColor}>{text}</ButtonLabel>
         </ButtonContent>
       </ButtonContainer>
@@ -449,16 +449,16 @@ export default function WelcomeScreen() {
     const color = colorAnimation(rValue, true);
     return {
       emoji: 'castle',
-      height: 54 + (ios ? 0 : 6),
+      height: 50 + (ios ? 0 : 6), // to compensate border width on Android
       shadowStyle: {
         backgroundColor: backgroundColor,
         shadowColor: color,
       },
       style: {
-        backgroundColor: colors.dark,
+        backgroundColor: colors.buttonBackgroundDark,
         borderColor: backgroundColor,
         borderWidth: ios ? 0 : 3,
-        width: 230 + (ios ? 0 : 6),
+        width: 242 + (ios ? 0 : 6),
       },
       text: 'Get a new wallet',
       textColor: colors.white,
@@ -477,16 +477,16 @@ export default function WelcomeScreen() {
         opacity: 0,
       },
       emoji: 'old_key',
-      height: 56,
+      height: 50,
       shadowStyle: {
         opacity: 0,
       },
       style: {
-        backgroundColor: colors.blueGreyDarkLight,
+        backgroundColor: colors.buttonBackgroundDark,
         width: 248,
       },
       text: 'I already have one',
-      textColor: colors.alpha(colors.blueGreyDark, 0.8),
+      textColor: colors.white,
     };
   }, [rValue]);
 
@@ -504,9 +504,9 @@ export default function WelcomeScreen() {
 
       <ContentWrapper style={contentStyle}>
         {android && IS_TESTING === 'true' ? (
-          <RainbowText color={colors.white} />
+          <HolyText color={colors.white} />
         ) : (
-          <MaskedView maskElement={<RainbowText color={colors.white} />}>
+          <MaskedView maskElement={<HolyText color={colors.white} />}>
             <RainbowTextMask style={textStyle} />
           </MaskedView>
         )}

@@ -36,7 +36,7 @@ const GasSpeedLabelPager = ({ label, theme, showPager = true }) => {
               backgroundColor={
                 speed === label
                   ? speedColors[i]
-                  : colors.alpha(colors.darkModeColors.blueGreyDark, 0.3)
+                  : colors.alpha(colors.blueGreyDark, 0.3)
               }
               key={`pager-${speed}-${i}`}
               selected={speed === label}

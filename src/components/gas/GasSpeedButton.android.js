@@ -30,7 +30,7 @@ const Container = styled(Row).attrs({
 `;
 
 const Label = styled(Text).attrs({
-  color: colors.alpha(colors.darkModeColors.blueGreyDark, 0.6),
+  color: colors.alpha(colors.blueGreyDark, 0.6),
   size: 'smedium',
   weight: 'semibold',
 })``;
@@ -53,7 +53,7 @@ const GasInput = styled(Input).attrs({
   letterSpacing: 'roundedMedium',
   maxLength: 5,
   multiline: false,
-  placeholderTextColor: colors.alpha(colors.darkModeColors.blueGreyDark, 0.3),
+  placeholderTextColor: colors.alpha(colors.blueGreyDark, 0.3),
   size: 'lmedium',
   testID: 'custom-gas-input',
 })`
@@ -385,7 +385,7 @@ const GasSpeedButton = ({
                   color={
                     customGasPriceInput
                       ? colors.white
-                      : colors.alpha(colors.darkModeColors.blueGreyDark, 0.3)
+                      : colors.alpha(colors.blueGreyDark, 0.3)
                   }
                   size="lmedium"
                   weight="bold"
