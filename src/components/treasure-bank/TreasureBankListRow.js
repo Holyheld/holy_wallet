@@ -44,7 +44,7 @@ const TreasureBankListRow = () => {
   const { width: deviceWidth } = useDimensions();
 
   return (
-    <ButtonPressAnimation overflowMargin={10} scaleTo={0.96}>
+    <ButtonPressAnimation onPress={() => {}} overflowMargin={10} scaleTo={0.96}>
       <Centered direction="column" marginBottom={15}>
         <TreasureBankListRowShadowStack deviceWidth={deviceWidth}>
           <TreasureBankListRowGradient />
@@ -52,6 +52,7 @@ const TreasureBankListRow = () => {
             align="center"
             css={padding(9, 10, 10, 20)}
             justify="space-between"
+            onPress={() => {}}
             scaleTo={0.96}
           >
             <Centered>

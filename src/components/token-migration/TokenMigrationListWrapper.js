@@ -24,7 +24,6 @@ export default function TokenMigrationListWrapper({
         isOpen={isTokenMigrationOpen}
         onPress={toggleOpenTokenMigration}
         savingsSumValue={totalValue}
-        showSumValue
       />
       <OpacityToggler
         isVisible={!isTokenMigrationOpen}
