@@ -17,6 +17,8 @@ import {
   withOpenFamilyTabs,
   withOpenInvestmentCards,
   withOpenSavings,
+  withOpenTokenMigration,
+  withOpenTreasureBank,
 } from '../../hoc';
 import {
   deviceUtils,
@@ -238,7 +240,32 @@ class RecyclerAssetList extends Component {
         );
         const poolsIndex = findIndex(sections, ({ name }) => name === 'pools');
 
-        const { sectionsIndices } = this.state;
+        const { sectionsIndices, dataProvider } = this.state;
+        const row = get(dataProvider, `_data[${index}]`);
+
+        if (row.item && row.item.isTreasureBank) {
+          //console.log('SHOW TREASURE BANK');
+          return {
+            height: ViewTypes.TREASURY_BANK.calculateHeight({
+              amountOfRows: 1,
+              isLast: true,
+              isOpen: this.props.openSavings,
+            }),
+            index: ViewTypes.TREASURY_BANK.index,
+          };
+        }
+
+        if (row.item && row.item.isTokenMigration) {
+          //console.log('SHOW TOKEN MIGRATION');
+          return {
+            height: ViewTypes.TOKEN_MIGRATION.calculateHeight({
+              amountOfRows: 1,
+              isLast: true,
+              isOpen: this.props.openSavings,
+            }),
+            index: ViewTypes.TOKEN_MIGRATION.index,
+          };
+        }
 
         if (
           index > 0 &&
@@ -369,7 +396,7 @@ class RecyclerAssetList extends Component {
             height: ViewTypes.COIN_ROW.calculateHeight({
               areSmallCollectibles: this.state.areSmallCollectibles,
               isFirst,
-              isLast: index === lastBalanceIndex,
+              isLast: false, //index === lastBalanceIndex, set it to false coz we have treasure bank section
             }),
             index: ViewTypes.COIN_ROW.index,
             isFirst,
@@ -463,10 +490,26 @@ class RecyclerAssetList extends Component {
       }
       return ctx;
     }, []);
+    // TODO: get it from sections props.
+    items.push({
+      item: {
+        assets: [{}],
+        isTreasureBank: true,
+      },
+      renderItem: () => null,
+    });
+    items.push({
+      item: {
+        assets: [{}],
+        isTokenMigration: true,
+      },
+      renderItem: () => null,
+    });
     items.push({ item: { isLastPlaceholder: true }, renderItem: () => null });
     const areSmallCollectibles = (c => c && get(c, 'type') === 'small')(
       sections.find(e => e.collectibles)
     );
+
     return {
       areSmallCollectibles,
       dataProvider: state.dataProvider.cloneWithRows(items),
@@ -760,7 +803,23 @@ class RecyclerAssetList extends Component {
         smallBalancedChanged,
       });
     } else if (type.index === ViewTypes.COIN_SAVINGS.index) {
+      //console.log('----COIN_SAVINGS----');
+      //console.log(data);
+      //console.log(data.item);
+
       return ViewTypes.COIN_SAVINGS.renderComponent({
+        data,
+      });
+    } else if (type.index === ViewTypes.TREASURY_BANK.index) {
+      //console.log('----TREASURY_BANK----');
+      //console.log(data);
+      return ViewTypes.TREASURY_BANK.renderComponent({
+        data,
+      });
+    } else if (type.index === ViewTypes.TOKEN_MIGRATION.index) {
+      //console.log('----TOKEN_MIGRATION----');
+      //console.log(data);
+      return ViewTypes.TOKEN_MIGRATION.renderComponent({
         data,
       });
     } else if (type.index === ViewTypes.POOLS.index) {
@@ -854,5 +913,7 @@ export default compose(
   withOpenInvestmentCards,
   withOpenBalances,
   withOpenSavings,
+  withOpenTreasureBank,
+  withOpenTokenMigration,
   withAccountSettings
 )(RecyclerAssetList);

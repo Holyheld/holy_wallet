@@ -14,6 +14,9 @@ import { ListFooter } from '../list';
 import PoolsListWrapper from '../pools/PoolsListWrapper';
 import SavingsListWrapper from '../savings/SavingsListWrapper';
 import { TokenFamilyHeaderHeight } from '../token-family';
+import TokenMigrationListWrapper from '../token-migration/TokenMigrationListWrapper';
+import TreasureBankListWrapper from '../treasure-bank/TreasureBankListWrapper';
+
 import { UniqueTokenRow } from '../unique-token';
 import AssetListHeader, { AssetListHeaderHeight } from './AssetListHeader';
 
@@ -27,6 +30,18 @@ const savingsOpenAdditionalHeight = -7.5;
 const savingsClosedAdditionalHeight = -5;
 const savingsLastOpenAdditionalHeight = -13;
 const savingsLastClosedAdditionalHeight = -10;
+
+const treasuresBankOpenAdditionalHeight = -7.5;
+const treasuresBankClosedAdditionalHeight = -5;
+const treasuresBankLastOpenAdditionalHeight = -13;
+const treasuresBankLastClosedAdditionalHeight = -10;
+const treasureBankRowHeight = 64;
+
+const tokenMigrationOpenAdditionalHeight = -7.5;
+const tokenMigrationClosedAdditionalHeight = -5;
+const tokenMigrationLastOpenAdditionalHeight = -13;
+const tokenMigrationLastClosedAdditionalHeight = -10;
+const tokenMigrationRowHeight = 64;
 
 const poolsOpenAdditionalHeight = -12;
 const poolsClosedAdditionalHeight = -15;
@@ -194,6 +209,54 @@ export const ViewTypes = {
             amountOfImagesWithForcedPrioritizeLoading,
         uniqueId: item.uniqueId,
       });
+    },
+  },
+
+  TREASURY_BANK: {
+    calculateHeight: ({ isOpen, isLast, amountOfRows }) =>
+      isOpen
+        ? TokenFamilyHeaderHeight +
+          (isLast
+            ? ListFooter.height + treasuresBankLastOpenAdditionalHeight
+            : treasuresBankOpenAdditionalHeight) +
+          treasureBankRowHeight * amountOfRows
+        : TokenFamilyHeaderHeight +
+          (isLast
+            ? ListFooter.height + treasuresBankLastClosedAdditionalHeight
+            : treasuresBankClosedAdditionalHeight),
+    index: 8,
+    renderComponent: ({ data }) => {
+      const { item = {} } = data;
+      return (
+        <TreasureBankListWrapper
+          assets={item.assets}
+          totalValue={item.totalValue}
+        />
+      );
+    },
+  },
+
+  TOKEN_MIGRATION: {
+    calculateHeight: ({ isOpen, isLast, amountOfRows }) =>
+      isOpen
+        ? TokenFamilyHeaderHeight +
+          (isLast
+            ? ListFooter.height + tokenMigrationLastOpenAdditionalHeight
+            : tokenMigrationOpenAdditionalHeight) +
+          tokenMigrationRowHeight * amountOfRows
+        : TokenFamilyHeaderHeight +
+          (isLast
+            ? ListFooter.height + tokenMigrationLastClosedAdditionalHeight
+            : tokenMigrationClosedAdditionalHeight),
+    index: 0,
+    renderComponent: ({ data }) => {
+      const { item = {} } = data;
+      return (
+        <TokenMigrationListWrapper
+          assets={item.assets}
+          totalValue={item.totalValue}
+        />
+      );
     },
   },
 
