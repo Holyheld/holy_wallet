@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setTokenMigrationSavings } from '../redux/openStateSettings';
+import { setOpenTokenMigration } from '../redux/openStateSettings';
 
 export default function useOpenTokenMigration() {
   const dispatch = useDispatch();
@@ -10,7 +10,7 @@ export default function useOpenTokenMigration() {
   );
 
   const toggleOpenTokenMigration = useCallback(
-    () => dispatch(setTokenMigrationSavings(!isTokenMigrationOpen)),
+    () => dispatch(setOpenTokenMigration(!isTokenMigrationOpen)),
     [dispatch, isTokenMigrationOpen]
   );
 

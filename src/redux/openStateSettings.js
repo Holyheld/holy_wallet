@@ -75,7 +75,7 @@ export const setOpenSavings = payload => (dispatch, getState) => {
   });
 };
 
-export const setTreasureBankSavings = payload => (dispatch, getState) => {
+export const setOpenTreasureBank = payload => (dispatch, getState) => {
   const { accountAddress, network } = getState().settings;
   saveTreasureBankToggle(payload, accountAddress, network);
   dispatch({
@@ -84,7 +84,7 @@ export const setTreasureBankSavings = payload => (dispatch, getState) => {
   });
 };
 
-export const setTokenMigrationSavings = payload => (dispatch, getState) => {
+export const setOpenTokenMigration = payload => (dispatch, getState) => {
   const { accountAddress, network } = getState().settings;
   saveTokenMigrationToggle(payload, accountAddress, network);
   dispatch({

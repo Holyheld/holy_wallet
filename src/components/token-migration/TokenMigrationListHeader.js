@@ -128,9 +128,9 @@ TokenMigrationListHeader.propTypes = {
 };
 
 TokenMigrationListHeader.defaultProps = {
-  emoji: 'bank',
+  emoji: 'dna',
   showSumValue: false,
-  title: 'Treasure Bank',
+  title: 'Token migrations',
   TokenMigrationSumValue: '0',
 };
 

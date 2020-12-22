@@ -6,7 +6,7 @@ import TreasureBankListHeader from './TreasureBankListHeader';
 import TreasureBankListRow from './TreasureBankListRow';
 
 const renderTreasureBankListRow = item => (
-  <TreasureBankListRow key={item?.underlying.symbol} {...item} />
+  <TreasureBankListRow key={item?.symbol} {...item} />
 );
 
 export default function TreasureBankListWrapper({ assets, totalValue = '0' }) {

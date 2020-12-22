@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setTreasureBankSavings } from '../redux/openStateSettings';
+import { setOpenTreasureBank } from '../redux/openStateSettings';
 
 export default function useOpenTreasureBank() {
   const dispatch = useDispatch();
@@ -10,7 +10,7 @@ export default function useOpenTreasureBank() {
   );
 
   const toggleOpenTreasureBank = useCallback(
-    () => dispatch(setTreasureBankSavings(!isTreasureBankOpen)),
+    () => dispatch(setOpenTreasureBank(!isTreasureBankOpen)),
     [dispatch, isTreasureBankOpen]
   );
 

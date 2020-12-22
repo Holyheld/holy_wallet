@@ -248,8 +248,8 @@ class RecyclerAssetList extends Component {
           return {
             height: ViewTypes.TREASURY_BANK.calculateHeight({
               amountOfRows: 1,
-              isLast: true,
-              isOpen: this.props.openSavings,
+              isLast: false,
+              isOpen: this.props.openTreasureBank,
             }),
             index: ViewTypes.TREASURY_BANK.index,
           };
@@ -261,7 +261,7 @@ class RecyclerAssetList extends Component {
             height: ViewTypes.TOKEN_MIGRATION.calculateHeight({
               amountOfRows: 1,
               isLast: true,
-              isOpen: this.props.openSavings,
+              isOpen: this.props.openTokenMigration,
             }),
             index: ViewTypes.TOKEN_MIGRATION.index,
           };
@@ -495,6 +495,7 @@ class RecyclerAssetList extends Component {
       item: {
         assets: [{}],
         isTreasureBank: true,
+        symbol: 'HH',
       },
       renderItem: () => null,
     });
@@ -502,6 +503,7 @@ class RecyclerAssetList extends Component {
       item: {
         assets: [{}],
         isTokenMigration: true,
+        symbol: 'TM',
       },
       renderItem: () => null,
     });

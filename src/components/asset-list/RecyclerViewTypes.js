@@ -248,7 +248,7 @@ export const ViewTypes = {
           (isLast
             ? ListFooter.height + tokenMigrationLastClosedAdditionalHeight
             : tokenMigrationClosedAdditionalHeight),
-    index: 0,
+    index: 9,
     renderComponent: ({ data }) => {
       const { item = {} } = data;
       return (

@@ -6,7 +6,7 @@ import TokenMigrationListHeader from './TokenMigrationListHeader';
 import TokenMigrationListRow from './TokenMigrationListRow';
 
 const renderTokenMigrationListRow = item => (
-  <TokenMigrationListRow key={item?.underlying.symbol} {...item} />
+  <TokenMigrationListRow key={item?.symbol} {...item} />
 );
 
 export default function TokenMigrationListWrapper({
