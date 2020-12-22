@@ -10581,7 +10581,8 @@
       "name": "Holyheld",
       "symbol": "HOLY",
       "extensions": {
-        "isVerified": true
+        "isVerified": true,
+        "isRainbowCurated": true
       }
     },
     {
