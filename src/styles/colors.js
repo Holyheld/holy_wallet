@@ -14,6 +14,7 @@ let base = {
   blueGreyDarker: '#0F0F11', // '15, 15, 17'
   blueGreyDarkLight: '#F3F4F5', // '243, 244, 245'
   brightRed: '#FF7171', // '255, 113, 113'
+  buttonActionBackground: '#25282D',
   buttonBackground: '#25282D',
   chartGreen: '#66d28f', // '102, 210, 143'
   dark: '#25292E', // '37, 41, 46'
@@ -22,10 +23,14 @@ let base = {
   dividerAlternative: '#FFFFFF',
   emptyStateText: '#FFFFFF',
   flamingo: '#E540F1', // '229, 64, 241'
+  fullscreenDark: '#3B3E43',
   green: '#2CCC00', // '58, 166, 134'
   grey: '#A9ADB9', // '169, 173, 185'
   grey20: '#333333', // '51, 51, 51'
+  handle: 'rgba(255, 255, 255, 0.9)',
+  handleLight: '#FFFFFF',
   headerBackground: '#3B3E43',
+  key: '#F0F0F0',
   lighterGrey: '#F7F7F8', // '247, 247, 248'
   lightestGrey: '#E9EBEF', // '238, 233, 232'
   lightGrey: '#CDCFD4', // '205, 207, 212'
@@ -48,6 +53,7 @@ let base = {
   rowDividerExtraLight: 'rgba(60, 66, 82, 0.015)', // '60, 66, 82, 0.015'
   rowDividerLight: 'rgba(60, 66, 82, 0.02)', // '60, 66, 82, 0.02'
   shadowGrey: '#6F6F6F', // '111, 111, 111'
+  sheetBackground: '#25292E',
   shimmer: '#EDEEF1', // '237, 238, 241'
   skeleton: '#F6F7F8', // '246, 247, 248'
   swapButton: '#575CFF',
@@ -57,7 +63,10 @@ let base = {
   swapPurple: '#575CFF', // '87, 92, 255'
   textColor: '#FFFFFF',
   textColorDark: '#000000',
+  textColorDescription: '#FFFFFF',
   textColorParagraph: '#FFFFFF',
+  textColorPlaceholder: '#F0F0F0',
+  textColorTitle: '#FFFFFF',
   transparent: 'transparent',
   white: '#FFFFFF', // '255, 255, 255'
   yellow: '#FFD657', // '255, 214, 87'
