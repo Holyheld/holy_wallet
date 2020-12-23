@@ -60,6 +60,7 @@ const TextIcon = styled(Text).attrs({
 `;
 
 const Title = styled(Text).attrs({
+  color: colors.textColorTitle,
   letterSpacing: 'roundedMedium',
   lineHeight: 27,
   size: 'larger',
@@ -71,7 +72,7 @@ const Title = styled(Text).attrs({
 
 const DescriptionText = styled(Text).attrs({
   align: 'left',
-  color: colors.alpha(colors.blueGreyDark, 0.4),
+  color: colors.textColorDescription,
   lineHeight: 22,
   size: 'smedium',
   weight: 'medium',

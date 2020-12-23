@@ -29,7 +29,7 @@ import { colors, margin, padding } from '@rainbow-me/styles';
 
 const DescriptionText = styled(Text).attrs({
   align: 'center',
-  color: colors.blueGreyDark50,
+  color: colors.textColorDescription,
   lineHeight: 'looser',
   size: 'large',
 })``;

@@ -2,11 +2,10 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { useSafeArea } from 'react-native-safe-area-context';
 import { useDimensions } from '../../hooks';
-import { useNavigation } from '../../navigation/Navigation';
-
 import TouchableBackdrop from '../TouchableBackdrop';
 import { Centered, Column } from '../layout';
 import SheetHandle from './SheetHandle';
+import { useNavigation } from '@rainbow-me/navigation';
 import { borders, colors } from '@rainbow-me/styles';
 
 const Sheet = ({ borderRadius, children, hideHandle }) => {
@@ -24,7 +23,7 @@ const Sheet = ({ borderRadius, children, hideHandle }) => {
         width="100%"
       >
         <Centered paddingBottom={7} paddingTop={6}>
-          {!hideHandle && <SheetHandle />}
+          {!hideHandle && <SheetHandle color={colors.handleDark} />}
         </Centered>
         {children}
       </Column>

@@ -3,7 +3,7 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Alert } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import styled from 'styled-components/primitives';
-import HolyLogo from '../assets/holys/glass.png';
+import HolyLogo from '../assets/holys/neon-rainbow-alternative.png';
 import { Centered, Column, ColumnWithMargins } from '../components/layout';
 import { Numpad, PinValue } from '../components/numpad';
 import { SheetTitle } from '../components/sheet';
@@ -15,7 +15,7 @@ import {
 } from '../handlers/localstorage/globalSettings';
 import { useDimensions, useShakeAnimation } from '../hooks';
 import { useBlockBackButton } from '../hooks/useBlockBackButton';
-import { useNavigation } from '../navigation/Navigation';
+import { useNavigation } from '@rainbow-me/navigation';
 import { colors, padding } from '@rainbow-me/styles';
 
 const Logo = styled(FastImage).attrs({
@@ -186,7 +186,7 @@ const PinAuthenticationScreen = () => {
 
   return (
     <Column
-      backgroundColor={colors.white}
+      backgroundColor={colors.fullscreenDark}
       flex={1}
       testID="pin-authentication-screen"
     >

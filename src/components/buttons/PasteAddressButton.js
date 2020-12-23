@@ -1,11 +1,15 @@
 import React, { useCallback, useEffect, useState } from 'react';
+import colors from '../../styles/colors';
 import { Text } from '../text';
 import MiniButton from './MiniButton';
 import { checkIsValidAddressOrENS } from '@rainbow-me/helpers/validators';
 import { useClipboard, useInvalidPaste } from '@rainbow-me/hooks';
 import { deviceUtils } from '@rainbow-me/utils';
 
-export default function PasteAddressButton({ onPress }) {
+export default function PasteAddressButton({
+  onPress,
+  textColor = colors.textColor,
+}) {
   const [isValid, setIsValid] = useState(false);
   const { onInvalidPaste } = useInvalidPaste();
   const {
@@ -47,7 +51,7 @@ export default function PasteAddressButton({ onPress }) {
       testID="paste-address-button"
       {...(android && { height: 30, overflowMargin: 15, width: 60 })}
     >
-      <Text color="white" weight="semibold">
+      <Text color={textColor} weight="semibold">
         Paste
       </Text>
     </MiniButton>

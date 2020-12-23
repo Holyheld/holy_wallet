@@ -11,6 +11,7 @@ import {
   fetchUserDataFromCloud,
   isCloudBackupAvailable,
 } from '../handlers/cloudBackup';
+import colors from '../styles/colors';
 import { cloudPlatform } from '../utils/platform';
 import WalletBackupStepTypes from '@rainbow-me/helpers/walletBackupStepTypes';
 import WalletBackupTypes from '@rainbow-me/helpers/walletBackupTypes';
@@ -90,6 +91,7 @@ export default function RestoreSheet() {
     <Column height={wrapperHeight}>
       <StatusBar barStyle="light-content" />
       <SlackSheet
+        backgroundColor={colors.modalBackground}
         contentHeight={longFormHeight}
         deferredHeight={android}
         testID="restore-sheet"

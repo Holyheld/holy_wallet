@@ -6,7 +6,7 @@ import { colors } from '@rainbow-me/styles';
 
 export const HandleHeight = 5;
 
-const defaultColor = colors.alpha(colors.blueGreyDark, 0.3);
+const defaultColor = colors.handle;
 
 const SheetHandle = styled.View.attrs(({ showBlur }) => ({
   as: showBlur && ios ? VibrancyView : View,

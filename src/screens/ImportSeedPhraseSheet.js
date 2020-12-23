@@ -102,12 +102,14 @@ const SecretTextArea = styled(Input).attrs({
   autoCapitalize: 'none',
   autoCorrect: false,
   autoFocus: true,
+  color: colors.textColor,
   enablesReturnKeyAutomatically: true,
   keyboardType: android ? 'visible-password' : 'default',
   lineHeight: 'looser',
   multiline: true,
   numberOfLines: 3,
   placeholder: 'Seed phrase, private key, Ethereum address or ENS name',
+  placeholderTextColor: colors.textColorPlaceholder,
   returnKeyType: 'done',
   size: 'large',
   spellCheck: false,
@@ -129,7 +131,7 @@ const Sheet = styled(Column).attrs({
 })`
   ${borders.buildRadius('top', isNativeStackAvailable ? 0 : 16)};
   ${padding(0, 15, sheetBottomPadding)};
-  background-color: ${colors.white};
+  background-color: ${colors.sheetBackground};
   z-index: 1;
 `;
 
@@ -230,7 +232,6 @@ export default function ImportSeedPhraseSheet() {
         Alert.alert(
           'Sorry, we cannot add this ENS name at this time. Please try again later!'
         );
-        return;
       }
       // Look up ENS for 0x address
     } else if (isValidAddress(input)) {
@@ -366,7 +367,7 @@ export default function ImportSeedPhraseSheet() {
     <Container testID="import-sheet">
       <StatusBar barStyle="light-content" />
       <Sheet>
-        <SheetHandle marginBottom={7} marginTop={6} />
+        <SheetHandle color={colors.handle} marginBottom={7} marginTop={6} />
         <Text size="large" weight="bold">
           Add Wallet
         </Text>
