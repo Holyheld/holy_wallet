@@ -20,7 +20,7 @@ const Container = styled(Centered).attrs(({ fixedToTop }) => ({
 `;
 
 const Content = styled(Column).attrs({ shrink: 0 })`
-  background-color: ${colors.white};
+  background-color: ${colors.modalBackground};
   border-radius: ${({ radius }) => radius};
   height: ${({ height }) => height};
   margin-top: ${({ fixedToTop }) => (fixedToTop ? 91 : 0)};

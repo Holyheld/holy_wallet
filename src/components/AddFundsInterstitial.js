@@ -6,13 +6,13 @@ import networkInfo from '../helpers/networkInfo';
 import networkTypes from '../helpers/networkTypes';
 import showWalletErrorAlert from '../helpers/support';
 import { useAccountSettings, useDimensions, useWallets } from '../hooks';
-import { useNavigation } from '../navigation/Navigation';
 import { magicMemo } from '../utils';
 import Divider from './Divider';
 import { ButtonPressAnimation, ScaleButtonZoomableAndroid } from './animations';
 import { Icon } from './icons';
 import { Centered, Row, RowWithMargins } from './layout';
 import { Text } from './text';
+import { useNavigation } from '@rainbow-me/navigation';
 import Routes from '@rainbow-me/routes';
 import { colors, padding, position } from '@rainbow-me/styles';
 import ShadowStack from 'react-native-shadow-stack';
@@ -36,7 +36,7 @@ const InterstitialButtonRow = styled(Row)`
 `;
 
 const InterstitialDivider = styled(Divider).attrs({
-  color: colors.rowDividerExtraLight,
+  color: colors.dividerAlternative,
   inset: [0, 0, 0, 0],
 })`
   border-radius: 1;
@@ -62,7 +62,7 @@ const Container = styled(Centered)`
 
 const Paragraph = styled(Text).attrs({
   align: 'center',
-  color: colors.alpha(colors.blueGreyDark, 0.4),
+  color: colors.textColorParagraph,
   letterSpacing: 'roundedMedium',
   lineHeight: 'paragraphSmall',
   size: 'lmedium',
@@ -221,19 +221,19 @@ const AddFundsInterstitial = ({ network, offsetY = 0 }) => {
             <Row justify="space-between" marginVertical={30}>
               <AmountButton
                 amount={50}
-                backgroundColor={colors.swapPurple}
+                backgroundColor={colors.swapButton}
                 color={colors.neonSkyblue}
                 onPress={handlePressAmount}
               />
               <AmountButton
                 amount={100}
-                backgroundColor={colors.swapPurple}
+                backgroundColor={colors.swapButton}
                 color={colors.neonSkyblue}
                 onPress={handlePressAmount}
               />
               <AmountButton
                 amount={250}
-                backgroundColor={colors.purpleDark}
+                backgroundColor={colors.swapButtonSecondary}
                 color={colors.pinkLight}
                 onPress={handlePressAmount}
               />
@@ -245,7 +245,7 @@ const AddFundsInterstitial = ({ network, offsetY = 0 }) => {
               >
                 <Text
                   align="center"
-                  color={colors.alpha(colors.blueGreyDark, 0.6)}
+                  color={colors.textColor}
                   lineHeight="loose"
                   size="large"
                   weight="bold"

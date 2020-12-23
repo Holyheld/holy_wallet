@@ -1,10 +1,10 @@
 import React, { useCallback } from 'react';
 import styled from 'styled-components/primitives';
-import { useNavigation } from '../../navigation/Navigation';
 import Icon from '../icons/Icon';
 import { Row } from '../layout';
 import Text from '../text/Text';
 import HeaderButton from './HeaderButton';
+import { useNavigation } from '@rainbow-me/navigation';
 import { colors, fonts, fontWithWidth } from '@rainbow-me/styles';
 
 const Container = styled(Row).attrs({ align: 'center' })`
@@ -13,14 +13,14 @@ const Container = styled(Row).attrs({ align: 'center' })`
 `;
 
 const IconText = styled(Text).attrs({
-  color: colors.dark,
+  color: colors.textColor,
   size: 'big',
 })`
   ${fontWithWidth(fonts.weight.bold)};
 `;
 
 export default function BackButton({
-  color,
+  color = colors.textColor,
   direction = 'left',
   onPress,
   throttle,

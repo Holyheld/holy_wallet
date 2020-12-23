@@ -10,11 +10,12 @@ import { RainbowContext } from '../../helpers/RainbowContext';
 import networkTypes from '../../helpers/networkTypes';
 import { useWallets } from '../../hooks';
 import { wipeKeychain } from '../../model/keychain';
-import { useNavigation } from '../../navigation/Navigation';
 import store from '../../redux/store';
 import { walletsUpdate } from '../../redux/wallets';
+import colors from '../../styles/colors';
 import { ListFooter, ListItem } from '../list';
 import { RadioListItem } from '../radio-list';
+import { useNavigation } from '@rainbow-me/navigation';
 import Routes from '@rainbow-me/routes';
 import logger from 'logger';
 
@@ -62,7 +63,10 @@ const DevSection = () => {
   };
 
   return (
-    <ScrollView testID="developer-settings-modal">
+    <ScrollView
+      backgroundColor={colors.modalBackground}
+      testID="developer-settings-modal"
+    >
       <ListItem label="💥 Clear async storage" onPress={AsyncStorage.clear} />
       <ListItem
         label="💣 Reset Keychain"

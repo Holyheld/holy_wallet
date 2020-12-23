@@ -179,7 +179,7 @@ export default class EmojiSelector extends PureComponent {
                     height: (width - 21) / this.props.columns,
                     width: (width - 21) / this.props.columns,
                     opacity: 0,
-                    backgroundColor: 'white',
+                    backgroundColor: colors.modalBackground,
                   },
                 };
                 return ios ? (

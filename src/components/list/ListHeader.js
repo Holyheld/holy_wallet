@@ -79,8 +79,8 @@ export default function ListHeader({
         </Content>
         {showDivider && (
           <Divider
-            backgroundColor={colors.darkBackground}
-            color={colors.dividerColor}
+            backgroundColor={colors.pageBackground}
+            color={colors.divider}
           />
         )}
         {!isSticky && title !== 'Balances' && (

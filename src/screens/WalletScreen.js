@@ -34,12 +34,12 @@ import colors from '../styles/colors';
 import { position } from '@rainbow-me/styles';
 
 const HeaderOpacityToggler = styled(OpacityToggler).attrs(({ isVisible }) => ({
+  backgroundColor: colors.headerBackground,
   endingOpacity: 0.4,
+  paddingTop: 5,
   pointerEvents: isVisible ? 'none' : 'auto',
-}))`
-  padding-top: 5;
-  z-index: 1;
-`;
+  zIndex: 1,
+}))``;
 
 const WalletPage = styled(Page)`
   ${position.size('100%')};
@@ -107,7 +107,7 @@ export default function WalletScreen() {
       >
         <HeaderOpacityToggler isVisible={isCoinListEdited}>
           <Header
-            backgroundColor={colors.darkBackground}
+            backgroundColor={colors.headerBackground}
             justify="space-between"
           >
             <ProfileHeaderButton />

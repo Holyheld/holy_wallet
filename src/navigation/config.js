@@ -275,8 +275,8 @@ export const settingsOptions = {
   headerBackTitle: 'Back',
   headerStatusBarHeight: 0,
   headerStyle: {
-    backgroundColor: 'transparent',
-    elevation: 0,
+    backgroundColor: colors.modalBackground,
+    elevation: 6,
     height: 49,
     shadowColor: 'transparent',
   },

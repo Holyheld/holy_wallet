@@ -16,13 +16,15 @@ import {
   useContacts,
   useRequests,
 } from '../hooks';
-import { useNavigation } from '../navigation/Navigation';
+import { useNavigation } from '@rainbow-me/navigation';
 import Routes from '@rainbow-me/routes';
 import { colors, position } from '@rainbow-me/styles';
 
 const ACTIVITY_LIST_INITIALIZATION_DELAY = 5000;
 
-const ProfileScreenPage = styled(Page)`
+const ProfileScreenPage = styled(Page).attrs({
+  color: colors.pageBackground,
+})`
   ${position.size('100%')};
   flex: 1;
 `;
@@ -91,7 +93,7 @@ export default function ProfileScreen({ navigation }) {
           <Icon color={colors.black} name="gear" />
         </HeaderButton>
         <BackButton
-          color={colors.black}
+          color={colors.textColor}
           direction="right"
           onPress={onPressBackButton}
         />

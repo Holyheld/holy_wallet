@@ -14,25 +14,29 @@ let base = {
   blueGreyDarker: '#0F0F11', // '15, 15, 17'
   blueGreyDarkLight: '#F3F4F5', // '243, 244, 245'
   brightRed: '#FF7171', // '255, 113, 113'
-  buttonBackgroundDark: '#25282D',
+  buttonBackground: '#25282D',
   chartGreen: '#66d28f', // '102, 210, 143'
   dark: '#25292E', // '37, 41, 46'
-  darkBackground: '#3B3E43',
   darkGrey: '#71778A', // '113, 119, 138'
-  dividerColor: 'rgba(255, 255, 255, 0.08)',
+  divider: 'rgba(255, 255, 255, 0.08)',
+  dividerAlternative: '#FFFFFF',
+  emptyStateText: '#FFFFFF',
   flamingo: '#E540F1', // '229, 64, 241'
   green: '#2CCC00', // '58, 166, 134'
   grey: '#A9ADB9', // '169, 173, 185'
   grey20: '#333333', // '51, 51, 51'
+  headerBackground: '#3B3E43',
   lighterGrey: '#F7F7F8', // '247, 247, 248'
   lightestGrey: '#E9EBEF', // '238, 233, 232'
   lightGrey: '#CDCFD4', // '205, 207, 212'
   mediumGrey: '#A1A5B3', // '161, 165, 179'
   mintDark: '#00E0A9', // '0, 224, 169'
+  modalBackground: '#3B3E43',
   neonSkyblue: '#34FFFF', // '52, 255, 255'
   offWhite: '#F8F9FA', // '248, 249, 250'
   orange: '#FF9900', // '255, 153, 0'
   orangeLight: '#FEBE44', // '254, 190, 68'
+  pageBackground: '#3B3E43',
   paleBlue: '#579DFF', // 87, 157, 255
   pink: '#FF54BB', // 255, 84, 187
   pinkLight: '#FF75E8', // '255, 117, 232'
@@ -46,7 +50,14 @@ let base = {
   shadowGrey: '#6F6F6F', // '111, 111, 111'
   shimmer: '#EDEEF1', // '237, 238, 241'
   skeleton: '#F6F7F8', // '246, 247, 248'
+  swapButton: '#575CFF',
+  swapButtonSecondary: '#6F00A3',
+  swapButtonText: '#34FFFF',
+  swapButtonTextSecondary: '#FF75E8',
   swapPurple: '#575CFF', // '87, 92, 255'
+  textColor: '#FFFFFF',
+  textColorDark: '#000000',
+  textColorParagraph: '#FFFFFF',
   transparent: 'transparent',
   white: '#FFFFFF', // '255, 255, 255'
   yellow: '#FFD657', // '255, 214, 87'

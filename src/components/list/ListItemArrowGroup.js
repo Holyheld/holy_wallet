@@ -10,11 +10,7 @@ import { colors } from '@rainbow-me/styles';
 const ListItemArrowGroup = ({ children }) => (
   <RowWithMargins align="center" flex={1} justify="end" margin={7}>
     {typeof children === 'string' ? (
-      <Text
-        color={colors.alpha(colors.blueGreyDark, 0.6)}
-        size="large"
-        weight="medium"
-      >
+      <Text color={colors.textColor} size="large" weight="medium">
         {children}
       </Text>
     ) : (
@@ -27,7 +23,7 @@ const ListItemArrowGroup = ({ children }) => (
         marginTop: 0.5,
         width: 8,
       }}
-      tintColor={colors.alpha(colors.blueGreyDark, 0.6)}
+      tintColor={colors.textColor}
     />
   </RowWithMargins>
 );

@@ -455,13 +455,13 @@ export default function WelcomeScreen() {
         shadowColor: color,
       },
       style: {
-        backgroundColor: colors.buttonBackgroundDark,
+        backgroundColor: colors.buttonBackground,
         borderColor: backgroundColor,
         borderWidth: ios ? 0 : 3,
         width: 242 + (ios ? 0 : 6),
       },
       text: 'Get a new wallet',
-      textColor: colors.white,
+      textColor: colors.textColor,
     };
   }, [rValue]);
 
@@ -482,7 +482,7 @@ export default function WelcomeScreen() {
         opacity: 0,
       },
       style: {
-        backgroundColor: colors.buttonBackgroundDark,
+        backgroundColor: colors.buttonBackground,
         width: 248,
       },
       text: 'I already have one',
@@ -504,9 +504,9 @@ export default function WelcomeScreen() {
 
       <ContentWrapper style={contentStyle}>
         {android && IS_TESTING === 'true' ? (
-          <HolyText color={colors.white} />
+          <HolyText color={colors.textColor} />
         ) : (
-          <MaskedView maskElement={<HolyText color={colors.white} />}>
+          <MaskedView maskElement={<HolyText color={colors.textColor} />}>
             <RainbowTextMask style={textStyle} />
           </MaskedView>
         )}

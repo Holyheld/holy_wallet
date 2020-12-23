@@ -21,7 +21,7 @@ const sx = StyleSheet.create({
 });
 
 const SavingsListRowEmptyState = ({ onPress }) => (
-  <RowWithMargins align="center" margin={8} paddingLeft={10} paddingRight={10}>
+  <RowWithMargins align="center" margin={8} paddingLeft={4}>
     <Text
       color={colors.white}
       letterSpacing="roundedTightest"

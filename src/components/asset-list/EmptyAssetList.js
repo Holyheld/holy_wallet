@@ -7,7 +7,7 @@ import { FabWrapperBottomPosition } from '../fab';
 import { Centered, Column } from '../layout';
 import AssetListHeader, { AssetListHeaderHeight } from './AssetListHeader';
 import AssetListItemSkeleton from './AssetListItemSkeleton';
-import { position } from '@rainbow-me/styles';
+import { colors, position } from '@rainbow-me/styles';
 
 const Container = styled(Column)`
   ${position.size('100%')};
@@ -32,7 +32,7 @@ const EmptyAssetList = ({
   }, [bottomInset, title]);
 
   return (
-    <Container {...props}>
+    <Container backgroundColor={colors.pageBackground} {...props}>
       <Centered flex={1}>
         {isWalletEthZero ? (
           <AddFundsInterstitial

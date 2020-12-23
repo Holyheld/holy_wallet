@@ -53,8 +53,8 @@ const Container = styled.View`
 `;
 
 const Divider = ({
-  backgroundColor,
-  color = colors.rowDivider,
+  backgroundColor = colors.pageBackground,
+  color = colors.divider,
   horizontal = true,
   inset = [0, 19, 0, 19],
   size = DividerSize,

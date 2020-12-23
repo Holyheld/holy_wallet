@@ -5,7 +5,7 @@ import FastImage from 'react-native-fast-image';
 import styled from 'styled-components/primitives';
 import { REVIEW_ANDROID } from '../../config/experimental';
 import useExperimentalFlag from '../../config/experimentalHooks';
-//import { supportedLanguages } from '../../languages';
+// import { supportedLanguages } from '../../languages';
 import AppVersionStamp from '../AppVersionStamp';
 import { Icon } from '../icons';
 import { Column, ColumnWithDividers } from '../layout';
@@ -18,8 +18,8 @@ import {
 import { Emoji } from '../text';
 import BackupIcon from '@rainbow-me/assets/settingsBackup.png';
 import CurrencyIcon from '@rainbow-me/assets/settingsCurrency.png';
-import NetworkIcon from '@rainbow-me/assets/settingsNetwork.png';
-import networkInfo from '@rainbow-me/helpers/networkInfo';
+// import NetworkIcon from '@rainbow-me/assets/settingsNetwork.png';
+// import networkInfo from '@rainbow-me/helpers/networkInfo';
 import WalletTypes from '@rainbow-me/helpers/walletTypes';
 import {
   useAccountSettings,
@@ -51,6 +51,7 @@ const CheckmarkIcon = styled(Icon).attrs({
 
 const contentContainerStyle = { flex: 1 };
 const Container = styled(ScrollView).attrs({
+  backgroundColor: colors.modalBackground,
   contentContainerStyle,
   scrollEventThrottle: 32,
 })`
@@ -111,14 +112,14 @@ export default function SettingsSection({
   onPressCurrency,
   onPressDev,
   onPressIcloudBackup,
-  /*onPressLanguage,*/
-  onPressNetwork,
+  // onPressLanguage,
+  // onPressNetwork,
   onPressShowSecret,
 }) {
   const isReviewAvailable = useExperimentalFlag(REVIEW_ANDROID) || ios;
 
   const { wallets } = useWallets();
-  const { /*language,*/ nativeCurrency, network } = useAccountSettings();
+  const { /*language,*/ nativeCurrency /*, network*/ } = useAccountSettings();
   const { isTinyPhone } = useDimensions();
 
   const onSendFeedback = useSendFeedback();
@@ -187,16 +188,16 @@ export default function SettingsSection({
         >
           <ListItemArrowGroup>{nativeCurrency || ''}</ListItemArrowGroup>
         </ListItem>
-        <ListItem
-          icon={<SettingIcon source={NetworkIcon} />}
-          label="Network"
-          onPress={onPressNetwork}
-          testID="network-section"
-        >
-          <ListItemArrowGroup>
-            {networkInfo?.[network]?.name}
-          </ListItemArrowGroup>
-        </ListItem>
+        {/*<ListItem*/}
+        {/*  icon={<SettingIcon source={NetworkIcon} />}*/}
+        {/*  label="Network"*/}
+        {/*  onPress={onPressNetwork}*/}
+        {/*  testID="network-section"*/}
+        {/*>*/}
+        {/*  <ListItemArrowGroup>*/}
+        {/*    {networkInfo?.[network]?.name}*/}
+        {/*  </ListItemArrowGroup>*/}
+        {/*</ListItem>*/}
         {/*<ListItem*/}
         {/*  icon={<SettingIcon source={LanguageIcon} />}*/}
         {/*  label="Language"*/}
