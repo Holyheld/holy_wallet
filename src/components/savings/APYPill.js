@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { IS_TESTING } from 'react-native-dotenv';
 import LinearGradient from 'react-native-linear-gradient';
 import RadialGradient from 'react-native-radial-gradient';
 import { Centered } from '../layout';
@@ -62,7 +61,7 @@ const TextComponent = ios ? GradientText : Text;
 function APYPill({ small, value }) {
   return (
     <Centered style={small ? sx.containerSmall : sx.container}>
-      {IS_TESTING === 'true' ? null : small ? (
+      {small ? (
         <RadialGradient
           {...radialGradientProps}
           borderRadius={21}

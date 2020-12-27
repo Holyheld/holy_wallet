@@ -1,16 +1,16 @@
 import produce from 'immer';
 import {
+  getLPBonusToggle,
   getOpenFamilies,
   getOpenInvestmentCards,
   getSavingsToggle,
   getSmallBalanceToggle,
-  getTokenMigrationToggle,
   getTreasureBankToggle,
+  saveLPBonusToggle,
   saveOpenFamilies,
   saveOpenInvestmentCards,
   saveSavingsToggle,
   saveSmallBalanceToggle,
-  saveTokenMigrationToggle,
   saveTreasureBankToggle,
 } from '../handlers/localstorage/accountLocal';
 
@@ -37,10 +37,7 @@ export const openStateSettingsLoadState = () => async (dispatch, getState) => {
       accountAddress,
       network
     );
-    const openTokenMigration = await getTokenMigrationToggle(
-      accountAddress,
-      network
-    );
+    const openLPBonus = await getLPBonusToggle(accountAddress, network);
     const openSmallBalances = await getSmallBalanceToggle(
       accountAddress,
       network
@@ -54,9 +51,9 @@ export const openStateSettingsLoadState = () => async (dispatch, getState) => {
       payload: {
         openFamilyTabs,
         openInvestmentCards,
+        openLPBonus,
         openSavings,
         openSmallBalances,
-        openTokenMigration,
         openTreasureBank,
       },
       type: OPEN_STATE_SETTINGS_LOAD_SUCCESS,
@@ -84,9 +81,9 @@ export const setOpenTreasureBank = payload => (dispatch, getState) => {
   });
 };
 
-export const setOpenTokenMigration = payload => (dispatch, getState) => {
+export const setOpenLPBonus = payload => (dispatch, getState) => {
   const { accountAddress, network } = getState().settings;
-  saveTokenMigrationToggle(payload, accountAddress, network);
+  saveLPBonusToggle(payload, accountAddress, network);
   dispatch({
     payload,
     type: SET_OPEN_TOKEN_MIGRATION,
@@ -140,9 +137,9 @@ export const resetOpenStateSettings = () => dispatch =>
 export const INITIAL_STATE = {
   openFamilyTabs: {},
   openInvestmentCards: {},
+  openLPBonus: false,
   openSavings: true,
   openSmallBalances: false,
-  openTokenMigration: false,
   openTreasureBank: true,
 };
 
@@ -153,7 +150,7 @@ export default (state = INITIAL_STATE, action) =>
       draft.openInvestmentCards = action.payload.openInvestmentCards;
       draft.openSavings = action.payload.openSavings;
       draft.openTreasureBank = action.payload.openTreasureBank;
-      draft.openTokenMigration = action.payload.openTokenMigration;
+      draft.openLPBonus = action.payload.openLPBonus;
       draft.openSmallBalances = action.payload.openSmallBalances;
     } else if (action.type === SET_OPEN_FAMILY_TABS) {
       draft.openFamilyTabs = action.payload;
@@ -164,7 +161,7 @@ export default (state = INITIAL_STATE, action) =>
     } else if (action.type === SET_OPEN_TREASURE_BANK) {
       draft.openTreasureBank = action.payload;
     } else if (action.type === SET_OPEN_TOKEN_MIGRATION) {
-      draft.openTokenMigration = action.payload;
+      draft.openLPBonus = action.payload;
     } else if (action.type === SET_OPEN_SMALL_BALANCES) {
       draft.openSmallBalances = action.payload;
     } else if (action.type === SET_OPEN_INVESTMENT_CARDS) {

@@ -20,7 +20,7 @@ const SMALL_BALANCE_TOGGLE = 'smallBalanceToggle';
 const SAVINGS = 'savings';
 const SAVINGS_TOGGLE = 'savingsToggle';
 const TREASURE_BANK_TOGGLE = 'treasureBankToggle';
-const TOKEN_MIGRATION_TOGGLE = 'tokenMigrationToggle';
+const TOKEN_MIGRATION_TOGGLE = 'LPBonusToggle';
 const SHOWCASE_TOKENS = 'showcaseTokens';
 const TRANSACTIONS = 'transactions';
 const UNIQUE_TOKENS = 'uniquetokens';
@@ -328,7 +328,7 @@ export const saveTreasureBankToggle = (isOpen, accountAddress, network) =>
  * @param  {String}   [network]
  * @return {Object}
  */
-export const getTokenMigrationToggle = (accountAddress, network) =>
+export const getLPBonusToggle = (accountAddress, network) =>
   getAccountLocal(TOKEN_MIGRATION_TOGGLE, accountAddress, network, false);
 
 /**
@@ -337,7 +337,7 @@ export const getTokenMigrationToggle = (accountAddress, network) =>
  * @param  {Boolean}    [token migration toggle]
  * @param  {String}   [network]
  */
-export const saveTokenMigrationToggle = (isOpen, accountAddress, network) =>
+export const saveLPBonusToggle = (isOpen, accountAddress, network) =>
   saveAccountLocal(TOKEN_MIGRATION_TOGGLE, isOpen, accountAddress, network);
 
 /**

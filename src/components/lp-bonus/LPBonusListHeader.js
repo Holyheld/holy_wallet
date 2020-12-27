@@ -28,11 +28,11 @@ const ListHeaderEmoji = styled(Emoji).attrs({ size: 'medium' })`
   margin-bottom: 3.5;
 `;
 
-const TokenMigrationListHeader = ({
+const LPBonusListHeader = ({
   emoji,
   isOpen,
   onPress,
-  TokenMigrationSumValue,
+  sumValue,
   showSumValue,
   title,
 }) => {
@@ -78,13 +78,9 @@ const TokenMigrationListHeader = ({
               }}
             >
               <SumValueText>
-                {Number(TokenMigrationSumValue) ||
-                Number(TokenMigrationSumValue) === 0
-                  ? convertAmountToNativeDisplay(
-                      TokenMigrationSumValue,
-                      nativeCurrency
-                    )
-                  : TokenMigrationSumValue}
+                {Number(sumValue) || Number(sumValue) === 0
+                  ? convertAmountToNativeDisplay(sumValue, nativeCurrency)
+                  : sumValue}
               </SumValueText>
             </Animated.View>
           )}
@@ -114,24 +110,24 @@ const TokenMigrationListHeader = ({
   );
 };
 
-TokenMigrationListHeader.animationDuration = TokenFamilyHeaderAnimationDuration;
+LPBonusListHeader.animationDuration = TokenFamilyHeaderAnimationDuration;
 
-TokenMigrationListHeader.height = TokenFamilyHeaderHeight;
+LPBonusListHeader.height = TokenFamilyHeaderHeight;
 
-TokenMigrationListHeader.propTypes = {
+LPBonusListHeader.propTypes = {
   emoji: PropTypes.string,
   isOpen: PropTypes.bool,
   onPress: PropTypes.func,
   showSumValue: PropTypes.bool,
+  sumValue: PropTypes.string,
   title: PropTypes.string,
-  TokenMigrationSumValue: PropTypes.string,
 };
 
-TokenMigrationListHeader.defaultProps = {
+LPBonusListHeader.defaultProps = {
   emoji: 'dna',
   showSumValue: false,
-  title: 'Token migrations',
-  TokenMigrationSumValue: '0',
+  sumValue: '0',
+  title: 'Early LP Bonus',
 };
 
-export default TokenMigrationListHeader;
+export default LPBonusListHeader;

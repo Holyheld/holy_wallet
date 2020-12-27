@@ -26,20 +26,24 @@ export default function useWalletSectionsData() {
     pinnedCoins,
   } = useCoinListEditOptions();
 
-  const { refetchSavings, savings, shouldRefetchSavings } = useSavingsAccount(
-    true
-  );
+  const { refetchSavings, shouldRefetchSavings } = useSavingsAccount(true);
 
   const walletSections = useMemo(() => {
+    // TODO: get data from network
+    let holySavings = [{}];
+    let holyTreasure = [{}];
+    let holyEarlyBonus = [{}];
     const accountInfo = {
       currentAction,
       hiddenCoins,
+      holyEarlyBonus,
+      holySavings,
+      holyTreasure,
       isCoinListEdited,
       language,
       nativeCurrency,
       network,
       pinnedCoins,
-      savings,
       ...accountData,
       ...uniqueTokens,
       ...uniswap,
@@ -66,7 +70,6 @@ export default function useWalletSectionsData() {
     network,
     pinnedCoins,
     refetchSavings,
-    savings,
     shouldRefetchSavings,
     showcaseTokens,
     uniqueTokens,

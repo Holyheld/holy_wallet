@@ -5,9 +5,10 @@ import { OpacityToggler } from '../animations';
 import TreasureBankListHeader from './TreasureBankListHeader';
 import TreasureBankListRow from './TreasureBankListRow';
 
-const renderTreasureBankListRow = item => (
-  <TreasureBankListRow key={item?.symbol} {...item} />
-);
+const renderTreasureBankListRow = item =>
+  item?.underlying ? (
+    <TreasureBankListRow key={item?.underlying.symbol} {...item} />
+  ) : null;
 
 export default function TreasureBankListWrapper({ assets, totalValue = '0' }) {
   const { isTreasureBankOpen, toggleOpenTreasureBank } = useOpenTreasureBank();

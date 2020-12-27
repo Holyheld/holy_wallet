@@ -11,10 +11,10 @@ import { CoinRowHeight } from '../coin-row';
 import { SavingsCoinRowHeight } from '../coin-row/SavingsCoinRow';
 import { FloatingActionButtonSize } from '../fab';
 import { ListFooter } from '../list';
+import LPBonusListWrapper from '../lp-bonus/LPBonusListWrapper';
 import PoolsListWrapper from '../pools/PoolsListWrapper';
 import SavingsListWrapper from '../savings/SavingsListWrapper';
 import { TokenFamilyHeaderHeight } from '../token-family';
-import TokenMigrationListWrapper from '../token-migration/TokenMigrationListWrapper';
 import TreasureBankListWrapper from '../treasure-bank/TreasureBankListWrapper';
 
 import { UniqueTokenRow } from '../unique-token';
@@ -37,11 +37,11 @@ const treasuresBankLastOpenAdditionalHeight = -13;
 const treasuresBankLastClosedAdditionalHeight = -10;
 const treasureBankRowHeight = 64;
 
-const tokenMigrationOpenAdditionalHeight = -7.5;
-const tokenMigrationClosedAdditionalHeight = -5;
-const tokenMigrationLastOpenAdditionalHeight = -13;
-const tokenMigrationLastClosedAdditionalHeight = -10;
-const tokenMigrationRowHeight = 64;
+const LPBonusOpenAdditionalHeight = -7.5;
+const LPBonusClosedAdditionalHeight = -5;
+const LPBonusLastOpenAdditionalHeight = -13;
+const LPBonusLastClosedAdditionalHeight = -10;
+const LPBonusRowHeight = 64;
 
 const poolsOpenAdditionalHeight = -12;
 const poolsClosedAdditionalHeight = -15;
@@ -241,21 +241,18 @@ export const ViewTypes = {
       isOpen
         ? TokenFamilyHeaderHeight +
           (isLast
-            ? ListFooter.height + tokenMigrationLastOpenAdditionalHeight
-            : tokenMigrationOpenAdditionalHeight) +
-          tokenMigrationRowHeight * amountOfRows
+            ? ListFooter.height + LPBonusLastOpenAdditionalHeight
+            : LPBonusOpenAdditionalHeight) +
+          LPBonusRowHeight * amountOfRows
         : TokenFamilyHeaderHeight +
           (isLast
-            ? ListFooter.height + tokenMigrationLastClosedAdditionalHeight
-            : tokenMigrationClosedAdditionalHeight),
+            ? ListFooter.height + LPBonusLastClosedAdditionalHeight
+            : LPBonusClosedAdditionalHeight),
     index: 9,
     renderComponent: ({ data }) => {
       const { item = {} } = data;
       return (
-        <TokenMigrationListWrapper
-          assets={item.assets}
-          totalValue={item.totalValue}
-        />
+        <LPBonusListWrapper assets={item.assets} totalValue={item.totalValue} />
       );
     },
   },
