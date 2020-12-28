@@ -28,11 +28,11 @@ const ListHeaderEmoji = styled(Emoji).attrs({ size: 'medium' })`
   margin-bottom: 3.5;
 `;
 
-const TreasureBankListHeader = ({
+const TreasuryBankListHeader = ({
   emoji,
   isOpen,
   onPress,
-  treasureBankSumValue,
+  treasuryBankSumValue,
   showSumValue,
   title,
 }) => {
@@ -78,13 +78,13 @@ const TreasureBankListHeader = ({
               }}
             >
               <SumValueText>
-                {Number(treasureBankSumValue) ||
-                Number(treasureBankSumValue) === 0
+                {Number(treasuryBankSumValue) ||
+                Number(treasuryBankSumValue) === 0
                   ? convertAmountToNativeDisplay(
-                      treasureBankSumValue,
+                      treasuryBankSumValue,
                       nativeCurrency
                     )
-                  : treasureBankSumValue}
+                  : treasuryBankSumValue}
               </SumValueText>
             </Animated.View>
           )}
@@ -114,24 +114,24 @@ const TreasureBankListHeader = ({
   );
 };
 
-TreasureBankListHeader.animationDuration = TokenFamilyHeaderAnimationDuration;
+TreasuryBankListHeader.animationDuration = TokenFamilyHeaderAnimationDuration;
 
-TreasureBankListHeader.height = TokenFamilyHeaderHeight;
+TreasuryBankListHeader.height = TokenFamilyHeaderHeight;
 
-TreasureBankListHeader.propTypes = {
+TreasuryBankListHeader.propTypes = {
   emoji: PropTypes.string,
   isOpen: PropTypes.bool,
   onPress: PropTypes.func,
   showSumValue: PropTypes.bool,
   title: PropTypes.string,
-  treasureBankSumValue: PropTypes.string,
+  treasuryBankSumValue: PropTypes.string,
 };
 
-TreasureBankListHeader.defaultProps = {
+TreasuryBankListHeader.defaultProps = {
   emoji: 'bank',
   showSumValue: false,
-  title: 'Treasure Bank',
-  treasureBankSumValue: '0',
+  title: 'Treasury Bank',
+  treasuryBankSumValue: '0',
 };
 
-export default TreasureBankListHeader;
+export default TreasuryBankListHeader;

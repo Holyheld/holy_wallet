@@ -17,6 +17,7 @@ import SavingsSheet from '../screens/SavingsSheet';
 import SendSheet from '../screens/SendSheet';
 import SettingsModal from '../screens/SettingsModal';
 import TransactionConfirmationScreen from '../screens/TransactionConfirmationScreen';
+import TreasurySheet from '../screens/TreasurySheet';
 import WalletConnectApprovalSheet from '../screens/WalletConnectApprovalSheet';
 import WalletConnectRedirectSheet from '../screens/WalletConnectRedirectSheet';
 import WelcomeScreen from '../screens/WelcomeScreen';
@@ -168,6 +169,11 @@ function MainNavigator() {
       <Stack.Screen
         component={SavingsSheet}
         name={Routes.SAVINGS_SHEET}
+        options={bottomSheetPreset}
+      />
+      <Stack.Screen
+        component={TreasurySheet}
+        name={Routes.TREASURY_SHEET}
         options={bottomSheetPreset}
       />
       <Stack.Screen

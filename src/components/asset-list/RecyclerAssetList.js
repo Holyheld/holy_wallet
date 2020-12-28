@@ -18,7 +18,7 @@ import {
   withOpenInvestmentCards,
   withOpenLPBonus,
   withOpenSavings,
-  withOpenTreasureBank,
+  withOpenTreasuryBank,
 } from '../../hoc';
 import {
   deviceUtils,
@@ -261,14 +261,14 @@ class RecyclerAssetList extends Component {
         if (
           index > 0 &&
           sections[balancesIndex].data[index - 1] &&
-          sections[balancesIndex].data[index - 1].holyTreasureContainer
+          sections[balancesIndex].data[index - 1].holyTreasuryContainer
         ) {
           return {
             height: ViewTypes.TREASURY_BANK.calculateHeight({
               amountOfRows:
                 sections[balancesIndex].data[index - 1].assets?.length || 0,
               isLast: false,
-              isOpen: this.props.openTreasureBank,
+              isOpen: this.props.openTreasuryBank,
             }),
             index: ViewTypes.TREASURY_BANK.index,
           };
@@ -713,8 +713,8 @@ class RecyclerAssetList extends Component {
       return `holySavingsContainer`;
     }
 
-    if (row.item && row.item.holyTreasureContainer) {
-      return `holyTreasureContainer`;
+    if (row.item && row.item.holyTreasuryContainer) {
+      return `holyTreasuryContainer`;
     }
 
     if (index === dataProvider._data.length - 1) {
@@ -911,7 +911,7 @@ export default compose(
   withOpenInvestmentCards,
   withOpenBalances,
   withOpenSavings,
-  withOpenTreasureBank,
+  withOpenTreasuryBank,
   withOpenLPBonus,
   withAccountSettings
 )(RecyclerAssetList);

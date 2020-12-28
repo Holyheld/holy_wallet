@@ -15,7 +15,7 @@ import LPBonusListWrapper from '../lp-bonus/LPBonusListWrapper';
 import PoolsListWrapper from '../pools/PoolsListWrapper';
 import SavingsListWrapper from '../savings/SavingsListWrapper';
 import { TokenFamilyHeaderHeight } from '../token-family';
-import TreasureBankListWrapper from '../treasure-bank/TreasureBankListWrapper';
+import TreasuryBankListWrapper from '../treasury-bank/TreasuryBankListWrapper';
 
 import { UniqueTokenRow } from '../unique-token';
 import AssetListHeader, { AssetListHeaderHeight } from './AssetListHeader';
@@ -31,11 +31,11 @@ const savingsClosedAdditionalHeight = -5;
 const savingsLastOpenAdditionalHeight = -13;
 const savingsLastClosedAdditionalHeight = -10;
 
-const treasuresBankOpenAdditionalHeight = -7.5;
-const treasuresBankClosedAdditionalHeight = -5;
-const treasuresBankLastOpenAdditionalHeight = -13;
-const treasuresBankLastClosedAdditionalHeight = -10;
-const treasureBankRowHeight = 64;
+const treasuryBankOpenAdditionalHeight = -7.5;
+const treasuryBankClosedAdditionalHeight = -5;
+const treasuryBankLastOpenAdditionalHeight = -13;
+const treasuryBankLastClosedAdditionalHeight = -10;
+const treasuryBankRowHeight = 64;
 
 const LPBonusOpenAdditionalHeight = -7.5;
 const LPBonusClosedAdditionalHeight = -5;
@@ -217,18 +217,18 @@ export const ViewTypes = {
       isOpen
         ? TokenFamilyHeaderHeight +
           (isLast
-            ? ListFooter.height + treasuresBankLastOpenAdditionalHeight
-            : treasuresBankOpenAdditionalHeight) +
-          treasureBankRowHeight * amountOfRows
+            ? ListFooter.height + treasuryBankLastOpenAdditionalHeight
+            : treasuryBankOpenAdditionalHeight) +
+          treasuryBankRowHeight * amountOfRows
         : TokenFamilyHeaderHeight +
           (isLast
-            ? ListFooter.height + treasuresBankLastClosedAdditionalHeight
-            : treasuresBankClosedAdditionalHeight),
+            ? ListFooter.height + treasuryBankLastClosedAdditionalHeight
+            : treasuryBankClosedAdditionalHeight),
     index: 8,
     renderComponent: ({ data }) => {
       const { item = {} } = data;
       return (
-        <TreasureBankListWrapper
+        <TreasuryBankListWrapper
           assets={item.assets}
           totalValue={item.totalValue}
         />
