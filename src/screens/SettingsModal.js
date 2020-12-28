@@ -8,7 +8,7 @@ import { Modal } from '../components/modal';
 import ModalHeaderButton from '../components/modal/ModalHeaderButton';
 import {
   CurrencySection,
-  LanguageSection,
+  // LanguageSection,
   // NetworkSection,
   SettingsSection,
 } from '../components/settings-menu';
@@ -78,11 +78,11 @@ const SettingsPages = {
     key: 'DevSection',
     title: 'Dev',
   },
-  language: {
-    component: LanguageSection,
-    key: 'LanguageSection',
-    title: 'Language',
-  },
+  // language: {
+  //   component: LanguageSection,
+  //   key: 'LanguageSection',
+  //   title: 'Language',
+  // },
   // network: {
   //   component: NetworkSection,
   //   key: 'NetworkSection',
@@ -104,7 +104,7 @@ const SettingsTitle = ({ children }) => {
   return (
     <Text
       align="center"
-      color={colors.textColor}
+      color={colors.textColorTitle}
       letterSpacing="roundedMedium"
       size="large"
       weight="bold"
@@ -234,7 +234,10 @@ export default function SettingsModal() {
             component={WalletSelectionView}
             name="WalletSelectionView"
             options={{
-              cardStyle: { backgroundColor: colors.white, marginTop: 6 },
+              cardStyle: {
+                backgroundColor: colors.modalBackground,
+                marginTop: 6,
+              },
               cardStyleInterpolator,
               title: 'Backup',
             }}

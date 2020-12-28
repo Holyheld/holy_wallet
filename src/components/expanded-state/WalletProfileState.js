@@ -53,7 +53,7 @@ const ProfileImage = styled(ImageAvatar)`
 
 const WalletProfileDivider = styled(Divider).attrs({
   borderRadius: 1,
-  color: colors.rowDividerLight,
+  color: colors.divider,
   inset: false,
 })``;
 
@@ -113,7 +113,7 @@ export default function WalletProfileState({
   ]);
 
   return (
-    <WalletProfileModal>
+    <WalletProfileModal color={colors.modalBackground}>
       <Centered
         direction="column"
         paddingBottom={30}
@@ -163,7 +163,7 @@ export default function WalletProfileState({
         </WalletProfileButton>
         <WalletProfileButton onPress={handleCancel}>
           <WalletProfileButtonText
-            color={colors.alpha(colors.blueGreyDark, 0.6)}
+            color={colors.textColor}
             letterSpacing="roundedMedium"
             weight="medium"
           >

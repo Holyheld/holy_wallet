@@ -16,6 +16,7 @@ let base = {
   brightRed: '#FF7171', // '255, 113, 113'
   buttonActionBackground: '#25282D',
   buttonBackground: '#25282D',
+  buttonBackgroundDisabled: '#CDCFD4',
   chartGreen: '#66d28f', // '102, 210, 143'
   dark: '#25292E', // '37, 41, 46'
   darkGrey: '#71778A', // '113, 119, 138'
@@ -37,6 +38,7 @@ let base = {
   mediumGrey: '#A1A5B3', // '161, 165, 179'
   mintDark: '#00E0A9', // '0, 224, 169'
   modalBackground: '#3B3E43',
+  modalHeader: '#3B3E43',
   neonSkyblue: '#34FFFF', // '52, 255, 255'
   offWhite: '#F8F9FA', // '248, 249, 250'
   orange: '#FF9900', // '255, 153, 0'

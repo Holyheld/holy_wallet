@@ -1,19 +1,21 @@
 import React, { Fragment, useCallback, useEffect, useRef } from 'react';
 import styled from 'styled-components/primitives';
+import colors from '../../../styles/colors';
 import { Input } from '../../inputs';
 import { PlaceholderText } from '../../text';
 import { useMagicAutofocus } from '@rainbow-me/hooks';
 import { fonts, fontWithWidth } from '@rainbow-me/styles';
 
-const NameInput = styled(Input).attrs({
+const NameInput = styled(Input).attrs(({ color = colors.textColor }) => ({
   align: 'center',
   autoCapitalize: 'words',
   autoFocus: true,
+  color: color,
   letterSpacing: 'roundedTight',
   returnKeyType: 'done',
   size: 'big',
   spellCheck: false,
-})`
+}))`
   ${fontWithWidth(fonts.weight.bold)};
   ${android ? 'height: 70; margin-vertical: -8;' : ''}
   width: 100%;

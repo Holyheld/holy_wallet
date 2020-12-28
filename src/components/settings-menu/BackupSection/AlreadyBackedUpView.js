@@ -38,7 +38,7 @@ const CheckmarkIconContainer = styled(View)`
 
 const CheckmarkIconText = styled(Text).attrs({
   align: 'center',
-  color: colors.white,
+  color: colors.textColor,
   size: 'larger',
   weight: 'bold',
 })``;
@@ -58,7 +58,7 @@ const Content = styled(Centered).attrs({
 
 const DescriptionText = styled(Text).attrs({
   align: 'center',
-  color: colors.alpha(colors.blueGreyDark, 0.5),
+  color: colors.textColorDescription,
   lineHeight: 'loosest',
   size: 'large',
 })`
@@ -72,15 +72,15 @@ const Footer = styled(Centered)`
 
 const Subtitle = styled(Text).attrs({
   align: 'center',
-  color: colors.alpha(colors.blueGreyDark, 0.5),
+  color: colors.textColorTitle,
+  marginTop: 10,
   size: fonts.size.smedium,
   weight: fonts.weight.medium,
-})`
-  margin-top: -10;
-`;
+})``;
 
 const Title = styled(Text).attrs({
   align: 'center',
+  color: colors.textColorTitle,
   size: 'larger',
   weight: 'bold',
 })`
@@ -259,10 +259,10 @@ export default function AlreadyBackedUpView() {
         <Column>
           <SheetActionButton
             androidWidth={225}
-            color={colors.white}
+            color={colors.buttonActionBackground}
             label="🗝 View recovery key"
             onPress={handleViewRecoveryPhrase}
-            textColor={colors.alpha(colors.blueGreyDark, 0.8)}
+            textColor={colors.textColor}
           />
         </Column>
       </Content>
@@ -271,7 +271,7 @@ export default function AlreadyBackedUpView() {
           <ButtonPressAnimation onPress={handleIcloudBackup}>
             <Text
               align="center"
-              color={colors.appleBlue}
+              color={colors.textColor}
               letterSpacing="roundedMedium"
               size="large"
               weight="semibold"

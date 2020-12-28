@@ -223,7 +223,7 @@ const transitionConfig = {
 };
 
 const BackArrow = styled(Icon).attrs({
-  color: colors.appleBlue,
+  color: colors.textColor,
   direction: 'left',
   name: 'caret',
 })`
@@ -254,6 +254,7 @@ const headerConfigOptions = {
   },
 };
 
+// todo recolor
 export const wyreWebviewOptions = {
   ...headerConfigOptions,
   headerStatusBarHeight: 24,
@@ -268,14 +269,14 @@ export const wyreWebviewOptions = {
 export const settingsOptions = {
   ...headerConfigOptions,
   cardShadowEnabled: false,
-  cardStyle: { backgroundColor: colors.white, overflow: 'visible' },
+  cardStyle: { backgroundColor: colors.modalBackground, overflow: 'visible' },
   gestureEnabled: true,
   gestureResponseDistance: { horizontal: deviceUtils.dimensions.width },
   ...(ios && { headerBackImage: BackImage }),
   headerBackTitle: 'Back',
   headerStatusBarHeight: 0,
   headerStyle: {
-    backgroundColor: colors.modalBackground,
+    backgroundColor: colors.modalHeader,
     elevation: 6,
     height: 49,
     shadowColor: 'transparent',

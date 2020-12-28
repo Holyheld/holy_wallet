@@ -3,12 +3,14 @@ import styled from 'styled-components/primitives';
 import Text from './Text';
 import { colors } from '@rainbow-me/styles';
 
-const Placeholder = styled(Text).attrs({
-  align: 'center',
-  color: colors.alpha(colors.blueGreyDark, 0.3),
-  size: 'big',
-  weight: 'semibold',
-})`
+const Placeholder = styled(Text).attrs(
+  ({ color = colors.textColorPlaceholder }) => ({
+    align: 'center',
+    color: color,
+    size: 'big',
+    weight: 'semibold',
+  })
+)`
   margin-bottom: ${android ? -48 : -27};
   width: 100%;
 `;

@@ -30,6 +30,9 @@ const Content = styled(RowWithMargins).attrs({
 `;
 
 export default function MiniButton({
+  activeButtonColor = colors.buttonActionBackground,
+  disabledButtonColor = colors.buttonBackgroundDisabled,
+  textColor = colors.textColor,
   borderRadius = 15,
   children,
   disabled,
@@ -50,7 +53,7 @@ export default function MiniButton({
       <View style={{ borderRadius, overflow: 'hidden' }}>
         <ShadowStack
           {...position.coverAsObject}
-          backgroundColor={disabled ? colors.lightGrey : colors.appleBlue}
+          backgroundColor={disabled ? disabledButtonColor : activeButtonColor}
           borderRadius={borderRadius}
           height={height}
           shadows={disabled ? shadows.disabled : shadows.default}
@@ -58,7 +61,7 @@ export default function MiniButton({
         />
         <Content>
           {typeof children === 'string' ? (
-            <Text color="white" weight="semibold">
+            <Text color={textColor} weight="semibold">
               {children}
             </Text>
           ) : (

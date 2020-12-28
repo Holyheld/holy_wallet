@@ -25,7 +25,7 @@ const ButtonLabel = styled(Text).attrs(({ color }) => ({
 }))``;
 
 export default function BiometricButtonContent({
-  color = colors.appleBlue,
+  color = colors.textColor,
   showIcon,
   text,
   testID,
