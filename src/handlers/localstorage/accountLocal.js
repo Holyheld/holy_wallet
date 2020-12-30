@@ -19,7 +19,7 @@ const PURCHASE_TRANSACTIONS = 'purchaseTransactions';
 const SMALL_BALANCE_TOGGLE = 'smallBalanceToggle';
 const SAVINGS = 'savings';
 const SAVINGS_TOGGLE = 'savingsToggle';
-const TREASURE_BANK_TOGGLE = 'treasureBankToggle';
+const TREASURY_BANK_TOGGLE = 'treasuryBankToggle';
 const TOKEN_MIGRATION_TOGGLE = 'LPBonusToggle';
 const SHOWCASE_TOKENS = 'showcaseTokens';
 const TRANSACTIONS = 'transactions';
@@ -41,7 +41,7 @@ export const accountLocalKeys = [
   SHOWCASE_TOKENS,
   TRANSACTIONS,
   TOKEN_MIGRATION_TOGGLE,
-  TREASURE_BANK_TOGGLE,
+  TREASURY_BANK_TOGGLE,
   UNIQUE_TOKENS,
   PINNED_COINS,
   HIDDEN_COINS,
@@ -305,22 +305,22 @@ export const saveSavingsToggle = (isOpen, accountAddress, network) =>
   saveAccountLocal(SAVINGS_TOGGLE, isOpen, accountAddress, network);
 
 /**
- * @desc get open treasure bank
+ * @desc get open treasury bank
  * @param  {String}   [address]
  * @param  {String}   [network]
  * @return {Object}
  */
-export const getTreasureBankToggle = (accountAddress, network) =>
-  getAccountLocal(TREASURE_BANK_TOGGLE, accountAddress, network, false);
+export const getTreasuryBankToggle = (accountAddress, network) =>
+  getAccountLocal(TREASURY_BANK_TOGGLE, accountAddress, network, false);
 
 /**
- * @desc save treasure bank toggle
+ * @desc save treasury bank toggle
  * @param  {String}   [address]
- * @param  {Boolean}    [treasure bank toggle]
+ * @param  {Boolean}    [treasury bank toggle]
  * @param  {String}   [network]
  */
-export const saveTreasureBankToggle = (isOpen, accountAddress, network) =>
-  saveAccountLocal(TREASURE_BANK_TOGGLE, isOpen, accountAddress, network);
+export const saveTreasuryBankToggle = (isOpen, accountAddress, network) =>
+  saveAccountLocal(TREASURY_BANK_TOGGLE, isOpen, accountAddress, network);
 
 /**
  * @desc get open token migration toggle

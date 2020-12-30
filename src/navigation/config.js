@@ -155,6 +155,16 @@ export const savingsSheetConfig = {
   }),
 };
 
+export const treasurySheetConfig = {
+  options: ({ route: { params = {} } }) => ({
+    ...buildCoolModalConfig({
+      ...params,
+      headerHeight: 0,
+      topOffset: 0,
+    }),
+  }),
+};
+
 export const stackNavigationConfig = {
   headerMode: 'none',
   keyboardHandlingEnabled: ios,

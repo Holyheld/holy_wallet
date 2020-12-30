@@ -46,7 +46,7 @@ const uniqueTokensSelector = state => state.uniqueTokens;
 const uniswapSelector = state => state.uniswap;
 const uniswapTotalSelector = state => state.uniswapTotal;
 const holySavingsSelector = state => state.holySavings;
-const holyTreasureSelector = state => state.holyTreasure;
+const holyTreasurySelector = state => state.holyTreasury;
 const holyEarlyLPBonusSelector = state => state.holyEarlyBonus;
 
 const enhanceRenderItem = compose(
@@ -176,7 +176,7 @@ const withBalanceHolySavingsSection = (holySavings, priceOfEther) => {
   let holySavingsAssets = [];
 
   if (priceOfEther) {
-    holySavingsAssets = map(() => {
+    holySavingsAssets = map(holySavings, () => {
       return {
         balance: '0',
         underlying: {
@@ -186,19 +186,19 @@ const withBalanceHolySavingsSection = (holySavings, priceOfEther) => {
     });
   }
 
-  const savingsSection = {
+  const section = {
     assets: holySavingsAssets,
     holySavingsContainer: true,
     totalValue: 0,
   };
-  return savingsSection;
+  return section;
 };
 
 const withBalanceHolyEarlyBonusSection = (earlyBonus, priceOfEther) => {
   let holyBonusAssets = [];
 
   if (priceOfEther) {
-    holyBonusAssets = map(() => {
+    holyBonusAssets = map(earlyBonus, () => {
       return {
         balance: '0',
         underlying: {
@@ -209,19 +209,19 @@ const withBalanceHolyEarlyBonusSection = (earlyBonus, priceOfEther) => {
     });
   }
 
-  const savingsSection = {
+  const section = {
     assets: holyBonusAssets,
     holyEarlyBonusContainer: true,
     totalValue: 0,
   };
-  return savingsSection;
+  return section;
 };
 
-const withBalanceHolyTreasureSection = (holyTreasure, priceOfEther) => {
-  let holyTreasureAssets = [];
+const withBalanceHolyTreasurySection = (holyTreasury, priceOfEther) => {
+  let holyTreasuryAssets = [];
 
   if (priceOfEther) {
-    holyTreasureAssets = map(() => {
+    holyTreasuryAssets = map(holyTreasury, () => {
       return {
         balance: '0',
         underlying: {
@@ -230,13 +230,12 @@ const withBalanceHolyTreasureSection = (holyTreasure, priceOfEther) => {
       };
     });
   }
-
-  const savingsSection = {
-    assets: holyTreasureAssets,
-    holyTreasureContainer: true,
+  const section = {
+    assets: holyTreasuryAssets,
+    holyTreasuryContainer: true,
     totalValue: 0,
   };
-  return savingsSection;
+  return section;
 };
 
 // const withBalanceSavingsSection = (savings, priceOfEther) => {
@@ -360,7 +359,7 @@ const withBalanceSection = (
   currentAction,
   uniswapTotal,
   holySavings,
-  holyTreasure,
+  holyTreasury,
   holyBonus
 ) => {
   const { assets, totalBalancesValue } = buildCoinsList(
@@ -379,7 +378,7 @@ const withBalanceSection = (
   }
 
   if (networkTypes.mainnet === network) {
-    balanceSectionData.push(holyTreasure);
+    balanceSectionData.push(holyTreasury);
   }
 
   if (networkTypes.mainnet === network) {
@@ -518,9 +517,9 @@ const balanceHolySavingsSelector = createSelector(
   withBalanceHolySavingsSection
 );
 
-const balanceHolyTreasureSelector = createSelector(
-  [holyTreasureSelector, ethPriceSelector],
-  withBalanceHolyTreasureSection
+const balanceHolyTreasurySelector = createSelector(
+  [holyTreasurySelector, ethPriceSelector],
+  withBalanceHolyTreasurySection
 );
 
 const balanceHolyEarlyBonusSelector = createSelector(
@@ -554,7 +553,7 @@ const balanceSectionSelector = createSelector(
     currentActionSelector,
     uniswapTotalSelector,
     balanceHolySavingsSelector,
-    balanceHolyTreasureSelector,
+    balanceHolyTreasurySelector,
     balanceHolyEarlyBonusSelector,
   ],
   withBalanceSection

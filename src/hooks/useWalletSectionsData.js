@@ -31,14 +31,14 @@ export default function useWalletSectionsData() {
   const walletSections = useMemo(() => {
     // TODO: get data from network
     let holySavings = [{}];
-    let holyTreasure = [{}];
+    let holyTreasury = [{}];
     let holyEarlyBonus = [{}];
     const accountInfo = {
       currentAction,
       hiddenCoins,
       holyEarlyBonus,
       holySavings,
-      holyTreasure,
+      holyTreasury,
       isCoinListEdited,
       language,
       nativeCurrency,
