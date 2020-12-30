@@ -6,9 +6,12 @@ import { useRatio } from './useRatio';
 import { ChartXLabel } from '@rainbow-me/animated-charts';
 import { colors, fonts, fontWithWidth } from '@rainbow-me/styles';
 
-const Label = styled(ChartXLabel)`
+const Label = styled(ChartXLabel).attrs(
+  ({ backgroundColor = colors.modalBackground }) => ({
+    backgroundColor,
+  })
+)`
   ${fontWithWidth(fonts.weight.medium)};
-  background-color: white;
   font-size: ${fonts.size.larger};
   font-variant: tabular-nums;
   letter-spacing: ${fonts.letterSpacing.roundedMedium};
@@ -91,7 +94,7 @@ export default function ChartDateLabel({ chartTimeSharedValue }) {
     return {
       color:
         ratio.value === 1
-          ? colors.blueGreyDark
+          ? colors.textColor
           : ratio.value < 1
           ? colors.red
           : colors.green,

@@ -18,7 +18,7 @@ const NOOP = () => undefined;
 
 const sx = StyleSheet.create({
   accountLabel: {
-    color: colors.dark,
+    color: colors.textColorTitle,
     fontFamily: fonts.family.SFProRounded,
     fontSize: getFontSize(fonts.size.lmedium),
     fontWeight: fonts.weight.medium,
@@ -31,7 +31,7 @@ const sx = StyleSheet.create({
     marginLeft: 19,
   },
   bottomRowText: {
-    color: colors.alpha(colors.blueGreyDark, 0.5),
+    color: colors.textColor,
     fontWeight: fonts.weight.medium,
     letterSpacing: fonts.letterSpacing.roundedMedium,
   },
@@ -53,7 +53,7 @@ const sx = StyleSheet.create({
     textAlign: 'center',
   },
   readOnlyText: {
-    color: colors.alpha(colors.blueGreyDark, 0.5),
+    color: colors.textColorPlaceholder,
     fontFamily: fonts.family.SFProRounded,
     fontWeight: fonts.weight.semibold,
     letterSpacing: fonts.letterSpacing.roundedTight,

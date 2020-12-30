@@ -24,7 +24,7 @@ import {
   buildUniqueTokenList,
 } from './assets';
 import networkTypes from './networkTypes';
-import { add, convertAmountToNativeDisplay, multiply } from './utilities';
+import { add, convertAmountToNativeDisplay } from './utilities';
 import Routes from '@rainbow-me/routes';
 import { ETH_ICON_URL, ethereumUtils } from '@rainbow-me/utils';
 
@@ -40,11 +40,14 @@ const languageSelector = state => state.language;
 const networkSelector = state => state.network;
 const nativeCurrencySelector = state => state.nativeCurrency;
 const pinnedCoinsSelector = state => state.pinnedCoins;
-const savingsSelector = state => state.savings;
+//const savingsSelector = state => state.savings;
 const showcaseTokensSelector = state => state.showcaseTokens;
 const uniqueTokensSelector = state => state.uniqueTokens;
 const uniswapSelector = state => state.uniswap;
 const uniswapTotalSelector = state => state.uniswapTotal;
+const holySavingsSelector = state => state.holySavings;
+const holyTreasureSelector = state => state.holyTreasure;
+const holyEarlyLPBonusSelector = state => state.holyEarlyBonus;
 
 const enhanceRenderItem = compose(
   withNavigation,
@@ -169,46 +172,113 @@ const withEthPrice = allAssets => {
   return get(ethAsset, 'native.price.amount', null);
 };
 
-const withBalanceSavingsSection = (savings, priceOfEther) => {
-  let savingsAssets = savings;
-  let totalUnderlyingNativeValue = '0';
-  if (priceOfEther) {
-    savingsAssets = map(savings, asset => {
-      const {
-        supplyBalanceUnderlying,
-        underlyingPrice,
-        lifetimeSupplyInterestAccrued,
-      } = asset;
-      const underlyingNativePrice =
-        asset.underlying.symbol === 'ETH'
-          ? priceOfEther
-          : multiply(underlyingPrice, priceOfEther);
-      const underlyingBalanceNativeValue = supplyBalanceUnderlying
-        ? multiply(supplyBalanceUnderlying, underlyingNativePrice)
-        : 0;
-      totalUnderlyingNativeValue = add(
-        totalUnderlyingNativeValue,
-        underlyingBalanceNativeValue
-      );
-      const lifetimeSupplyInterestAccruedNative = lifetimeSupplyInterestAccrued
-        ? multiply(lifetimeSupplyInterestAccrued, underlyingNativePrice)
-        : 0;
+const withBalanceHolySavingsSection = (holySavings, priceOfEther) => {
+  let holySavingsAssets = [];
 
+  if (priceOfEther) {
+    holySavingsAssets = map(() => {
       return {
-        ...asset,
-        lifetimeSupplyInterestAccruedNative,
-        underlyingBalanceNativeValue,
+        balance: '0',
+        underlying: {
+          symbol: 'USD',
+        },
       };
     });
   }
 
   const savingsSection = {
-    assets: savingsAssets,
-    savingsContainer: true,
-    totalValue: totalUnderlyingNativeValue,
+    assets: holySavingsAssets,
+    holySavingsContainer: true,
+    totalValue: 0,
   };
   return savingsSection;
 };
+
+const withBalanceHolyEarlyBonusSection = (earlyBonus, priceOfEther) => {
+  let holyBonusAssets = [];
+
+  if (priceOfEther) {
+    holyBonusAssets = map(() => {
+      return {
+        balance: '0',
+        underlying: {
+          address: '0x39eae99e685906ff1c11a962a743440d0a1a6e09',
+          symbol: 'HOLY',
+        },
+      };
+    });
+  }
+
+  const savingsSection = {
+    assets: holyBonusAssets,
+    holyEarlyBonusContainer: true,
+    totalValue: 0,
+  };
+  return savingsSection;
+};
+
+const withBalanceHolyTreasureSection = (holyTreasure, priceOfEther) => {
+  let holyTreasureAssets = [];
+
+  if (priceOfEther) {
+    holyTreasureAssets = map(() => {
+      return {
+        balance: '0',
+        underlying: {
+          symbol: 'USD',
+        },
+      };
+    });
+  }
+
+  const savingsSection = {
+    assets: holyTreasureAssets,
+    holyTreasureContainer: true,
+    totalValue: 0,
+  };
+  return savingsSection;
+};
+
+// const withBalanceSavingsSection = (savings, priceOfEther) => {
+//   let savingsAssets = savings;
+//   let totalUnderlyingNativeValue = '0';
+//   if (priceOfEther) {
+//     savingsAssets = map(savings, asset => {
+//       const {
+//         supplyBalanceUnderlying,
+//         underlyingPrice,
+//         lifetimeSupplyInterestAccrued,
+//       } = asset;
+//       const underlyingNativePrice =
+//         asset.underlying.symbol === 'ETH'
+//           ? priceOfEther
+//           : multiply(underlyingPrice, priceOfEther);
+//       const underlyingBalanceNativeValue = supplyBalanceUnderlying
+//         ? multiply(supplyBalanceUnderlying, underlyingNativePrice)
+//         : 0;
+//       totalUnderlyingNativeValue = add(
+//         totalUnderlyingNativeValue,
+//         underlyingBalanceNativeValue
+//       );
+//       const lifetimeSupplyInterestAccruedNative = lifetimeSupplyInterestAccrued
+//         ? multiply(lifetimeSupplyInterestAccrued, underlyingNativePrice)
+//         : 0;
+
+//       return {
+//         ...asset,
+//         lifetimeSupplyInterestAccruedNative,
+//         underlyingBalanceNativeValue,
+//       };
+//     });
+//   }
+
+//   const savingsSection = {
+//     assets: savingsAssets,
+//     savingsContainer: true,
+//     totalValue: totalUnderlyingNativeValue,
+//   };
+//   return savingsSection;
+// };
 
 const coinEditContextMenu = (
   allAssets,
@@ -279,7 +349,6 @@ const withBalanceSection = (
   allAssets,
   allAssetsCount,
   assetsTotal,
-  savingsSection,
   isBalancesSectionEmpty,
   isLoadingAssets,
   language,
@@ -289,7 +358,10 @@ const withBalanceSection = (
   pinnedCoins,
   hiddenCoins,
   currentAction,
-  uniswapTotal
+  uniswapTotal,
+  holySavings,
+  holyTreasure,
+  holyBonus
 ) => {
   const { assets, totalBalancesValue } = buildCoinsList(
     allAssets,
@@ -303,14 +375,26 @@ const withBalanceSection = (
   let balanceSectionData = [];
 
   if (networkTypes.mainnet === network) {
-    balanceSectionData.push(savingsSection);
+    balanceSectionData.push(holySavings);
+  }
+
+  if (networkTypes.mainnet === network) {
+    balanceSectionData.push(holyTreasure);
+  }
+
+  if (networkTypes.mainnet === network) {
+    balanceSectionData.push(holyBonus);
   }
 
   balanceSectionData.push(...assets);
 
+  // if (networkTypes.mainnet === network) {
+  //   balanceSectionData.push(holySavings);
+  // }
+
   const totalBalanceWithSavingsValue = add(
     totalBalancesValue,
-    get(savingsSection, 'totalValue', 0)
+    0 //get(savingsSection, 'totalValue', 0)
   );
   const totalBalanceWithAllSectionValues = add(
     totalBalanceWithSavingsValue,
@@ -424,9 +508,24 @@ const uniqueTokenDataSelector = createSelector(
 
 const ethPriceSelector = createSelector([allAssetsSelector], withEthPrice);
 
-const balanceSavingsSectionSelector = createSelector(
-  [savingsSelector, ethPriceSelector],
-  withBalanceSavingsSection
+// const balanceSavingsSectionSelector = createSelector(
+//   [savingsSelector, ethPriceSelector],
+//   withBalanceSavingsSection
+// );
+
+const balanceHolySavingsSelector = createSelector(
+  [holySavingsSelector, ethPriceSelector],
+  withBalanceHolySavingsSection
+);
+
+const balanceHolyTreasureSelector = createSelector(
+  [holyTreasureSelector, ethPriceSelector],
+  withBalanceHolyTreasureSection
+);
+
+const balanceHolyEarlyBonusSelector = createSelector(
+  [holyEarlyLPBonusSelector, ethPriceSelector],
+  withBalanceHolyEarlyBonusSection
 );
 
 const uniswapSectionSelector = createSelector(
@@ -444,7 +543,6 @@ const balanceSectionSelector = createSelector(
     allAssetsSelector,
     allAssetsCountSelector,
     assetsTotalSelector,
-    balanceSavingsSectionSelector,
     isBalancesSectionEmptySelector,
     isLoadingAssetsSelector,
     languageSelector,
@@ -455,6 +553,9 @@ const balanceSectionSelector = createSelector(
     hiddenCoinsSelector,
     currentActionSelector,
     uniswapTotalSelector,
+    balanceHolySavingsSelector,
+    balanceHolyTreasureSelector,
+    balanceHolyEarlyBonusSelector,
   ],
   withBalanceSection
 );

@@ -47,7 +47,9 @@ const skeletonTransition = (
   </Transition.Sequence>
 );
 
-const Container = styled(Transitioning.View)`
+const Container = styled(Transitioning.View).attrs({
+  backgroundColor: colors.modalBackground,
+})`
   height: ${({ height }) => height};
   margin-top: -2;
 `;
@@ -57,7 +59,7 @@ const EmptyWalletList = styled(EmptyAssetList).attrs({
   pointerEvents: 'none',
 })`
   ${position.cover};
-  background-color: ${colors.white};
+  background-color: ${colors.modalBackground};
   padding-top: ${listTopPadding};
 `;
 

@@ -42,7 +42,7 @@ const Masthead = styled(Column).attrs({
 
 const MastheadDescription = styled(Text).attrs({
   align: 'center',
-  color: colors.alpha(colors.blueGreyDark, 0.6),
+  color: colors.textColorDescription,
   lineHeight: 'looser',
   size: 'large',
 })`

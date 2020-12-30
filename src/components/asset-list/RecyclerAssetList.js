@@ -16,7 +16,9 @@ import {
   withOpenBalances,
   withOpenFamilyTabs,
   withOpenInvestmentCards,
+  withOpenLPBonus,
   withOpenSavings,
+  withOpenTreasureBank,
 } from '../../hoc';
 import {
   deviceUtils,
@@ -243,7 +245,7 @@ class RecyclerAssetList extends Component {
         if (
           index > 0 &&
           sections[balancesIndex].data[index - 1] &&
-          sections[balancesIndex].data[index - 1].savingsContainer
+          sections[balancesIndex].data[index - 1].holySavingsContainer
         ) {
           return {
             height: ViewTypes.COIN_SAVINGS.calculateHeight({
@@ -253,6 +255,38 @@ class RecyclerAssetList extends Component {
               isOpen: this.props.openSavings,
             }),
             index: ViewTypes.COIN_SAVINGS.index,
+          };
+        }
+
+        if (
+          index > 0 &&
+          sections[balancesIndex].data[index - 1] &&
+          sections[balancesIndex].data[index - 1].holyTreasureContainer
+        ) {
+          return {
+            height: ViewTypes.TREASURY_BANK.calculateHeight({
+              amountOfRows:
+                sections[balancesIndex].data[index - 1].assets?.length || 0,
+              isLast: false,
+              isOpen: this.props.openTreasureBank,
+            }),
+            index: ViewTypes.TREASURY_BANK.index,
+          };
+        }
+
+        if (
+          index > 0 &&
+          sections[balancesIndex].data[index - 1] &&
+          sections[balancesIndex].data[index - 1].holyEarlyBonusContainer
+        ) {
+          return {
+            height: ViewTypes.TOKEN_MIGRATION.calculateHeight({
+              amountOfRows:
+                sections[balancesIndex].data[index - 1].assets?.length || 0,
+              isLast: false,
+              isOpen: this.props.openLPBonus,
+            }),
+            index: ViewTypes.TOKEN_MIGRATION.index,
           };
         }
 
@@ -301,7 +335,8 @@ class RecyclerAssetList extends Component {
           );
           const lastBalanceIndex =
             sectionsIndices[balancesIndex] + balanceItemsCount;
-          if (index === lastBalanceIndex - 2) {
+
+          if (index === lastBalanceIndex - 1) {
             if (this.coinDividerIndex !== index) {
               this.coinDividerIndex = index;
               if (this.props.isCoinListEdited) {
@@ -310,9 +345,10 @@ class RecyclerAssetList extends Component {
               }
             }
             if (
-              sections[balancesIndex].data[lastBalanceIndex - 2]
+              sections[balancesIndex].data[lastBalanceIndex - 1] // changed to -1 coz we moved `savings` section
                 .smallBalancesContainer
             ) {
+              //console.log('RENDER COIND DIVIDER');
               return {
                 height: ViewTypes.COIN_DIVIDER.calculateHeight(),
                 index: ViewTypes.COIN_DIVIDER.index,
@@ -321,13 +357,14 @@ class RecyclerAssetList extends Component {
               };
             }
           }
-          if (index === lastBalanceIndex - 1) {
+          if (index === lastBalanceIndex) {
             if (
-              sections[balancesIndex].data[lastBalanceIndex - 2] &&
-              sections[balancesIndex].data[lastBalanceIndex - 2]
+              sections[balancesIndex].data[lastBalanceIndex - 1] &&
+              sections[balancesIndex].data[lastBalanceIndex - 1]
                 .smallBalancesContainer
             ) {
               smallBalancesIndex = index - 1;
+              //console.log('RENDER COIN_SMALL_BALANCES');
               return {
                 height: ViewTypes.COIN_SMALL_BALANCES.calculateHeight({
                   isCoinListEdited: this.props.isCoinListEdited,
@@ -364,6 +401,7 @@ class RecyclerAssetList extends Component {
             index === firstBalanceIndex &&
             !sections[balancesIndex].data[firstBalanceIndex - 1]
               .smallBalancesContainer;
+          //console.log('RENDER COIN ROW');
 
           return {
             height: ViewTypes.COIN_ROW.calculateHeight({
@@ -424,6 +462,7 @@ class RecyclerAssetList extends Component {
   static getDerivedStateFromProps({ sections, openFamilyTabs }, state) {
     const sectionsIndices = [];
     const stickyComponentsIndices = [];
+
     const items = sections.reduce((ctx, section) => {
       sectionsIndices.push(ctx.length);
       if (section.pools) {
@@ -463,10 +502,12 @@ class RecyclerAssetList extends Component {
       }
       return ctx;
     }, []);
+
     items.push({ item: { isLastPlaceholder: true }, renderItem: () => null });
     const areSmallCollectibles = (c => c && get(c, 'type') === 'small')(
       sections.find(e => e.collectibles)
     );
+
     return {
       areSmallCollectibles,
       dataProvider: state.dataProvider.cloneWithRows(items),
@@ -668,6 +709,14 @@ class RecyclerAssetList extends Component {
       return `savingsContainer`;
     }
 
+    if (row.item && row.item.holySavingsContainer) {
+      return `holySavingsContainer`;
+    }
+
+    if (row.item && row.item.holyTreasureContainer) {
+      return `holyTreasureContainer`;
+    }
+
     if (index === dataProvider._data.length - 1) {
       return 'footer';
     }
@@ -763,6 +812,14 @@ class RecyclerAssetList extends Component {
       return ViewTypes.COIN_SAVINGS.renderComponent({
         data,
       });
+    } else if (type.index === ViewTypes.TREASURY_BANK.index) {
+      return ViewTypes.TREASURY_BANK.renderComponent({
+        data,
+      });
+    } else if (type.index === ViewTypes.TOKEN_MIGRATION.index) {
+      return ViewTypes.TOKEN_MIGRATION.renderComponent({
+        data,
+      });
     } else if (type.index === ViewTypes.POOLS.index) {
       return ViewTypes.POOLS.renderComponent({
         data,
@@ -854,5 +911,7 @@ export default compose(
   withOpenInvestmentCards,
   withOpenBalances,
   withOpenSavings,
+  withOpenTreasureBank,
+  withOpenLPBonus,
   withAccountSettings
 )(RecyclerAssetList);

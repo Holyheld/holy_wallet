@@ -3,7 +3,7 @@ import { Text } from '../text';
 import { colors } from '@rainbow-me/styles';
 
 const TokenInfoHeading = styled(Text).attrs({
-  color: colors.alpha(colors.blueGreyDark, 0.5),
+  color: colors.textColor,
   letterSpacing: 'roundedMedium',
   size: 'smedium',
   weight: 'semibold',

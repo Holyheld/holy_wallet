@@ -1,13 +1,17 @@
 import produce from 'immer';
 import {
+  getLPBonusToggle,
   getOpenFamilies,
   getOpenInvestmentCards,
   getSavingsToggle,
   getSmallBalanceToggle,
+  getTreasureBankToggle,
+  saveLPBonusToggle,
   saveOpenFamilies,
   saveOpenInvestmentCards,
   saveSavingsToggle,
   saveSmallBalanceToggle,
+  saveTreasureBankToggle,
 } from '../handlers/localstorage/accountLocal';
 
 // -- Constants ------------------------------------------------------------- //
@@ -19,6 +23,8 @@ const CLEAR_OPEN_STATE_SETTINGS = 'openStateSettings/CLEAR_OPEN_STATE_SETTINGS';
 const PUSH_OPEN_FAMILY_TAB = 'openStateSettings/PUSH_OPEN_FAMILY_TAB';
 const SET_OPEN_FAMILY_TABS = 'openStateSettings/SET_OPEN_FAMILY_TABS';
 const SET_OPEN_SAVINGS = 'openStateSettings/SET_OPEN_SAVINGS';
+const SET_OPEN_TREASURE_BANK = 'openStateSettings/SET_OPEN_TREASURE_BANK';
+const SET_OPEN_TOKEN_MIGRATION = 'openStateSettings/SET_OPEN_TOKEN_MIGRATION';
 const SET_OPEN_SMALL_BALANCES = 'openStateSettings/SET_OPEN_SMALL_BALANCES';
 const SET_OPEN_INVESTMENT_CARDS = 'openStateSettings/SET_OPEN_INVESTMENT_CARDS';
 
@@ -27,6 +33,11 @@ export const openStateSettingsLoadState = () => async (dispatch, getState) => {
   try {
     const { accountAddress, network } = getState().settings;
     const openSavings = await getSavingsToggle(accountAddress, network);
+    const openTreasureBank = await getTreasureBankToggle(
+      accountAddress,
+      network
+    );
+    const openLPBonus = await getLPBonusToggle(accountAddress, network);
     const openSmallBalances = await getSmallBalanceToggle(
       accountAddress,
       network
@@ -40,8 +51,10 @@ export const openStateSettingsLoadState = () => async (dispatch, getState) => {
       payload: {
         openFamilyTabs,
         openInvestmentCards,
+        openLPBonus,
         openSavings,
         openSmallBalances,
+        openTreasureBank,
       },
       type: OPEN_STATE_SETTINGS_LOAD_SUCCESS,
     });
@@ -56,6 +69,24 @@ export const setOpenSavings = payload => (dispatch, getState) => {
   dispatch({
     payload,
     type: SET_OPEN_SAVINGS,
+  });
+};
+
+export const setOpenTreasureBank = payload => (dispatch, getState) => {
+  const { accountAddress, network } = getState().settings;
+  saveTreasureBankToggle(payload, accountAddress, network);
+  dispatch({
+    payload,
+    type: SET_OPEN_TREASURE_BANK,
+  });
+};
+
+export const setOpenLPBonus = payload => (dispatch, getState) => {
+  const { accountAddress, network } = getState().settings;
+  saveLPBonusToggle(payload, accountAddress, network);
+  dispatch({
+    payload,
+    type: SET_OPEN_TOKEN_MIGRATION,
   });
 };
 
@@ -106,8 +137,10 @@ export const resetOpenStateSettings = () => dispatch =>
 export const INITIAL_STATE = {
   openFamilyTabs: {},
   openInvestmentCards: {},
+  openLPBonus: false,
   openSavings: true,
   openSmallBalances: false,
+  openTreasureBank: true,
 };
 
 export default (state = INITIAL_STATE, action) =>
@@ -116,6 +149,8 @@ export default (state = INITIAL_STATE, action) =>
       draft.openFamilyTabs = action.payload.openFamilyTabs;
       draft.openInvestmentCards = action.payload.openInvestmentCards;
       draft.openSavings = action.payload.openSavings;
+      draft.openTreasureBank = action.payload.openTreasureBank;
+      draft.openLPBonus = action.payload.openLPBonus;
       draft.openSmallBalances = action.payload.openSmallBalances;
     } else if (action.type === SET_OPEN_FAMILY_TABS) {
       draft.openFamilyTabs = action.payload;
@@ -123,6 +158,10 @@ export default (state = INITIAL_STATE, action) =>
       draft.openFamilyTabs = action.payload;
     } else if (action.type === SET_OPEN_SAVINGS) {
       draft.openSavings = action.payload;
+    } else if (action.type === SET_OPEN_TREASURE_BANK) {
+      draft.openTreasureBank = action.payload;
+    } else if (action.type === SET_OPEN_TOKEN_MIGRATION) {
+      draft.openLPBonus = action.payload;
     } else if (action.type === SET_OPEN_SMALL_BALANCES) {
       draft.openSmallBalances = action.payload;
     } else if (action.type === SET_OPEN_INVESTMENT_CARDS) {

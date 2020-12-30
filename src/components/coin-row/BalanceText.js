@@ -2,7 +2,7 @@ import styled from 'styled-components/primitives';
 import { colors } from '../../styles';
 import { Text } from '../text';
 
-const BalanceText = styled(Text).attrs(({ color = colors.dark }) => ({
+const BalanceText = styled(Text).attrs(({ color = colors.red }) => ({
   align: 'right',
   color,
   size: 'lmedium',

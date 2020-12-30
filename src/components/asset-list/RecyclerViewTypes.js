@@ -11,9 +11,12 @@ import { CoinRowHeight } from '../coin-row';
 import { SavingsCoinRowHeight } from '../coin-row/SavingsCoinRow';
 import { FloatingActionButtonSize } from '../fab';
 import { ListFooter } from '../list';
+import LPBonusListWrapper from '../lp-bonus/LPBonusListWrapper';
 import PoolsListWrapper from '../pools/PoolsListWrapper';
 import SavingsListWrapper from '../savings/SavingsListWrapper';
 import { TokenFamilyHeaderHeight } from '../token-family';
+import TreasureBankListWrapper from '../treasure-bank/TreasureBankListWrapper';
+
 import { UniqueTokenRow } from '../unique-token';
 import AssetListHeader, { AssetListHeaderHeight } from './AssetListHeader';
 
@@ -27,6 +30,18 @@ const savingsOpenAdditionalHeight = -7.5;
 const savingsClosedAdditionalHeight = -5;
 const savingsLastOpenAdditionalHeight = -13;
 const savingsLastClosedAdditionalHeight = -10;
+
+const treasuresBankOpenAdditionalHeight = -7.5;
+const treasuresBankClosedAdditionalHeight = -5;
+const treasuresBankLastOpenAdditionalHeight = -13;
+const treasuresBankLastClosedAdditionalHeight = -10;
+const treasureBankRowHeight = 64;
+
+const LPBonusOpenAdditionalHeight = -7.5;
+const LPBonusClosedAdditionalHeight = -5;
+const LPBonusLastOpenAdditionalHeight = -13;
+const LPBonusLastClosedAdditionalHeight = -10;
+const LPBonusRowHeight = 64;
 
 const poolsOpenAdditionalHeight = -12;
 const poolsClosedAdditionalHeight = -15;
@@ -194,6 +209,51 @@ export const ViewTypes = {
             amountOfImagesWithForcedPrioritizeLoading,
         uniqueId: item.uniqueId,
       });
+    },
+  },
+
+  TREASURY_BANK: {
+    calculateHeight: ({ isOpen, isLast, amountOfRows }) =>
+      isOpen
+        ? TokenFamilyHeaderHeight +
+          (isLast
+            ? ListFooter.height + treasuresBankLastOpenAdditionalHeight
+            : treasuresBankOpenAdditionalHeight) +
+          treasureBankRowHeight * amountOfRows
+        : TokenFamilyHeaderHeight +
+          (isLast
+            ? ListFooter.height + treasuresBankLastClosedAdditionalHeight
+            : treasuresBankClosedAdditionalHeight),
+    index: 8,
+    renderComponent: ({ data }) => {
+      const { item = {} } = data;
+      return (
+        <TreasureBankListWrapper
+          assets={item.assets}
+          totalValue={item.totalValue}
+        />
+      );
+    },
+  },
+
+  TOKEN_MIGRATION: {
+    calculateHeight: ({ isOpen, isLast, amountOfRows }) =>
+      isOpen
+        ? TokenFamilyHeaderHeight +
+          (isLast
+            ? ListFooter.height + LPBonusLastOpenAdditionalHeight
+            : LPBonusOpenAdditionalHeight) +
+          LPBonusRowHeight * amountOfRows
+        : TokenFamilyHeaderHeight +
+          (isLast
+            ? ListFooter.height + LPBonusLastClosedAdditionalHeight
+            : LPBonusClosedAdditionalHeight),
+    index: 9,
+    renderComponent: ({ data }) => {
+      const { item = {} } = data;
+      return (
+        <LPBonusListWrapper assets={item.assets} totalValue={item.totalValue} />
+      );
     },
   },
 

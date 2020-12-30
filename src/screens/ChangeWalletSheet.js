@@ -82,14 +82,14 @@ const EditButton = styled(ButtonPressAnimation).attrs(({ editMode }) => ({
 
 const EditButtonLabel = styled(Text).attrs(({ editMode }) => ({
   align: 'right',
-  color: colors.appleBlue,
+  color: colors.textColor,
   letterSpacing: 'roundedMedium',
   size: 'large',
   weight: editMode ? 'semibold' : 'medium',
 }))``;
 
 const Whitespace = styled.View`
-  background-color: ${colors.white};
+  background-color: ${colors.modalHeader};
   bottom: -400px;
   height: 400px;
   position: absolute;

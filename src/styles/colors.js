@@ -64,6 +64,7 @@ let base = {
   swapButtonTextSecondary: '#FF75E8',
   swapPurple: '#575CFF', // '87, 92, 255'
   textColor: '#FFFFFF',
+  textColorCoin: '#FFFFFF',
   textColorDark: '#000000',
   textColorDescription: '#FFFFFF',
   textColorParagraph: '#FFFFFF',

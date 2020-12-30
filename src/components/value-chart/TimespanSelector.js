@@ -13,7 +13,7 @@ const Container = styled(Centered)`
 
 const TimespanItemLabel = styled(Text).attrs(({ color, isSelected }) => ({
   align: 'center',
-  color: isSelected ? color : colors.alpha(colors.blueGreyDark, 0.4),
+  color: isSelected ? color : colors.textColor,
   letterSpacing: 'roundedTighter',
   size: 'smedium',
   weight: 'bold',

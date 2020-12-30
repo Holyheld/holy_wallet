@@ -5,10 +5,11 @@ import { OpacityToggler } from '../animations';
 import SavingsListHeader from './SavingsListHeader';
 import SavingsListRow from './SavingsListRow';
 
-const renderSavingsListRow = item =>
-  item?.underlying ? (
+const renderSavingsListRow = item => {
+  return item?.underlying ? (
     <SavingsListRow key={item?.underlying.symbol} {...item} />
   ) : null;
+};
 
 export default function SavingsListWrapper({ assets, totalValue = '0' }) {
   const { isSavingsOpen, toggleOpenSavings } = useOpenSavings();

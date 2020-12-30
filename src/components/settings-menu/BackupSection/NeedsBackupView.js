@@ -31,7 +31,7 @@ const Content = styled(Centered).attrs({
 
 const DescriptionText = styled(Text).attrs({
   align: 'center',
-  color: colors.alpha(colors.blueGreyDark, 0.5),
+  color: colors.textColorDescription,
   lineHeight: 'loosest',
   size: 'large',
 })`
@@ -44,9 +44,7 @@ const Subtitle = styled(Text).attrs({
   color: colors.orangeLight,
   size: fonts.size.smedium,
   weight: fonts.weight.medium,
-})`
-  margin-top: -10;
-`;
+})``;
 
 const Title = styled(Text).attrs({
   align: 'center',
@@ -124,10 +122,10 @@ export default function NeedsBackupView() {
           />
           <SheetActionButton
             androidWidth={220}
-            color={colors.white}
+            color={colors.buttonBackground}
             label="🤓 Back up manually"
             onPress={onManualBackup}
-            textColor={colors.alpha(colors.blueGreyDark, 0.8)}
+            textColor={colors.textColor}
           />
         </Column>
       </Content>

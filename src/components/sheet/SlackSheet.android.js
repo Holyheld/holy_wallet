@@ -75,7 +75,7 @@ const Whitespace = styled.View`
 `;
 
 export default function SlackSheet({
-  backgroundColor = colors.white,
+  backgroundColor = colors.modalBackground,
   borderRadius = 30,
   children,
   contentHeight,

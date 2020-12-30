@@ -12,6 +12,7 @@ import {
 } from '../components/backup';
 import { Column } from '../components/layout';
 import { SlackSheet } from '../components/sheet';
+import colors from '../styles/colors';
 import { cloudPlatform } from '../utils/platform';
 import WalletBackupStepTypes from '@rainbow-me/helpers/walletBackupStepTypes';
 import {
@@ -197,6 +198,7 @@ export default function BackupSheet() {
       <StatusBar barStyle="light-content" />
       <SlackSheet
         additionalTopPadding={android && !nativeScreen}
+        backgroundColor={colors.pageBackground}
         contentHeight={sheetHeight}
       >
         {renderStep()}

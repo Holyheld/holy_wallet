@@ -69,6 +69,15 @@ const AddCashButton = styled(RainbowButton).attrs({
   margin-top: 16;
 `;
 
+const MigrateButton = styled(RainbowButton).attrs({
+  label: 'Migrate Holy',
+  overflowMargin: 30,
+  skipTopMargin: true,
+  width: 200,
+})`
+  margin-top: 16;
+`;
+
 const DropdownArrow = styled(Centered)`
   height: 9;
   margin-top: 11;
@@ -246,7 +255,7 @@ export default function ProfileMasthead({
   return (
     <Column
       align="center"
-      height={addCashAvailable ? 260 : 185}
+      height={addCashAvailable ? 335 : 260}
       marginBottom={24}
       marginTop={0}
     >
@@ -299,6 +308,7 @@ export default function ProfileMasthead({
         />
       </RowWithMargins>
       {addCashAvailable && <AddCashButton onPress={handlePressAddCash} />}
+      {<MigrateButton onPress={handlePressAddCash} />}
       {showBottomDivider && <ProfileMastheadDivider />}
     </Column>
   );

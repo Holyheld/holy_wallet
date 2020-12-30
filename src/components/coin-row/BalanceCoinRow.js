@@ -90,7 +90,7 @@ const TopRow = ({ name, native, nativeCurrencySymbol }) => {
       </FlexItem>
       <PriceContainer>
         <BalanceText
-          color={nativeDisplay ? null : colors.blueGreyLight}
+          color={nativeDisplay ? null : colors.textColor}
           numberOfLines={1}
         >
           {nativeDisplay || `${nativeCurrencySymbol}0.00`}

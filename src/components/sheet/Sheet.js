@@ -8,7 +8,13 @@ import SheetHandle from './SheetHandle';
 import { useNavigation } from '@rainbow-me/navigation';
 import { borders, colors } from '@rainbow-me/styles';
 
-const Sheet = ({ borderRadius, children, hideHandle }) => {
+const Sheet = ({
+  borderRadius,
+  children,
+  hideHandle,
+  backgroundColor = colors.modalHeader,
+  handleColor = colors.handle,
+}) => {
   const { width } = useDimensions();
   const { goBack } = useNavigation();
   const insets = useSafeArea();
@@ -17,13 +23,13 @@ const Sheet = ({ borderRadius, children, hideHandle }) => {
     <Column height="100%" justify="end" width={width}>
       <TouchableBackdrop onPress={goBack} />
       <Column
-        backgroundColor={colors.white}
+        backgroundColor={backgroundColor}
         css={borders.buildRadius('top', borderRadius)}
         paddingBottom={insets.bottom}
         width="100%"
       >
         <Centered paddingBottom={7} paddingTop={6}>
-          {!hideHandle && <SheetHandle color={colors.handleDark} />}
+          {!hideHandle && <SheetHandle color={handleColor} />}
         </Centered>
         {children}
       </Column>
