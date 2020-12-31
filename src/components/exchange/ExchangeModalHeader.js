@@ -32,7 +32,7 @@ const InfoButton = styled(ButtonPressAnimation).attrs({
 `;
 
 const InfoButtonIcon = styled(Icon).attrs({
-  color: colors.alpha(colors.blueGreyDark, 0.3),
+  color: colors.textColor,
   name: 'info',
 })`
   ${position.size(18)};

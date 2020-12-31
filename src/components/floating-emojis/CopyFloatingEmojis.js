@@ -23,13 +23,13 @@ const CopyFloatingEmojis = ({
       wiggleFactor={0}
       {...props}
     >
-      {({ onNewEmoji }) => (
+      {() => (
         <ButtonPressAnimation
           hapticType="impactLight"
           onPress={() => {
             onPress?.(textToCopy);
             if (!disabled) {
-              onNewEmoji();
+              // onNewEmoji();
               setClipboard(textToCopy);
             }
           }}

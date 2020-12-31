@@ -90,7 +90,7 @@ export default function ProfileScreen({ navigation }) {
           }}
           testID="settings-button"
         >
-          <Icon color={colors.black} name="gear" />
+          <Icon color={colors.textColor} name="gear" />
         </HeaderButton>
         <BackButton
           color={colors.textColor}

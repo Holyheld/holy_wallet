@@ -130,7 +130,7 @@ const RainbowButton = ({
 const Container = styled.View`
   ${StyleSheet.absoluteFillObject};
   align-items: center;
-  background-color: ${colors.black};
+  background-color: ${colors.welcomeScreenBackground};
   justify-content: center;
 `;
 

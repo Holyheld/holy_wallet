@@ -21,14 +21,13 @@ const AddressInputContainer = styled(Row).attrs({ align: 'center' })`
       : android
       ? padding(5, 15)
       : padding(19, 15)};
-  background-color: ${colors.white};
   overflow: hidden;
   width: 100%;
 `;
 
 const AddressFieldLabel = styled(Label)`
+  color: ${colors.textColor};
   margin-right: 6;
-  opacity: 0.45;
 `;
 
 const SheetHandle = android
@@ -36,7 +35,7 @@ const SheetHandle = android
       margin-top: 6;
     `
   : styled(Icon).attrs({
-      color: colors.sendScreen.grey,
+      color: colors.handle,
       name: 'handle',
       testID: 'sheet-handle',
     })`

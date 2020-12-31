@@ -9,13 +9,13 @@ import ShadowStack from 'react-native-shadow-stack';
 export const CoinIconSize = 40;
 
 const defaultShadow = [
-  [0, 4, 6, colors.dark, 0.04],
-  [0, 1, 3, colors.dark, 0.08],
+  [0, 10, 30, colors.dark, 0.2],
+  [0, 5, 15, colors.dark, 0.4],
 ];
 
 const CoinIcon = ({
   address,
-  bgColor,
+  bgColor = colors.skeletonColor,
   isHidden,
   isPinned,
   showShadow = true,

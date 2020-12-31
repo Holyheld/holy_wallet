@@ -58,7 +58,7 @@ const ExchangeNativeField = (
     typeof nativeAmount === 'string' && nativeAmount.length > 0;
 
   const nativeAmountColor = colors.alpha(
-    isFocused ? colors.dark : colors.blueGreyDark,
+    isFocused ? colors.textColor : colors.textColorPlaceholder,
     isFocused ? 1 : nativeAmountExists ? 0.5 : 0.3
   );
 

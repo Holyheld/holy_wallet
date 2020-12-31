@@ -13,10 +13,12 @@ let base = {
   blueGreyDark60: '#898d97', // this color is blueGreyDark at 60% over white
   blueGreyDarker: '#0F0F11', // '15, 15, 17'
   blueGreyDarkLight: '#F3F4F5', // '243, 244, 245'
+  borderColor: 'transparent',
   brightRed: '#FF7171', // '255, 113, 113'
   buttonActionBackground: '#25282D',
   buttonBackground: '#25282D',
   buttonBackgroundDisabled: '#CDCFD4',
+  buttonBlue: '#4E99FA',
   chartGreen: '#66d28f', // '102, 210, 143'
   dark: '#25292E', // '37, 41, 46'
   darkGrey: '#71778A', // '113, 119, 138'
@@ -38,6 +40,7 @@ let base = {
   mediumGrey: '#A1A5B3', // '161, 165, 179'
   mintDark: '#00E0A9', // '0, 224, 169'
   modalBackground: '#3B3E43',
+  modalBackgroundLighter: '#41454A',
   modalHeader: '#3B3E43',
   neonSkyblue: '#34FFFF', // '52, 255, 255'
   offWhite: '#F8F9FA', // '248, 249, 250'
@@ -51,6 +54,8 @@ let base = {
   purpleDark: '#6F00A3', // '111, 0, 163'
   purpleLight: '#FFD9FE', // '255, 217, 254'
   red: '#FF494A', // '255, 73, 74'
+  rowBackground: '#3B3E43',
+  rowBackgroundSecondary: '#3B3E43',
   rowDivider: 'rgba(60, 66, 82, 0.03)', // '60, 66, 82, 0.03'
   rowDividerExtraLight: 'rgba(60, 66, 82, 0.015)', // '60, 66, 82, 0.015'
   rowDividerLight: 'rgba(60, 66, 82, 0.02)', // '60, 66, 82, 0.02'
@@ -58,12 +63,14 @@ let base = {
   sheetBackground: '#25292E',
   shimmer: '#EDEEF1', // '237, 238, 241'
   skeleton: '#F6F7F8', // '246, 247, 248'
+  skeletonColor: '#25292E',
   swapButton: '#575CFF',
   swapButtonSecondary: '#6F00A3',
   swapButtonText: '#34FFFF',
   swapButtonTextSecondary: '#FF75E8',
   swapPurple: '#575CFF', // '87, 92, 255'
   textColor: '#FFFFFF',
+  textColorBlue: '#4E99FA',
   textColorCoin: '#FFFFFF',
   textColorDark: '#000000',
   textColorDescription: '#FFFFFF',
@@ -71,6 +78,7 @@ let base = {
   textColorPlaceholder: '#F0F0F0',
   textColorTitle: '#FFFFFF',
   transparent: 'transparent',
+  welcomeScreenBackground: '#010101',
   white: '#FFFFFF', // '255, 255, 255'
   yellow: '#FFD657', // '255, 214, 87'
   yellowOrange: '#FFC400', // '255, 178, 0'

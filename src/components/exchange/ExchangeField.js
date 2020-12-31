@@ -11,7 +11,7 @@ import { colors } from '@rainbow-me/styles';
 const CoinSize = 40;
 const ExchangeFieldHeight = android ? 64 : 38;
 const ExchangeFieldPadding = android ? 15 : 19;
-const skeletonColor = colors.alpha(colors.blueGreyDark, 0.1);
+const skeletonColor = colors.skeletonColor;
 
 const Container = styled(Row).attrs({
   align: 'center',

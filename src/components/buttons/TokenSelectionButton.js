@@ -19,7 +19,7 @@ const Content = styled(RowWithMargins).attrs({ align: 'center', margin: 7 })`
 const CaretIcon = styled(FastImage).attrs({
   resizeMode: FastImage.resizeMode.contain,
   source: CaretImageSource,
-  tintColor: colors.white,
+  tintColor: colors.textColor,
 })`
   height: 18;
   top: 0.5;
@@ -29,7 +29,7 @@ const CaretIcon = styled(FastImage).attrs({
 const ButtonShadows = styled(ShadowStack).attrs(({ symbol }) => ({
   shadows: [
     [0, 10, 30, colors.dark, 0.2],
-    [0, 5, 15, symbol ? colors.dark : colors.appleBlue, 0.4],
+    [0, 5, 15, symbol ? colors.textColor : colors.appleBlue, 0.4],
   ],
 }))``;
 
@@ -56,18 +56,20 @@ const TokenSelectionButton = ({
   >
     <ButtonShadows
       {...position.coverAsObject}
-      backgroundColor={symbol ? colors.dark : colors.appleBlue}
+      backgroundColor={
+        symbol ? colors.buttonActionBackground : colors.buttonBackground
+      }
       borderRadius={borderRadius}
       elevation={ios ? 0 : 8}
       height={46}
       shadows={shadows}
       symbol={symbol}
-      //width={100}
+      width="auto"
     />
     <Content>
       <Text
         align="center"
-        color={colors.white}
+        color={colors.textColor}
         size="large"
         testID={testID + '-text'}
         weight="bold"

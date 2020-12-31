@@ -20,7 +20,7 @@ import { abbreviations } from '@rainbow-me/utils';
 
 const WalletProfileAddressText = styled(TruncatedAddress).attrs({
   align: 'center',
-  color: colors.alpha(colors.blueGreyDark, 0.6),
+  color: colors.textColor,
   firstSectionLength: abbreviations.defaultNumCharsPerSection,
   size: 'lmedium',
   truncationLength: 4,

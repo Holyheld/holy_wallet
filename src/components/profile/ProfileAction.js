@@ -17,7 +17,7 @@ const Container = styled(RowWithMargins).attrs({
 `;
 
 const ProfileActionIcon = styled(Icon).attrs({
-  color: colors.appleBlue,
+  color: colors.textColor,
 })`
   ${({ iconSize }) => position.size(iconSize)};
   margin-top: 0.5;
@@ -33,7 +33,7 @@ const ProfileAction = ({ icon, iconSize = 16, onPress, text, ...props }) => (
     <Container>
       <ProfileActionIcon iconSize={iconSize} name={icon} />
       <Text
-        color="appleBlue"
+        color={colors.textColor}
         letterSpacing="roundedMedium"
         lineHeight={19}
         size="lmedium"

@@ -16,7 +16,7 @@ import { colors, margin, padding } from '@rainbow-me/styles';
 
 const AddressAbbreviation = styled(TruncatedAddress).attrs({
   align: 'center',
-  color: colors.blueGreyDark,
+  color: colors.textColor,
   firstSectionLength: abbreviations.defaultNumCharsPerSection,
   size: 'lmedium',
   truncationLength: 4,
@@ -42,7 +42,7 @@ const SubmitButton = styled(Button).attrs(({ value }) => ({
 `;
 
 const SubmitButtonLabel = styled(Text).attrs({
-  color: 'white',
+  color: colors.textColor,
   size: 'lmedium',
   weight: 'semibold',
 })`
@@ -89,7 +89,10 @@ const ContactProfileState = ({ address, color: colorProp, contact }) => {
   ]);
 
   return (
-    <ProfileModal onPressBackdrop={handleAddContact}>
+    <ProfileModal
+      color={colors.modalBackground}
+      onPressBackdrop={handleAddContact}
+    >
       <Centered css={padding(24, 25)} direction="column">
         <ProfileAvatarButton
           color={color}
@@ -139,16 +142,8 @@ const ContactProfileState = ({ address, color: colorProp, contact }) => {
                 }
           }
         >
-          <Centered
-            backgroundColor={colors.white}
-            css={padding(8, 9)}
-            testID="contact-profile-cancel-button"
-          >
-            <Text
-              color={colors.alpha(colors.blueGreyDark, 0.4)}
-              size="lmedium"
-              weight="regular"
-            >
+          <Centered css={padding(8, 9)} testID="contact-profile-cancel-button">
+            <Text color={colors.textColor} size="lmedium" weight="regular">
               {contact ? 'Delete Contact' : 'Cancel'}
             </Text>
           </Centered>

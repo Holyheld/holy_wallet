@@ -9,7 +9,7 @@ import { ButtonPressAnimation, interpolate } from '../animations';
 import { Row, RowWithMargins } from '../layout';
 import { Emoji, Text, TruncatedText } from '../text';
 import TokenFamilyHeaderIcon from './TokenFamilyHeaderIcon';
-import { colors, padding } from '@rainbow-me/styles';
+import { padding } from '@rainbow-me/styles';
 
 const AnimatedFastImage = Animated.createAnimatedComponent(FastImage);
 
@@ -21,7 +21,6 @@ const Content = styled(Row).attrs({
   justify: 'space-between',
 })`
   ${({ isCoinRow }) => padding(0, isCoinRow ? 16 : 19)};
-  background-color: ${colors.white};
   height: ${TokenFamilyHeaderHeight};
   width: 100%;
 `;

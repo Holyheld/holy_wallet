@@ -9,7 +9,7 @@ import { colors } from '@rainbow-me/styles';
 
 const BodyText = styled(Text).attrs({
   align: 'center',
-  color: colors.blueGreyDark50,
+  color: colors.textColor,
   lineHeight: 'looser',
   size: 'large',
 })`
@@ -21,7 +21,7 @@ const TreasurySheetEmptyState = () => {
     <Centered direction="column" paddingTop={9}>
       <CoinIcon size={50} symbol="USD" />
       <BodyText>You have no treasury to claim.</BodyText>
-      <Divider color={colors.rowDividerLight} inset={[0, 42]} />
+      <Divider color={colors.divider} inset={[0, 42]} />
     </Centered>
   );
 };

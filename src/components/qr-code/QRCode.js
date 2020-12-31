@@ -23,8 +23,8 @@ const generateMatrix = (value, errorCorrectionLevel) => {
 const QRCode = ({
   ecl = 'M',
   logo = HornsLogo,
-  logoBackgroundColor = colors.white,
-  logoMargin = -5,
+  logoBackgroundColor = colors.transparent,
+  logoMargin = 0,
   logoSize = 84,
   size = 150,
   value = 'QR Code',

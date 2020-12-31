@@ -40,6 +40,7 @@ const UniqueTokenCard = ({
     }
   }, [item, onPress]);
 
+  // TODO consider transparent UniqueToken background
   return (
     <Container
       as={ButtonPressAnimation}
@@ -51,7 +52,7 @@ const UniqueTokenCard = ({
     >
       <Content {...props} height={height} style={style} width={width}>
         <UniqueTokenImage
-          backgroundColor={background || colors.lightestGrey}
+          backgroundColor={background || colors.modalBackgroundLighter}
           imageUrl={image_preview_url}
           item={item}
           resizeMode={resizeMode}

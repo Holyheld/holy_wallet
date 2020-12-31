@@ -61,7 +61,7 @@ import { Portal } from 'react-native-cool-modals/Portal';
 
 const WALLETCONNECT_SYNC_DELAY = 500;
 
-StatusBar.pushStackEntry({ animated: true, barStyle: 'dark-content' });
+StatusBar.pushStackEntry({ animated: true, barStyle: 'light-content' });
 
 if (__DEV__) {
   reactNativeDisableYellowBox && LogBox.ignoreAllLogs();
@@ -72,7 +72,7 @@ if (__DEV__) {
     dsn: SENTRY_ENDPOINT,
     enableAutoSessionTracking: true,
     environment: SENTRY_ENVIRONMENT,
-    release: `me.rainbow-${VersionNumber.appVersion}`,
+    release: `me.holy-${VersionNumber.appVersion}`,
   };
 
   if (android) {

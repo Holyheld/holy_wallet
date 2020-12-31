@@ -61,7 +61,8 @@ export function onNavigationStateChange(currentState) {
     if (routeName !== prevRouteName) {
       if ([prevRouteName, routeName].includes(Routes.RECEIVE_MODAL)) {
         StatusBar.setBarStyle(
-          routeName === Routes.RECEIVE_MODAL ? 'light-content' : 'dark-content',
+          // routeName === Routes.RECEIVE_MODAL ? 'light-content' : 'dark-content',
+          'light-content',
           true
         );
       }

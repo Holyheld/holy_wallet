@@ -15,7 +15,6 @@ const AnimatedTextInput = Animated.createAnimatedComponent(TextInput);
 
 const PercentLabel = styled(AnimatedTextInput)`
   ${fontWithWidth(fonts.weight.bold)};
-  background-color: white;
   font-size: ${fonts.size.big};
   font-variant: tabular-nums;
   letter-spacing: ${fonts.letterSpacing.roundedTightest};
@@ -81,7 +80,7 @@ export default function ChartPercentChangeLabel() {
     return {
       color:
         ratio.value === 1
-          ? colors.blueGreyDark
+          ? colors.textColor
           : ratio.value < 1
           ? colors.red
           : colors.green,

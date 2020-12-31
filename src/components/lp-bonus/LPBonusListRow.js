@@ -14,8 +14,8 @@ import { colors, padding, position } from '@rainbow-me/styles';
 import ShadowStack from 'react-native-shadow-stack';
 
 const LPBonusListRowShadows = [
-  [0, 10, 30, colors.dark, 0.1],
-  [0, 5, 15, colors.dark, 0.04],
+  [0, 10, 30, colors.dark, 0.2],
+  [0, 5, 15, colors.dark, 0.4],
 ];
 
 const neverRerender = () => true;
@@ -24,7 +24,7 @@ const LPBonusListRowGradient = React.memo(
   () => (
     <LinearGradient
       borderRadius={49}
-      colors={['#FFFFFF', '#F7F9FA']}
+      colors={[colors.rowBackground, colors.rowBackgroundSecondary]}
       end={{ x: 0.5, y: 1 }}
       pointerEvents="none"
       start={{ x: 0.5, y: 0 }}
@@ -67,7 +67,6 @@ const LPBonusListRow = ({ underlying }) => {
             </Centered>
             <RowWithMargins align="center" margin={8} paddingLeft={4}>
               <Text
-                color={colors.blueGreyDark}
                 letterSpacing="roundedTightest"
                 opacity={0.5}
                 size="lmedium"

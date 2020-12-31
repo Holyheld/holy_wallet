@@ -34,7 +34,7 @@ const Placeholder = styled(Row)`
 `;
 
 const PlaceholderText = styled(Label)`
-  opacity: 0.45;
+  color: ${colors.textColorPlaceholder};
 `;
 
 const formatValue = value =>
@@ -82,7 +82,7 @@ const AddressField = (
       <AddressInput
         {...props}
         autoFocus={autoFocus}
-        color={isValid ? colors.appleBlue : colors.blueGreyDark}
+        color={isValid ? colors.textColor : colors.textColorPlaceholder}
         onBlur={expandAbbreviatedClipboard}
         onChange={handleChange}
         onChangeText={setInputValue}

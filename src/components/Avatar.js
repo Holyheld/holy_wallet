@@ -9,7 +9,7 @@ import ShadowStack from 'react-native-shadow-stack';
 
 const Container = styled(Centered)`
   ${position.cover}
-  background-color: ${colors.lighterGrey};
+  background-color: ${colors.skeletonColor};
   border-radius: ${({ size }) => size};
 `;
 

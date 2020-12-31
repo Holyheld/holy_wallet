@@ -11,7 +11,7 @@ const DetailsRow = ({ label, value, ...props }) => (
     </Text>
     <Text
       align="right"
-      color={colors.alpha(colors.dark, 0.6)}
+      color={colors.textColor}
       letterSpacing="roundedTight"
       size="lmedium"
     >

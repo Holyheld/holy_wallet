@@ -6,7 +6,6 @@ import { useTimeout } from '../../hooks';
 import TokenFamilyHeader, {
   TokenFamilyHeaderAnimationDuration,
 } from './TokenFamilyHeader';
-import { colors } from '@rainbow-me/styles';
 
 export const TokenFamilyWrapPaddingTop = 6;
 
@@ -20,7 +19,6 @@ const transition = (
 );
 
 const Container = styled.View`
-  background-color: ${colors.white};
   overflow: hidden;
   padding-top: ${({ isFirst }) => (isFirst ? TokenFamilyWrapPaddingTop : 0)};
 `;

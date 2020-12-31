@@ -17,7 +17,7 @@ const Input = styled(TextInputMask).attrs({
 `;
 
 const AndroidMaskWrapper = styled.View`
-  background-color: ${colors.white};
+  background-color: ${colors.modalHeader};
   position: absolute;
   top: 11.5;
   right: 0;
@@ -27,7 +27,7 @@ const AndroidMaskWrapper = styled.View`
 
 const ExchangeInput = (
   {
-    color = colors.dark,
+    color = colors.textColor,
     editable,
     keyboardAppearance = 'dark',
     letterSpacing = 'roundedTightest',
@@ -37,7 +37,7 @@ const ExchangeInput = (
     onChangeText,
     onFocus,
     placeholder = '0',
-    placeholderTextColor = colors.alpha(colors.blueGreyDark, 0.3),
+    placeholderTextColor = colors.textColorPlaceholder,
     size = 'h2',
     testID,
     value = '',

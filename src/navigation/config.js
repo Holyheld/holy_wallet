@@ -48,7 +48,7 @@ export const nativeStackConfig = {
     },
     onWillDismiss: () => {
       onWillPop();
-      StatusBar.setBarStyle('dark-content');
+      StatusBar.setBarStyle('light-content');
     },
     showDragIndicator: false,
     springDamping: 0.8,
@@ -287,7 +287,7 @@ export const settingsOptions = {
   headerStatusBarHeight: 0,
   headerStyle: {
     backgroundColor: colors.modalHeader,
-    elevation: 6,
+    elevation: 0,
     height: 49,
     shadowColor: 'transparent',
   },

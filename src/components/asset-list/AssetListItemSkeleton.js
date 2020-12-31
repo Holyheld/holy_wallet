@@ -30,7 +30,7 @@ const Container = styled.View`
 
 const FakeAvatar = styled.View`
   ${position.size(40)};
-  background-color: ${colors.skeleton};
+  background-color: ${colors.skeletonColor};
   border-radius: 20;
 `;
 
@@ -44,7 +44,7 @@ const FakeRow = withProps({
 })(Row);
 
 const FakeText = styled.View`
-  background-color: ${colors.skeleton};
+  background-color: ${colors.skeletonColor};
   border-radius: 5;
   height: 10;
 `;
@@ -105,10 +105,10 @@ export default class AssetListItemSkeleton extends PureComponent {
 
   renderShimmer() {
     const gradientColors = [
-      colors.skeleton,
+      colors.skeletonColor,
       colors.shimmer,
-      colors.skeleton,
-      colors.skeleton,
+      colors.skeletonColor,
+      colors.skeletonColor,
     ];
 
     const gradientSteps = [0, 0.2, 0.4, 1];

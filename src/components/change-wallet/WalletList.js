@@ -59,7 +59,6 @@ const EmptyWalletList = styled(EmptyAssetList).attrs({
   pointerEvents: 'none',
 })`
   ${position.cover};
-  background-color: ${colors.modalBackground};
   padding-top: ${listTopPadding};
 `;
 
@@ -77,7 +76,7 @@ const WalletFlatList = styled(FlatList).attrs(({ showDividers }) => ({
 `;
 
 const WalletListDivider = styled(Divider).attrs({
-  color: colors.rowDividerExtraLight,
+  color: colors.divider,
   inset: [0, 15],
 })`
   margin-bottom: 1;

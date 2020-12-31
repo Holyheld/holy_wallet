@@ -11,7 +11,7 @@ import supportedNativeCurrencies from '@rainbow-me/references/native-currencies.
 import { colors, fonts, fontWithWidth } from '@rainbow-me/styles';
 
 const Label = styled(ChartYLabel)`
-  color: ${colors.black};
+  color: ${colors.textColor};
   ${fontWithWidth(fonts.weight.heavy)};
   font-size: ${fonts.size.big};
   letter-spacing: ${fonts.letterSpacing.roundedTight};

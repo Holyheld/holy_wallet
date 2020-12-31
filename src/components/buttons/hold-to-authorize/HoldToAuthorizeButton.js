@@ -57,7 +57,7 @@ const Content = styled(Centered)`
 `;
 
 const Title = styled(Text).attrs(({ smallButton }) => ({
-  color: 'white',
+  color: colors.textColor,
   size: smallButton ? 'large' : 'larger',
   weight: 'bold',
 }))`
@@ -103,7 +103,7 @@ class HoldToAuthorizeButton extends PureComponent {
   };
 
   static defaultProps = {
-    backgroundColor: colors.appleBlue,
+    backgroundColor: colors.buttonBlue,
     disabled: false,
     theme: 'light',
   };

@@ -21,7 +21,7 @@ const fallbackTextStyles = {
 const FallbackImage = styled(ImageWithCachedMetadata)`
   ${position.cover};
   background-color: ${({ showFallbackImage }) =>
-    showFallbackImage ? colors.white : colors.transparent};
+    showFallbackImage ? colors.skeletonColor : colors.transparent};
 `;
 
 const CoinIconFallback = fallbackProps => {

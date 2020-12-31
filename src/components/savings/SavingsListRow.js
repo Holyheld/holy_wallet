@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import React, { useCallback, useEffect, useState } from 'react';
 import { InteractionManager } from 'react-native';
 import { IS_TESTING } from 'react-native-dotenv';
-// import LinearGradient from 'react-native-linear-gradient';
+import LinearGradient from 'react-native-linear-gradient';
 import styled from 'styled-components/primitives';
 
 import { ButtonPressAnimation } from '../animations';
@@ -15,14 +15,14 @@ import SavingsListRowAnimatedNumber from './SavingsListRowAnimatedNumber';
 import SavingsListRowEmptyState from './SavingsListRowEmptyState';
 import { formatSavingsAmount } from '@rainbow-me/helpers/savings';
 import { useDimensions } from '@rainbow-me/hooks';
-import { colors, padding } from '@rainbow-me/styles';
+import { colors, padding, position } from '@rainbow-me/styles';
 import ShadowStack from 'react-native-shadow-stack';
 
 const ANIMATE_NUMBER_INTERVAL = 60;
 
 const SavingsListRowShadows = [
-  [0, 10, 30, colors.dark, 0.1],
-  [0, 5, 15, colors.dark, 0.04],
+  [0, 10, 30, colors.dark, 0.2],
+  [0, 5, 15, colors.dark, 0.4],
 ];
 
 const NOOP = () => undefined;
@@ -31,15 +31,14 @@ const neverRerender = () => true;
 // eslint-disable-next-line react/display-name
 const SavingsListRowGradient = React.memo(
   () => (
-    // <LinearGradient
-    //   borderRadius={49}
-    //   colors={['#FFFFFF', '#F7F9FA']}
-    //   end={{ x: 0.5, y: 1 }}
-    //   pointerEvents="none"
-    //   start={{ x: 0.5, y: 0 }}
-    //   style={position.coverAsObject}
-    // />
-    <></>
+    <LinearGradient
+      borderRadius={49}
+      colors={[colors.rowBackground, colors.rowBackgroundSecondary]}
+      end={{ x: 0.5, y: 1 }}
+      pointerEvents="none"
+      start={{ x: 0.5, y: 0 }}
+      style={position.coverAsObject}
+    />
   ),
   neverRerender
 );

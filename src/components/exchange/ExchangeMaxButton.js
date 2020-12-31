@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/primitives';
+import colors from '../../styles/colors';
 import { ButtonPressAnimation } from '../animations';
 import { Row } from '../layout';
 import { Text } from '../text';
@@ -18,7 +19,7 @@ const MaxButtonContent = styled(Row).attrs({
 
 const MaxButtonLabel = styled(Text).attrs({
   align: 'center',
-  color: 'appleBlue',
+  color: colors.textColorBlue,
   size: 'lmedium',
   weight: 'bold',
 })`

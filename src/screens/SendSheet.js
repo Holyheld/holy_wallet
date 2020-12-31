@@ -65,7 +65,7 @@ const SheetContainer = styled(Column).attrs({
   flex: 1,
 })`
   ${borders.buildRadius('top', isNativeStackAvailable ? 0 : 16)};
-  background-color: ${colors.white};
+  background-color: ${colors.modalBackground};
   height: ${isNativeStackAvailable || android ? sheetHeight : '100%'};
   width: 100%;
 `;

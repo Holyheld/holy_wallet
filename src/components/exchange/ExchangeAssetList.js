@@ -16,7 +16,7 @@ const Header = styled.View`
 `;
 
 const HeaderBackground = styled(LinearGradient).attrs({
-  colors: [colors.white, colors.alpha(colors.white, 0)],
+  colors: [colors.modalHeader, colors.modalHeader],
   end: { x: 0.5, y: 1 },
   locations: [0.55, 1],
   start: { x: 0.5, y: 0 },
@@ -27,7 +27,7 @@ const HeaderBackground = styled(LinearGradient).attrs({
 `;
 
 const HeaderTitle = styled(Text).attrs({
-  color: colors.blueGreyDark50,
+  color: colors.textColorTitle,
   letterSpacing: 'roundedMedium',
   size: 'smedium',
   weight: 'heavy',

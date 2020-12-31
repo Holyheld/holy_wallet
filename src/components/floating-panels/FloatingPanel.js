@@ -24,7 +24,7 @@ const Container = styled(Column)`
 `;
 
 const FloatingPanel = ({
-  color = colors.white,
+  color = colors.modalBackground,
   height = 'auto',
   hideShadow = true,
   overflow = 'hidden',

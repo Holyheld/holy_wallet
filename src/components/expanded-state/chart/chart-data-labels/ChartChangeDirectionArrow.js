@@ -22,7 +22,7 @@ export default function ChartChangeDirectionArrow() {
   const arrowColor = useDerivedValue(
     () =>
       ratio.value === 1
-        ? colors.blueGreyDark
+        ? colors.textColor
         : ratio.value < 1
         ? colors.red
         : colors.green,

@@ -27,6 +27,7 @@ import { addHexPrefix } from '../handlers/web3';
 import CurrencySelectionTypes from '../helpers/currencySelectionTypes';
 import { delayNext } from '../hooks/useMagicAutofocus';
 import { useNavigation } from '../navigation/Navigation';
+import colors from '../styles/colors';
 import {
   useInteraction,
   useMagicAutofocus,
@@ -304,6 +305,7 @@ export default function CurrencySelectModal() {
         }}
       >
         <Modal
+          backgroundColor={colors.modalBackground}
           containerPadding={0}
           fullScreenOnAndroid
           height="100%"

@@ -10,18 +10,19 @@ const Container = styled(ColumnWithMargins).attrs({
   ${padding(android ? 10 : 19, 19, android ? 12 : 24)};
 `;
 
-export default function ExpandedStateSection({ children, title, ...props }) {
+export default function ExpandedStateSection({
+  children,
+  title,
+  color = colors.textColorDescription,
+  ...props
+}) {
   return (
     <Container {...props}>
       <Text letterSpacing="roundedTight" size="larger" weight="bold">
         {title}
       </Text>
       {typeof children === 'string' ? (
-        <Text
-          color={colors.alpha(colors.blueGreyDark, 0.5)}
-          lineHeight="paragraphSmall"
-          size="lmedium"
-        >
+        <Text color={color} lineHeight="paragraphSmall" size="lmedium">
           {children}
         </Text>
       ) : (

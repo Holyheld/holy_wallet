@@ -67,7 +67,7 @@ const UniqueTokenExpandedState = ({ asset }) => {
         <UniqueTokenExpandedStateImage asset={asset} />
         <SheetActionButtonRow>
           <SheetActionButton
-            color={colors.dark}
+            color={colors.buttonActionBackground}
             label={isShowcaseAsset ? '􀁏 Showcase' : '􀁍 Showcase'}
             onPress={handlePressShowcase}
             weight="bold"
@@ -90,7 +90,7 @@ const UniqueTokenExpandedState = ({ asset }) => {
             <ExpandedStateSection title={`About ${familyName}`}>
               <Column>
                 <Text
-                  color={colors.alpha(colors.blueGreyDark, 0.5)}
+                  color={colors.textColorDescription}
                   lineHeight="paragraphSmall"
                   size="lmedium"
                 >

@@ -31,13 +31,13 @@ const Content = styled(Row).attrs({
 })`
   ${padding(0, 19, 2)};
   background-color: ${({ isSticky }) =>
-    isSticky ? colors.white : colors.transparent};
+    isSticky ? colors.pageBackground : colors.transparent};
   height: ${ListHeaderHeight};
   width: 100%;
 `;
 
 const StickyBackgroundBlocker = styled.View`
-  background-color: ${colors.white};
+  background-color: ${colors.pageBackground};
   height: ${({ isEditMode }) => (isEditMode ? ListHeaderHeight : 0)};
   top: ${({ isEditMode }) => (isEditMode ? -40 : 0)};
   width: ${({ deviceDimensions }) => deviceDimensions.width};
