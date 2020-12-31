@@ -70,6 +70,8 @@ const getActionLabel = type => {
       return 'Withdraws in';
     case 'transaction':
       return 'Confirms in';
+    case ExchangeModalTypes.treasuryClaim:
+      return 'Exiting for';
     default:
       return 'Swaps in';
   }

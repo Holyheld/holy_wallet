@@ -13,8 +13,8 @@ import {
 } from '../components/sheet';
 import TreasurySheetHeader from '../components/treasury-bank/TreasurySheetHeader';
 import { useDimensions, useWallets } from '@rainbow-me/hooks';
-// import { useNavigation } from '@rainbow-me/navigation';
-// import Routes from '@rainbow-me/routes';
+import { useNavigation } from '@rainbow-me/navigation';
+import Routes from '@rainbow-me/routes';
 import { colors, position } from '@rainbow-me/styles';
 
 export const SavingsSheetEmptyHeight = 313;
@@ -28,7 +28,7 @@ const Container = styled(Centered).attrs({ direction: 'column' })`
 
 const TreasurySheet = () => {
   const { height: deviceHeight } = useDimensions();
-  //const { navigate } = useNavigation();
+  const { navigate } = useNavigation();
   const { params } = useRoute();
   const insets = useSafeArea();
   const { isReadOnlyWallet } = useWallets();
@@ -37,16 +37,13 @@ const TreasurySheet = () => {
   const isEmpty = balance === 0;
   const onWithdraw = useCallback(() => {
     if (!isReadOnlyWallet) {
-      // navigate(Routes.SAVINGS_WITHDRAW_MODAL, {
-      //   cTokenBalance,
-      //   defaultInputAsset: underlying,
-      //   supplyBalanceUnderlying,
-      //   underlyingPrice,
-      // });
+      navigate(Routes.TREASURY_CLAIM_MODAL, {
+        balance,
+      });
     } else {
       Alert.alert(`You need to import the wallet in order to do this`);
     }
-  }, [isReadOnlyWallet]);
+  }, [isReadOnlyWallet, navigate, balance]);
 
   return (
     <Container

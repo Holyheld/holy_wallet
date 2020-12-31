@@ -22,12 +22,24 @@ const ConfirmExchangeButton = ({
   type,
   ...props
 }) => {
-  let label =
-    type === ExchangeModalTypes.deposit
-      ? 'Hold to Deposit'
-      : type === ExchangeModalTypes.withdrawal
-      ? 'Hold to Withdraw '
-      : 'Hold to Swap';
+  let label = '';
+  switch (type) {
+    case ExchangeModalTypes.deposit:
+      label = 'Hold to Deposit';
+      break;
+    case ExchangeModalTypes.withdrawal:
+      label = 'Hold to Withdraw';
+      break;
+    case ExchangeModalTypes.treasuryClaim:
+      label = 'Hold to Claim & Burn';
+      break;
+    case ExchangeModalTypes.holyMigrate:
+      label = 'Hold to Migrate';
+      break;
+    default:
+      label = 'Hold to Swap';
+  }
+
   if (!isSufficientBalance) {
     label = 'Insufficient Funds';
   } else if (!isSufficientLiquidity) {

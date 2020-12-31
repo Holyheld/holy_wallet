@@ -8,6 +8,7 @@ import BackupSheet from '../screens/BackupSheet';
 import ChangeWalletSheet from '../screens/ChangeWalletSheet';
 import DepositModal from '../screens/DepositModal';
 import ExpandedAssetSheet from '../screens/ExpandedAssetSheet';
+import HolyMigrateModalWrapper from '../screens/HolyMigrateModal';
 import ImportSeedPhraseSheet from '../screens/ImportSeedPhraseSheet';
 import ModalScreen from '../screens/ModalScreen';
 import PinAuthenticationScreen from '../screens/PinAuthenticationScreen';
@@ -17,6 +18,7 @@ import SavingsSheet from '../screens/SavingsSheet';
 import SendSheet from '../screens/SendSheet';
 import SettingsModal from '../screens/SettingsModal';
 import TransactionConfirmationScreen from '../screens/TransactionConfirmationScreen';
+import TreasuryClaimModalWrapper from '../screens/TreasuryClaimModal';
 import TreasurySheet from '../screens/TreasurySheet';
 import WalletConnectApprovalSheet from '../screens/WalletConnectApprovalSheet';
 import WalletConnectRedirectSheet from '../screens/WalletConnectRedirectSheet';
@@ -162,6 +164,11 @@ function MainNavigator() {
         options={sheetPreset}
       />
       <Stack.Screen
+        component={HolyMigrateModalWrapper}
+        name={Routes.HOLY_MIGRATE_MODAL}
+        options={exchangePreset}
+      />
+      <Stack.Screen
         component={ImportSeedPhraseSheet}
         name={Routes.IMPORT_SEED_PHRASE_SHEET}
         options={sheetPreset}
@@ -175,6 +182,11 @@ function MainNavigator() {
         component={TreasurySheet}
         name={Routes.TREASURY_SHEET}
         options={bottomSheetPreset}
+      />
+      <Stack.Screen
+        component={TreasuryClaimModalWrapper}
+        name={Routes.TREASURY_CLAIM_MODAL}
+        options={exchangePreset}
       />
       <Stack.Screen
         component={WithdrawModal}
