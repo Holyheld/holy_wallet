@@ -52,7 +52,7 @@ const UniqueTokenCard = ({
     >
       <Content {...props} height={height} style={style} width={width}>
         <UniqueTokenImage
-          backgroundColor={background || colors.modalBackgroundLighter}
+          backgroundColor={background || colors.skeletonColor}
           imageUrl={image_preview_url}
           item={item}
           resizeMode={resizeMode}
