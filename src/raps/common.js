@@ -13,7 +13,9 @@ const NOOP = () => undefined;
 
 export const RapActionTypes = {
   depositCompound: 'depositCompound',
+  holyMigrate: 'holyMigrate',
   swap: 'swap',
+  treasuryClaim: 'treasuryClaim',
   unlock: 'unlock',
   withdrawCompound: 'withdrawCompound',
 };
@@ -28,6 +30,12 @@ const findActionByType = type => {
       return depositCompound;
     case RapActionTypes.withdrawCompound:
       return withdrawCompound;
+    case RapActionTypes.treasuryClaim:
+      // TODO: do treasury claim
+      return NOOP;
+    case RapActionTypes.holyMigrate:
+      // TODO: do holy migrate
+      return NOOP;
     default:
       return NOOP;
   }

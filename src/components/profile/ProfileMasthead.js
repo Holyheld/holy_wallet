@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux';
 import styled from 'styled-components/primitives';
 import { walletsSetSelected, walletsUpdate } from '../../redux/wallets';
 import Divider from '../Divider';
+import { Alert } from '../alerts';
 import { ButtonPressAnimation } from '../animations';
 import { RainbowButton } from '../buttons';
 import { FloatingEmojis } from '../floating-emojis';
@@ -23,6 +24,7 @@ import {
   useAccountProfile,
   useDimensions,
   useWallets,
+  //useWalletSectionsData,
 } from '@rainbow-me/hooks';
 import { useNavigation } from '@rainbow-me/navigation';
 import Routes from '@rainbow-me/routes';
@@ -96,7 +98,14 @@ export default function ProfileMasthead({
   recyclerListRef,
   showBottomDivider = true,
 }) {
-  const { wallets, selectedWallet, isDamaged } = useWallets();
+  const { wallets, selectedWallet, isDamaged, isReadOnlyWallet } = useWallets();
+  // const {
+  //   isWalletEthZero,
+  //   refetchSavings,
+  //   sections,
+  // } = useWalletSectionsData();
+  // TODO: get balance of holy coin?
+  const balance = 20;
   const onNewEmoji = useRef();
   const setOnNewEmoji = useCallback(
     newOnNewEmoji => (onNewEmoji.current = newOnNewEmoji),
@@ -216,6 +225,16 @@ export default function ProfileMasthead({
     navigate(Routes.RECEIVE_MODAL);
   }, [navigate, isDamaged]);
 
+  const handleMigrateHoly = useCallback(() => {
+    if (!isReadOnlyWallet) {
+      navigate(Routes.HOLY_MIGRATE_MODAL, {
+        balance,
+      });
+    } else {
+      Alert.alert(`You need to import the wallet in order to do this`);
+    }
+  }, [navigate, isReadOnlyWallet]);
+
   const handlePressAddCash = useCallback(() => {
     if (isDamaged) {
       showWalletErrorAlert();
@@ -308,7 +327,7 @@ export default function ProfileMasthead({
         />
       </RowWithMargins>
       {addCashAvailable && <AddCashButton onPress={handlePressAddCash} />}
-      {<MigrateButton onPress={handlePressAddCash} />}
+      {<MigrateButton onPress={handleMigrateHoly} />}
       {showBottomDivider && <ProfileMastheadDivider />}
     </Column>
   );
