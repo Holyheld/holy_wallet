@@ -3,7 +3,7 @@ import { TruncatedText } from '../../../text';
 import { colors } from '@rainbow-me/styles';
 
 const ChartHeaderTitle = styled(TruncatedText).attrs(
-  ({ color = colors.dark }) => ({
+  ({ color = colors.text }) => ({
     color,
     letterSpacing: 'roundedTight',
     size: 'big',

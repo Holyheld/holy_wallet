@@ -51,7 +51,7 @@ const MastheadDescription = styled(Text).attrs({
 
 const MastheadIcon = styled(Text).attrs({
   align: 'center',
-  color: 'appleBlue',
+  color: colors.textColorPrimary,
   size: 43,
   weight: 'semibold',
 })``;
@@ -118,13 +118,14 @@ export default function BackupManualStep() {
         {secretLoaded && (
           <View marginTop={30}>
             <SheetActionButton
-              color={colors.appleBlue}
+              color={colors.buttonPrimary}
               fullWidth
               label={`􀁣 I’ve saved ${
                 type === WalletTypes.privateKey ? 'my key' : 'these words'
               }`}
               onPress={onComplete}
               size="big"
+              textColor={colors.textColorPrimaryButton}
               weight="bold"
             />
           </View>

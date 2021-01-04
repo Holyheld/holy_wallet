@@ -7,7 +7,7 @@ import { Centered, Column, Row } from '../layout';
 import { Text } from '../text';
 import { colors } from '@rainbow-me/styles';
 
-const KeyColor = colors.key;
+const KeyColor = colors.textColor;
 
 const KeyboardButtonContent = styled(Centered)`
   height: ${({ height }) => height};

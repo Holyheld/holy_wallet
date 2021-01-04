@@ -14,14 +14,13 @@ import { colors, padding, position } from '@rainbow-me/styles';
 import ShadowStack from 'react-native-shadow-stack';
 
 const AssetRowShadow = [
-  [0, 1, 0, colors.dark, 0.01],
-  [0, 4, 12, colors.dark, 0.04],
-  [0, 8, 23, colors.dark, 0.05],
+  [0, 1, 0, colors.transparent, 0.01],
+  [0, 4, 12, colors.transparent, 0.04],
+  [0, 8, 23, colors.transparent, 0.05],
 ];
 
 const Container = styled(Column)`
   ${position.size('100%')};
-  background-color: ${colors.white};
   flex: 1;
   overflow: hidden;
 `;
@@ -36,15 +35,12 @@ const FormContainer = styled(Column).attrs({
       : isTinyPhone
       ? padding(6, 15, 0)
       : padding(19, 15)};
-  background-color: ${colors.lighterGrey};
   flex: 1;
   margin-bottom: ${android ? 0 : ({ isTinyPhone }) => (isTinyPhone ? -19 : 0)};
   width: 100%;
 `;
 
-const KeyboardSizeView = styled(KeyboardArea)`
-  background-color: ${colors.lighterGrey};
-`;
+const KeyboardSizeView = styled(KeyboardArea)``;
 
 export default function SendAssetForm({
   assetAmount,
@@ -78,6 +74,8 @@ export default function SendAssetForm({
       <ShadowStack
         borderRadius={0}
         height={SendCoinRow.selectedHeight}
+        paddingLeft={isNft ? 10 : 5}
+        paddingRight={5}
         shadows={AssetRowShadow}
         width={deviceWidth}
       >
@@ -87,7 +85,7 @@ export default function SendAssetForm({
           selected
           testID="send-asset-form"
         >
-          <Icon name="doubleCaret" />
+          <Icon color={colors.textColor} name="doubleCaret" />
         </AssetRowElement>
       </ShadowStack>
       <FormContainer isNft={isNft} isTinyPhone={isTinyPhone}>

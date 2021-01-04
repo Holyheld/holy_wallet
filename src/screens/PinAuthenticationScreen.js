@@ -186,7 +186,7 @@ const PinAuthenticationScreen = () => {
 
   return (
     <Column
-      backgroundColor={colors.fullscreenDark}
+      backgroundColor={colors.pageBackground}
       flex={1}
       testID="pin-authentication-screen"
     >

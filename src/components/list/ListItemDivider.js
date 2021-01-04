@@ -4,8 +4,12 @@ import { withNeverRerender } from '../../hoc';
 import Divider from '../Divider';
 import { colors } from '@rainbow-me/styles';
 
-const ListItemDivider = ({ inset }) => (
-  <Divider color={colors.divider} inset={[0, inset]} />
+const ListItemDivider = ({
+  inset,
+  color = colors.divider,
+  backgroundColor = colors.pageBackground,
+}) => (
+  <Divider backgroundColor={backgroundColor} color={color} inset={[0, inset]} />
 );
 
 ListItemDivider.propTypes = {

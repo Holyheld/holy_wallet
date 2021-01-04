@@ -5,6 +5,7 @@ import { Column, Flex } from '../../components/layout';
 import { colors } from '@rainbow-me/styles';
 
 const FilledValue = styled(Column)`
+  background-color: ${colors.textColorPrimary};
   width: 20;
   height: 20;
   border-radius: 20;
@@ -16,7 +17,7 @@ const EmptyValue = styled(Column)`
   border-width: 3;
   width: 20;
   height: 20;
-  border-color: ${colors.appleBlue};
+  border-color: ${colors.textColorPrimaryMuted};
   border-radius: 20;
   margin-left: 10;
   margin-right: 10;
@@ -31,26 +32,10 @@ const PinValue = ({ translateX, value, ...props }) => {
           transform: [{ translateX }],
         }}
       >
-        {value && value.length ? (
-          <FilledValue backgroundColor={colors.appleBlue} />
-        ) : (
-          <EmptyValue />
-        )}
-        {value && value.length > 1 ? (
-          <FilledValue backgroundColor={colors.appleBlue} />
-        ) : (
-          <EmptyValue />
-        )}
-        {value && value.length > 2 ? (
-          <FilledValue backgroundColor={colors.appleBlue} />
-        ) : (
-          <EmptyValue />
-        )}
-        {value && value.length > 3 ? (
-          <FilledValue backgroundColor={colors.appleBlue} />
-        ) : (
-          <EmptyValue />
-        )}
+        {value && value.length ? <FilledValue /> : <EmptyValue />}
+        {value && value.length > 1 ? <FilledValue /> : <EmptyValue />}
+        {value && value.length > 2 ? <FilledValue /> : <EmptyValue />}
+        {value && value.length > 3 ? <FilledValue /> : <EmptyValue />}
       </Animated.View>
     </Flex>
   );

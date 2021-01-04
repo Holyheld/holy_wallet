@@ -26,10 +26,13 @@ const CaretIcon = styled(FastImage).attrs({
   width: 8;
 `;
 
-const ButtonShadows = styled(ShadowStack).attrs(({ symbol }) => ({
+// const ButtonShadows = styled(ShadowStack).attrs(({ symbol }) => ({
+const ButtonShadows = styled(ShadowStack).attrs(() => ({
   shadows: [
-    [0, 10, 30, colors.dark, 0.2],
-    [0, 5, 15, symbol ? colors.textColor : colors.appleBlue, 0.4],
+    // [0, 10, 30, colors.dark, 0.2],
+    // [0, 5, 15, symbol ? colors.textColor : colors.appleBlue, 0.4],
+    [0, 10, 30, colors.transparent, 0.2],
+    [0, 5, 15, colors.transparent, 0.4],
   ],
 }))``;
 
@@ -56,9 +59,7 @@ const TokenSelectionButton = ({
   >
     <ButtonShadows
       {...position.coverAsObject}
-      backgroundColor={
-        symbol ? colors.buttonActionBackground : colors.buttonBackground
-      }
+      backgroundColor={!symbol ? colors.buttonPrimary : colors.buttonSecondary}
       borderRadius={borderRadius}
       elevation={ios ? 0 : 8}
       height={46}

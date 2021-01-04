@@ -67,12 +67,18 @@ const UniqueTokenExpandedState = ({ asset }) => {
         <UniqueTokenExpandedStateImage asset={asset} />
         <SheetActionButtonRow>
           <SheetActionButton
-            color={colors.buttonActionBackground}
+            color={colors.buttonPrimary}
             label={isShowcaseAsset ? '􀁏 Showcase' : '􀁍 Showcase'}
             onPress={handlePressShowcase}
+            textColor={colors.textColorPrimaryButton}
             weight="bold"
           />
-          {isSendable && <SendActionButton />}
+          {isSendable && (
+            <SendActionButton
+              color={colors.buttonSecondary}
+              textColor={colors.textColorSecondaryButton}
+            />
+          )}
         </SheetActionButtonRow>
         <SheetDivider />
         <ColumnWithDividers dividerRenderer={SheetDivider}>
@@ -96,7 +102,9 @@ const UniqueTokenExpandedState = ({ asset }) => {
                 >
                   {familyDescription}
                 </Text>
-                {familyLink && <Link url={familyLink} />}
+                {familyLink && (
+                  <Link color={colors.textColorPrimary} url={familyLink} />
+                )}
               </Column>
             </ExpandedStateSection>
           )}

@@ -30,7 +30,7 @@ const AuthenticationText = styled(Text).attrs({
 `;
 
 const CopyButtonIcon = styled(Icon).attrs({
-  color: colors.appleBlue,
+  color: colors.textColorPrimary,
   name: 'copy',
 })`
   ${position.size(16)};
@@ -47,7 +47,7 @@ const CopyButtonRow = styled(RowWithMargins).attrs({
 `;
 
 const CopyButtonText = styled(Text).attrs({
-  color: colors.appleBlue,
+  color: colors.textColorPrimary,
   letterSpacing: 'roundedMedium',
   lineHeight: 19,
   size: 'large',
@@ -56,11 +56,15 @@ const CopyButtonText = styled(Text).attrs({
 
 const ToggleSecretButton = styled(Button)`
   ${margin(0, 20)};
-  ${shadow.build(0, 5, 15, colors.purple, 0.3)}
-  background-color: ${colors.appleBlue};
+  ${shadow.build(0, 5, 15, colors.transparent, 0.3)}
+  background-color: ${colors.textColorPrimary};
 `;
 
-const LoadingSpinner = android ? Spinner : ActivityIndicator;
+const ActivitySpinner = styled(Spinner).attrs({
+  color: colors.textColorPrimary,
+})``;
+
+const LoadingSpinner = android ? ActivitySpinner : ActivityIndicator;
 
 export default function SecretDisplaySection({
   onSecretLoaded,

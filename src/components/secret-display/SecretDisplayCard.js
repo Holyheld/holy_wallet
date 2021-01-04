@@ -65,10 +65,7 @@ function SeedWordGrid({ seed }) {
               const number = Number(index + 1 + colIndex * wordColumn.length);
               return (
                 <GridItem justify="end" key={`grid_number_${number}`}>
-                  <GridText
-                    align="right"
-                    color={colors.alpha(colors.appleBlue, 0.6)}
-                  >
+                  <GridText align="right" color={colors.textColorPrimaryMuted}>
                     {number}
                   </GridText>
                 </GridItem>
@@ -98,7 +95,11 @@ export default function SecretDisplayCard({ seed, type }) {
         </>
       )}
       <Content>
-        <CopyTooltip textToCopy={seed} tooltipText="Copy to clipboard">
+        <CopyTooltip
+          textColor={colors.textColorPrimary}
+          textToCopy={seed}
+          tooltipText="Copy to clipboard"
+        >
           {seed && type === WalletTypes.mnemonic && (
             <SeedWordGrid seed={seed} />
           )}

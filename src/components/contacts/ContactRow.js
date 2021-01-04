@@ -11,7 +11,7 @@ import { colors, margin } from '@rainbow-me/styles';
 
 const ContactAddress = styled(TruncatedAddress).attrs({
   align: 'left',
-  color: colors.alpha(colors.blueGreyDark, 0.4),
+  color: colors.textColorMuted,
   firstSectionLength: abbreviations.defaultNumCharsPerSection,
   size: 'smedium',
   truncationLength: 4,

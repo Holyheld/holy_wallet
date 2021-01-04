@@ -30,8 +30,8 @@ const Content = styled(RowWithMargins).attrs({
 `;
 
 export default function MiniButton({
-  activeButtonColor = colors.buttonActionBackground,
-  disabledButtonColor = colors.buttonBackgroundDisabled,
+  activeButtonColor = colors.buttonPrimary,
+  disabledButtonColor = colors.buttonDisabled,
   textColor = colors.textColor,
   borderRadius = 15,
   children,

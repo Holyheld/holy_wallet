@@ -54,7 +54,8 @@ export function onNavigationStateChange(currentState) {
 
     if (wasCustomSlackOpen !== isCustomSlackOpen) {
       StatusBar.setBarStyle(
-        wasCustomSlackOpen ? 'dark-content' : 'light-content'
+        // wasCustomSlackOpen ? 'dark-content' : 'light-content'
+        'light-content'
       );
     }
   } else {
@@ -80,9 +81,10 @@ export function onNavigationStateChange(currentState) {
 
       if ([prevRouteName, routeName].includes(Routes.QR_SCANNER_SCREEN)) {
         StatusBar.setBarStyle(
-          routeName === Routes.QR_SCANNER_SCREEN
-            ? 'light-content'
-            : 'dark-content',
+          // routeName === Routes.QR_SCANNER_SCREEN
+          //   ? 'light-content'
+          //   : 'dark-content',
+          'light-content',
           true
         );
       }
@@ -96,7 +98,8 @@ export function onNavigationStateChange(currentState) {
 
       if ([prevRouteName, routeName].includes(Routes.SAVINGS_SHEET)) {
         StatusBar.setBarStyle(
-          !isOnSwipeScreen(routeName) ? 'light-content' : 'dark-content',
+          // !isOnSwipeScreen(routeName) ? 'light-content' : 'dark-content',
+          'light-content',
           true
         );
       }
@@ -109,7 +112,7 @@ export function onNavigationStateChange(currentState) {
       }
 
       if (prevRouteName === Routes.EXPANDED_ASSET_SHEET) {
-        StatusBar.setBarStyle('dark-content', true);
+        StatusBar.setBarStyle('light-content', true);
       }
     }
   }

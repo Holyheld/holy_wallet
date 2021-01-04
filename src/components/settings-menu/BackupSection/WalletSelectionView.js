@@ -23,7 +23,7 @@ import { abbreviations, showActionSheetWithOptions } from '@rainbow-me/utils';
 
 const CaretIcon = styled(FastImage).attrs({
   source: Caret,
-  tintColor: colors.alpha(colors.blueGreyDark, 0.6),
+  tintColor: colors.textColorPrimaryMuted,
 })`
   height: 18;
   margin-top: 15;
@@ -31,7 +31,7 @@ const CaretIcon = styled(FastImage).attrs({
 `;
 
 const Address = styled(TruncatedAddress).attrs({
-  color: colors.dark,
+  color: colors.textColor,
   firstSectionLength: 6,
   size: fonts.size.lmedium,
   truncationLength: 4,
@@ -39,7 +39,7 @@ const Address = styled(TruncatedAddress).attrs({
 })``;
 
 const AccountLabel = styled(Text).attrs({
-  color: colors.dark,
+  color: colors.textColor,
   size: fonts.size.lmedium,
   weight: 'regular',
 })``;
@@ -242,7 +242,8 @@ const WalletSelectionView = () => {
                 </Row>
               </ButtonPressAnimation>
               <Divider
-                color={colors.alpha(colors.blueGreyDark, 0.01)}
+                backgroundColor={colors.modalBackground}
+                color={colors.divider}
                 inset={[0, 15, 0]}
               />
             </Column>

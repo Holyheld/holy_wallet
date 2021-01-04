@@ -15,10 +15,11 @@ let base = {
   blueGreyDarkLight: '#F3F4F5', // '243, 244, 245'
   borderColor: 'transparent',
   brightRed: '#FF7171', // '255, 113, 113'
-  buttonActionBackground: '#25282D',
-  buttonBackground: '#25282D',
-  buttonBackgroundDisabled: '#CDCFD4',
   buttonBlue: '#4E99FA',
+  buttonDisabled: '#CDCFD4',
+  buttonPrimary: '#FFCC00',
+  buttonSecondary: '#444444',
+  buttonTertiary: '#999999',
   chartGreen: '#66d28f', // '102, 210, 143'
   dark: '#25292E', // '37, 41, 46'
   darkGrey: '#71778A', // '113, 119, 138'
@@ -39,21 +40,21 @@ let base = {
   lightGrey: '#CDCFD4', // '205, 207, 212'
   mediumGrey: '#A1A5B3', // '161, 165, 179'
   mintDark: '#00E0A9', // '0, 224, 169'
-  modalBackground: '#3B3E43',
+  modalBackground: '#333333',
   modalBackgroundLighter: '#41454A',
-  modalHeader: '#3B3E43',
+  modalHeader: '#333333',
   neonSkyblue: '#34FFFF', // '52, 255, 255'
   offWhite: '#F8F9FA', // '248, 249, 250'
   orange: '#FF9900', // '255, 153, 0'
   orangeLight: '#FEBE44', // '254, 190, 68'
-  pageBackground: '#3B3E43',
+  pageBackground: '#010101',
   paleBlue: '#579DFF', // 87, 157, 255
   pink: '#FF54BB', // 255, 84, 187
   pinkLight: '#FF75E8', // '255, 117, 232'
   purple: '#735CFF', // '115, 92, 255'
   purpleDark: '#6F00A3', // '111, 0, 163'
   purpleLight: '#FFD9FE', // '255, 217, 254'
-  red: '#FF494A', // '255, 73, 74'
+  red: '#ff494a', // '255, 73, 74'
   rowBackground: '#3B3E43',
   rowBackgroundSecondary: '#3B3E43',
   rowDivider: 'rgba(60, 66, 82, 0.03)', // '60, 66, 82, 0.03'
@@ -74,8 +75,13 @@ let base = {
   textColorCoin: '#FFFFFF',
   textColorDark: '#000000',
   textColorDescription: '#FFFFFF',
+  textColorMuted: '#999999',
   textColorParagraph: '#FFFFFF',
-  textColorPlaceholder: '#F0F0F0',
+  textColorPlaceholder: '#999999',
+  textColorPrimary: '#FFCC00',
+  textColorPrimaryButton: '#333333',
+  textColorPrimaryMuted: 'rgba(255, 204, 0, 0.8)',
+  textColorSecondaryButton: '#FFFFFF',
   textColorTitle: '#FFFFFF',
   transparent: 'transparent',
   welcomeScreenBackground: '#010101',
@@ -141,6 +147,9 @@ const vendor = {
 
 const isColorLight = targetColor =>
   chroma(targetColor || base.white).luminance() > 0.5;
+
+const isColorDarker = (color, compareTo) =>
+  chroma(color).luminance() < chroma(compareTo).luminance();
 
 const isHex = (color = '') => color.length >= 3 && color.charAt(0) === '#';
 const isRGB = (color = '') => toLower(color).substring(0, 3) === 'rgb';
@@ -227,5 +236,6 @@ export default {
   // darkModeColors,
   get: getColorForString,
   getRandomColor,
+  isColorDarker: isColorDarker,
   propType: PropTypes.oneOf([...Object.keys(colors), ...Object.values(colors)]),
 };

@@ -19,7 +19,7 @@ const MaxButtonContent = styled(Row).attrs({
 
 const MaxButtonLabel = styled(Text).attrs({
   align: 'center',
-  color: colors.textColorBlue,
+  color: colors.textColorPrimary,
   size: 'lmedium',
   weight: 'bold',
 })`

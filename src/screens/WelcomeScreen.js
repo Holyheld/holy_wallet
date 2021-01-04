@@ -1,21 +1,15 @@
-import MaskedView from '@react-native-community/masked-view';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Animated, Easing, StyleSheet } from 'react-native';
 import { IS_TESTING } from 'react-native-dotenv';
-import Reanimated, {
-  Clock,
-  Easing as REasing,
-  Value as RValue,
-  timing,
-} from 'react-native-reanimated';
+import Reanimated from 'react-native-reanimated';
 import { useValue } from 'react-native-redash';
 import styled from 'styled-components/native';
 import { useMemoOne } from 'use-memo-one';
-import HolyFiber from '../assets/holys/fiber.png';
-import HolyFur from '../assets/holys/fur.png';
-import HolyGlass from '../assets/holys/glass.png';
-import HolyGold from '../assets/holys/gold.png';
-import HolyStone from '../assets/holys/stone.png';
+import HolyGlassOrange from '../assets/holys/glass-orange.png';
+import HolyGlassRainbow from '../assets/holys/glass-rainbow.png';
+import HolyNeonRainbow from '../assets/holys/neon-rainbow.png';
+import HolyNeon from '../assets/holys/neon.png';
+import HolyWhite from '../assets/holys/white.png';
 import { ButtonPressAnimation } from '../components/animations';
 import HolyText from '../components/icons/svg/HolyText';
 import { RowWithMargins } from '../components/layout';
@@ -32,19 +26,6 @@ import { useNavigation } from '@rainbow-me/navigation';
 import Routes from '@rainbow-me/routes';
 import { colors, shadow } from '@rainbow-me/styles';
 import logger from 'logger';
-
-const {
-  and,
-  block,
-  clockRunning,
-  color,
-  not,
-  set,
-  cond,
-  interpolate,
-  round,
-  startClock,
-} = Reanimated;
 
 const ButtonContainer = styled(Reanimated.View)`
   border-radius: ${({ height }) => height / 2};
@@ -163,46 +144,46 @@ const images = [
     delay: 0,
     id: 'glass',
     rotate: '0deg',
-    scale: 0.5066666667,
-    source: ios ? { uri: 'glass' } : HolyGlass,
-    x: -116,
+    scale: 0.4,
+    source: ios ? { uri: 'neon-rainbow' } : HolyNeonRainbow,
+    x: -110,
     y: -202,
   },
   {
     delay: 20,
     id: 'stone',
     rotate: '0deg',
-    scale: 0.3333333333,
-    source: ios ? { uri: 'stone' } : HolyStone,
-    x: 149,
-    y: 350,
+    scale: 0.29,
+    source: ios ? { uri: 'white' } : HolyWhite,
+    x: 135,
+    y: 342,
   },
   {
     delay: 40,
     id: 'fur',
     rotate: '0deg',
-    scale: 0.45,
-    source: ios ? { uri: 'fur' } : HolyFur,
-    x: 150,
-    y: -263,
+    scale: 0.4,
+    source: ios ? { uri: 'glass-orange' } : HolyGlassOrange,
+    x: 160,
+    y: -250,
   },
   {
     delay: 60,
     id: 'fiber',
     rotate: '-360deg',
     scale: 0.2826666667,
-    source: ios ? { uri: 'fiber' } : HolyFiber,
-    x: -172,
+    source: ios ? { uri: 'glass-rainbow' } : HolyGlassRainbow,
+    x: -180,
     y: 180,
   },
   {
     delay: 80,
     id: 'gold',
     rotate: '360deg',
-    scale: 0.42248,
-    source: ios ? { uri: 'gold' } : HolyGold,
-    x: 40,
-    y: 215,
+    scale: 0.3,
+    source: ios ? { uri: 'neon' } : HolyNeon,
+    x: 55,
+    y: 200,
   },
 ];
 
@@ -267,80 +248,12 @@ const Image = styled(Animated.Image)`
   width: ${INITIAL_SIZE};
 `;
 
-const RAINBOW_TEXT_HEIGHT = 32;
-const RAINBOW_TEXT_WIDTH = 125;
-
-const RainbowTextMask = styled(Reanimated.View)`
-  height: ${RAINBOW_TEXT_HEIGHT};
-  width: ${RAINBOW_TEXT_WIDTH};
-`;
-
-function runTiming(value) {
-  const clock = new Clock();
-  const state = {
-    finished: new RValue(0),
-    frameTime: new RValue(0),
-    position: new RValue(0),
-    time: new RValue(0),
-  };
-
-  const config = {
-    duration: 2500,
-    easing: REasing.linear,
-    toValue: new RValue(1),
-  };
-
-  return block([
-    cond(and(not(state.finished), clockRunning(clock)), 0, [
-      set(state.finished, 0),
-      set(state.time, 0),
-      set(state.position, value),
-      set(state.frameTime, 0),
-      set(config.toValue, 5),
-      startClock(clock),
-    ]),
-    timing(clock, state, config),
-    state.position,
-  ]);
-}
-
-/* eslint-disable sort-keys */
-const colorsRGB = [
-  { r: 255, g: 73, b: 74 },
-  { r: 255, g: 170, b: 0 },
-  { r: 0, g: 222, b: 111 },
-  { r: 0, g: 163, b: 217 },
-  { r: 115, g: 92, b: 255 },
-];
-/* eslint-enable sort-keys */
-
-const colorRGB = (r, g, b) => color(round(r), round(g), round(b));
-
 const springConfig = {
   bounciness: 7.30332,
   speed: 0.6021408,
   toValue: 1,
   useNativeDriver: true,
 };
-
-function colorAnimation(rValue, fromShadow) {
-  const animation = runTiming(rValue.current);
-  const r = interpolate(animation, {
-    inputRange: [0, 1, 2, 3, 4, 5],
-    outputRange: [...colorsRGB.map(({ r }) => r), colorsRGB[0].r],
-  });
-
-  const g = interpolate(animation, {
-    inputRange: [0, 1, 2, 3, 4, 5],
-    outputRange: [...colorsRGB.map(({ g }) => g), colorsRGB[0].g],
-  });
-
-  const b = interpolate(animation, {
-    inputRange: [0, 1, 2, 3, 4, 5],
-    outputRange: [...colorsRGB.map(({ b }) => b), colorsRGB[0].b],
-  });
-  return colorRGB(r, g, b, fromShadow);
-}
 
 export default function WelcomeScreen() {
   const { replace, navigate } = useNavigation();
@@ -436,8 +349,6 @@ export default function WelcomeScreen() {
 
   const rValue = useValue(0);
 
-  const backgroundColor = useMemoOne(() => colorAnimation(rValue, false), []);
-
   const onCreateWallet = useCallback(async () => {
     replace(Routes.SWIPE_LAYOUT, {
       params: { emptyWallet: true },
@@ -446,19 +357,15 @@ export default function WelcomeScreen() {
   }, [replace]);
 
   const createWalletButtonProps = useMemoOne(() => {
-    const color = colorAnimation(rValue, true);
     return {
-      emoji: 'castle',
-      height: 50 + (ios ? 0 : 6), // to compensate border width on Android
+      emoji: 'luggage',
+      height: 50,
       shadowStyle: {
-        backgroundColor: backgroundColor,
-        shadowColor: color,
+        opacity: 0,
       },
       style: {
-        backgroundColor: colors.buttonBackground,
-        borderColor: backgroundColor,
-        borderWidth: ios ? 0 : 3,
-        width: 242 + (ios ? 0 : 6),
+        backgroundColor: colors.buttonSecondary,
+        width: 248,
       },
       text: 'Get a new wallet',
       textColor: colors.textColor,
@@ -476,23 +383,17 @@ export default function WelcomeScreen() {
       darkShadowStyle: {
         opacity: 0,
       },
-      emoji: 'old_key',
+      emoji: 'key',
       height: 50,
       shadowStyle: {
         opacity: 0,
       },
       style: {
-        backgroundColor: colors.buttonBackground,
+        backgroundColor: colors.buttonSecondary,
         width: 248,
       },
       text: 'I already have one',
       textColor: colors.white,
-    };
-  }, [rValue]);
-
-  const textStyle = useMemoOne(() => {
-    return {
-      backgroundColor,
     };
   }, [rValue]);
 
@@ -503,14 +404,7 @@ export default function WelcomeScreen() {
       ))}
 
       <ContentWrapper style={contentStyle}>
-        {android && IS_TESTING === 'true' ? (
-          <HolyText color={colors.textColor} />
-        ) : (
-          <MaskedView maskElement={<HolyText color={colors.textColor} />}>
-            <RainbowTextMask style={textStyle} />
-          </MaskedView>
-        )}
-
+        <HolyText color={colors.textColor} />
         <ButtonWrapper style={buttonStyle}>
           <RainbowButton
             onPress={onCreateWallet}

@@ -51,7 +51,7 @@ const WhiteButtonGradient = React.memo(
 const SheetActionButton = ({
   androidWidth,
   borderRadius = 56,
-  color = colors.appleBlue,
+  color = colors.buttonSecondary,
   disabled,
   elevation = 24,
   emoji,

@@ -57,7 +57,7 @@ const Content = styled(Centered)`
 `;
 
 const Title = styled(Text).attrs(({ smallButton }) => ({
-  color: colors.textColor,
+  color: colors.textColorPrimaryButton,
   size: smallButton ? 'large' : 'larger',
   weight: 'bold',
 }))`
@@ -76,7 +76,7 @@ const calculateReverseDuration = proc(longPressProgress =>
 );
 
 const LoadingSpinner = styled(android ? Spinner : ActivityIndicator).attrs({
-  color: colors.white,
+  color: colors.textColorPrimaryButton,
   size: 31,
 })`
   left: 15;
@@ -103,7 +103,7 @@ class HoldToAuthorizeButton extends PureComponent {
   };
 
   static defaultProps = {
-    backgroundColor: colors.buttonBlue,
+    backgroundColor: colors.buttonPrimary,
     disabled: false,
     theme: 'light',
   };

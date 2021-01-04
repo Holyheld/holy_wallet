@@ -8,7 +8,7 @@ const borderRadius = 10.5;
 
 const Gradient = styled(RadialGradient).attrs({
   center: [0, borderRadius],
-  colors: colors.gradients.lightGrey,
+  colors: [colors.buttonSecondary, colors.buttonSecondary],
 })`
   ${padding(2, 6)};
   border-radius: ${borderRadius};
@@ -20,7 +20,7 @@ export default function Pill({ children, ...props }) {
     <Gradient {...props}>
       <TruncatedText
         align="center"
-        color={colors.alpha(colors.blueGreyDark, 0.5)}
+        color={colors.textColorSecondaryButton}
         letterSpacing="uppercase"
         size="smedium"
         weight="semibold"

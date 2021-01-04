@@ -198,7 +198,7 @@ export default function BackupSheet() {
       <StatusBar barStyle="light-content" />
       <SlackSheet
         additionalTopPadding={android && !nativeScreen}
-        backgroundColor={colors.pageBackground}
+        backgroundColor={colors.modalBackground}
         contentHeight={sheetHeight}
       >
         {renderStep()}

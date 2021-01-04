@@ -236,7 +236,6 @@ export default function SettingsModal() {
             options={{
               cardStyle: {
                 backgroundColor: colors.modalBackground,
-                marginTop: 6,
               },
               cardStyleInterpolator,
               title: 'Backup',

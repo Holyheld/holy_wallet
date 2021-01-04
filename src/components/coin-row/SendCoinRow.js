@@ -28,7 +28,7 @@ const BottomRow = ({ balance, native, nativeCurrencySymbol }) => {
     get(native, 'balance.display') || `${nativeCurrencySymbol}0.00`;
 
   return (
-    <Text color={colors.alpha(colors.blueGreyDark, 0.5)} size="smedium">
+    <Text color={colors.textColorMuted} size="smedium">
       {get(balance, 'display')} ≈ {fiatValue}
     </Text>
   );

@@ -9,7 +9,7 @@ const Container = styled(Centered)`
 `;
 
 export default function ActivityIndicator({
-  color = colors.blueGreyDark,
+  color = colors.textColorPrimary,
   isInteraction = false,
   size = 25,
   ...props

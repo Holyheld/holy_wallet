@@ -23,7 +23,7 @@ const selectedStyles = css`
 `;
 
 const BottomRow = ({ subtitle }) => (
-  <TruncatedText color={colors.alpha(colors.blueGreyDark, 0.5)} size="smedium">
+  <TruncatedText color={colors.textColorMuted} size="smedium">
     {subtitle}
   </TruncatedText>
 );
@@ -92,7 +92,7 @@ const CollectiblesSendRow = enhance(
     <Fragment>
       {isFirstRow && (
         <Centered height={dividerHeight}>
-          <Divider color={colors.rowDividerLight} />
+          <Divider backgroundColor={colors.modalBackground} />
         </Centered>
       )}
       <ButtonPressAnimation onPress={onPress} scaleTo={0.98}>

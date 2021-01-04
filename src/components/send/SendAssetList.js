@@ -20,7 +20,6 @@ import {
   SendCoinRow,
   SendSavingsCoinRow,
 } from '../coin-row';
-import { Centered } from '../layout';
 import SavingsListHeader from '../savings/SavingsListHeader';
 import TokenFamilyHeader from '../token-family/TokenFamilyHeader';
 import { colors } from '@rainbow-me/styles';
@@ -42,11 +41,15 @@ const SendAssetRecyclerListView = styled(RecyclerListView)`
   min-height: 1;
 `;
 
-const SendAssetListDivider = () => (
-  <Centered marginVertical={dividerMargin}>
-    <Divider color={colors.divider} />
-  </Centered>
-);
+// const SendAssetListDivider = () => (
+//   <Centered marginVertical={dividerMargin}>
+//     <Divider color={colors.divider} />
+//   </Centered>
+// );
+
+const SendAssetListDivider = styled(Divider).attrs({
+  backgroundColor: colors.modalBackground,
+})``;
 
 export default class SendAssetList extends React.Component {
   constructor(props) {

@@ -11,7 +11,7 @@ const PageElement = styled.View`
 `;
 
 const Page = (
-  { color = colors.white, showBottomInset, showTopInset, ...props },
+  { color = colors.pageBackground, showBottomInset, showTopInset, ...props },
   ref
 ) => {
   const insets = useSafeArea();

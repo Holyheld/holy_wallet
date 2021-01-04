@@ -11,7 +11,7 @@ const sx = StyleSheet.create({
   button: {
     ...position.centeredAsObject,
     ...shadow.buildAsObject(0, 4, 6, colors.swapPurple, 0.4),
-    backgroundColor: colors.swapPurple,
+    backgroundColor: colors.buttonPrimary,
     borderRadius: ButtonBorderRadius,
     height: 30,
     paddingBottom: 1,
@@ -23,7 +23,7 @@ const sx = StyleSheet.create({
 const SavingsListRowEmptyState = ({ onPress }) => (
   <RowWithMargins align="center" margin={8} paddingLeft={4}>
     <Text
-      color={colors.white}
+      color={colors.textColor}
       letterSpacing="roundedTightest"
       opacity={0.5}
       size="lmedium"
@@ -33,7 +33,7 @@ const SavingsListRowEmptyState = ({ onPress }) => (
     </Text>
     <ButtonPressAnimation onPress={onPress} scaleTo={0.9} style={sx.button}>
       <Text
-        color={colors.white}
+        color={colors.textColorPrimaryButton}
         letterSpacing="roundedTight"
         size="lmedium"
         weight="semibold"

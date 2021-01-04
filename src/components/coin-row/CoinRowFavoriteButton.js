@@ -24,8 +24,8 @@ const FavoriteButton = styled(Centered)`
 const Circle = styled(RadialGradient).attrs(({ isFavorited }) => ({
   center: [0, 15],
   colors: isFavorited
-    ? [colors.alpha('#FFB200', 0), colors.alpha('#FFB200', 0.2)]
-    : ['#FFFFFF', '#F2F4F7'],
+    ? [colors.buttonPrimary, colors.buttonPrimary]
+    : [colors.buttonSecondary, colors.buttonSecondary],
 }))`
   border-radius: 15px;
   height: 30px;
@@ -35,7 +35,9 @@ const Circle = styled(RadialGradient).attrs(({ isFavorited }) => ({
 
 const StarIcon = styled(Text).attrs(({ isFavorited }) => ({
   align: 'center',
-  color: isFavorited ? '#FFB200' : colors.alpha(colors.blueGreyDark, 0.2),
+  color: isFavorited
+    ? colors.textColorPrimaryButton
+    : colors.textColorSecondaryButton,
   letterSpacing: 'zero',
   size: 'smaller',
   weight: 'heavy',

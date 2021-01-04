@@ -54,13 +54,9 @@ const ExchangeNativeField = (
     [onFocus]
   );
 
-  const nativeAmountExists =
-    typeof nativeAmount === 'string' && nativeAmount.length > 0;
-
-  const nativeAmountColor = colors.alpha(
-    isFocused ? colors.textColor : colors.textColorPlaceholder,
-    isFocused ? 1 : nativeAmountExists ? 0.5 : 0.3
-  );
+  const nativeAmountColor = isFocused
+    ? colors.textColor
+    : colors.textColorPlaceholder;
 
   return (
     <TouchableWithoutFeedback onPress={handleFocusNativeField}>

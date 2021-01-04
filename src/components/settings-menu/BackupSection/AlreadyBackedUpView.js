@@ -80,7 +80,7 @@ const Subtitle = styled(Text).attrs({
 
 const Title = styled(Text).attrs({
   align: 'center',
-  color: colors.textColorTitle,
+  color: colors.textColorPrimary,
   size: 'larger',
   weight: 'bold',
 })`
@@ -259,10 +259,10 @@ export default function AlreadyBackedUpView() {
         <Column>
           <SheetActionButton
             androidWidth={225}
-            color={colors.buttonActionBackground}
+            color={colors.buttonPrimary}
             label="🗝 View recovery key"
             onPress={handleViewRecoveryPhrase}
-            textColor={colors.textColor}
+            textColor={colors.textColorPrimaryButton}
           />
         </Column>
       </Content>

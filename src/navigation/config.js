@@ -186,7 +186,7 @@ export const closeKeyboardOnClose = {
 
 export const nativeStackDefaultConfig = {
   allowsDragToDismiss: true,
-  backgroundColor: '#0A0A0A',
+  backgroundColor: colors.pageBackground,
   backgroundOpacity: 1,
   customStack: true,
   headerHeight: 0,

@@ -866,12 +866,7 @@ class RecyclerAssetList extends Component {
     } = this.state;
 
     return (
-      <View
-        backgroundColor={colors.pageBackground}
-        flex={1}
-        onLayout={this.handleOnLayout}
-        overflow="hidden"
-      >
+      <View flex={1} onLayout={this.handleOnLayout} overflow="hidden">
         <StickyContainer
           overrideRowRenderer={this.stickyRowRenderer}
           stickyHeaderIndices={isCoinListEdited ? [0] : stickyComponentsIndices}

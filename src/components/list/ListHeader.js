@@ -77,12 +77,7 @@ export default function ListHeader({
           </Row>
           {children}
         </Content>
-        {showDivider && (
-          <Divider
-            backgroundColor={colors.pageBackground}
-            color={colors.divider}
-          />
-        )}
+        {showDivider && <Divider color={colors.divider} />}
         {!isSticky && title !== 'Balances' && (
           <StickyBackgroundBlocker
             deviceDimensions={deviceDimensions}

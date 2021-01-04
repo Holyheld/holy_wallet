@@ -55,7 +55,7 @@ const UniqueTokenExpandedStateHeader = ({ asset }) => {
       <HeadingColumn>
         <RowWithMargins align="center" margin={3}>
           <Text
-            color={colors.blueGreyDark50}
+            color={colors.textColor}
             letterSpacing="uppercase"
             size="smedium"
             uppercase

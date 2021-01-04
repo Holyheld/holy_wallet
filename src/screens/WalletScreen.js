@@ -30,11 +30,9 @@ import {
   useWalletSectionsData,
 } from '../hooks';
 import { updateRefetchSavings } from '../redux/data';
-import colors from '../styles/colors';
 import { position } from '@rainbow-me/styles';
 
 const HeaderOpacityToggler = styled(OpacityToggler).attrs(({ isVisible }) => ({
-  backgroundColor: colors.headerBackground,
   endingOpacity: 0.4,
   paddingTop: 5,
   pointerEvents: isVisible ? 'none' : 'auto',
@@ -106,10 +104,7 @@ export default function WalletScreen() {
         isReadOnlyWallet={isReadOnlyWallet}
       >
         <HeaderOpacityToggler isVisible={isCoinListEdited}>
-          <Header
-            backgroundColor={colors.headerBackground}
-            justify="space-between"
-          >
+          <Header justify="space-between">
             <ProfileHeaderButton />
             {discoverSheetAvailable ? (
               <DiscoverHeaderButton />

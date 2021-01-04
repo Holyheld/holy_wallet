@@ -8,10 +8,10 @@ import { colors } from '@rainbow-me/styles';
 import { gasUtils, magicMemo } from '@rainbow-me/utils';
 
 const speedColors = [
-  colors.white,
-  colors.white,
-  colors.white,
-  colors.appleBlue,
+  colors.textColor,
+  colors.textColor,
+  colors.textColor,
+  colors.textColorPrimary,
 ];
 
 const PagerItem = styled(Row)`
@@ -34,9 +34,7 @@ const GasSpeedLabelPager = ({ label, theme, showPager = true }) => {
           {gasUtils.GasSpeedOrder.map((speed, i) => (
             <PagerItem
               backgroundColor={
-                speed === label
-                  ? speedColors[i]
-                  : colors.alpha(colors.blueGreyDark, 0.3)
+                speed === label ? speedColors[i] : colors.buttonSecondary
               }
               key={`pager-${speed}-${i}`}
               selected={speed === label}

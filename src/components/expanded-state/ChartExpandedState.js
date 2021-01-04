@@ -32,6 +32,7 @@ export default function ChartExpandedState({ asset }) {
     chartData,
     chartType,
     color,
+    textColor,
     fetchingCharts,
     initialChartDataLabels,
     showChart,
@@ -98,9 +99,17 @@ export default function ChartExpandedState({ asset }) {
       ) : (
         <SheetActionButtonRow>
           {showSwapButton && (
-            <SwapActionButton color={color} inputType={AssetInputTypes.in} />
+            <SwapActionButton
+              color={color}
+              inputType={AssetInputTypes.in}
+              textColor={textColor}
+            />
           )}
-          <SendActionButton color={color} fullWidth={!showSwapButton} />
+          <SendActionButton
+            color={color}
+            fullWidth={!showSwapButton}
+            textColor={textColor}
+          />
         </SheetActionButtonRow>
       )}
     </SlackSheet>

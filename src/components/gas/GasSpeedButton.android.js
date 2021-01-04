@@ -29,14 +29,14 @@ const Container = styled(Row).attrs({
   ${margin(10, 18, 10, 15)}
 `;
 
-const Label = styled(Text).attrs({
-  color: colors.alpha(colors.blueGreyDark, 0.6),
+const Label = styled(Text).attrs(({ color = colors.textColor }) => ({
+  color: color,
   size: 'smedium',
   weight: 'semibold',
-})``;
+}))``;
 
 const ButtonLabel = styled(BorderlessButton).attrs({
-  color: colors.appleBlue,
+  color: colors.textColor,
   hitSlop: 40,
   opacity: 1,
   size: 'smedium',
@@ -46,14 +46,14 @@ const ButtonLabel = styled(BorderlessButton).attrs({
 `;
 
 const GasInput = styled(Input).attrs({
-  color: colors.white,
+  color: colors.textColor,
   height: 58,
   keyboardAppearance: 'dark',
   keyboardType: 'numeric',
   letterSpacing: 'roundedMedium',
   maxLength: 5,
   multiline: false,
-  placeholderTextColor: colors.alpha(colors.blueGreyDark, 0.3),
+  placeholderTextColor: colors.textColorMuted,
   size: 'lmedium',
   testID: 'custom-gas-input',
 })`
@@ -63,14 +63,14 @@ const GasInput = styled(Input).attrs({
 
 const LittleBorderlessButton = ({ onPress, children, testID }) => (
   <ButtonLabel onPress={onPress} testID={testID} width={120}>
-    <Text color={colors.appleBlue} size="smedium" weight="bold">
+    <Text color={colors.textColor} size="smedium" weight="bold">
       {children}
     </Text>
   </ButtonLabel>
 );
 
 const BottomRightLabel = ({ formatter }) => (
-  <Label color={colors.white}>{formatter()}</Label>
+  <Label color={colors.textColor}>{formatter()}</Label>
 );
 
 const formatGasPrice = (gasPrice, nativeCurrency) => {
@@ -352,7 +352,7 @@ const GasSpeedButton = ({
   ]);
 
   const focusOnInput = useCallback(() => inputRef.current?.focus(), []);
-  const isCustom = selectedGasPriceOption === CUSTOM ? true : false;
+  const isCustom = selectedGasPriceOption === CUSTOM;
 
   return (
     <Container
@@ -386,8 +386,8 @@ const GasSpeedButton = ({
                 <Text
                   color={
                     customGasPriceInput
-                      ? colors.white
-                      : colors.alpha(colors.blueGreyDark, 0.3)
+                      ? colors.textColor
+                      : colors.textColorMuted
                   }
                   size="lmedium"
                   weight="bold"
@@ -402,7 +402,7 @@ const GasSpeedButton = ({
 
         <Row justify="space-between" style={{ height: 27 }}>
           {!isCustom ? (
-            <Label color={colors.white} height={10}>
+            <Label color={colors.textColor} height={10}>
               Network Fee
             </Label>
           ) : (

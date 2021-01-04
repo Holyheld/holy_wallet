@@ -156,7 +156,11 @@ export default function SendHeader({
         )}
         {!isValidAddress && <PasteAddressButton onPress={onPressPaste} />}
       </AddressInputContainer>
-      <Divider color={colors.rowDivider} flex={0} inset={false} />
+      <Divider
+        backgroundColor={colors.modalBackground}
+        flex={0}
+        inset={false}
+      />
     </Fragment>
   );
 }

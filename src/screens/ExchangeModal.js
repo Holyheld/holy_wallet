@@ -29,7 +29,6 @@ import { Centered, KeyboardFixedOpenLayout } from '../components/layout';
 import ExchangeModalTypes from '../helpers/exchangeModalTypes';
 import isKeyboardOpen from '../helpers/isKeyboardOpen';
 import { loadWallet } from '../model/wallet';
-import { useNavigation } from '../navigation/Navigation';
 import { executeRap } from '../raps/common';
 import { multicallClearState } from '../redux/multicall';
 import ethUnits from '../references/ethereum-units.json';
@@ -45,6 +44,7 @@ import {
   useUniswapCurrencies,
   useUniswapMarketDetails,
 } from '@rainbow-me/hooks';
+import { useNavigation } from '@rainbow-me/navigation';
 import Routes from '@rainbow-me/routes';
 import { colors, position } from '@rainbow-me/styles';
 import { backgroundTask, isNewValueForPath } from '@rainbow-me/utils';

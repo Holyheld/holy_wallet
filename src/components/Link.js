@@ -22,7 +22,7 @@ const Container = styled(RowWithMargins).attrs({
   ${android ? 'padding-vertical: 10' : 'padding-top: 14'};
 `;
 
-const Link = ({ url }) => {
+const Link = ({ color = colors.textColor, url }) => {
   const handlePress = useCallback(() => Linking.openURL(url), [url]);
 
   return (
@@ -33,8 +33,8 @@ const Link = ({ url }) => {
       transformOrigin="left"
     >
       <Container>
-        <Icon color={colors.appleBlue} name="compass" />
-        <Text color={colors.appleBlue} size="lmedium" weight="semibold">
+        <Icon color={color} name="compass" />
+        <Text color={color} size="lmedium" weight="semibold">
           {formatURLForDisplay(url)}
         </Text>
       </Container>

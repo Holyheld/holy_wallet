@@ -122,10 +122,10 @@ export default function NeedsBackupView() {
           />
           <SheetActionButton
             androidWidth={220}
-            color={colors.buttonBackground}
+            color={colors.buttonPrimary}
             label="🤓 Back up manually"
             onPress={onManualBackup}
-            textColor={colors.textColor}
+            textColor={colors.textColorPrimaryButton}
           />
         </Column>
       </Content>

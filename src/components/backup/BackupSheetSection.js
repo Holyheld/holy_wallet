@@ -28,7 +28,7 @@ const Masthead = styled(Column).attrs({
 
 const MastheadDescription = styled(Text).attrs({
   align: 'center',
-  color: colors.blueGreyDark50,
+  color: colors.textColor,
   lineHeight: 'looser',
   size: 'large',
 })`
@@ -82,12 +82,12 @@ export default function BackupSheetSection({
         />
         <SheetActionButton
           androidWidth={maxButtonWidth}
-          color={colors.white}
+          color={colors.buttonSecondary}
           label={secondaryLabel}
           onPress={onSecondaryAction}
           size="big"
           testID={secondaryButtonTestId}
-          textColor={colors.alpha(colors.blueGreyDark, 0.8)}
+          textColor={colors.textColorSecondaryButton}
         />
       </Footer>
     </Fragment>

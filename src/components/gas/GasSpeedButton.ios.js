@@ -340,7 +340,7 @@ const GasSpeedButton = ({
           <BorderlessButton onPress={focusOnInput}>
             <Row>
               <Input
-                color={colors.white}
+                color={colors.textColor}
                 height={19}
                 keyboardAppearance="dark"
                 keyboardType="numeric"
@@ -351,7 +351,7 @@ const GasSpeedButton = ({
                 onFocus={handleCustomGasFocus}
                 onSubmitEditing={handleInputButtonManager}
                 placeholder={`${defaultCustomGasPrice}`}
-                placeholderTextColor={colors.alpha(colors.blueGreyDark, 0.3)}
+                placeholderTextColor={colors.textColorPlaceholder}
                 ref={inputRef}
                 size="lmedium"
                 testID="custom-gas-input"
@@ -360,9 +360,7 @@ const GasSpeedButton = ({
               />
               <Text
                 color={
-                  customGasPriceInput
-                    ? colors.white
-                    : colors.alpha(colors.blueGreyDark, 0.3)
+                  customGasPriceInput ? colors.textColor : colors.textColorMuted
                 }
                 size="lmedium"
                 weight="bold"
@@ -382,7 +380,7 @@ const GasSpeedButton = ({
       </Row>
       <Row justify="space-between">
         {!isCustom ? (
-          <Label color={colors.white}>Network Fee</Label>
+          <Label color={colors.textColor}>Network Fee</Label>
         ) : (
           <LittleBorderlessButton
             onPress={handleInputButtonManager}

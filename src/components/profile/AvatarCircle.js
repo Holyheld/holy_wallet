@@ -19,7 +19,7 @@ const AvatarCircleView = styled(Flex)`
 
 const FirstLetter = styled(Text).attrs({
   align: 'center',
-  color: colors.white,
+  color: colors.textColor,
   letterSpacing: 2,
   lineHeight: android ? 68 : 66,
   size: ios ? 38 : 30,
@@ -60,7 +60,9 @@ export default function AvatarCircle({
     >
       <ShadowStack
         {...position.sizeAsObject(AvatarCircleSize)}
-        backgroundColor={overlayStyles ? 'rgb(51, 54, 59)' : colors.white}
+        backgroundColor={
+          overlayStyles ? 'rgb(51, 54, 59)' : colors.skeletonColor
+        }
         borderRadius={AvatarCircleSize}
         marginBottom={12}
         shadows={shadows[overlayStyles ? 'overlay' : 'default']}

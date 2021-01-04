@@ -6,6 +6,7 @@ import { colors } from '@rainbow-me/styles';
 
 export default function SwapActionButton({
   color = colors.swapPurple,
+  textColor = colors.textColor,
   inputType,
   ...props
 }) {
@@ -29,6 +30,7 @@ export default function SwapActionButton({
       label="􀖅 Swap"
       onPress={handlePress}
       testID="swap"
+      textColor={textColor}
       weight="bold"
     />
   );

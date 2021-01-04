@@ -27,7 +27,7 @@ const BottomRow = ({
     balance: { display: balanceNativeValue },
   },
 }) => (
-  <Text color={colors.alpha(colors.blueGreyDark, 0.5)} size="smedium">
+  <Text color={colors.textColorMuted} size="smedium">
     {balanceDisplay} ≈ {balanceNativeValue}
   </Text>
 );

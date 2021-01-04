@@ -1,5 +1,6 @@
 import { debounce } from 'lodash';
 import { useContext, useEffect, useMemo, useRef, useState } from 'react';
+import colors from '../../styles/colors';
 import { monotoneCubicInterpolation } from '@rainbow-me/animated-charts';
 import {
   useChartData,
@@ -69,7 +70,19 @@ export default function useChartThrottledPoints({
     assetForColor = asset?.tokens?.[0] || asset;
   }
 
-  const color = useColorForAsset(assetForColor);
+  const colorForAsset = useColorForAsset(assetForColor);
+  const isColorDarker = colors.isColorDarker(
+    colorForAsset,
+    colors.modalBackground
+  );
+
+  const color = isColorDarker ? colors.buttonSecondary : colorForAsset;
+
+  const textColor = isColorDarker
+    ? colors.textColorSecondaryButton
+    : colors.textColor;
+
+  // const color = useColorForAsset(assetForColor);
 
   const [isFetchingInitially, setIsFetchingInitially] = useState(true);
 
@@ -136,6 +149,7 @@ export default function useChartThrottledPoints({
     fetchingCharts,
     initialChartDataLabels,
     showChart,
+    textColor,
     throttledData,
   };
 }

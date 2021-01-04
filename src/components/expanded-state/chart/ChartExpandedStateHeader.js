@@ -49,7 +49,7 @@ export default function ChartExpandedStateHeader({
   asset,
   changeDirection,
   changeRef,
-  color = colors.dark,
+  color = colors.textColor,
   dateRef,
   isPool,
   isScrubbing,

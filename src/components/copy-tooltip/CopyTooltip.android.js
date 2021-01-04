@@ -5,7 +5,13 @@ import { TouchableOpacity, View } from 'react-native';
 import Tooltips from 'react-native-tooltips';
 import { colors } from '@rainbow-me/styles';
 
-const CopyTooltip = ({ children, textToCopy, tooltipText }) => {
+const CopyTooltip = ({
+  children,
+  textToCopy,
+  tooltipText,
+  textColor = colors.textColor,
+  tintColor = colors.blueGreyDark,
+}) => {
   const [visible, setVisible] = useState(false);
   const parent = useRef();
   const target = useRef();
@@ -34,9 +40,9 @@ const CopyTooltip = ({ children, textToCopy, tooltipText }) => {
         shadow={false}
         target={target.current}
         text={tooltipText}
-        textColor={colors.white}
+        textColor={textColor}
         textSize={14}
-        tintColor={colors.blueGreyDark}
+        tintColor={tintColor}
         visible={visible}
       />
     </Fragment>

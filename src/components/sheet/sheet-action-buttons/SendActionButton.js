@@ -7,6 +7,7 @@ import { colors } from '@rainbow-me/styles';
 
 export default function SendActionButton({
   color = colors.paleBlue,
+  textColor = colors.textColor,
   ...props
 }) {
   const navigate = useExpandedStateNavigation();
@@ -30,6 +31,7 @@ export default function SendActionButton({
       label="􀈠 Send"
       onPress={handlePress}
       testID="send"
+      textColor={textColor}
       weight="bold"
     />
   );

@@ -2,6 +2,7 @@ import QRCodeUtil from 'qrcode';
 import React, { useMemo } from 'react';
 import Svg, { Circle, ClipPath, Defs, G, Image, Rect } from 'react-native-svg';
 import HornsLogo from '../../assets/sign_of_the_horns.png';
+import HornsLogoIos from '../../assets/sign_of_the_horns_ios.png';
 import { magicMemo } from '../../utils';
 import { colors } from '@rainbow-me/styles';
 
@@ -22,7 +23,7 @@ const generateMatrix = (value, errorCorrectionLevel) => {
 
 const QRCode = ({
   ecl = 'M',
-  logo = HornsLogo,
+  logo = ios ? HornsLogoIos : HornsLogo,
   logoBackgroundColor = colors.transparent,
   logoMargin = 0,
   logoSize = 80,

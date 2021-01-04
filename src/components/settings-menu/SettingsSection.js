@@ -82,6 +82,10 @@ const WarningIcon = styled(Icon).attrs({
   margin-top: 1;
 `;
 
+const Divider = styled(ListItemDivider).attrs({
+  backgroundColor: colors.modalBackground,
+})``;
+
 const checkAllWallets = wallets => {
   if (!wallets) return false;
   let areBackedUp = true;
@@ -161,7 +165,7 @@ export default function SettingsSection({
 
   return (
     <Container scrollEnabled={isTinyPhone}>
-      <ColumnWithDividers dividerRenderer={ListItemDivider} marginTop={7}>
+      <ColumnWithDividers dividerRenderer={Divider} marginTop={7}>
         {canBeBackedUp && (
           <ListItem
             icon={<SettingIcon source={BackupIcon} />}
@@ -209,7 +213,7 @@ export default function SettingsSection({
         {/*</ListItem>*/}
       </ColumnWithDividers>
       <ListFooter />
-      <ColumnWithDividers dividerRenderer={ListItemDivider}>
+      <ColumnWithDividers dividerRenderer={Divider}>
         <ListItem
           icon={<Emoji name="sign_of_the_horns" />}
           label="Share Holy"
