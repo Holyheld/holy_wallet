@@ -76,6 +76,7 @@ const WalletFlatList = styled(FlatList).attrs(({ showDividers }) => ({
 `;
 
 const WalletListDivider = styled(Divider).attrs({
+  backgroundColor: colors.modalBackground,
   color: colors.divider,
   inset: [0, 15],
 })`

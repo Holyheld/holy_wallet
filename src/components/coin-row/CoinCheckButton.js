@@ -22,7 +22,7 @@ const Content = styled(Row).attrs(({ isAbsolute }) => ({
 
 const CircleOutline = styled.View`
   ${borders.buildCircle(22)}
-  border-color: ${colors.alpha(colors.blueGreyDark, 0.12)};
+  border-color: ${colors.alpha(colors.buttonPrimary, 0.12)};
   border-width: 1.5;
   position: absolute;
 `;
@@ -30,8 +30,8 @@ const CircleOutline = styled.View`
 const CheckmarkBackground = styled.View`
   ${borders.buildCircle(22)}
   ${padding(4.5)}
-  ${shadow.build(0, 4, 12, colors.appleBlue, 0.4)}
-  background-color: ${colors.appleBlue};
+  ${shadow.build(0, 4, 12, colors.transparent, 0.4)}
+  background-color: ${colors.buttonPrimary};
 `;
 
 const CoinCheckButton = ({ isAbsolute, onPress, toggle, ...props }) => (
@@ -45,7 +45,7 @@ const CoinCheckButton = ({ isAbsolute, onPress, toggle, ...props }) => (
       <CircleOutline />
       <OpacityToggler friction={20} isVisible={!toggle} tension={1000}>
         <CheckmarkBackground>
-          <Icon color="white" name="checkmark" />
+          <Icon color={colors.textColorPrimaryButton} name="checkmark" />
         </CheckmarkBackground>
       </OpacityToggler>
     </Content>

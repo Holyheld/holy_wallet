@@ -40,7 +40,10 @@ const FormContainer = styled(Column).attrs({
   width: 100%;
 `;
 
-const KeyboardSizeView = styled(KeyboardArea)``;
+const KeyboardSizeView = styled(KeyboardArea).attrs({
+  // TODO check on iOS
+  // backgroundColor: colors.modalBackground,
+})``;
 
 export default function SendAssetForm({
   assetAmount,

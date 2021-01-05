@@ -1,5 +1,6 @@
 import analytics from '@segment/analytics-react-native';
 import React, { useCallback } from 'react';
+import colors from '../../styles/colors';
 import { UnderlineField } from '../fields';
 import { RowWithMargins } from '../layout';
 import { Text } from '../text';
@@ -51,7 +52,7 @@ export default function SendAssetFormField({
       />
       <Text
         align="right"
-        color="dark"
+        color={colors.textColor}
         size={isTinyPhone || android ? 'bigger' : 'h3'}
       >
         {label.length > labelMaxLength

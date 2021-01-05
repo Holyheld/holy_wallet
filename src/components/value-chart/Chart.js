@@ -76,7 +76,6 @@ const Overlay = styled(Animated.View).attrs({
 })`
   ${position.cover};
   align-items: center;
-  background-color: ${colors.alpha(colors.white, 0.9)};
   justify-content: center;
 `;
 

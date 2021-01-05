@@ -32,7 +32,8 @@ const Spacer = styled.View`
 `;
 
 const SubmitButton = styled(Button).attrs(({ value }) => ({
-  backgroundColor: value.length > 0 ? colors.appleBlue : undefined,
+  backgroundColor:
+    value.length > 0 ? colors.buttonPrimary : colors.buttonSecondary,
   disabled: !value.length > 0,
   showShadow: true,
   size: 'small',
@@ -41,11 +42,14 @@ const SubmitButton = styled(Button).attrs(({ value }) => ({
   width: 215;
 `;
 
-const SubmitButtonLabel = styled(Text).attrs({
-  color: colors.textColor,
+const SubmitButtonLabel = styled(Text).attrs(({ value }) => ({
+  color:
+    value.length > 0
+      ? colors.textColorPrimaryButton
+      : colors.textColorSecondaryButton,
   size: 'lmedium',
   weight: 'semibold',
-})`
+}))`
   margin-bottom: 1.5;
 `;
 
@@ -120,14 +124,14 @@ const ContactProfileState = ({ address, color: colorProp, contact }) => {
           <AddressAbbreviation address={address} />
         </CopyTooltip>
         <Centered paddingVertical={19} width={93}>
-          <Divider inset={false} />
+          <Divider backgroundColor={colors.modalBackground} inset={false} />
         </Centered>
         <SubmitButton
           onPress={handleAddContact}
           testID="contact-profile-add-button"
           value={value}
         >
-          <SubmitButtonLabel>
+          <SubmitButtonLabel value={value}>
             {contact ? 'Done' : 'Add Contact'}
           </SubmitButtonLabel>
         </SubmitButton>

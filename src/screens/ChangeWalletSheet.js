@@ -459,7 +459,11 @@ export default function ChangeWalletSheet() {
       <Column height={headerHeight} justify="space-between">
         <SheetTitle>Wallets</SheetTitle>
         {showDividers && (
-          <Divider color={colors.rowDividerExtraLight} inset={[0, 15]} />
+          <Divider
+            backgroundColor={colors.modalBackground}
+            color={colors.divider}
+            inset={[0, 15]}
+          />
         )}
       </Column>
       <EditButton editMode={editMode} onPress={() => setEditMode(e => !e)}>

@@ -8,6 +8,7 @@ import BackupSheet from '../screens/BackupSheet';
 import ChangeWalletSheet from '../screens/ChangeWalletSheet';
 import DepositModal from '../screens/DepositModal';
 import ExpandedAssetSheet from '../screens/ExpandedAssetSheet';
+import HamburgerSheet from '../screens/HamburgerSheet';
 import HolyMigrateModalWrapper from '../screens/HolyMigrateModal';
 import ImportSeedPhraseSheet from '../screens/ImportSeedPhraseSheet';
 import ModalScreen from '../screens/ModalScreen';
@@ -161,6 +162,11 @@ function MainNavigator() {
       <Stack.Screen
         component={AddCashSheet}
         name={Routes.ADD_CASH_SHEET}
+        options={sheetPreset}
+      />
+      <Stack.Screen
+        component={HamburgerSheet}
+        name={Routes.HAMBURGER_SHEET}
         options={sheetPreset}
       />
       <Stack.Screen

@@ -73,7 +73,7 @@ const SheetContainer = styled(Column).attrs({
 const KeyboardSizeView = styled(KeyboardArea)`
   width: 100%;
   background-color: ${({ showAssetForm }) =>
-    showAssetForm ? colors.lighterGrey : colors.white};
+    showAssetForm ? colors.modalBackground : colors.modalBackground};
 `;
 
 export default function SendSheet(props) {
@@ -523,13 +523,12 @@ export default function SendSheet(props) {
             selected={selected}
             sendMaxBalance={sendMaxBalance}
             txSpeedRenderer={
-              isIphoneX() && (
-                <SendTransactionSpeed
-                  gasPrice={selectedGasPrice}
-                  nativeCurrencySymbol={nativeCurrencySymbol}
-                  onPressTransactionSpeed={onPressTransactionSpeed}
-                />
-              )
+              /* TODO: check why android was blocked here */
+              <SendTransactionSpeed
+                gasPrice={selectedGasPrice}
+                nativeCurrencySymbol={nativeCurrencySymbol}
+                onPressTransactionSpeed={onPressTransactionSpeed}
+              />
             }
           />
         )}

@@ -15,23 +15,24 @@ import styled from 'styled-components/primitives';
 import { Button } from '../buttons';
 import { ExchangeInput } from '../exchange';
 import { ColumnWithMargins, Row } from '../layout';
+import { Text } from '../text';
 import { useDimensions } from '@rainbow-me/hooks';
 import { colors, position } from '@rainbow-me/styles';
 
 const Underline = styled.View`
   ${position.cover};
-  background-color: ${colors.blueGreyDark};
+  background-color: ${colors.textColorPrimary};
   opacity: 0.2;
 `;
 
 const UnderlineAnimated = styled(Animated.View)`
   ${position.cover};
-  background-color: ${colors.sendScreen.brightBlue};
+  background-color: ${colors.textColorPrimary};
   left: -100%;
 `;
 
 const UnderlineInput = styled(ExchangeInput).attrs(({ isTinyPhone }) => ({
-  color: colors.dark,
+  color: colors.textColor,
   disableTabularNums: true,
   keyboardAppearance: 'light',
   letterSpacing: 'roundedTightest',
@@ -170,12 +171,12 @@ const UnderlineField = (
         />
         {buttonText && isFocused && (
           <Button
-            backgroundColor={colors.sendScreen.brightBlue}
+            backgroundColor={colors.buttonPrimary}
             onPress={handleButtonPress}
             size="small"
             type="pill"
           >
-            {buttonText}
+            <Text color={colors.textColorPrimaryButton}>{buttonText}</Text>
           </Button>
         )}
       </Row>

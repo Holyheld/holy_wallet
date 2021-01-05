@@ -37,7 +37,7 @@ const EmptyAssetList = ({
         {isWalletEthZero ? (
           <AddFundsInterstitial
             network={network}
-            offsetY={interstitialOffset}
+            offsetY={-interstitialOffset * 0.6}
           />
         ) : (
           <React.Fragment>

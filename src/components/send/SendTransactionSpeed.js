@@ -7,18 +7,18 @@ import { Text } from '../text';
 import { colors } from '@rainbow-me/styles';
 
 const FeeButton = styled(Button).attrs({
-  backgroundColor: colors.white,
-  borderColor: colors.dark,
+  backgroundColor: colors.buttonSecondary,
+  borderColor: colors.transparent,
   borderWidth: 1,
   opacity: 1,
   showShadow: false,
   size: 'small',
-  textProps: { color: colors.alpha(colors.blueGreyDark, 0.6) },
+  textProps: { color: colors.textColorSecondaryButton },
   type: 'pill',
 })``;
 
 const TimeButton = styled(Button).attrs({
-  backgroundColor: colors.blueGreyDark,
+  backgroundColor: colors.buttonTertiary,
   borderWidth: 1,
   scaleTo: 0.96,
   size: 'small',
@@ -41,7 +41,11 @@ export default function SendTransactionSpeed({
     <Row justify="space-between">
       <FeeButton onPress={onPressTransactionSpeed}>Fee: {fee}</FeeButton>
       <TimeButton onPress={onPressTransactionSpeed}>
-        <Text color={colors.white} size="medium" weight="semibold">
+        <Text
+          color={colors.textColorSecondaryButton}
+          size="medium"
+          weight="semibold"
+        >
           􀐫 Arrives in ~ {time}
         </Text>
       </TimeButton>

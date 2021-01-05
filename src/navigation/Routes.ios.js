@@ -10,6 +10,7 @@ import BackupSheet from '../screens/BackupSheet';
 import ChangeWalletSheet from '../screens/ChangeWalletSheet';
 import DepositModal from '../screens/DepositModal';
 import ExpandedAssetSheet from '../screens/ExpandedAssetSheet';
+import HamburgerSheet from '../screens/HamburgerSheet';
 import HolyMigrateModalWrapper from '../screens/HolyMigrateModal';
 import ImportSeedPhraseSheet from '../screens/ImportSeedPhraseSheet';
 import ModalScreen from '../screens/ModalScreen';
@@ -317,6 +318,11 @@ function NativeStackNavigator() {
       <NativeStack.Screen
         component={TreasuryClaimModalWrapper}
         name={Routes.TREASURY_CLAIM_MODAL}
+        options={nativeStackDefaultConfigWithoutStatusBar}
+      />
+      <NativeStack.Screen
+        component={HamburgerSheet}
+        name={Routes.HAMBURGER_SHEET}
         options={nativeStackDefaultConfigWithoutStatusBar}
       />
       <NativeStack.Screen

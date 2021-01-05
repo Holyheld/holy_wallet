@@ -14,6 +14,7 @@ const Routes = {
   EXCHANGE_MODAL: 'ExchangeModal',
   EXPANDED_ASSET_SCREEN: 'ExpandedAssetScreen',
   EXPANDED_ASSET_SHEET: 'ExpandedAssetSheet',
+  HAMBURGER_SHEET: 'HamburgerSheet',
   HOLY_MIGRATE_MODAL: 'HolyMigrateModal',
   IMPORT_SCREEN: 'ImportScreen',
   IMPORT_SEED_PHRASE_SHEET: 'ImportSeedPhraseSheet',

@@ -2,9 +2,9 @@ import React, { Fragment } from 'react';
 import styled from 'styled-components/primitives';
 import { useDimensions } from '../../hooks';
 import supportedNativeCurrencies from '../../references/native-currencies.json';
-import { removeLeadingZeros } from '../../utils/formatters';
 import { Column, ColumnWithMargins } from '../layout';
 import SendAssetFormField from './SendAssetFormField';
+import { removeLeadingZeros } from '@rainbow-me/utils';
 
 const footerMargin = 31;
 const FooterContainer = styled(ColumnWithMargins).attrs(({ deviceHeight }) => ({

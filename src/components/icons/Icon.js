@@ -34,6 +34,7 @@ import EmojiTravelIcon from './svg/EmojiTravelIcon';
 import FaceIdIcon from './svg/FaceIdIcon';
 import FatArrowIcon from './svg/FatArrowIcon';
 import GearIcon from './svg/GearIcon';
+import HamburgerIcon from './svg/HamburgerIcon';
 import HandleIcon from './svg/HandleIcon';
 import HiddenIcon from './svg/HiddenIcon';
 import InboxIcon from './svg/InboxIcon';
@@ -98,6 +99,7 @@ const IconTypes = {
   fatArrow: FatArrowIcon,
   fingerprint: TouchIdIcon,
   gear: GearIcon,
+  hamburger: HamburgerIcon,
   handle: HandleIcon,
   hidden: HiddenIcon,
   inbox: InboxIcon,

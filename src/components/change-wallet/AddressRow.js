@@ -18,7 +18,7 @@ const NOOP = () => undefined;
 
 const sx = StyleSheet.create({
   accountLabel: {
-    color: colors.textColorTitle,
+    color: colors.textColor,
     fontFamily: fonts.family.SFProRounded,
     fontSize: getFontSize(fonts.size.lmedium),
     fontWeight: fonts.weight.medium,
@@ -88,7 +88,7 @@ const OptionsIcon = ({ onPress }) => (
   <ButtonPressAnimation onPress={onPress} scaleTo={0.9}>
     <Centered height={40} width={60}>
       {android ? (
-        <Icon circle color={colors.appleBlue} name="threeDots" tightDots />
+        <Icon circle color={colors.textColor} name="threeDots" tightDots />
       ) : (
         <Text style={sx.editIcon}>􀍡</Text>
       )}

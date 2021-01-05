@@ -49,13 +49,14 @@ const enhanceButton = compose(
 
 const AddButton = enhanceButton(({ onPress }) => (
   <Button
-    backgroundColor={colors.sendScreen.brightBlue}
+    backgroundColor={colors.buttonPrimary}
     onPress={onPress}
     size="small"
     testID="add-contact-button"
     type="pill"
   >
     <FastImage
+      color={colors.textColorPrimaryButton}
       source={AddContactIcon}
       style={{
         height: 14.7,

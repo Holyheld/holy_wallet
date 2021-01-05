@@ -2,8 +2,7 @@ import React, { createElement } from 'react';
 import styled from 'styled-components/primitives';
 import { safeAreaInsetValues } from '../../utils';
 import { FlexItem, RowWithMargins } from '../layout';
-import ExchangeFab from './ExchangeFab';
-import SendFab from './SendFab';
+import HamburgerFab from './HamburgerFab';
 
 export const FabWrapperBottomPosition = 21 + safeAreaInsetValues.bottom;
 
@@ -17,7 +16,7 @@ const FabWrapperRow = styled(RowWithMargins).attrs({ margin: 12 })`
 export default function FabWrapper({
   children,
   disabled,
-  fabs = [ExchangeFab, SendFab],
+  fabs = [HamburgerFab],
   isCoinListEdited,
   isReadOnlyWallet,
   ...props

@@ -5,16 +5,17 @@ import styled from 'styled-components/primitives';
 import networkInfo from '../helpers/networkInfo';
 import networkTypes from '../helpers/networkTypes';
 import showWalletErrorAlert from '../helpers/support';
-import { useDimensions, useWallets } from '../hooks';
+import { useAccountSettings, useDimensions, useWallets } from '../hooks';
 import { magicMemo } from '../utils';
 import Divider from './Divider';
-import { ButtonPressAnimation } from './animations';
+import { ButtonPressAnimation, ScaleButtonZoomableAndroid } from './animations';
 import { Icon } from './icons';
 import { Centered, Row, RowWithMargins } from './layout';
 import { Text } from './text';
 import { useNavigation } from '@rainbow-me/navigation';
 import Routes from '@rainbow-me/routes';
-import { colors, padding } from '@rainbow-me/styles';
+import { colors, padding, position } from '@rainbow-me/styles';
+import ShadowStack from 'react-native-shadow-stack';
 
 const ButtonContainerHeight = 400;
 const ButtonContainerWidth = 261;
@@ -24,14 +25,18 @@ const ButtonContainer = styled(Centered).attrs({ direction: 'column' })`
 `;
 
 const InterstitialButton = styled(ButtonPressAnimation).attrs({
-  backgroundColor: colors.alpha(colors.buttonPrimary, 0.2),
+  backgroundColor: colors.alpha(colors.blueGreyDark, 0.06),
   borderRadius: 23,
 })`
   ${padding(10.5, 15, 14.5)};
 `;
 
+const InterstitialButtonRow = styled(Row)`
+  margin-bottom: ${({ isSmallPhone }) => (isSmallPhone ? 19 : 42)};
+`;
+
 const InterstitialDivider = styled(Divider).attrs({
-  color: colors.divider,
+  color: colors.dividerAlternative,
   inset: [0, 0, 0, 0],
 })`
   border-radius: 1;
@@ -44,6 +49,11 @@ const CopyAddressButton = styled(ButtonPressAnimation).attrs({
   ${padding(10.5, 15, 14.5)};
 `;
 
+const AmountBPA = styled(ButtonPressAnimation)`
+  border-radius: 25px;
+  overflow: visible;
+`;
+
 const Container = styled(Centered)`
   left: 50%;
   position: absolute;
@@ -52,7 +62,7 @@ const Container = styled(Centered)`
 
 const Paragraph = styled(Text).attrs({
   align: 'center',
-  color: colors.textColorMuted,
+  color: colors.textColorParagraph,
   letterSpacing: 'roundedMedium',
   lineHeight: 'paragraphSmall',
   size: 'lmedium',
@@ -75,6 +85,27 @@ const Subtitle = styled(Title)`
   margin-top: ${({ isSmallPhone }) => (isSmallPhone ? 19 : 42)};
 `;
 
+const AmountText = styled(Text).attrs(({ children }) => ({
+  align: 'center',
+  children: android ? `  ${children.join('')}  ` : children,
+  letterSpacing: 'roundedTightest',
+  size: 'bigger',
+  weight: 'heavy',
+}))`
+  ${android ? padding(15, 4.5) : padding(24, 15, 25)};
+  align-self: center;
+  text-shadow: 0px 0px 20px ${({ color }) => color};
+  z-index: 1;
+`;
+
+const AmountButtonWrapper = styled(Row).attrs({
+  justify: 'center',
+  marginLeft: 7.5,
+  marginRight: 7.5,
+})`
+  ${android ? 'width: 100' : ''};
+`;
+
 const buildInterstitialTransform = (isSmallPhone, offsetY) => ({
   transform: [
     { translateX: (ButtonContainerWidth / 2) * -1 },
@@ -92,10 +123,84 @@ const onAddFromFaucet = network => {
   Linking.openURL(faucetUrl);
 };
 
+const shadows = {
+  [colors.swapPurple]: [
+    [0, 5, 15, colors.dark, 0.2],
+    [0, 10, 30, colors.swapPurple, 0.4],
+  ],
+  [colors.purpleDark]: [
+    [0, 5, 15, colors.dark, 0.2],
+    [0, 10, 30, colors.purpleDark, 0.4],
+  ],
+};
+
+const InnerBPA = android ? ButtonPressAnimation : ({ children }) => children;
+
+const Wrapper = android ? ScaleButtonZoomableAndroid : AmountBPA;
+
+const AmountButton = ({ amount, backgroundColor, color, onPress }) => {
+  const handlePress = useCallback(() => onPress?.(amount), [amount, onPress]);
+
+  return (
+    <AmountButtonWrapper>
+      <Wrapper disabled={android} onPress={handlePress}>
+        <ShadowStack
+          {...position.coverAsObject}
+          backgroundColor={backgroundColor}
+          borderRadius={25}
+          shadows={shadows[backgroundColor]}
+          {...(android && {
+            height: 80,
+            width: 100,
+          })}
+        />
+        <InnerBPA
+          onPress={handlePress}
+          reanimatedButton
+          style={{ flex: 1 }}
+          wrapperStyle={{
+            width: 100,
+            zIndex: 10,
+          }}
+        >
+          <AmountText color={color} textShadowColor={color}>
+            ${amount}
+          </AmountText>
+        </InnerBPA>
+      </Wrapper>
+    </AmountButtonWrapper>
+  );
+};
+
 const AddFundsInterstitial = ({ network, offsetY = 0 }) => {
   const { isSmallPhone } = useDimensions();
   const { navigate } = useNavigation();
   const { isDamaged } = useWallets();
+  const { accountAddress } = useAccountSettings();
+
+  const handlePressAmount = useCallback(
+    amount => {
+      if (isDamaged) {
+        showWalletErrorAlert();
+        return;
+      }
+      if (ios) {
+        navigate(Routes.ADD_CASH_FLOW, {
+          params: !isNaN(amount) ? { amount } : null,
+          screen: Routes.ADD_CASH_SCREEN_NAVIGATOR,
+        });
+      } else {
+        navigate(Routes.WYRE_WEBVIEW_NAVIGATOR, {
+          params: {
+            address: accountAddress,
+            amount: !isNaN(amount) ? amount : null,
+          },
+          screen: Routes.WYRE_WEBVIEW,
+        });
+      }
+    },
+    [isDamaged, navigate, accountAddress]
+  );
 
   const handlePressCopyAddress = useCallback(() => {
     if (isDamaged) {
@@ -110,7 +215,50 @@ const AddFundsInterstitial = ({ network, offsetY = 0 }) => {
       <ButtonContainer>
         {network === networkTypes.mainnet ? (
           <Fragment>
-            <Title>Fund your wallet with ETH</Title>
+            <Title>
+              To get started, buy some ETH{ios ? ` with Apple Pay` : ''}
+            </Title>
+            <Row justify="space-between" marginVertical={30}>
+              <AmountButton
+                amount={50}
+                backgroundColor={colors.swapButton}
+                color={colors.neonSkyblue}
+                onPress={handlePressAmount}
+              />
+              <AmountButton
+                amount={100}
+                backgroundColor={colors.swapButton}
+                color={colors.neonSkyblue}
+                onPress={handlePressAmount}
+              />
+              <AmountButton
+                amount={250}
+                backgroundColor={colors.swapButtonSecondary}
+                color={colors.pinkLight}
+                onPress={handlePressAmount}
+              />
+            </Row>
+            <InterstitialButtonRow>
+              <InterstitialButton
+                onPress={handlePressAmount}
+                radiusAndroid={23}
+              >
+                <Text
+                  align="center"
+                  color={colors.textColor}
+                  lineHeight="loose"
+                  size="large"
+                  weight="bold"
+                >
+                  􀍡 Other amount
+                </Text>
+              </InterstitialButton>
+            </InterstitialButtonRow>
+            {!isSmallPhone && <InterstitialDivider />}
+            <Subtitle isSmallPhone={isSmallPhone}>
+              or send ETH to your wallet
+            </Subtitle>
+
             <Paragraph>
               Send from Coinbase or another exchange—or ask a friend!
             </Paragraph>
