@@ -1,9 +1,11 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useCallback } from 'react';
 
 import LinearGradient from 'react-native-linear-gradient';
 import styled from 'styled-components/primitives';
 
+import { useNavigation } from '../../navigation/Navigation';
+import Routes from '../../navigation/routesNames';
 import { ButtonPressAnimation } from '../animations';
 import { CoinIcon } from '../coin-icon';
 import { Centered, Row, RowWithMargins } from '../layout';
@@ -45,9 +47,23 @@ const LPBonusListRowShadowStack = styled(ShadowStack).attrs(
 
 const LPBonusListRow = ({ underlying }) => {
   const { width: deviceWidth } = useDimensions();
+  const { navigate } = useNavigation();
+
+  const BonusBalance = '10.00';
+
+  const onButtonPress = useCallback(() => {
+    navigate(Routes.LP_BONUS_SHEET, {
+      balance: BonusBalance,
+      lifetimeSupplyInterestAccrued: '10',
+    });
+  }, [navigate]);
 
   return (
-    <ButtonPressAnimation onPress={() => {}} overflowMargin={10} scaleTo={0.96}>
+    <ButtonPressAnimation
+      onPress={onButtonPress}
+      overflowMargin={10}
+      scaleTo={0.96}
+    >
       <Centered direction="column" marginBottom={15}>
         <LPBonusListRowShadowStack deviceWidth={deviceWidth}>
           <LPBonusListRowGradient />

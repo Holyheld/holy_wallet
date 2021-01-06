@@ -176,11 +176,13 @@ const withBalanceHolySavingsSection = (holySavings, priceOfEther) => {
   let holySavingsAssets = [];
 
   if (priceOfEther) {
-    holySavingsAssets = map(holySavings, () => {
+    holySavingsAssets = map(holySavings, saving => {
       return {
-        balance: '0',
+        apy: saving.apy,
+        balance: saving.balance,
         underlying: {
-          symbol: 'USD',
+          address: saving.underlying.address,
+          symbol: saving.underlying.symbol,
         },
       };
     });
@@ -189,7 +191,9 @@ const withBalanceHolySavingsSection = (holySavings, priceOfEther) => {
   const section = {
     assets: holySavingsAssets,
     holySavingsContainer: true,
-    totalValue: 0,
+    totalValue: holySavingsAssets
+      .reduce((total, asset) => total + +asset.balance, 0)
+      .toString(),
   };
   return section;
 };
@@ -223,7 +227,7 @@ const withBalanceHolyTreasurySection = (holyTreasury, priceOfEther) => {
   if (priceOfEther) {
     holyTreasuryAssets = map(holyTreasury, () => {
       return {
-        balance: '0',
+        balance: '10',
         underlying: {
           symbol: 'USD',
         },

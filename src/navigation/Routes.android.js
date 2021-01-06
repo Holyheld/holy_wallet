@@ -9,12 +9,13 @@ import ChangeWalletSheet from '../screens/ChangeWalletSheet';
 import DepositModal from '../screens/DepositModal';
 import ExpandedAssetSheet from '../screens/ExpandedAssetSheet';
 import HolyMigrateModalWrapper from '../screens/HolyMigrateModal';
+import HolySavingsSheet from '../screens/HolySavingsSheet';
 import ImportSeedPhraseSheet from '../screens/ImportSeedPhraseSheet';
+import LPBonusSheet from '../screens/LPBonusSheet';
 import ModalScreen from '../screens/ModalScreen';
 import PinAuthenticationScreen from '../screens/PinAuthenticationScreen';
 import ReceiveModal from '../screens/ReceiveModal';
 import RestoreSheet from '../screens/RestoreSheet';
-import SavingsSheet from '../screens/SavingsSheet';
 import SendSheet from '../screens/SendSheet';
 import SettingsModal from '../screens/SettingsModal';
 import TransactionConfirmationScreen from '../screens/TransactionConfirmationScreen';
@@ -174,7 +175,7 @@ function MainNavigator() {
         options={sheetPreset}
       />
       <Stack.Screen
-        component={SavingsSheet}
+        component={HolySavingsSheet}
         name={Routes.SAVINGS_SHEET}
         options={bottomSheetPreset}
       />
@@ -187,6 +188,11 @@ function MainNavigator() {
         component={TreasuryClaimModalWrapper}
         name={Routes.TREASURY_CLAIM_MODAL}
         options={exchangePreset}
+      />
+      <Stack.Screen
+        component={LPBonusSheet}
+        name={Routes.LP_BONUS_SHEET}
+        options={bottomSheetPreset}
       />
       <Stack.Screen
         component={WithdrawModal}

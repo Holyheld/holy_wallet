@@ -25,7 +25,7 @@ const TreasurySheetHeader = ({ balance, lifetimeAccruedInterest }) => (
         size="large"
         weight="semibold"
       >
-        􀁍 {lifetimeAccruedInterest}
+        ${lifetimeAccruedInterest}
       </Text>
     </RowWithMargins>
   </Centered>

@@ -4,7 +4,7 @@ import { Centered, RowWithMargins } from '../layout';
 import { DollarFigure, Text } from '../text';
 import { colors, padding } from '@rainbow-me/styles';
 
-const SavingsSheetHeader = ({ balance, lifetimeAccruedInterest }) => (
+const LPBonusSheetHeader = ({ balance, lifetimeAccruedInterest }) => (
   <Centered css={padding(17, 0, 8)} direction="column">
     <Text
       color={colors.alpha(colors.blueGreyDark, 0.5)}
@@ -13,7 +13,7 @@ const SavingsSheetHeader = ({ balance, lifetimeAccruedInterest }) => (
       uppercase
       weight="semibold"
     >
-      Savings
+      EARLY LP BONUS
     </Text>
     <DollarFigure decimals={2} value={balance} />
     <RowWithMargins align="center" margin={4} marginTop={1}>
@@ -25,15 +25,15 @@ const SavingsSheetHeader = ({ balance, lifetimeAccruedInterest }) => (
         size="large"
         weight="semibold"
       >
-        ${lifetimeAccruedInterest}
+        {lifetimeAccruedInterest}
       </Text>
     </RowWithMargins>
   </Centered>
 );
 
-SavingsSheetHeader.propTypes = {
+LPBonusSheetHeader.propTypes = {
   balance: PropTypes.string,
   lifetimeAccruedInterest: PropTypes.string,
 };
 
-export default SavingsSheetHeader;
+export default LPBonusSheetHeader;

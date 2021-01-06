@@ -10,6 +10,7 @@ import editOptions from './editOptions';
 import explorer from './explorer';
 import fallbackExplorer from './fallbackExplorer';
 import gas from './gas';
+import holy from './holy';
 import imageMetadata from './imageMetadata';
 import keyboardHeight from './keyboardHeight';
 import multicall from './multicall';
@@ -36,6 +37,7 @@ export default combineReducers({
   explorer,
   fallbackExplorer,
   gas,
+  holy,
   imageMetadata,
   keyboardHeight,
   multicall,

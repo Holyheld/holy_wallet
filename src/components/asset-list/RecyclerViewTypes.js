@@ -139,13 +139,13 @@ export const ViewTypes = {
   },
 
   COIN_SAVINGS: {
-    calculateHeight: ({ isOpen, isLast, amountOfRows }) =>
+    calculateHeight: ({ isOpen, isLast }) =>
       isOpen
         ? TokenFamilyHeaderHeight +
           (isLast
             ? ListFooter.height + savingsLastOpenAdditionalHeight
             : savingsOpenAdditionalHeight) +
-          SavingsCoinRowHeight * amountOfRows
+          SavingsCoinRowHeight * 1 // coz we always have only one row here
         : TokenFamilyHeaderHeight +
           (isLast
             ? ListFooter.height + savingsLastClosedAdditionalHeight
@@ -154,7 +154,10 @@ export const ViewTypes = {
     renderComponent: ({ data }) => {
       const { item = {} } = data;
       return (
-        <SavingsListWrapper assets={item.assets} totalValue={item.totalValue} />
+        <SavingsListWrapper
+          savings={item.assets}
+          totalBalance={item.totalValue}
+        />
       );
     },
   },

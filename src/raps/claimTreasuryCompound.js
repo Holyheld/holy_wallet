@@ -18,7 +18,7 @@ const createClaimTreasuryCompoundRap = async ({
 
   // create a deposit rap
   logger.log('[claim treasury] making claim func');
-  const deposit = createNewAction(RapActionTypes.withdrawCompound, {
+  const deposit = createNewAction(RapActionTypes.treasuryClaim, {
     selectedGasPrice,
   });
   actions = concat(actions, deposit);

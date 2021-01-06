@@ -2,8 +2,8 @@ import React, { Fragment } from 'react';
 import styled from 'styled-components/primitives';
 import { ButtonPressAnimation } from '../animations';
 import { Column, FlexItem, Row, RowWithMargins } from '../layout';
+import { APYPill } from '../savings';
 import { Emoji, Text } from '../text';
-import APYPill from '../treasury-bank/APYPill';
 import BalanceText from './BalanceText';
 import CoinName from './CoinName';
 import { colors, padding } from '@rainbow-me/styles';
@@ -56,14 +56,14 @@ const TopRow = ({ balance, symbol }) => (
   <Row align="center" justify="space-between" marginBottom={2}>
     <FlexItem flex={1}>
       <CoinName letterSpacing="roundedMedium" weight="semibold">
-        Treasury Bonus
+        HH
       </CoinName>
     </FlexItem>
     <BalanceText>{balance + ' ' + symbol}</BalanceText>
   </Row>
 );
 
-const TreasuryCoinRow = ({ balance, symbol, share, additionalShare }) => (
+const LPBonusCoinRow = ({ balance, symbol, share, additionalShare }) => (
   <ButtonPressAnimation disabled onPress={() => {}} scaleTo={1.02}>
     <Container>
       <Emoji name="flag_united_states" size={25} />
@@ -83,4 +83,4 @@ const TreasuryCoinRow = ({ balance, symbol, share, additionalShare }) => (
   </ButtonPressAnimation>
 );
 
-export default TreasuryCoinRow;
+export default LPBonusCoinRow;

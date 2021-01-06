@@ -1,7 +1,6 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback } from 'react';
 import { Alert } from 'react-native';
 import styled from 'styled-components/primitives';
-import { calculateAPY } from '../../helpers/savings';
 import { useNavigation } from '../../navigation/Navigation';
 import { magicMemo } from '../../utils';
 import Divider from '../Divider';
@@ -35,16 +34,8 @@ const GradientAPYHeadingText = styled(GradientText).attrs({
   steps: [0, 1],
 })``;
 
-const SavingsSheetEmptyState = ({
-  isReadOnlyWallet,
-  supplyRate,
-  underlying,
-}) => {
+const SavingsSheetEmptyState = ({ isReadOnlyWallet, apy, underlying }) => {
   const { navigate } = useNavigation();
-
-  const apy = useMemo(() => Math.floor(calculateAPY(supplyRate) * 10) / 10, [
-    supplyRate,
-  ]);
 
   const onDeposit = useCallback(() => {
     if (!isReadOnlyWallet) {
