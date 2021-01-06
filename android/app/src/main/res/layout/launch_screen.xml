@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
 >
-    <ImageView 
+
+    <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/launch_screen"
+        android:background="@drawable/gradient"
+        android:contentDescription="@string/holy_logo"
         android:scaleType="center"
-        android:background="@color/primary_dark"
+        android:scaleX="3"
+        android:scaleY="3"
+        android:src="@drawable/launch_screen"
     />
 </RelativeLayout>

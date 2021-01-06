@@ -1,4 +1,5 @@
 <resources>
-    <string name="app_name">Rainbow</string>
+    <string name="app_name">Holy Wallet</string>
     <string moduleConfig="true" name="CodePushDeploymentKey">DeploymentKey</string>
+    <string name="holy_logo">Holy Logo</string>
 </resources>

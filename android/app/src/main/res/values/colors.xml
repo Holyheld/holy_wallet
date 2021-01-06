@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="primary_dark">#010101</color>
+    <color name="gradient_start">#333333</color>
+    <color name="gradient_center">#131313</color>
+    <color name="gradient_end">#272727</color>
 </resources>

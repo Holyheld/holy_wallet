@@ -70,7 +70,7 @@ const TokenSelectionButton = ({
     <Content>
       <Text
         align="center"
-        color={colors.textColor}
+        color={!symbol ? colors.textColorPrimaryButton : colors.textColor}
         size="large"
         testID={testID + '-text'}
         weight="bold"
