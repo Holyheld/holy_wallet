@@ -3,7 +3,7 @@ import { colors } from '../../styles';
 import { TruncatedText } from '../text';
 
 const CoinName = styled(TruncatedText).attrs(
-  ({ color = colors.textColorCoin }) => ({
+  ({ color = colors.textColor }) => ({
     color,
     letterSpacing: 'roundedMedium',
     lineHeight: android ? 'normalTight' : 'normal',

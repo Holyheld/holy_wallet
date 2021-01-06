@@ -75,12 +75,12 @@ const StatusProps = {
 const TransactionStatusBadge = ({ pending, status, title, ...props }) => {
   const isSwapping = status === TransactionStatusTypes.swapping;
 
-  let statusColor = colors.alpha(colors.blueGreyDark, 0.7);
+  let statusColor = colors.textColorMuted;
   if (pending) {
     if (isSwapping) {
       statusColor = colors.swapPurple;
     } else {
-      statusColor = colors.appleBlue;
+      statusColor = colors.textColorPrimary;
     }
   } else if (status === TransactionStatusTypes.swapped) {
     statusColor = colors.swapPurple;
@@ -90,7 +90,7 @@ const TransactionStatusBadge = ({ pending, status, title, ...props }) => {
     <Row align="center" {...props}>
       {pending && (
         <Spinner
-          color={isSwapping ? colors.swapPurple : colors.appleBlue}
+          color={isSwapping ? colors.swapPurple : colors.textColorPrimary}
           size={12}
         />
       )}
