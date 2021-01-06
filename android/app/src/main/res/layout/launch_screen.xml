@@ -11,8 +11,6 @@
         android:background="@drawable/gradient"
         android:contentDescription="@string/holy_logo"
         android:scaleType="center"
-        android:scaleX="3"
-        android:scaleY="3"
         android:src="@drawable/launch_screen"
     />
 </RelativeLayout>
