@@ -30,6 +30,9 @@ export default function useWalletSectionsData() {
 
   const { refetchSavings, shouldRefetchSavings } = useSavingsAccount(true);
 
+  // console.log('uniswap');
+  // console.log(uniswap);
+
   const walletSections = useMemo(() => {
     // TODO: get data from network
     /*let holySavings = [

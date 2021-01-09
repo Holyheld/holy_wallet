@@ -1,0 +1,5 @@
+import HOLY_PASSAGE_ABI from './holy-passage.json';
+
+const HOLY_PASSAGE_ADDRESS = '0x6c183CF22f4E0Ba6Dfa3EbA35Cbf1537B83fbE51';
+
+export { HOLY_PASSAGE_ADDRESS, HOLY_PASSAGE_ABI };

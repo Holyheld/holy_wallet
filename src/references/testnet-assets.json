@@ -2,6 +2,36 @@
   "ropsten": [
     {
       "asset": {
+        "asset_code": "0xe211f0268797Fe96c91247fBF5ea7A902876818E",
+        "coingecko_id": "holy",
+        "decimals": 18,
+        "icon_url": "https://s3.amazonaws.com/icons.assets/DAI_mcd.png",
+        "name": "Holy v1",
+        "price": {
+          "changed_at": 1582562452,
+          "relative_change_24h": 0.8470466197462612,
+          "value": 1
+        },
+        "symbol": "HOLY"
+      }
+    },
+    {
+      "asset": {
+        "asset_code": "0x3B055b3c00E8e27bB84a1E98391443Bff4049129",
+        "coingecko_id": "hh",
+        "decimals": 18,
+        "icon_url": "https://s3.amazonaws.com/icons.assets/DAI_mcd.png",
+        "name": "hh v2",
+        "price": {
+          "changed_at": 1582562452,
+          "relative_change_24h": 0.8470466197462612,
+          "value": 1
+        },
+        "symbol": "HH"
+      }
+    },
+    {
+      "asset": {
         "asset_code": "eth",
         "coingecko_id": "ethereum",
         "decimals": 18,

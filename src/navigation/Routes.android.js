@@ -10,6 +10,7 @@ import DepositModal from '../screens/DepositModal';
 import ExpandedAssetSheet from '../screens/ExpandedAssetSheet';
 import HolyMigrateModalWrapper from '../screens/HolyMigrateModal';
 import HolySavingsSheet from '../screens/HolySavingsSheet';
+import HolySavingsWithdrawModalWrapper from '../screens/HolySavingsWithdrawModal';
 import ImportSeedPhraseSheet from '../screens/ImportSeedPhraseSheet';
 import LPBonusSheet from '../screens/LPBonusSheet';
 import ModalScreen from '../screens/ModalScreen';
@@ -194,6 +195,16 @@ function MainNavigator() {
         name={Routes.LP_BONUS_SHEET}
         options={bottomSheetPreset}
       />
+      <Stack.Screen
+        component={HolySavingsWithdrawModalWrapper}
+        name={Routes.HOLY_SAVINGS_WITHDRAW_MODAL}
+        options={exchangePreset}
+      />
+      {/* <Stack.Screen
+        component={HolySavingsDepositModalWrapper}
+        name={Routes.HOLY_SAVINGS_DEPOSIT_MODAL}
+        options={exchangePreset}
+      /> */}
       <Stack.Screen
         component={WithdrawModal}
         name={Routes.SAVINGS_WITHDRAW_MODAL}

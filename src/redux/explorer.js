@@ -25,7 +25,7 @@ const EXPLORER_DISABLE_FALLBACK = 'explorer/EXPLORER_DISABLE_FALLBACK';
 const EXPLORER_SET_FALLBACK_HANDLER = 'explorer/EXPLORER_SET_FALLBACK_HANDLER';
 
 const TRANSACTIONS_LIMIT = 1000;
-const ZERION_ASSETS_TIMEOUT = 15000; // 15 seconds
+const ZERION_ASSETS_TIMEOUT = 65000; // 15 seconds
 
 const messages = {
   ADDRESS_ASSETS: {
@@ -171,6 +171,9 @@ export const explorerInit = () => async (dispatch, getState) => {
   // Fallback to the testnet data provider
   // if we're not on mainnnet
   if (network !== NetworkTypes.mainnet || forceFallbackProvider) {
+    // console.log(
+    //   '========================forceFallbackProvider======================================'
+    // );
     return dispatch(fallbackExplorerInit());
   }
 
@@ -202,6 +205,9 @@ export const explorerInit = () => async (dispatch, getState) => {
   if (network === NetworkTypes.mainnet) {
     const assetsTimeoutHandler = setTimeout(() => {
       logger.log('😬 Zerion timeout. Falling back!');
+      // console.log(
+      //   '========================ZERION OUT======================================'
+      // );
       dispatch(fallbackExplorerInit());
       dispatch({
         type: EXPLORER_ENABLE_FALLBACK,

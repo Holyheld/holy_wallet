@@ -5,14 +5,14 @@ import SavingsListHeader from './SavingsListHeader';
 import SavingsListRow from './SavingsListRow';
 
 const renderSavingsListRow = (savingItem, totalBalance, allSavings) => {
-  return (
+  return savingItem?.underlying ? (
     <SavingsListRow
       currentSaving={savingItem}
       key={savingItem.underlying.symbol}
       savings={allSavings}
       totalBalance={totalBalance}
     />
-  );
+  ) : null;
 };
 
 export default function SavingsListWrapper({ savings, totalBalance = '0' }) {

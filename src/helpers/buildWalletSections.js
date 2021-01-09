@@ -23,7 +23,7 @@ import {
   buildCoinsList,
   buildUniqueTokenList,
 } from './assets';
-import networkTypes from './networkTypes';
+//import networkTypes from './networkTypes';
 import { add, convertAmountToNativeDisplay } from './utilities';
 import Routes from '@rainbow-me/routes';
 import { ETH_ICON_URL, ethereumUtils } from '@rainbow-me/utils';
@@ -377,17 +377,17 @@ const withBalanceSection = (
 
   let balanceSectionData = [];
 
-  if (networkTypes.mainnet === network) {
-    balanceSectionData.push(holySavings);
-  }
+  //if (networkTypes.mainnet === network) {
+  balanceSectionData.push(holySavings);
+  //}
 
-  if (networkTypes.mainnet === network) {
-    balanceSectionData.push(holyTreasury);
-  }
+  //if (networkTypes.mainnet === network) {
+  balanceSectionData.push(holyTreasury);
+  //}
 
-  if (networkTypes.mainnet === network) {
-    balanceSectionData.push(holyBonus);
-  }
+  //if (networkTypes.mainnet === network) {
+  balanceSectionData.push(holyBonus);
+  //}
 
   balanceSectionData.push(...assets);
 

@@ -47,22 +47,18 @@ const HolySavingsSheet = () => {
 
   const onWithdraw = useCallback(() => {
     if (!isReadOnlyWallet) {
-      navigate(Routes.SAVINGS_WITHDRAW_MODAL, {
-        defaultInputAsset: defaultSaving.underlying,
-        supplyBalanceUnderlying: defaultSaving.supplyBalanceUnderlying,
-
-        totalBalance,
-        underlyingPrice: defaultSaving.supplyBalanceUnderlying,
+      navigate(Routes.HOLY_SAVINGS_WITHDRAW_MODAL, {
+        currentSavings: defaultSaving,
       });
 
-      analytics.track('Navigated to SavingsWithdrawModal', {
-        category: 'savings',
+      analytics.track('Navigated to HolySavingsWithdrawModal', {
+        category: 'holy savings',
         label: defaultSaving.underlying.symbol,
       });
     } else {
       Alert.alert(`You need to import the wallet in order to do this`);
     }
-  }, [totalBalance, isReadOnlyWallet, navigate, defaultSaving]);
+  }, [isReadOnlyWallet, navigate, defaultSaving]);
 
   const onDeposit = useCallback(() => {
     if (!isReadOnlyWallet) {
@@ -137,7 +133,7 @@ const HolySavingsSheet = () => {
                 <HolySavingsCoinRow
                   additionalShare="0.111"
                   apy={savingsItem.apy}
-                  balance={savingsItem.balance}
+                  balance={savingsItem.tokenBalance}
                   symbol={savingsItem.underlying.symbol}
                 />
               </Column>

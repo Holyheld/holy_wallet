@@ -58,13 +58,18 @@ const searchCurrencyList = (searchList, query) => {
   });
 };
 
+export const HolySavingsSelectModalType = {
+  input: 'input',
+  output: 'output',
+};
+
 export default function HolySavingsSelectModal() {
   const isFocused = useIsFocused();
   const prevIsFocused = usePrevious(isFocused);
   const { navigate, dangerouslyGetState } = useNavigation();
   const {
     params: {
-      onSelectCurrency,
+      onSelectSaving,
       restoreFocusOnSwapModal,
       setPointerEvents,
       tabTransitionPosition,
@@ -84,24 +89,16 @@ export default function HolySavingsSelectModal() {
 
   const holySavingsList = useMemo(() => {
     let filteredList = [];
-    if (type === CurrencySelectionTypes.input) {
-      filteredList = headerlessSection(savings);
-      if (searchQueryForSearch) {
-        filteredList = searchCurrencyList(savings, searchQueryForSearch);
-        filteredList = headerlessSection(filteredList);
-      }
-    } else if (type === CurrencySelectionTypes.output) {
-      filteredList = headerlessSection(savings);
-      if (searchQueryForSearch) {
-        filteredList = searchCurrencyList(savings, searchQueryForSearch);
-        filteredList = headerlessSection(filteredList);
-      } else {
-        filteredList = headerlessSection(filteredList);
-      }
+
+    filteredList = headerlessSection(savings);
+    if (searchQueryForSearch) {
+      filteredList = searchCurrencyList(savings, searchQueryForSearch);
+      filteredList = headerlessSection(filteredList);
     }
+
     setIsSearching(false);
     return filteredList;
-  }, [searchQueryForSearch, type, savings]);
+  }, [searchQueryForSearch, savings]);
 
   const [startQueryDebounce, stopQueryDebounce] = useTimeout();
   useEffect(() => {
@@ -118,12 +115,12 @@ export default function HolySavingsSelectModal() {
   const handleSelectAsset = useCallback(
     item => {
       setPointerEvents(false);
-      onSelectCurrency(item);
+      onSelectSaving(item);
       delayNext();
       dangerouslyGetState().index = 1;
       navigate(Routes.MAIN_EXCHANGE_SCREEN);
     },
-    [setPointerEvents, onSelectCurrency, dangerouslyGetState, navigate]
+    [setPointerEvents, onSelectSaving, dangerouslyGetState, navigate]
   );
 
   const itemProps = useMemo(

@@ -19,14 +19,16 @@ export const INITIAL_HOLY_STATE = {
     {
       apy: '1.555',
       balance: '10',
+      tokenBalance: '1',
       underlying: {
-        address: '0x6b175474e89094c44da98b954eedeac495271d0f', // TODO: real address
+        address: '0x6b175474e89094c44da98b954eedeac495271d1f', // TODO: real address
         symbol: 'yUSD',
       },
     },
     {
       apy: '2.95',
       balance: '111',
+      tokenBalance: '1',
       underlying: {
         address: '0x6b175474e89094c44da98b954eedeac495271d0f', // TODO: real address
         symbol: 'yCRV',
@@ -35,6 +37,7 @@ export const INITIAL_HOLY_STATE = {
     {
       apy: '10',
       balance: '55',
+      tokenBalance: '1',
       underlying: {
         address: '0x6b175474e89094c44da98b954eedeac495271d0f', // TODO: real address
         symbol: '3CRV',
