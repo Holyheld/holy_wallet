@@ -1,14 +1,18 @@
 import React, { useMemo } from 'react';
-import { useColorForAsset } from '../../hooks';
+import colors from '../../styles/colors';
 import { magicMemo } from '../../utils';
 import { CoinIcon } from '../coin-icon';
 import { RowWithMargins } from '../layout';
 import TokenInfoValue from './TokenInfoValue';
 
-const TokenInfoBalanceValue = ({ align, asset, ...props }) => {
+const TokenInfoBalanceValue = ({
+  align,
+  asset,
+  color = colors.textColor,
+  ...props
+}) => {
   const { address, balance, shadowColor, symbol, value } = asset;
 
-  const color = useColorForAsset(asset);
   const coinIconShadow = useMemo(() => [[0, 3, 9, shadowColor || color, 0.2]], [
     color,
     shadowColor,

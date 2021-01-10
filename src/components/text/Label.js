@@ -3,7 +3,7 @@ import Text from './Text';
 import { colors } from '@rainbow-me/styles';
 
 const labelStyles = {
-  color: colors.blueGreyDark,
+  color: colors.textColor,
   opacity: 0.6,
   size: 'h5',
   weight: 'semibold',

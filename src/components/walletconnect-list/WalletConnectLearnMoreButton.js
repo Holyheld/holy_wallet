@@ -18,14 +18,18 @@ const WalletConnectLearnMoreButton = ({ onPressLearnMore }) => (
     >
       <Centered direction="column">
         <Text
-          color="paleBlue"
+          color={colors.textColor}
           css={padding(6, 0)}
           size="lmedium"
           weight="semibold"
         >
           Learn More
         </Text>
-        <Divider color={colors.rowDividerLight} inset={false} />
+        <Divider
+          backgroundColor={colors.modalBackground}
+          color={colors.divider}
+          inset={false}
+        />
       </Centered>
     </ButtonPressAnimation>
   </Row>

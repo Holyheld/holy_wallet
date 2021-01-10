@@ -11,6 +11,7 @@ import {
   useResetAccountState,
 } from '../../hooks';
 import { settingsUpdateNetwork } from '../../redux/settings';
+import colors from '../../styles/colors';
 import { RadioList, RadioListItem } from '../radio-list';
 
 const networks = values(networkInfo);
@@ -37,6 +38,7 @@ const NetworkSection = () => {
 
   return (
     <RadioList
+      dividerBackgroundColor={colors.modalBackground}
       extraData={network}
       items={networks.map(({ disabled, name, value }) => ({
         disabled,

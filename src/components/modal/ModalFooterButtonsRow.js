@@ -6,7 +6,7 @@ import { Row } from '../layout';
 import { colors } from '@rainbow-me/styles';
 
 const Container = styled(Row)`
-  border-top-color: ${colors.rowDivider};
+  border-top-color: ${colors.divider};
   border-top-width: 2;
 `;
 

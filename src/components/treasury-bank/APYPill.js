@@ -6,7 +6,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import RadialGradient from 'react-native-radial-gradient';
 import { Centered } from '../layout';
 
-import { GradientText, Text } from '../text';
+import { GradientText } from '../text';
 import { colors, position } from '@rainbow-me/styles';
 
 const sx = StyleSheet.create({
@@ -57,7 +57,8 @@ if (android) {
   textProps.color = colors.green;
 }
 
-const TextComponent = ios ? GradientText : Text;
+// const TextComponent = ios ? GradientText : Text; // TODO investigate why GradientText is ios-only
+const TextComponent = GradientText;
 
 function APYPill({ small, value }) {
   return (

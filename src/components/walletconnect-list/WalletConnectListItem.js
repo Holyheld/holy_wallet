@@ -56,7 +56,7 @@ export default function WalletConnectListItem({ dappIcon, dappName, dappUrl }) {
         flex={1}
       >
         <RequestVendorLogoIcon
-          backgroundColor={colors.white}
+          backgroundColor={colors.textColor}
           dappName={dappName}
           imageUrl={overrideLogo || dappIcon}
           size={VendorLogoIconSize}
@@ -73,7 +73,7 @@ export default function WalletConnectListItem({ dappIcon, dappName, dappUrl }) {
             {isAuthenticated && (
               <Text
                 align="center"
-                color={colors.appleBlue}
+                color={colors.textColor}
                 letterSpacing="roundedMedium"
                 size="lmedium"
                 weight="bold"
@@ -84,7 +84,7 @@ export default function WalletConnectListItem({ dappIcon, dappName, dappUrl }) {
           </Row>
 
           <TruncatedText
-            color={colors.alpha(colors.blueGreyDark, 0.6)}
+            color={colors.textColor}
             size="smedium"
             weight="medium"
           >

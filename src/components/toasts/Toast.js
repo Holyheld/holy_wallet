@@ -45,7 +45,7 @@ export function ToastsContainer({ children }) {
 
 export default function Toast({
   children,
-  color = colors.dark,
+  color = colors.modalBackgroundLighter, // TODO left slightly lighter color here
   distance = 60,
   targetTranslate = 0,
   icon,

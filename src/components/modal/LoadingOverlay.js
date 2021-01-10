@@ -20,7 +20,7 @@ const Container = styled(Centered).attrs({
 
 const Overlay = styled(Centered)`
   ${padding(19, 19, 22)};
-  background-color: ${colors.alpha(colors.blueGreyDark, 0.15)};
+  background-color: ${colors.alpha(colors.buttonPrimary, 0.15)};
   border-radius: ${20};
   overflow: hidden;
 `;
@@ -34,7 +34,7 @@ const OverlayBlur = styled(BlurView).attrs({
 `;
 
 const Title = styled(Text).attrs({
-  color: colors.blueGreyDark,
+  color: colors.textColorPrimary,
   lineHeight: ios ? 'none' : '24px',
   size: 'large',
   weight: 'semibold',
@@ -47,7 +47,7 @@ const LoadingOverlay = ({ title, ...props }) => (
     <Overlay>
       <Centered zIndex={2}>
         {android ? (
-          <Spinner color={colors.blueGreyDark} />
+          <Spinner color={colors.textColorPrimary} />
         ) : (
           <ActivityIndicator />
         )}

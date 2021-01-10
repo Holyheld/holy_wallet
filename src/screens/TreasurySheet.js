@@ -63,14 +63,19 @@ const TreasurySheet = () => {
           />
           <SheetActionButtonRow>
             <SheetActionButton
-              color={colors.dark}
+              color={colors.buttonClaimAndBurn}
               label="Claim & Burn"
               onPress={onWithdraw}
               radiusAndroid={24}
+              textColor={colors.textColorClaimAndBurn}
               weight="bold"
             />
           </SheetActionButtonRow>
-          <Divider color={colors.rowDividerLight} zIndex={0} />
+          <Divider
+            backgroundColor={colors.modalBackground}
+            color={colors.divider}
+            zIndex={0}
+          />
           <Column paddingBottom={9} paddingTop={4}>
             <TreasuryCoinRow
               additionalShare="0.1"
@@ -79,7 +84,11 @@ const TreasurySheet = () => {
               symbol="USD"
             />
           </Column>
-          <Divider color={colors.rowDividerLight} zIndex={0} />
+          <Divider
+            backgroundColor={colors.modalBackground}
+            color={colors.divider}
+            zIndex={0}
+          />
           {/* <SavingsPredictionStepper
               asset={underlying}
               balance={

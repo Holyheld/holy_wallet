@@ -123,7 +123,7 @@ export default function CurrencySelectModal() {
           filteredList.push({
             data: filteredBest,
             title: '􀇻 Rainbow Verified',
-            useGradientText: IS_TESTING === 'true' ? false : true,
+            useGradientText: IS_TESTING !== 'true',
           });
 
         const filteredHighWithoutScams = filterScams(
@@ -149,7 +149,7 @@ export default function CurrencySelectModal() {
           {
             data: concat(favorites, curatedAssets),
             title: '􀇻 Rainbow Verified',
-            useGradientText: IS_TESTING === 'true' ? false : true,
+            useGradientText: IS_TESTING !== 'true',
           },
         ];
       }

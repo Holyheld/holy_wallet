@@ -38,7 +38,7 @@ const TimespanItem = ({ color, isSelected, item, ...props }) => (
 );
 
 const TimespanSelector = ({
-  color = colors.dark,
+  color = colors.textColor,
   defaultIndex = 0,
   reloadChart,
   showMonth,

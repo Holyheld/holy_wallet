@@ -11,14 +11,14 @@ const TagBorderRadius = 12;
 
 const Container = styled(Column)`
   ${padding(8, 10)};
-  background-color: ${colors.white};
+  background-color: ${colors.buttonSecondary};
   border-radius: ${TagBorderRadius};
   text-align: left;
   z-index: 1;
 `;
 
 const OuterBorder = styled(Centered)`
-  border-color: ${colors.alpha(colors.blueGreyDark, 0.06)};
+  border-color: ${colors.buttonSecondary};
   border-radius: ${TagBorderRadius};
   border-width: 1;
   flex: none;
@@ -27,7 +27,7 @@ const OuterBorder = styled(Centered)`
 `;
 
 const Text = styled(TextElement).attrs({
-  color: colors.alpha(colors.blueGreyDark, 0.5),
+  color: colors.textColorSecondaryButton,
   letterSpacing: 'roundedMedium',
   size: 'lmedium',
   weight: 'medium',
@@ -36,7 +36,7 @@ const Text = styled(TextElement).attrs({
 `;
 
 const Title = styled(TextElement).attrs({
-  color: colors.alpha(colors.blueGreyDark, 0.4),
+  color: colors.textColorSecondaryButton,
   letterSpacing: 'roundedMedium',
   size: 'tiny',
   weight: 'semibold',

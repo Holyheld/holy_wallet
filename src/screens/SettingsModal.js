@@ -9,7 +9,7 @@ import ModalHeaderButton from '../components/modal/ModalHeaderButton';
 import {
   CurrencySection,
   // LanguageSection,
-  // NetworkSection,
+  NetworkSection,
   SettingsSection,
 } from '../components/settings-menu';
 import SettingsBackupView from '../components/settings-menu/BackupSection/SettingsBackupView';
@@ -83,11 +83,11 @@ const SettingsPages = {
   //   key: 'LanguageSection',
   //   title: 'Language',
   // },
-  // network: {
-  //   component: NetworkSection,
-  //   key: 'NetworkSection',
-  //   title: 'Network',
-  // },
+  network: {
+    component: NetworkSection,
+    key: 'NetworkSection',
+    title: 'Network',
+  },
 };
 
 const EmptyButtonPlaceholder = styled.View`

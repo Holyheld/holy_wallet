@@ -12,9 +12,9 @@ const ButtonContent = styled(Row).attrs({
 })`
   ${padding(ios ? 5 : 0, 10, 6)};
   ${({ isActive }) =>
-    isActive ? shadow.build(0, 4, 12, colors.appleBlue, 0.4) : ''};
+    isActive ? shadow.build(0, 4, 12, colors.transparent, 0.4) : ''};
   background-color: ${({ isActive }) =>
-    isActive ? colors.appleBlue : colors.alpha(colors.blueGreyDark, 0.06)};
+    isActive ? colors.buttonPrimary : colors.buttonSecondary};
   border-radius: 15;
   height: 30;
 `;
@@ -47,9 +47,13 @@ const CoinDividerEditButton = ({
         <ButtonContent isActive={isActive} style={style}>
           <Text
             align="center"
-            color={isActive ? 'white' : colors.alpha(colors.blueGreyDark, 0.6)}
+            color={
+              isActive
+                ? colors.textColorPrimaryButton
+                : colors.textColorSecondaryButton
+            }
             letterSpacing="roundedTight"
-            opacity={textOpacityAlwaysOn || isActive ? 1 : 0.3333333333}
+            opacity={1}
             size="lmedium"
             weight="bold"
           >

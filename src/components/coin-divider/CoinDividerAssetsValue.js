@@ -12,7 +12,7 @@ const Container = styled(OpacityToggler)`
 
 const ValueText = styled(Text).attrs({
   align: 'right',
-  color: colors.alpha(colors.blueGreyDark, 0.6),
+  color: colors.textColor,
   size: 'lmedium',
 })`
   padding-bottom: 1;

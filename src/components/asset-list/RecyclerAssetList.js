@@ -889,7 +889,6 @@ class RecyclerAssetList extends Component {
               refreshControl: fetchData && this.renderRefreshControl(),
             }}
             style={{
-              backgroundColor: colors.pageBackground,
               flex: 1,
               minHeight: 1,
             }}

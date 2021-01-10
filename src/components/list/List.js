@@ -1,6 +1,7 @@
 import { PropTypes } from 'prop-types';
-import React from 'react';
+import React, { useCallback } from 'react';
 import { FlatList } from 'react-native';
+import colors from '../../styles/colors';
 import ListItem from './ListItem';
 import ListItemDivider from './ListItemDivider';
 
@@ -10,17 +11,36 @@ const getListItemLayout = (data, index) => ({
   offset: ListItem.height * index,
 });
 
-const List = ({ getItemLayout, items, renderItem, ...props }) => (
-  <FlatList
-    ItemSeparatorComponent={ListItemDivider}
-    data={items}
-    getItemLayout={getItemLayout}
-    removeClippedSubviews
-    renderItem={renderItem}
-    scrollEventThrottle={16}
-    {...props}
-  />
-);
+const List = ({
+  getItemLayout,
+  items,
+  renderItem,
+  dividerBackgroundColor = colors.pageBackground,
+  dividerColor = colors.divider,
+  ...props
+}) => {
+  const dividerRenderer = useCallback(
+    () => (
+      <ListItemDivider
+        backgroundColor={dividerBackgroundColor}
+        color={dividerColor}
+      />
+    ),
+    [dividerBackgroundColor, dividerColor]
+  );
+
+  return (
+    <FlatList
+      ItemSeparatorComponent={dividerRenderer}
+      data={items}
+      getItemLayout={getItemLayout}
+      removeClippedSubviews
+      renderItem={renderItem}
+      scrollEventThrottle={16}
+      {...props}
+    />
+  );
+};
 
 List.propTypes = {
   getItemLayout: PropTypes.func.isRequired,

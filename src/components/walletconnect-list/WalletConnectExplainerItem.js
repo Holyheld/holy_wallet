@@ -19,11 +19,7 @@ export default function WalletConnectExplainerItem({
           </TruncatedText>
         </FlexItem>
         <FlexItem marginTop={4}>
-          <Text
-            color={colors.alpha(colors.blueGreyDark, 0.45)}
-            lineHeight="loose"
-            size="smedium"
-          >
+          <Text color={colors.textColor} lineHeight="loose" size="smedium">
             {content}
           </Text>
         </FlexItem>

@@ -5,6 +5,7 @@ import React from 'react';
 import { compose, onlyUpdateForKeys, withHandlers } from 'recompact';
 import { withAccountSettings } from '../../hoc';
 import supportedNativeCurrencies from '../../references/native-currencies.json';
+import colors from '../../styles/colors';
 import { CoinIcon } from '../coin-icon';
 import { RadioList, RadioListItem } from '../radio-list';
 import { Emoji } from '../text';
@@ -42,6 +43,7 @@ CurrencyListItem.propTypes = {
 
 const CurrencySection = ({ nativeCurrency, onSelectCurrency }) => (
   <RadioList
+    dividerBackgroundColor={colors.modalBackground}
     extraData={nativeCurrency}
     items={currencyListItems}
     marginTop={7}

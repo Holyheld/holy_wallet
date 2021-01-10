@@ -22,7 +22,7 @@ import logger from 'logger';
 
 const AuthenticationText = styled(Text).attrs({
   align: 'center',
-  color: 'blueGreyDark',
+  color: colors.textColor,
   size: 'large',
   weight: 'normal',
 })`
@@ -140,7 +140,7 @@ export default function SecretDisplaySection({
           </AuthenticationText>
           <ToggleSecretButton onPress={loadSeed}>
             <BiometricButtonContent
-              color={colors.white}
+              color={colors.textColor}
               showIcon={!seed}
               text={`Show Recovery ${upperFirst(typeLabel)}`}
             />

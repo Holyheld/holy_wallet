@@ -121,11 +121,11 @@ const AddFundsInterstitial = ({ network, offsetY = 0 }) => {
               Request test ETH through the {get(networkInfo[network], 'name')}{' '}
               faucet
             </Title>
-            <Row marginTop={30}>
+            <Row marginBottom={10} marginTop={30}>
               <InterstitialButton onPress={() => onAddFromFaucet(network)}>
                 <Text
                   align="center"
-                  color={colors.alpha(colors.blueGreyDark, 0.6)}
+                  color={colors.textColorPrimary}
                   lineHeight="loose"
                   size="large"
                   weight="bold"

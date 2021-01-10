@@ -12,18 +12,14 @@ const DefaultTransactionConfirmationSection = ({ address, data, value }) => (
     <TransactionRow title={lang.t('wallet.action.to')}>
       <TruncatedAddress
         address={address}
-        color={colors.alpha(colors.blueGreyDark, 0.6)}
+        color={colors.textColor}
         size="lmedium"
         truncationLength={15}
       />
     </TransactionRow>
     {!!value && (
       <TransactionRow title={lang.t('wallet.action.value')}>
-        <Text
-          color={colors.alpha(colors.blueGreyDark, 0.6)}
-          size="lmedium"
-          uppercase
-        >
+        <Text color={colors.textColor} size="lmedium" uppercase>
           {value} ETH
         </Text>
       </TransactionRow>

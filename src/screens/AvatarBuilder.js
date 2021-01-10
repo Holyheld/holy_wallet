@@ -25,7 +25,7 @@ const Container = styled(Column)`
 `;
 
 const SheetContainer = styled(Column)`
-  background-color: ${colors.white};
+  background-color: ${colors.modalBackground};
   border-radius: 20px;
   height: 420px;
   overflow: hidden;

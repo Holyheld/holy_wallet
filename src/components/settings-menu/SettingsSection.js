@@ -18,8 +18,8 @@ import {
 import { Emoji } from '../text';
 import BackupIcon from '@rainbow-me/assets/settingsBackup.png';
 import CurrencyIcon from '@rainbow-me/assets/settingsCurrency.png';
-// import NetworkIcon from '@rainbow-me/assets/settingsNetwork.png';
-// import networkInfo from '@rainbow-me/helpers/networkInfo';
+import NetworkIcon from '@rainbow-me/assets/settingsNetwork.png';
+import networkInfo from '@rainbow-me/helpers/networkInfo';
 import WalletTypes from '@rainbow-me/helpers/walletTypes';
 import {
   useAccountSettings,
@@ -117,13 +117,13 @@ export default function SettingsSection({
   onPressDev,
   onPressIcloudBackup,
   // onPressLanguage,
-  // onPressNetwork,
+  onPressNetwork,
   onPressShowSecret,
 }) {
   const isReviewAvailable = useExperimentalFlag(REVIEW_ANDROID) || ios;
 
   const { wallets } = useWallets();
-  const { /*language,*/ nativeCurrency /*, network*/ } = useAccountSettings();
+  const { /*language,*/ nativeCurrency, network } = useAccountSettings();
   const { isTinyPhone } = useDimensions();
 
   const onSendFeedback = useSendFeedback();
@@ -192,16 +192,16 @@ export default function SettingsSection({
         >
           <ListItemArrowGroup>{nativeCurrency || ''}</ListItemArrowGroup>
         </ListItem>
-        {/*<ListItem*/}
-        {/*  icon={<SettingIcon source={NetworkIcon} />}*/}
-        {/*  label="Network"*/}
-        {/*  onPress={onPressNetwork}*/}
-        {/*  testID="network-section"*/}
-        {/*>*/}
-        {/*  <ListItemArrowGroup>*/}
-        {/*    {networkInfo?.[network]?.name}*/}
-        {/*  </ListItemArrowGroup>*/}
-        {/*</ListItem>*/}
+        <ListItem
+          icon={<SettingIcon source={NetworkIcon} />}
+          label="Network"
+          onPress={onPressNetwork}
+          testID="network-section"
+        >
+          <ListItemArrowGroup>
+            {networkInfo?.[network]?.name}
+          </ListItemArrowGroup>
+        </ListItem>
         {/*<ListItem*/}
         {/*  icon={<SettingIcon source={LanguageIcon} />}*/}
         {/*  label="Language"*/}

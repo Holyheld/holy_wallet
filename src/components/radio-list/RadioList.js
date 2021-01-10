@@ -1,10 +1,13 @@
 import { PropTypes } from 'prop-types';
 import React, { createElement, PureComponent } from 'react';
+import colors from '../../styles/colors';
 import { List } from '../list';
 import RadioListItem from './RadioListItem';
 
 export default class RadioList extends PureComponent {
   static propTypes = {
+    dividerBackgroundColor: PropTypes.string,
+    dividerColor: PropTypes.string,
     items: PropTypes.arrayOf(
       PropTypes.shape({
         value: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
@@ -17,6 +20,8 @@ export default class RadioList extends PureComponent {
   };
 
   static defaultProps = {
+    dividerBackgroundColor: colors.pageBackground,
+    dividerColor: colors.divider,
     renderItem: RadioListItem,
   };
 

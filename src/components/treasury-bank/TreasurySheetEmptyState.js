@@ -21,7 +21,11 @@ const TreasurySheetEmptyState = () => {
     <Centered direction="column" paddingTop={9}>
       <CoinIcon size={50} symbol="USD" />
       <BodyText>You have no treasury to claim.</BodyText>
-      <Divider color={colors.divider} inset={[0, 42]} />
+      <Divider
+        backgroundColor={colors.modalBackground}
+        color={colors.divider}
+        inset={[0, 42]}
+      />
     </Centered>
   );
 };

@@ -8,7 +8,7 @@ import { Monospace } from '../text';
 import { colors, position } from '@rainbow-me/styles';
 
 const FallbackTextColorVariants = {
-  dark: colors.alpha(colors.blueGreyDark, 0.5),
+  dark: colors.textColor,
   light: colors.white,
 };
 

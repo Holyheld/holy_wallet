@@ -27,15 +27,12 @@ const SheetSubtitleCyclerItem = ({ error, selected, subtitle }) => {
     ease,
   });
 
+  // check mix color
   return (
     <Animated.View {...position.coverAsObject} style={{ opacity }}>
       <AnimatedText
         align="center"
-        color={mixColor(
-          textColorAnimation,
-          colors.blueGreyDark50,
-          colors.brightRed
-        )}
+        color={mixColor(textColorAnimation, colors.textColor, colors.brightRed)}
         letterSpacing="uppercase"
         size="smedium"
         uppercase

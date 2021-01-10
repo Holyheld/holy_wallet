@@ -8,7 +8,7 @@ import { Text as UnstyledText } from '../text';
 import { colors } from '@rainbow-me/styles';
 
 const BackArrow = styled(Icon).attrs({
-  color: colors.appleBlue,
+  color: colors.textColor,
   direction: 'left',
   name: 'caret',
 })`
@@ -30,7 +30,7 @@ const Container = styled(Row).attrs(({ side }) => ({
 
 const Text = styled(UnstyledText).attrs({
   align: 'center',
-  color: colors.appleBlue,
+  color: colors.textColor,
   size: 'large',
   weight: 'medium',
 })`

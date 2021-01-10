@@ -24,7 +24,7 @@ const CaretContainer = styled.View`
 
 const CaretIcon = styled(FastImage).attrs({
   source: Caret,
-  tintColor: colors.blueGreyDark,
+  tintColor: colors.textColorSecondaryButton,
 })`
   height: 18;
   width: 8;
@@ -71,6 +71,7 @@ const CoinDividerOpenButton = ({
     <OpacityToggler isVisible={isVisible}>
       <Content height={coinDividerHeight}>
         <RoundButtonSizeToggler
+          color={colors.buttonSecondary}
           endingWidth={28}
           isOpen={isSmallBalancesOpen}
           startingWidth={3}

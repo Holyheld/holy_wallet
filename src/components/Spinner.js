@@ -25,7 +25,7 @@ Spinner.propTypes = {
 };
 
 Spinner.defaultProps = {
-  color: colors.white,
+  color: colors.textColor,
   duration: 1500,
   size: 20,
 };

@@ -12,7 +12,8 @@ import ShadowStack from 'react-native-shadow-stack';
 const CardBorderRadius = 25;
 
 const BackgroundGradient = styled(LinearGradient).attrs({
-  colors: colors.gradients.offWhite,
+  // colors: colors.gradients.offWhite,
+  colors: [colors.transparent, colors.transparent],
   end: { x: 0.5, y: 1 },
   start: { x: 0.5, y: 0 },
 })`

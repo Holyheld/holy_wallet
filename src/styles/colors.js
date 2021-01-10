@@ -16,6 +16,7 @@ let base = {
   borderColor: 'transparent',
   brightRed: '#FF7171', // '255, 113, 113'
   buttonBlue: '#4E99FA',
+  buttonClaimAndBurn: '#FFFFFF',
   buttonDisabled: '#CDCFD4',
   buttonPrimary: '#FFCC00',
   buttonSecondary: '#444444',
@@ -72,6 +73,7 @@ let base = {
   swapPurple: '#575CFF', // '87, 92, 255'
   textColor: '#FFFFFF',
   textColorBlue: '#4E99FA',
+  textColorClaimAndBurn: '#333333',
   textColorCoin: '#FFFFFF',
   textColorDark: '#000000',
   textColorDescription: '#FFFFFF',

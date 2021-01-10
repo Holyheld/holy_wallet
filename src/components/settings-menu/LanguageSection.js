@@ -5,6 +5,7 @@ import React from 'react';
 import { compose, onlyUpdateForKeys, withHandlers } from 'recompact';
 import { withAccountSettings } from '../../hoc';
 import { resources, supportedLanguages } from '../../languages';
+import colors from '../../styles/colors';
 import { RadioList, RadioListItem } from '../radio-list';
 
 // Only show languages that have 'wallet' translations available.
@@ -26,6 +27,7 @@ const renderLanguageListItem = ({ code, language, ...item }) => (
 
 const LanguageSection = ({ language, onSelectLanguage }) => (
   <RadioList
+    dividerBackgroundColor={colors.modalBackground}
     extraData={language}
     items={languageListItems}
     marginTop={7}

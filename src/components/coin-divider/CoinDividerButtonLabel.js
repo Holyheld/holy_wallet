@@ -6,7 +6,7 @@ import { Text } from '../text';
 import { colors } from '@rainbow-me/styles';
 
 const LabelText = styled(Text).attrs({
-  color: colors.alpha(colors.blueGreyDark, 0.6),
+  color: colors.textColorSecondaryButton,
   letterSpacing: 'roundedTight',
   size: 'lmedium',
   weight: 'bold',

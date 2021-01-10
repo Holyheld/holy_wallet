@@ -30,7 +30,7 @@ const sheetHeight =
 
 const SheetContainer = styled(Column)`
   ${borders.buildRadius('top', isNativeStackAvailable ? 0 : 16)};
-  background-color: ${colors.white};
+  background-color: ${colors.modalBackground};
   height: ${isNativeStackAvailable ? deviceHeight : sheetHeight};
   top: ${isNativeStackAvailable ? 0 : statusBarHeight};
   width: 100%;

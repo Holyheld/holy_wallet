@@ -13,7 +13,7 @@ const Container = styled(Row).attrs({
   shrink: 0,
 })`
   ${borders.buildRadius('top', 20)};
-  background-color: ${colors.white};
+  background-color: ${colors.modalHeader};
   height: ${ModalHeaderHeight};
   width: 100%;
 `;

@@ -8,8 +8,8 @@ import { borders, colors } from '@rainbow-me/styles';
 import ShadowStack from 'react-native-shadow-stack';
 
 const shadows = [
-  [0, 4, android ? 1 : 6, colors.dark, 0.04],
-  [0, 1, 3, colors.dark, 0.08],
+  [0, 4, android ? 1 : 6, colors.transparent, 0.04],
+  [0, 1, 3, colors.transparent, 0.08],
 ];
 
 const TrophyEmoji = styled(Emoji).attrs({
@@ -38,7 +38,7 @@ const TokenFamilyHeaderIcon = ({
   ) : (
     <ShadowStack
       {...circleStyle}
-      backgroundColor={familyImage ? colors.white : colors.purpleLight}
+      backgroundColor={familyImage ? colors.white : colors.purpleLight} // TODO check, investigate why we need backgroundColor here
       shadows={shadows}
       style={style}
     >

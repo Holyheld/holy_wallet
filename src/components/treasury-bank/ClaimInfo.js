@@ -8,6 +8,7 @@ import {
   useTimingTransition,
 } from 'react-native-redash';
 import styled from 'styled-components/primitives';
+import colors from '../../styles/colors';
 import { interpolate } from '../animations';
 import { Centered } from '../layout';
 import { Text } from '../text';
@@ -76,10 +77,10 @@ const ClaimInfo = ({ asset, amount }) => {
       testID="swap-info"
     >
       <Container>
-        <Text color="grey" size="smedium" weight="medium">
+        <Text color={colors.textColorMuted} size="smedium" weight="medium">
           Exiting for{' '}
         </Text>
-        <Text color="white" size="smedium" weight="semibold">
+        <Text color={colors.textColor} size="smedium" weight="semibold">
           {`${amountToDisplay}  ${symbol}`}
         </Text>
       </Container>

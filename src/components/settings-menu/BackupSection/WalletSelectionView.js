@@ -254,7 +254,7 @@ const WalletSelectionView = () => {
           <ButtonPressAnimation onPress={manageCloudBackups}>
             <Text
               align="center"
-              color={colors.alpha(colors.blueGreyDark, 0.6)}
+              color={colors.textColor}
               letterSpacing="roundedMedium"
               size="lmedium"
               weight="semibold"

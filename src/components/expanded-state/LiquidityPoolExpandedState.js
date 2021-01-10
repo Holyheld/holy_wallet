@@ -75,7 +75,7 @@ const LiquidityPoolExpandedState = ({ asset }) => {
                 key={`tokeninfo-${tokenAsset.symbol}`}
                 title={`${tokenAsset.symbol} balance`}
               >
-                <TokenInfoBalanceValue />
+                <TokenInfoBalanceValue color={color} />
               </TokenInfoItem>
             );
           })}

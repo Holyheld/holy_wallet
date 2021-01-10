@@ -17,7 +17,7 @@ const Container = styled(Row)`
 `;
 const MessageWrapper = styled(ScrollView)`
   ${padding(12, 15)}
-  border-color: ${colors.alpha(colors.blueGreyDark, 0.08)};
+  border-color: ${colors.textColor};
   border-radius: 20;
   border-width: 1;
   margin-bottom: 14;
@@ -41,7 +41,7 @@ const TransactionMessage = ({ maxHeight = 150, message, method }) => {
   return (
     <Container maxHeight={maximumHeight} minHeight={minimumHeight}>
       <MessageWrapper>
-        <Text color={colors.alpha(colors.blueGreyDark, 0.6)} size="lmedium">
+        <Text color={colors.textColor} size="lmedium">
           {msg}
         </Text>
       </MessageWrapper>
