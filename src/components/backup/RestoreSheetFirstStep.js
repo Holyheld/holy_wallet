@@ -130,7 +130,11 @@ export default function RestoreSheetFirstStep({
               </DescriptionText>
             </Column>
           </SheetRow>
-          <Divider color={colors.rowDividerExtraLight} inset={[0, 30]} />
+          <Divider
+            backgroundColor={colors.modalBackground}
+            color={colors.divider}
+            inset={[0, 30]}
+          />
         </React.Fragment>
       )}
       <SheetRow
@@ -150,7 +154,11 @@ export default function RestoreSheetFirstStep({
           </DescriptionText>
         </Column>
       </SheetRow>
-      <Divider color={colors.rowDividerExtraLight} inset={[0, 30]} />
+      <Divider
+        backgroundColor={colors.modalBackground}
+        color={colors.divider}
+        inset={[0, 30]}
+      />
 
       <SheetRow
         as={ButtonPressAnimation}

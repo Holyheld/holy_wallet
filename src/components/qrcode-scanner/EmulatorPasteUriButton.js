@@ -25,8 +25,8 @@ export default function EmulatorPasteUriButton() {
 
   return isEmulator ? (
     <Button
-      backgroundColor={colors.white}
-      color={colors.sendScreen.brightBlue}
+      backgroundColor={colors.textColorSecondaryButton}
+      color={colors.buttonSecondary}
       onPress={handlePressPasteSessionUri}
       size="small"
       type="pill"

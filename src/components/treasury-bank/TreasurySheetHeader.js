@@ -7,7 +7,7 @@ import { colors, padding } from '@rainbow-me/styles';
 const TreasurySheetHeader = ({ balance, lifetimeAccruedInterest }) => (
   <Centered css={padding(17, 0, 8)} direction="column">
     <Text
-      color={colors.textColorTitle}
+      color={colors.textColorMuted}
       letterSpacing="uppercase"
       size="smedium"
       uppercase

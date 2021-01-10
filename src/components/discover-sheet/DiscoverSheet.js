@@ -1,9 +1,10 @@
 import { useIsFocused } from '@react-navigation/native';
 import React, { useMemo, useRef } from 'react';
-import { findNodeHandle, NativeModules, View } from 'react-native';
+import { findNodeHandle, NativeModules, StyleSheet, View } from 'react-native';
 import { useSafeArea } from 'react-native-safe-area-context';
 // eslint-disable-next-line import/no-unresolved
 import SlackBottomSheet from 'react-native-slack-bottom-sheet';
+import colors from '../../styles/colors';
 import DiscoverSheetContent from './DiscoverSheetContent';
 import DiscoverSheetContext from './DiscoverSheetContext';
 import { deviceUtils } from '@rainbow-me/utils';
@@ -22,7 +23,7 @@ function DiscoverSheetAndroid() {
       style={[
         StyleSheet.absoluteFillObject,
         {
-          backgroundColor: 'white',
+          backgroundColor: colors.modalBackground,
           bottom: 0,
           top: 100,
         },

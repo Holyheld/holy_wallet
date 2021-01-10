@@ -157,9 +157,13 @@ export default function NavigationList({
     ]
   );
 
-  const rowsLength = useMemo(() => {
-    return rows.reduce((prev, item) => (item.isVisible ? prev + 1 : prev), 0);
+  const rowsToRender = useMemo(() => {
+    return rows.filter(r => !r.disabled && r.isVisible);
   }, [rows]);
+
+  const rowsLength = useMemo(() => {
+    return rowsToRender.length;
+  }, [rowsToRender]);
 
   const listHeight =
     (rowHeight + (showDividers ? 2 : 0)) * rowsLength + listPaddingBottom;
@@ -179,7 +183,7 @@ export default function NavigationList({
   return (
     <Container height={listHeight}>
       <NavigationFlatList
-        data={rows}
+        data={rowsToRender}
         initialNumToRender={rowsLength}
         renderItem={renderItem}
         scrollEnabled={scrollEnabled}

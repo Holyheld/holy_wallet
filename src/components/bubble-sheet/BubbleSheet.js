@@ -7,8 +7,8 @@ import { colors, shadow } from '@rainbow-me/styles';
 export const BubbleSheetBorderRadius = 30;
 
 const Container = styled(Column)`
-  ${shadow.build(0, 10, 50, colors.black, 0.6)}
-  background-color: ${colors.white};
+  ${shadow.build(0, 10, 50, colors.transparent, 0.6)}
+  background-color: ${colors.modalBackground};
   border-radius: ${BubbleSheetBorderRadius};
   bottom: ${({ bottom }) => (bottom ? 21 : 0)};
   flex-grow: 0;

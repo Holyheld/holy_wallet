@@ -115,7 +115,7 @@ export default function QRScannerScreen() {
         )}
         <ScannerHeader>
           <BackButton
-            color={colors.white}
+            color={colors.textColor}
             direction="left"
             onPress={handlePressBackButton}
             testID="goToBalancesFromScanner"
