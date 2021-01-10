@@ -13,13 +13,17 @@ export const holyUpdateSavings = savings => dispatch => {
   });
 };
 
-// -- Reducer --------------------------------------------------------------- //
-export const INITIAL_HOLY_STATE = {
-  savingsTokens: [
+export const holySavingsRefreshState = () => async dispatch => {
+  // request to smart contract here
+  const savings = [
     {
       apy: '1.555',
       balance: '10',
-      tokenBalance: '1',
+      native: {
+        price: {
+          amount: '1',
+        },
+      },
       underlying: {
         address: '0x6b175474e89094c44da98b954eedeac495271d1f', // TODO: real address
         symbol: 'yUSD',
@@ -27,19 +31,74 @@ export const INITIAL_HOLY_STATE = {
     },
     {
       apy: '2.95',
-      balance: '111',
-      tokenBalance: '1',
+      balance: '22',
+      native: {
+        price: {
+          amount: '1',
+        },
+      },
       underlying: {
-        address: '0x6b175474e89094c44da98b954eedeac495271d0f', // TODO: real address
+        address: '0x6b175474e89094c44da98b954eedeac495271d2f', // TODO: real address
         symbol: 'yCRV',
       },
     },
     {
       apy: '10',
-      balance: '55',
-      tokenBalance: '1',
+      balance: '33',
+      native: {
+        price: {
+          amount: '1',
+        },
+      },
       underlying: {
-        address: '0x6b175474e89094c44da98b954eedeac495271d0f', // TODO: real address
+        address: '0x6b175474e89094c44da98b954eedeac495271d3f', // TODO: real address
+        symbol: '3CRV',
+      },
+    },
+  ];
+
+  dispatch(holyUpdateSavings(savings));
+};
+
+// -- Reducer --------------------------------------------------------------- //
+export const INITIAL_HOLY_STATE = {
+  savingsTokens: [
+    {
+      apy: '1.555',
+      balance: '0',
+      native: {
+        price: {
+          amount: '0',
+        },
+      },
+      underlying: {
+        address: '0x6b175474e89094c44da98b954eedeac495271d1f', // TODO: real address
+        symbol: 'yUSD',
+      },
+    },
+    {
+      apy: '2.95',
+      balance: '0',
+      native: {
+        price: {
+          amount: '0',
+        },
+      },
+      underlying: {
+        address: '0x6b175474e89094c44da98b954eedeac495271d2f', // TODO: real address
+        symbol: 'yCRV',
+      },
+    },
+    {
+      apy: '10',
+      balance: '0',
+      native: {
+        price: {
+          amount: '0',
+        },
+      },
+      underlying: {
+        address: '0x6b175474e89094c44da98b954eedeac495271d3f', // TODO: real address
         symbol: '3CRV',
       },
     },
@@ -52,7 +111,7 @@ export default (state = INITIAL_HOLY_STATE, action) =>
       case HOLY_CLEAR_STATE:
         return INITIAL_HOLY_STATE;
       case HOLY_UPDATE_SAVINGS:
-        draft.savings = action.payload;
+        draft.savingsTokens = action.payload;
         break;
       default:
         break;

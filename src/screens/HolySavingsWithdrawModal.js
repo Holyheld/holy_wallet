@@ -17,14 +17,17 @@ import {
   ConfirmExchangeButton,
   ExchangeInputField,
   ExchangeModalHeader,
+  ExchangeOutputField,
   SlippageWarning,
 } from '../components/exchange';
 import { FloatingPanel, FloatingPanels } from '../components/floating-panels';
 import { GasSpeedButton } from '../components/gas';
 import { Centered, KeyboardFixedOpenLayout } from '../components/layout';
 import exchangeModalTypes from '../helpers/exchangeModalTypes';
-import useSavingsWithBalanceWithSelections from '../hooks/useHolySavings';
+import useSavingsForWithdraw from '../hooks/useHolySavings';
+import useHolyWithdrawInputs from '../hooks/useHolyWithdrawInputs';
 import { loadWallet } from '../model/wallet';
+import { ExchangeNavigatorFactory } from '../navigation/ExchangeModalNavigator';
 import { useNavigation } from '../navigation/Navigation';
 import useStatusBarManaging from '../navigation/useStatusBarManaging';
 import { executeRap } from '../raps/common';
@@ -37,30 +40,30 @@ import {
   useBlockPolling,
   useGas,
   useSwapInputRefs,
-  useSwapInputs,
+  useUniswapCurrencies,
 } from '@rainbow-me/hooks';
 import Routes from '@rainbow-me/routes';
 import { colors, position } from '@rainbow-me/styles';
-import { backgroundTask } from '@rainbow-me/utils';
+import { backgroundTask, isNewValueForPath } from '@rainbow-me/utils';
 
 import logger from 'logger';
 
 const AnimatedFloatingPanels = Animated.createAnimatedComponent(FloatingPanels);
 const Wrapper = ios ? KeyboardFixedOpenLayout : Fragment;
 
-const HolySavingsWithdrawModalWrapper = () => {
+const HolySavingsWithdrawModalWrapper = ({ navigation, ...props }) => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   android && useStatusBarManaging();
   const { params } = useRoute();
-  const savings = params?.savings;
-  const currentSavings = params?.currentSavings;
+  const currentSaving = params?.currentSaving;
 
   const testID = params?.testID;
   return (
     <HolySavingsWithdraModal
-      currentSavings={currentSavings}
-      savings={savings}
+      currentSaving={currentSaving}
+      navigation={navigation}
       testID={testID}
+      {...props}
     />
   );
 };
@@ -75,8 +78,6 @@ const HolySavingsWithdraModal = ({ currentSaving, testID }) => {
   const {
     params: { tabTransitionPosition },
   } = useRoute();
-
-  const maxInputBalance = currentSaving.balance;
 
   const defaultGasLimit = 10000;
 
@@ -98,9 +99,17 @@ const HolySavingsWithdraModal = ({ currentSaving, testID }) => {
   // );
 
   const {
-    inputCurrency,
+    inputSaving,
     navigateToSelectInputSaving,
-  } = useSavingsWithBalanceWithSelections({
+    navigateToSelectOutputCurrency,
+    outputCurrency,
+    previousInputSaving,
+  } = useSavingsForWithdraw({
+    defaultInputSaving: currentSaving,
+    inputHeaderTitle: 'choose saving',
+  });
+
+  useUniswapCurrencies({
     defaultInputSaving: currentSaving,
     inputHeaderTitle: 'choose saving',
   });
@@ -121,6 +130,7 @@ const HolySavingsWithdraModal = ({ currentSaving, testID }) => {
 
   const [isAuthorizing, setIsAuthorizing] = useState(false);
   const [slippage] = useState(null);
+  const [maxInputBalance, setMaxInputBalance] = useState(0);
 
   useAndroidBackHandler(() => {
     navigate(Routes.WALLET_SCREEN);
@@ -132,8 +142,9 @@ const HolySavingsWithdraModal = ({ currentSaving, testID }) => {
     inputFieldRef,
     lastFocusedInputHandle,
     nativeFieldRef,
+    outputFieldRef,
   } = useSwapInputRefs({
-    inputCurrency: inputCurrency,
+    inputCurrency: inputSaving,
   });
 
   const {
@@ -144,16 +155,15 @@ const HolySavingsWithdraModal = ({ currentSaving, testID }) => {
     isSufficientBalance,
     nativeAmount,
     // outputAmount,
-    // outputAmountDisplay,
+    outputAmountDisplay,
     // setIsSufficientBalance,
     updateInputAmount,
     updateNativeAmount,
-    // updateOutputAmount,
-  } = useSwapInputs({
-    inputCurrency,
-    maxInputBalance,
-    nativeFieldRef,
-    supplyBalanceUnderlying: currentSaving.balance,
+    updateOutputAmount,
+  } = useHolyWithdrawInputs({
+    inputSaving,
+    maxInputBalance: maxInputBalance,
+    outputCurrency,
   });
 
   const isDismissing = useRef(false);
@@ -199,6 +209,31 @@ const HolySavingsWithdraModal = ({ currentSaving, testID }) => {
   useEffect(() => {
     updateGasLimit();
   }, [updateGasLimit]);
+
+  const clearForm = useCallback(() => {
+    logger.log('[exchange] - clear form');
+    inputFieldRef?.current?.clear();
+    nativeFieldRef?.current?.clear();
+    outputFieldRef?.current?.clear();
+    updateInputAmount();
+    setMaxInputBalance(0);
+  }, [
+    inputFieldRef,
+    nativeFieldRef,
+    outputFieldRef,
+    updateInputAmount,
+    setMaxInputBalance,
+  ]);
+
+  // Clear form and reset max input balance on new input currency
+  useEffect(() => {
+    if (
+      isNewValueForPath(inputSaving, previousInputSaving, 'underlying.address')
+    ) {
+      clearForm();
+      setMaxInputBalance(inputSaving.balance);
+    }
+  }, [clearForm, inputSaving, previousInputSaving, setMaxInputBalance]);
 
   useEffect(() => {
     return () => {
@@ -255,7 +290,7 @@ const HolySavingsWithdraModal = ({ currentSaving, testID }) => {
         const rap = await createRap({
           callback,
           inputAmount,
-          inputCurrency,
+          inputSaving,
           isMax,
           selectedGasPrice,
         });
@@ -277,7 +312,7 @@ const HolySavingsWithdraModal = ({ currentSaving, testID }) => {
     setParams,
     navigate,
     isMax,
-    inputCurrency,
+    inputSaving,
   ]);
 
   return (
@@ -336,8 +371,12 @@ const HolySavingsWithdraModal = ({ currentSaving, testID }) => {
             />
             <ExchangeInputField
               inputAmount={inputAmount}
-              inputCurrencyAddress={get(inputCurrency, 'address', null)}
-              inputCurrencySymbol={get(inputCurrency, 'symbol', null)}
+              inputCurrencyAddress={get(
+                inputSaving,
+                'underlying.address',
+                null
+              )}
+              inputCurrencySymbol={get(inputSaving, 'underlying.symbol', null)}
               inputFieldRef={inputFieldRef}
               nativeAmount={nativeAmount}
               nativeCurrency={nativeCurrency}
@@ -348,6 +387,16 @@ const HolySavingsWithdraModal = ({ currentSaving, testID }) => {
               setInputAmount={updateInputAmount}
               setNativeAmount={updateNativeAmount}
               testID={testID + '-input'}
+            />
+            <ExchangeOutputField
+              onFocus={handleFocus}
+              onPressSelectOutputCurrency={navigateToSelectOutputCurrency}
+              outputAmount={outputAmountDisplay}
+              outputCurrencyAddress={get(outputCurrency, 'address', null)}
+              outputCurrencySymbol={get(outputCurrency, 'symbol', null)}
+              outputFieldRef={outputFieldRef}
+              setOutputAmount={updateOutputAmount}
+              testID={testID + '-output'}
             />
           </FloatingPanel>
 
@@ -387,4 +436,4 @@ const HolySavingsWithdraModal = ({ currentSaving, testID }) => {
   );
 };
 
-export default HolySavingsWithdrawModalWrapper;
+export default ExchangeNavigatorFactory(HolySavingsWithdrawModalWrapper);

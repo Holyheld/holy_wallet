@@ -10,7 +10,7 @@ import DepositModal from '../screens/DepositModal';
 import ExpandedAssetSheet from '../screens/ExpandedAssetSheet';
 import HolyMigrateModalWrapper from '../screens/HolyMigrateModal';
 import HolySavingsSheet from '../screens/HolySavingsSheet';
-import HolySavingsWithdrawModalWrapper from '../screens/HolySavingsWithdrawModal';
+import HolySavingsWithdrawModal from '../screens/HolySavingsWithdrawModal';
 import ImportSeedPhraseSheet from '../screens/ImportSeedPhraseSheet';
 import LPBonusSheet from '../screens/LPBonusSheet';
 import ModalScreen from '../screens/ModalScreen';
@@ -196,7 +196,7 @@ function MainNavigator() {
         options={bottomSheetPreset}
       />
       <Stack.Screen
-        component={HolySavingsWithdrawModalWrapper}
+        component={HolySavingsWithdrawModal}
         name={Routes.HOLY_SAVINGS_WITHDRAW_MODAL}
         options={exchangePreset}
       />

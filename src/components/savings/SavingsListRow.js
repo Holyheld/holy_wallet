@@ -1,7 +1,7 @@
 import analytics from '@segment/analytics-react-native';
 import PropTypes from 'prop-types';
 
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { InteractionManager } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import styled from 'styled-components/primitives';
@@ -13,7 +13,6 @@ import { Centered, Row, RowWithMargins } from '../layout';
 import { Emoji, Text } from '../text';
 import APYPill from './APYPill';
 import SavingsListRowEmptyState from './SavingsListRowEmptyState';
-import { formatSavingsAmount } from '@rainbow-me/helpers/savings';
 import { useDimensions } from '@rainbow-me/hooks';
 import { colors, padding, position } from '@rainbow-me/styles';
 import ShadowStack from 'react-native-shadow-stack';
@@ -54,9 +53,6 @@ const SavingsListRow = ({ totalBalance, currentSaving, savings }) => {
   const { width: deviceWidth } = useDimensions();
   const { navigate } = useNavigation();
 
-  const initialValue = totalBalance;
-  const [value] = useState(initialValue);
-
   const onButtonPress = useCallback(() => {
     navigate(Routes.SAVINGS_SHEET, {
       currentSaving: currentSaving,
@@ -64,7 +60,7 @@ const SavingsListRow = ({ totalBalance, currentSaving, savings }) => {
       savings: savings,
       totalBalance: totalBalance,
     });
-  }, []);
+  }, [currentSaving, navigate, savings, totalBalance]);
 
   useEffect(() => {
     if (
@@ -80,7 +76,7 @@ const SavingsListRow = ({ totalBalance, currentSaving, savings }) => {
       });
   }, [currentSaving]);
 
-  const displayValue = formatSavingsAmount(value);
+  const displayValue = parseFloat(totalBalance).toFixed(2);
 
   return (
     <ButtonPressAnimation
@@ -101,7 +97,7 @@ const SavingsListRow = ({ totalBalance, currentSaving, savings }) => {
             <Centered>
               <Emoji lineHeight="none" name="flag_united_states" size={20} />
             </Centered>
-            {!isNaN(displayValue) ? (
+            {!isNaN(displayValue) && totalBalance !== '0' ? (
               <RowWithMargins align="center" margin={8} paddingLeft={4}>
                 <Text
                   color={colors.blueGreyDark}
@@ -110,7 +106,7 @@ const SavingsListRow = ({ totalBalance, currentSaving, savings }) => {
                   size="lmedium"
                   weight="bold"
                 >
-                  {`$${totalBalance}`}
+                  {`$${displayValue}`}
                 </Text>
               </RowWithMargins>
             ) : (

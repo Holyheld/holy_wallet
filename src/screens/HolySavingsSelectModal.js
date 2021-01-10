@@ -1,14 +1,5 @@
 import { useIsFocused, useRoute } from '@react-navigation/native';
-import { toLower } from 'lodash';
-import matchSorter from 'match-sorter';
-import React, {
-  Fragment,
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
+import React, { Fragment, useCallback, useEffect, useMemo } from 'react';
 import { StatusBar } from 'react-native';
 import Animated, { Extrapolate } from 'react-native-reanimated';
 import styled from 'styled-components/primitives';
@@ -17,24 +8,16 @@ import { interpolate } from '../components/animations';
 import {
   CurrencySelectionList,
   CurrencySelectModalHeader,
-  ExchangeSearch,
 } from '../components/exchange';
 import { Column, KeyboardFixedOpenLayout } from '../components/layout';
 import { Modal } from '../components/modal';
-import { addHexPrefix } from '../handlers/web3';
 import CurrencySelectionTypes from '../helpers/currencySelectionTypes';
 import { useHolySavingsWithBalance } from '../hooks/useHolySavings';
 import { delayNext } from '../hooks/useMagicAutofocus';
 import { useNavigation } from '../navigation/Navigation';
-import {
-  useInteraction,
-  useMagicAutofocus,
-  usePrevious,
-  useTimeout,
-} from '@rainbow-me/hooks';
+import { useInteraction, usePrevious } from '@rainbow-me/hooks';
 import Routes from '@rainbow-me/routes';
 import { position } from '@rainbow-me/styles';
-import { filterList } from '@rainbow-me/utils';
 
 const TabTransitionAnimation = styled(Animated.View)`
   ${position.size('100%')};
@@ -42,21 +25,6 @@ const TabTransitionAnimation = styled(Animated.View)`
 
 const headerlessSection = data => [{ data, title: '' }];
 const Wrapper = ios ? KeyboardFixedOpenLayout : Fragment;
-
-const searchCurrencyList = (searchList, query) => {
-  const isAddress = query.match(/^(0x)?[0-9a-fA-F]{40}$/);
-
-  if (isAddress) {
-    const formattedQuery = toLower(addHexPrefix(query));
-    return filterList(searchList, formattedQuery, ['address'], {
-      threshold: matchSorter.rankings.CASE_SENSITIVE_EQUAL,
-    });
-  }
-
-  return filterList(searchList, query, ['symbol', 'name'], {
-    threshold: matchSorter.rankings.CONTAINS,
-  });
-};
 
 export const HolySavingsSelectModalType = {
   input: 'input',
@@ -78,39 +46,14 @@ export default function HolySavingsSelectModal() {
     },
   } = useRoute();
 
-  const searchInputRef = useRef();
-  const { handleFocus } = useMagicAutofocus(searchInputRef, undefined, true);
-
-  const [searchQuery, setSearchQuery] = useState('');
-  const [isSearching, setIsSearching] = useState(false);
-  const [searchQueryForSearch, setSearchQueryForSearch] = useState('');
-
   const savings = useHolySavingsWithBalance();
 
   const holySavingsList = useMemo(() => {
     let filteredList = [];
 
     filteredList = headerlessSection(savings);
-    if (searchQueryForSearch) {
-      filteredList = searchCurrencyList(savings, searchQueryForSearch);
-      filteredList = headerlessSection(filteredList);
-    }
-
-    setIsSearching(false);
     return filteredList;
-  }, [searchQueryForSearch, savings]);
-
-  const [startQueryDebounce, stopQueryDebounce] = useTimeout();
-  useEffect(() => {
-    stopQueryDebounce();
-    startQueryDebounce(
-      () => {
-        setIsSearching(true);
-        setSearchQueryForSearch(searchQuery);
-      },
-      searchQuery === '' ? 1 : 250
-    );
-  }, [searchQuery, startQueryDebounce, stopQueryDebounce]);
+  }, [savings]);
 
   const handleSelectAsset = useCallback(
     item => {
@@ -144,7 +87,6 @@ export default function HolySavingsSelectModal() {
 
     // on page blur
     if (!isFocused && prevIsFocused) {
-      setSearchQuery('');
       restoreFocusOnSwapModal?.();
     }
   }, [
@@ -192,21 +134,12 @@ export default function HolySavingsSelectModal() {
           <GestureBlocker type="top" />
           <Column flex={1}>
             <CurrencySelectModalHeader testID="currency-select-header" />
-            <ExchangeSearch
-              isFetching={false}
-              isSearching={isSearching}
-              onChangeText={setSearchQuery}
-              onFocus={handleFocus}
-              ref={searchInputRef}
-              searchQuery={searchQuery}
-              testID="currency-select-search"
-            />
             {type === null || type === undefined ? null : (
               <CurrencySelectionList
                 itemProps={itemProps}
                 listItems={holySavingsList}
                 loading={false}
-                query={searchQueryForSearch}
+                query={null}
                 showList={isFocused}
                 testID="currency-select-list"
                 type={type}

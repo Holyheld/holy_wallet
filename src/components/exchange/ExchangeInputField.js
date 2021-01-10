@@ -35,6 +35,7 @@ export default function ExchangeInputField({
   onPressSelectInputCurrency,
   setInputAmount,
   setNativeAmount,
+  showNative,
   testID,
 }) {
   return (
@@ -52,23 +53,27 @@ export default function ExchangeInputField({
         testID={testID}
         useCustomAndroidMask={android}
       />
-      <NativeFieldRow>
-        <ExchangeNativeField
-          editable
-          height={BottomRowHeight}
-          nativeAmount={nativeAmount}
-          nativeCurrency={nativeCurrency}
-          onFocus={onFocus}
-          ref={nativeFieldRef}
-          setNativeAmount={setNativeAmount}
-          testID={testID + '-native'}
-        />
-        <ExchangeMaxButton
-          disabled={!inputCurrencySymbol}
-          onPress={onPressMaxBalance}
-          testID={testID + '-max'}
-        />
-      </NativeFieldRow>
+      {showNative ? (
+        <NativeFieldRow>
+          <ExchangeNativeField
+            editable
+            height={BottomRowHeight}
+            nativeAmount={nativeAmount}
+            nativeCurrency={nativeCurrency}
+            onFocus={onFocus}
+            ref={nativeFieldRef}
+            setNativeAmount={setNativeAmount}
+            testID={testID + '-native'}
+          />
+          <ExchangeMaxButton
+            disabled={!inputCurrencySymbol}
+            onPress={onPressMaxBalance}
+            testID={testID + '-max'}
+          />
+        </NativeFieldRow>
+      ) : (
+        <></>
+      )}
     </Container>
   );
 }

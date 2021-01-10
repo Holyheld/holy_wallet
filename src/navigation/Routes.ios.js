@@ -12,6 +12,7 @@ import DepositModal from '../screens/DepositModal';
 import ExpandedAssetSheet from '../screens/ExpandedAssetSheet';
 import HolyMigrateModalWrapper from '../screens/HolyMigrateModal';
 import HolySavingsSheet from '../screens/HolySavingsSheet';
+import HolySavingsWithdrawModal from '../screens/HolySavingsWithdrawModal';
 import ImportSeedPhraseSheet from '../screens/ImportSeedPhraseSheet';
 import LPBonusSheet from '../screens/LPBonusSheet';
 import ModalScreen from '../screens/ModalScreen';
@@ -286,6 +287,11 @@ function NativeStackNavigator() {
         component={HolySavingsSheet}
         name={Routes.SAVINGS_SHEET}
         {...savingsSheetConfig}
+      />
+      <NativeStack.Screen
+        component={HolySavingsWithdrawModal}
+        name={Routes.HOLY_SAVINGS_WITHDRAW_MODAL}
+        options={nativeStackDefaultConfigWithoutStatusBar}
       />
       <NativeStack.Screen
         component={TreasurySheet}

@@ -3,6 +3,7 @@ import { useCallback, useState } from 'react';
 import { InteractionManager } from 'react-native';
 import { useSelector } from 'react-redux';
 import { createSelector } from 'reselect';
+import currencySelectionTypes from '../helpers/currencySelectionTypes';
 import { useNavigation } from '../navigation/Navigation';
 import { delayNext } from './useMagicAutofocus';
 import usePrevious from './usePrevious';
@@ -16,7 +17,22 @@ const withSavings = holySavingsTokens => {
 };
 
 const withSavingsAssetsInWallet = holySavingsTokens => {
-  return holySavingsTokens.filter(saving => saving.balance !== '0');
+  return holySavingsTokens
+    .filter(saving => saving.balance !== '0')
+    .map(saving => {
+      return {
+        ...saving,
+        address: saving.underlying.address,
+        name: saving.underlying.symbol,
+        native: {
+          ...saving.native,
+          balance: {
+            display: saving.balance,
+          },
+        },
+        symbol: saving.underlying.symbol,
+      };
+    });
 };
 
 const withHolySavingsSelector = createSelector(
@@ -37,7 +53,7 @@ export function useHolySavingsWithBalance() {
   return useSelector(withHolySavingsAssetsInWalletSelector);
 }
 
-export default function useSavingsWithBalanceWithSelections({
+export default function useSavingsForWithdraw({
   defaultInputSaving,
   inputHeaderTitle,
 }) {
@@ -47,22 +63,49 @@ export default function useSavingsWithBalanceWithSelections({
   } = useRoute();
 
   const [inputSaving, setInputSaving] = useState(defaultInputSaving);
+  const [outputCurrency, setOutputCurrency] = useState(null);
 
-  const previousInputCurrency = usePrevious(inputSaving);
+  const previousOutputCurrency = usePrevious(outputCurrency);
+  const previousInputSaving = usePrevious(inputSaving);
 
   const updateInputSaving = useCallback(
-    async (newInputCurrency, userSelected = true) => {
+    async (newInputSaving, userSelected = true) => {
       logger.log(
         '[update input saving] new input saving, user selected?',
-        newInputCurrency,
+        newInputSaving,
         userSelected
       );
 
-      logger.log('[update input curr] prev input curr', previousInputCurrency);
+      logger.log(
+        '[update input saving] prev input saving',
+        previousInputSaving
+      );
 
-      setInputSaving(newInputCurrency);
+      setInputSaving(newInputSaving);
     },
-    [previousInputCurrency]
+    [previousInputSaving]
+  );
+
+  const updateOutputCurrency = useCallback(
+    (newOutputCurrency, userSelected = true) => {
+      logger.log(
+        '[update output curr] new output curr, user selected?',
+        newOutputCurrency,
+        userSelected
+      );
+      logger.log(
+        '[update output curr] input savings at the moment',
+        inputSaving
+      );
+
+      setOutputCurrency(newOutputCurrency);
+
+      logger.log(
+        '[update output curr] prev output curr',
+        previousOutputCurrency
+      );
+    },
+    [inputSaving, previousOutputCurrency]
   );
 
   const navigateToSelectInputSaving = useCallback(() => {
@@ -70,10 +113,12 @@ export default function useSavingsWithBalanceWithSelections({
       dangerouslyGetParent().dangerouslyGetState().index = 0;
       setParams({ focused: false });
       delayNext();
-      navigate(Routes.HOLY_SAVINGS_SELECT_SCREEN, {
+      navigate(Routes.CURRENCY_SELECT_SCREEN, {
         headerTitle: inputHeaderTitle,
         onSelectSaving: updateInputSaving,
         restoreFocusOnSwapModal: () => setParams({ focused: true }),
+        type: currencySelectionTypes.input,
+        useHolySavingsSelect: true,
       });
       blockInteractions();
     });
@@ -86,8 +131,34 @@ export default function useSavingsWithBalanceWithSelections({
     updateInputSaving,
   ]);
 
+  const navigateToSelectOutputCurrency = useCallback(() => {
+    InteractionManager.runAfterInteractions(() => {
+      setParams({ focused: false });
+      dangerouslyGetParent().dangerouslyGetState().index = 0;
+      delayNext();
+      navigate(Routes.CURRENCY_SELECT_SCREEN, {
+        category: 'holy savings',
+        headerTitle: 'Receive',
+        onSelectCurrency: updateOutputCurrency,
+        restoreFocusOnSwapModal: () => setParams({ focused: true }),
+        type: currencySelectionTypes.output,
+        useHolySavingsSelect: false,
+      });
+      blockInteractions();
+    });
+  }, [
+    blockInteractions,
+    dangerouslyGetParent,
+    navigate,
+    setParams,
+    updateOutputCurrency,
+  ]);
+
   return {
     inputSaving,
     navigateToSelectInputSaving,
+    navigateToSelectOutputCurrency,
+    outputCurrency,
+    previousInputSaving,
   };
 }

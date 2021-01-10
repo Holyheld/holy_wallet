@@ -27,6 +27,7 @@ import { addHexPrefix } from '../handlers/web3';
 import CurrencySelectionTypes from '../helpers/currencySelectionTypes';
 import { delayNext } from '../hooks/useMagicAutofocus';
 import { useNavigation } from '../navigation/Navigation';
+import HolySavingsSelectModal from './HolySavingsSelectModal';
 import {
   useInteraction,
   useMagicAutofocus,
@@ -61,21 +62,31 @@ const searchCurrencyList = (searchList, query) => {
   });
 };
 
-export default function CurrencySelectModal() {
+export default function CurrencySelectModalWrapper() {
+  const { params } = useRoute();
+  const { useHolySavingsSelect } = params;
+
+  if (useHolySavingsSelect) {
+    return <HolySavingsSelectModal />;
+  } else {
+    return <CurrencySelectModal />;
+  }
+}
+
+function CurrencySelectModal() {
   const isFocused = useIsFocused();
   const prevIsFocused = usePrevious(isFocused);
   const { navigate, dangerouslyGetState } = useNavigation();
+  const { params } = useRoute();
   const {
-    params: {
-      category,
-      onSelectCurrency,
-      restoreFocusOnSwapModal,
-      setPointerEvents,
-      tabTransitionPosition,
-      toggleGestureEnabled,
-      type,
-    },
-  } = useRoute();
+    category,
+    onSelectCurrency,
+    restoreFocusOnSwapModal,
+    setPointerEvents,
+    tabTransitionPosition,
+    toggleGestureEnabled,
+    type,
+  } = params;
 
   const searchInputRef = useRef();
   const { handleFocus } = useMagicAutofocus(searchInputRef, undefined, true);
@@ -319,6 +330,7 @@ export default function CurrencySelectModal() {
               isSearching={isSearching}
               onChangeText={setSearchQuery}
               onFocus={handleFocus}
+              placeholder="Search Uniswap"
               ref={searchInputRef}
               searchQuery={searchQuery}
               testID="currency-select-search"
