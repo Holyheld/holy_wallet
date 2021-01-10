@@ -30,7 +30,7 @@ const { call, greaterThan, onChange } = Animated;
 const ENABLING_CAMERA_OFFSET = 1.01;
 
 const Background = styled.View`
-  background-color: black;
+  background-color: ${colors.pageBackground};
   height: 100%;
   position: absolute;
   width: 100%;
@@ -70,7 +70,7 @@ export default function QRScannerScreen() {
   const isFocusedIOS = useFocusFromSwipe();
   const isFocusedAndroid = useIsFocused();
   const [sheetHeight, onSheetLayout] = useHeight(240);
-  const [initializeCamera, setInitializeCamera] = useState(ios ? true : false);
+  const [initializeCamera, setInitializeCamera] = useState(ios);
   const { navigate } = useNavigation();
   const {
     walletConnectorsByDappName,
