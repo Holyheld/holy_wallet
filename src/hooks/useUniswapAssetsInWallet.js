@@ -24,6 +24,11 @@ const withUniswapAssetsInWallet = (
   };
 
   const { allAssets } = assetData;
+
+  // console.log('allAssets');
+  // console.log(allAssets);
+  // console.log('uniswapCuratedAndGlobalPairs');
+  // console.log(uniswapCuratedAndGlobalPairs);
   const uniswapAssetsInWallet =
     network === NetworkTypes.mainnet
       ? filter(

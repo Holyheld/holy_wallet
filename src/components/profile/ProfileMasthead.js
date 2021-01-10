@@ -22,6 +22,7 @@ import useExperimentalFlag, {
 import showWalletErrorAlert from '@rainbow-me/helpers/support';
 import {
   useAccountProfile,
+  useAsset,
   useDimensions,
   useWallets,
   //useWalletSectionsData,
@@ -105,7 +106,17 @@ export default function ProfileMasthead({
   //   sections,
   // } = useWalletSectionsData();
   // TODO: get balance of holy coin?
-  const balance = 20;
+
+  const holyCoinV1 = {
+    address: '0xe211f0268797Fe96c91247fBF5ea7A902876818E', // from testnet
+    type: 'token',
+  };
+
+  const holyV1Asset = useAsset(holyCoinV1);
+  //console.log(uniswapAssetsInWallet);
+  //console.log('holyV1Asset');
+  //console.log(holyV1Asset);
+
   const onNewEmoji = useRef();
   const setOnNewEmoji = useCallback(
     newOnNewEmoji => (onNewEmoji.current = newOnNewEmoji),
@@ -228,12 +239,12 @@ export default function ProfileMasthead({
   const handleMigrateHoly = useCallback(() => {
     if (!isReadOnlyWallet) {
       navigate(Routes.HOLY_MIGRATE_MODAL, {
-        balance,
+        holyV1Asset,
       });
     } else {
       Alert.alert(`You need to import the wallet in order to do this`);
     }
-  }, [navigate, isReadOnlyWallet]);
+  }, [navigate, isReadOnlyWallet, holyV1Asset]);
 
   const handlePressAddCash = useCallback(() => {
     if (isDamaged) {

@@ -36,6 +36,12 @@ const ConfirmExchangeButton = ({
     case ExchangeModalTypes.holyMigrate:
       label = 'Hold to Migrate';
       break;
+    case ExchangeModalTypes.holyWithdraw:
+      label = 'Hold to withdraw';
+      break;
+    case ExchangeModalTypes.holyDeposit:
+      label = 'Hold to deposite';
+      break;
     default:
       label = 'Hold to Swap';
   }

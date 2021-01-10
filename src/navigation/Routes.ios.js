@@ -12,11 +12,12 @@ import DepositModal from '../screens/DepositModal';
 import ExpandedAssetSheet from '../screens/ExpandedAssetSheet';
 import HamburgerSheet from '../screens/HamburgerSheet';
 import HolyMigrateModalWrapper from '../screens/HolyMigrateModal';
+import HolySavingsSheet from '../screens/HolySavingsSheet';
 import ImportSeedPhraseSheet from '../screens/ImportSeedPhraseSheet';
+import LPBonusSheet from '../screens/LPBonusSheet';
 import ModalScreen from '../screens/ModalScreen';
 import ReceiveModal from '../screens/ReceiveModal';
 import RestoreSheet from '../screens/RestoreSheet';
-import SavingsSheet from '../screens/SavingsSheet';
 import SendSheet from '../screens/SendSheet';
 import SettingsModal from '../screens/SettingsModal';
 import TransactionConfirmationScreen from '../screens/TransactionConfirmationScreen';
@@ -283,7 +284,7 @@ function NativeStackNavigator() {
         {...restoreSheetConfig}
       />
       <NativeStack.Screen
-        component={SavingsSheet}
+        component={HolySavingsSheet}
         name={Routes.SAVINGS_SHEET}
         {...savingsSheetConfig}
       />
@@ -293,8 +294,13 @@ function NativeStackNavigator() {
         {...treasurySheetConfig}
       />
       <NativeStack.Screen
+        component={LPBonusSheet}
+        name={Routes.LP_BONUS_SHEET}
+        {...treasurySheetConfig}
+      />
+      <NativeStack.Screen
         component={DepositModal}
-        name={Routes.TREASURY_CLAIM_MODAL}
+        name={Routes.SAVINGS_DEPOSIT_MODAL}
         options={nativeStackDefaultConfigWithoutStatusBar}
       />
       <NativeStack.Screen

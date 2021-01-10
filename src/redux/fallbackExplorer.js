@@ -222,9 +222,14 @@ const fetchAssetBalances = async (tokens, address, network) => {
     balanceCheckerContractAbi,
     web3Provider
   );
+
+  // console.log('fetch balance for');
+  // console.log(tokens);
   try {
     const values = await balanceCheckerContract.balances([address], tokens);
 
+    // console.log('values');
+    // console.log(values);
     const balances = {};
     [address].forEach((addr, addrIdx) => {
       balances[addr] = {};
@@ -245,6 +250,7 @@ const fetchAssetBalances = async (tokens, address, network) => {
 };
 
 export const fallbackExplorerInit = () => async (dispatch, getState) => {
+  //console.log('------------FALLBACK INIT-----------------');
   const { accountAddress, nativeCurrency, network } = getState().settings;
   const { latestTxBlockNumber, mainnetAssets } = getState().fallbackExplorer;
   const formattedNativeCurrency = toLower(nativeCurrency);
@@ -273,6 +279,7 @@ export const fallbackExplorerInit = () => async (dispatch, getState) => {
     const { mainnetAssets } = getState().fallbackExplorer;
     const assets =
       network === networkTypes.mainnet ? mainnetAssets : testnetAssets[network];
+
     if (!assets || !assets.length) {
       const fallbackExplorerBalancesHandle = setTimeout(
         fetchAssetsBalancesAndPrices,
@@ -333,6 +340,10 @@ export const fallbackExplorerInit = () => async (dispatch, getState) => {
     }
 
     logger.log('😬 FallbackExplorer updating assets');
+    // logger.log(assets);
+    // for (let i = 0; i < assets.length; i++) {
+    //   logger.log(assets[i]);
+    // }
 
     dispatch(
       addressAssetsReceived({

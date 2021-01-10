@@ -1,4 +1,13 @@
 {
+    "ropsten":{
+        "0xe211f0268797Fe96c91247fBF5ea7A902876818E": {
+            "address": "0xe211f0268797Fe96c91247fBF5ea7A902876818E",
+            "name": "Holyheld v1",
+            "symbol": "HOLY",
+            "decimals": 18,
+            "exchangeAddress": "0xaBD44a1D1b9Fb0F39fE1D1ee6b1e2a14916D067D"
+        }
+    },
     "rinkeby": {
         "ETH": {
             "address": "eth",

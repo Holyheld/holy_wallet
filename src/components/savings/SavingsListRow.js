@@ -3,22 +3,20 @@ import PropTypes from 'prop-types';
 
 import React, { useCallback, useEffect, useState } from 'react';
 import { InteractionManager } from 'react-native';
-import { IS_TESTING } from 'react-native-dotenv';
 import LinearGradient from 'react-native-linear-gradient';
 import styled from 'styled-components/primitives';
+import { useNavigation } from '../../navigation/Navigation';
+import Routes from '../../navigation/routesNames';
 
 import { ButtonPressAnimation } from '../animations';
-import { Centered, Row } from '../layout';
-import { Emoji } from '../text';
+import { Centered, Row, RowWithMargins } from '../layout';
+import { Emoji, Text } from '../text';
 import APYPill from './APYPill';
-import SavingsListRowAnimatedNumber from './SavingsListRowAnimatedNumber';
 import SavingsListRowEmptyState from './SavingsListRowEmptyState';
 import { formatSavingsAmount } from '@rainbow-me/helpers/savings';
 import { useDimensions } from '@rainbow-me/hooks';
 import { colors, padding, position } from '@rainbow-me/styles';
 import ShadowStack from 'react-native-shadow-stack';
-
-const ANIMATE_NUMBER_INTERVAL = 60;
 
 const SavingsListRowShadows = [
   [0, 10, 30, colors.dark, 0.2],
@@ -52,72 +50,39 @@ const SavingsListRowShadowStack = styled(ShadowStack).attrs(
   })
 )``;
 
-const SavingsListRow = ({ balance, underlying }) => {
+const SavingsListRow = ({ totalBalance, currentSaving, savings }) => {
   const { width: deviceWidth } = useDimensions();
-  //const { navigate } = useNavigation();
+  const { navigate } = useNavigation();
 
-  const initialValue = balance;
+  const initialValue = totalBalance;
   const [value] = useState(initialValue);
-  const [steps] = useState(0);
 
   const onButtonPress = useCallback(() => {
-    // navigate(Routes.SAVINGS_SHEET, {
-    //   cTokenBalance,
-    //   isEmpty: !supplyBalanceUnderlying,
-    //   lifetimeSupplyInterestAccrued,
-    //   lifetimeSupplyInterestAccruedNative,
-    //   longFormHeight: supplyBalanceUnderlying
-    //     ? SavingsSheetHeight
-    //     : SavingsSheetEmptyHeight,
-    //   supplyBalanceUnderlying,
-    //   supplyRate,
-    //   underlying,
-    //   underlyingBalanceNativeValue,
-    //   underlyingPrice,
-    // });
-    // analytics.track('Opened Savings Sheet', {
-    //   category: 'savings',
-    //   empty: !supplyBalanceUnderlying,
-    //   label: underlying.symbol,
-    // });
+    navigate(Routes.SAVINGS_SHEET, {
+      currentSaving: currentSaving,
+      lifetimeAccruedInterest: 0.1,
+      savings: savings,
+      totalBalance: totalBalance,
+    });
   }, []);
 
-  // useEffect(() => {
-  //   if (!supplyBalanceUnderlying) return;
-
-  //   const futureValue = calculateCompoundInterestInDays(
-  //     initialValue,
-  //     supplyRate,
-  //     1
-  //   );
-
-  //   if (!BigNumber(futureValue).eq(value)) {
-  //     setValue(futureValue);
-  //     setSteps(MS_IN_1_DAY / ANIMATE_NUMBER_INTERVAL);
-  //   }
-  // }, [
-  //   apy,
-  //   initialValue,
-  //   supplyBalanceUnderlying,
-  //   supplyRate,
-  //   underlying,
-  //   value,
-  // ]);
-
   useEffect(() => {
-    if (underlying && underlying.symbol && balance)
+    if (
+      currentSaving.underlying &&
+      currentSaving.underlying.symbol &&
+      currentSaving.balance
+    )
       InteractionManager.runAfterInteractions(() => {
         analytics.track('User has savings', {
           category: 'savings',
-          label: underlying.symbol,
+          label: currentSaving.underlying.symbol,
         });
       });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [currentSaving]);
 
   const displayValue = formatSavingsAmount(value);
 
-  return !underlying ? null : (
+  return (
     <ButtonPressAnimation
       onPress={onButtonPress}
       overflowMargin={10}
@@ -136,18 +101,22 @@ const SavingsListRow = ({ balance, underlying }) => {
             <Centered>
               <Emoji lineHeight="none" name="flag_united_states" size={20} />
             </Centered>
-            {balance && !isNaN(displayValue) && IS_TESTING !== 'true' ? (
-              <SavingsListRowAnimatedNumber
-                initialValue={initialValue}
-                interval={ANIMATE_NUMBER_INTERVAL}
-                steps={steps}
-                symbol={underlying.symbol}
-                value={displayValue}
-              />
+            {!isNaN(displayValue) ? (
+              <RowWithMargins align="center" margin={8} paddingLeft={4}>
+                <Text
+                  color={colors.blueGreyDark}
+                  letterSpacing="roundedTightest"
+                  opacity={0.5}
+                  size="lmedium"
+                  weight="bold"
+                >
+                  {`$${totalBalance}`}
+                </Text>
+              </RowWithMargins>
             ) : (
               <SavingsListRowEmptyState onPress={NOOP} />
             )}
-            <APYPill value="2.96" />
+            <APYPill value={currentSaving.apy} />
           </Row>
         </SavingsListRowShadowStack>
       </Centered>
@@ -156,8 +125,9 @@ const SavingsListRow = ({ balance, underlying }) => {
 };
 
 SavingsListRow.propTypes = {
-  balance: PropTypes.string,
-  underlying: PropTypes.object,
+  currentSaving: PropTypes.object,
+  savings: PropTypes.array,
+  totalBalance: PropTypes.string,
 };
 
 export default React.memo(SavingsListRow);

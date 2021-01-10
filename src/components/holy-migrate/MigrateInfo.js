@@ -77,7 +77,7 @@ const MigrateInfo = ({ asset, amount }) => {
     >
       <Container>
         <Text color="grey" size="smedium" weight="medium">
-          Swapping for{' '}
+          Migrating for{' '}
         </Text>
         <Text color="white" size="smedium" weight="semibold">
           {`${amountToDisplay}  ${symbol}`}

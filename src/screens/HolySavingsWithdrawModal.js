@@ -1,37 +1,44 @@
 import { useRoute } from '@react-navigation/native';
 import { get } from 'lodash';
-import React, { Fragment, useCallback, useEffect, useState } from 'react';
+import React, {
+  Fragment,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
+import { Keyboard } from 'react-native';
 import Animated, { Extrapolate } from 'react-native-reanimated';
 import { useAndroidBackHandler } from 'react-navigation-backhandler';
 import { useDispatch } from 'react-redux';
-import styled from 'styled-components/primitives';
+import { dismissingScreenListener } from '../../shim';
 import { interpolate } from '../components/animations';
-import { CoinIcon } from '../components/coin-icon';
 import {
   ConfirmExchangeButton,
+  ExchangeInputField,
   ExchangeModalHeader,
+  SlippageWarning,
 } from '../components/exchange';
-import ExchangeInput from '../components/exchange/ExchangeInput';
 import { FloatingPanel, FloatingPanels } from '../components/floating-panels';
 import { GasSpeedButton } from '../components/gas';
-import MigrateInfo from '../components/holy-migrate/MigrateInfo';
-import {
-  Centered,
-  ColumnWithMargins,
-  KeyboardFixedOpenLayout,
-  Row,
-  RowWithMargins,
-} from '../components/layout';
+import { Centered, KeyboardFixedOpenLayout } from '../components/layout';
 import exchangeModalTypes from '../helpers/exchangeModalTypes';
+import useSavingsWithBalanceWithSelections from '../hooks/useHolySavings';
 import { loadWallet } from '../model/wallet';
 import { useNavigation } from '../navigation/Navigation';
 import useStatusBarManaging from '../navigation/useStatusBarManaging';
 import { executeRap } from '../raps/common';
-import createHolyMigrateCompoundRap, {
-  estimateHolyMigrateCompound,
-} from '../raps/holyMigrateCompound';
+import createHolySavingsWithdrawCompoundRap, {
+  estimateHolySavingsWithdrawCompound,
+} from '../raps/holySavingsWithdrawCompound';
 import { multicallClearState } from '../redux/multicall';
-import { useBlockPolling, useGas } from '@rainbow-me/hooks';
+import {
+  useAccountSettings,
+  useBlockPolling,
+  useGas,
+  useSwapInputRefs,
+  useSwapInputs,
+} from '@rainbow-me/hooks';
 import Routes from '@rainbow-me/routes';
 import { colors, position } from '@rainbow-me/styles';
 import { backgroundTask } from '@rainbow-me/utils';
@@ -40,62 +47,65 @@ import logger from 'logger';
 
 const AnimatedFloatingPanels = Animated.createAnimatedComponent(FloatingPanels);
 const Wrapper = ios ? KeyboardFixedOpenLayout : Fragment;
-const CoinSize = 40;
-const ExchangeFieldPadding = android ? 15 : 19;
-const ExchangeFieldHeight = android ? 64 : 38;
 
-const Container = styled(ColumnWithMargins).attrs({ margin: 15 })`
-  padding-top: 6;
-  width: 100%;
-  z-index: 1;
-`;
-
-const InnerContainer = styled(Row).attrs({
-  align: 'center',
-  justify: 'flex-end',
-})`
-  width: 100%;
-  padding-right: ${ExchangeFieldPadding};
-`;
-
-const FieldRow = styled(RowWithMargins).attrs({
-  align: 'center',
-  margin: 30,
-})`
-  flex: 1;
-  padding-left: ${ExchangeFieldPadding};
-  padding-right: ${ExchangeFieldPadding};
-`;
-
-const Input = styled(ExchangeInput).attrs({
-  letterSpacing: 'roundedTightest',
-})`
-  margin-vertical: -10;
-  height: ${ExchangeFieldHeight + (android ? 20 : 0)};
-`;
-
-const HolyMigrateModalWrapper = () => {
+const HolySavingsWithdrawModalWrapper = () => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   android && useStatusBarManaging();
   const { params } = useRoute();
-  const holyV1Asset = params?.holyV1Asset;
+  const savings = params?.savings;
+  const currentSavings = params?.currentSavings;
+
   const testID = params?.testID;
-  return <HolyMigrateModal holyV1Asset={holyV1Asset} testID={testID} />;
+  return (
+    <HolySavingsWithdraModal
+      currentSavings={currentSavings}
+      savings={savings}
+      testID={testID}
+    />
+  );
 };
 
-const HolyMigrateModal = ({ holyV1Asset, testID }) => {
-  const { navigate, setParams } = useNavigation();
+const HolySavingsWithdraModal = ({ currentSaving, testID }) => {
+  const {
+    navigate,
+    setParams,
+    dangerouslyGetParent,
+    addListener,
+  } = useNavigation();
   const {
     params: { tabTransitionPosition },
   } = useRoute();
 
-  const amountToMigrate = get(holyV1Asset, 'balance.amount');
-  const symbol = get(holyV1Asset, 'symbol');
-  const address = get(holyV1Asset, 'address');
+  const maxInputBalance = currentSaving.balance;
 
-  const defaultGasLimit = 160000;
-  const estimateRap = estimateHolyMigrateCompound;
-  const type = exchangeModalTypes.holyMigrate;
+  const defaultGasLimit = 10000;
+
+  const createRap = createHolySavingsWithdrawCompoundRap;
+  const estimateRap = estimateHolySavingsWithdrawCompound;
+  const type = exchangeModalTypes.holyWithdraw;
+  // useAsset - to get data from uniswap about this asset
+  // const inputCurrency = useMemo(
+  //   () => ({
+  //     address: currentSavings.underlying.address,
+  //     native: {
+  //       price: {
+  //         amount: 10, // price of one saving
+  //       },
+  //     },
+  //     symbol: currentSavings.underlying.symbol,
+  //   }),
+  //   [currentSavings]
+  // );
+
+  const {
+    inputCurrency,
+    navigateToSelectInputSaving,
+  } = useSavingsWithBalanceWithSelections({
+    defaultInputSaving: currentSaving,
+    inputHeaderTitle: 'choose saving',
+  });
+
+  //console.log(inputCurrency);
 
   const dispatch = useDispatch();
   const {
@@ -107,6 +117,7 @@ const HolyMigrateModal = ({ holyV1Asset, testID }) => {
     updateTxFee,
   } = useGas();
   const { initWeb3Listener, stopWeb3Listener } = useBlockPolling();
+  const { nativeCurrency } = useAccountSettings();
 
   const [isAuthorizing, setIsAuthorizing] = useState(false);
   const [slippage] = useState(null);
@@ -116,14 +127,73 @@ const HolyMigrateModal = ({ holyV1Asset, testID }) => {
     return true;
   });
 
+  const {
+    handleFocus,
+    inputFieldRef,
+    lastFocusedInputHandle,
+    nativeFieldRef,
+  } = useSwapInputRefs({
+    inputCurrency: inputCurrency,
+  });
+
+  const {
+    inputAmount,
+    // inputAmountDisplay,
+    // inputAsExactAmount,
+    isMax,
+    isSufficientBalance,
+    nativeAmount,
+    // outputAmount,
+    // outputAmountDisplay,
+    // setIsSufficientBalance,
+    updateInputAmount,
+    updateNativeAmount,
+    // updateOutputAmount,
+  } = useSwapInputs({
+    inputCurrency,
+    maxInputBalance,
+    nativeFieldRef,
+    supplyBalanceUnderlying: currentSaving.balance,
+  });
+
+  const isDismissing = useRef(false);
+  useEffect(() => {
+    if (ios) {
+      return;
+    }
+    dismissingScreenListener.current = () => {
+      Keyboard.dismiss();
+      isDismissing.current = true;
+    };
+    const unsubscribe = (
+      dangerouslyGetParent()?.dangerouslyGetParent()?.addListener || addListener
+    )('transitionEnd', ({ data: { closing } }) => {
+      if (!closing && isDismissing.current) {
+        isDismissing.current = false;
+        lastFocusedInputHandle?.current?.focus();
+      }
+    });
+    return () => {
+      unsubscribe();
+      dismissingScreenListener.current = undefined;
+    };
+  }, [addListener, dangerouslyGetParent, lastFocusedInputHandle]);
+
+  const handleCustomGasBlur = useCallback(() => {
+    lastFocusedInputHandle?.current?.focus();
+  }, [lastFocusedInputHandle]);
+
   const updateGasLimit = useCallback(async () => {
     try {
-      const gasLimit = await estimateRap();
+      const gasLimit = await estimateRap({
+        inputAmount,
+      });
+
       updateTxFee(gasLimit);
     } catch (error) {
       updateTxFee(defaultGasLimit);
     }
-  }, [defaultGasLimit, estimateRap, updateTxFee]);
+  }, [defaultGasLimit, estimateRap, inputAmount, updateTxFee]);
 
   // Update gas limit
   useEffect(() => {
@@ -161,6 +231,12 @@ const HolyMigrateModal = ({ holyV1Asset, testID }) => {
     updateDefaultGasLimit,
   ]);
 
+  const isSlippageWarningVisible = isSufficientBalance && !!inputAmount;
+
+  const handlePressMaxBalance = useCallback(async () => {
+    updateInputAmount(currentSaving.balance);
+  }, [updateInputAmount, currentSaving]);
+
   const handleSubmit = useCallback(() => {
     backgroundTask.execute(async () => {
       setIsAuthorizing(true);
@@ -168,32 +244,41 @@ const HolyMigrateModal = ({ holyV1Asset, testID }) => {
         const wallet = await loadWallet();
         if (!wallet) {
           setIsAuthorizing(false);
-          logger.sentry(`aborting holy migrate due to missing wallet`);
+          logger.sentry(`aborting holy savings withdraw due to missing wallet`);
           return;
         }
 
-        setIsAuthorizing(false);
         const callback = () => {
           setParams({ focused: false });
           navigate(Routes.PROFILE_SCREEN);
         };
-        const rap = await createHolyMigrateCompoundRap({
-          amount: amountToMigrate,
+        const rap = await createRap({
           callback,
-          currency: holyV1Asset,
+          inputAmount,
+          inputCurrency,
+          isMax,
           selectedGasPrice,
         });
-        logger.log('[holy migrate] rap', rap);
+        logger.log('[holy savings withdraw] rap', rap);
         await executeRap(wallet, rap);
-        logger.log('[holy migrate] executed rap!');
+        logger.log('[holy savings withdraw] executed rap!');
+        setIsAuthorizing(false);
       } catch (error) {
         setIsAuthorizing(false);
-        logger.log('[holy migrate] error submitting migrate', error);
+        logger.log('[holy savings withdrawe] error submitting migrate', error);
         setParams({ focused: false });
         navigate(Routes.WALLET_SCREEN);
       }
     });
-  }, [amountToMigrate, selectedGasPrice, setParams, navigate, holyV1Asset]);
+  }, [
+    createRap,
+    inputAmount,
+    selectedGasPrice,
+    setParams,
+    navigate,
+    isMax,
+    inputCurrency,
+  ]);
 
   return (
     <Wrapper>
@@ -247,25 +332,26 @@ const HolyMigrateModal = ({ holyV1Asset, testID }) => {
               onPressDetails={() => {}}
               showDetailsButton={false}
               testID={testID + '-header'}
-              title="Migrate"
+              title="Withdraw"
             />
-            <Container>
-              <InnerContainer>
-                <FieldRow>
-                  <CoinIcon address={address} size={CoinSize} symbol={symbol} />
-
-                  <Input editable={false} value={amountToMigrate} />
-                </FieldRow>
-              </InnerContainer>
-            </Container>
+            <ExchangeInputField
+              inputAmount={inputAmount}
+              inputCurrencyAddress={get(inputCurrency, 'address', null)}
+              inputCurrencySymbol={get(inputCurrency, 'symbol', null)}
+              inputFieldRef={inputFieldRef}
+              nativeAmount={nativeAmount}
+              nativeCurrency={nativeCurrency}
+              nativeFieldRef={nativeFieldRef}
+              onFocus={handleFocus}
+              onPressMaxBalance={handlePressMaxBalance}
+              onPressSelectInputCurrency={navigateToSelectInputSaving}
+              setInputAmount={updateInputAmount}
+              setNativeAmount={updateNativeAmount}
+              testID={testID + '-input'}
+            />
           </FloatingPanel>
-          <MigrateInfo
-            amount={amountToMigrate}
-            asset={{
-              symbol: symbol,
-            }}
-            testID="migrate-info-button"
-          />
+
+          {isSlippageWarningVisible && <SlippageWarning slippage={slippage} />}
 
           <Fragment>
             <Centered
@@ -275,9 +361,10 @@ const HolyMigrateModal = ({ holyV1Asset, testID }) => {
               width="100%"
             >
               <ConfirmExchangeButton
+                disabled={!Number(inputAmount)}
                 isAuthorizing={isAuthorizing}
                 isDeposit={false}
-                isSufficientBalance
+                isSufficientBalance={isSufficientBalance}
                 isSufficientGas={isSufficientGas}
                 isSufficientLiquidity
                 onSubmit={handleSubmit}
@@ -290,7 +377,7 @@ const HolyMigrateModal = ({ holyV1Asset, testID }) => {
 
           <GasSpeedButton
             dontBlur
-            onCustomGasBlur={() => {}}
+            onCustomGasBlur={handleCustomGasBlur}
             testID={testID + '-gas'}
             type={type}
           />
@@ -300,4 +387,4 @@ const HolyMigrateModal = ({ holyV1Asset, testID }) => {
   );
 };
 
-export default HolyMigrateModalWrapper;
+export default HolySavingsWithdrawModalWrapper;

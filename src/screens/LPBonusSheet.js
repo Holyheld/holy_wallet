@@ -4,21 +4,20 @@ import { Alert, StatusBar } from 'react-native';
 import { useSafeArea } from 'react-native-safe-area-context';
 import styled from 'styled-components/native';
 import Divider from '../components/Divider';
-import TreasuryCoinRow from '../components/coin-row/TreasuryCoinRow';
+import LPBonusCoinRow from '../components/coin-row/LPBonusCoinRow';
 import { Centered, Column } from '../components/layout';
+import LPBonusSheetHeader from '../components/lp-bonus/LPBonusSheetHeader';
 import {
   SheetActionButton,
   SheetActionButtonRow,
   SlackSheet,
 } from '../components/sheet';
-import TreasurySheetHeader from '../components/treasury-bank/TreasurySheetHeader';
 import { useDimensions, useWallets } from '@rainbow-me/hooks';
 import { useNavigation } from '@rainbow-me/navigation';
-import Routes from '@rainbow-me/routes';
 import { colors, position } from '@rainbow-me/styles';
 
-export const SavingsSheetEmptyHeight = 313;
-export const SavingsSheetHeight = android ? 410 : 352;
+export const SheetEmptyHeight = 313;
+export const SheetHeight = android ? 410 : 352;
 
 const Container = styled(Centered).attrs({ direction: 'column' })`
   ${position.cover};
@@ -26,7 +25,7 @@ const Container = styled(Centered).attrs({ direction: 'column' })`
     height ? `height: ${height + deviceHeight}` : null};
 `;
 
-const TreasurySheet = () => {
+const LPBonusSheet = () => {
   const { height: deviceHeight } = useDimensions();
   const { navigate } = useNavigation();
   const { params } = useRoute();
@@ -35,60 +34,53 @@ const TreasurySheet = () => {
   const balance = params['balance'];
   const lifetimeSupplyInterestAccrued = params['lifetimeSupplyInterestAccrued'];
   const isEmpty = balance === 0;
-  const onWithdraw = useCallback(() => {
+  const onClaim = useCallback(() => {
     if (!isReadOnlyWallet) {
-      navigate(Routes.TREASURY_CLAIM_MODAL, {
-        balance,
-      });
+      // TODO: Claim LP bonus
     } else {
       Alert.alert(`You need to import the wallet in order to do this`);
     }
   }, [isReadOnlyWallet, navigate, balance]);
 
+  const apy = '2.960000';
+  const apyTruncated = parseFloat(apy).toFixed(2);
+  const shareText = `${apyTruncated}`;
+
   return (
     <Container
       deviceHeight={deviceHeight}
-      height={isEmpty ? SavingsSheetEmptyHeight : SavingsSheetHeight}
+      height={isEmpty ? SheetEmptyHeight : SheetHeight}
       insets={insets}
     >
       <StatusBar barStyle="light-content" />
       <SlackSheet
         additionalTopPadding={android}
-        contentHeight={isEmpty ? SavingsSheetEmptyHeight : SavingsSheetHeight}
+        contentHeight={isEmpty ? SheetEmptyHeight : SheetHeight}
       >
         <Fragment>
-          <TreasurySheetHeader
+          <LPBonusSheetHeader
             balance={balance}
             lifetimeAccruedInterest={lifetimeSupplyInterestAccrued}
           />
           <SheetActionButtonRow>
             <SheetActionButton
-              color={colors.buttonClaimAndBurn}
-              label="Claim & Burn"
-              onPress={onWithdraw}
+              color={colors.dark}
+              label="Claim"
+              onPress={onClaim}
               radiusAndroid={24}
-              textColor={colors.textColorClaimAndBurn}
               weight="bold"
             />
           </SheetActionButtonRow>
-          <Divider
-            backgroundColor={colors.modalBackground}
-            color={colors.divider}
-            zIndex={0}
-          />
+          <Divider color={colors.rowDividerLight} zIndex={0} />
           <Column paddingBottom={9} paddingTop={4}>
-            <TreasuryCoinRow
+            <LPBonusCoinRow
               additionalShare="0.1"
               balance={balance}
-              share="1.37"
-              symbol="yUSD"
+              share={shareText}
+              symbol="HH"
             />
           </Column>
-          <Divider
-            backgroundColor={colors.modalBackground}
-            color={colors.divider}
-            zIndex={0}
-          />
+          <Divider color={colors.rowDividerLight} zIndex={0} />
           {/* <SavingsPredictionStepper
               asset={underlying}
               balance={
@@ -104,4 +96,4 @@ const TreasurySheet = () => {
   );
 };
 
-export default React.memo(TreasurySheet);
+export default React.memo(LPBonusSheet);
