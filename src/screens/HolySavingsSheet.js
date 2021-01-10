@@ -108,21 +108,27 @@ const HolySavingsSheet = () => {
             />
             <SheetActionButtonRow>
               <SheetActionButton
-                color={colors.dark}
+                color={colors.buttonSecondary}
                 label="􀁏 Withdraw"
                 onPress={onWithdraw}
                 radiusAndroid={24}
+                textColor={colors.textColorSecondaryButton}
                 weight="bold"
               />
               <SheetActionButton
-                color={colors.swapPurple}
+                color={colors.buttonClaimAndBurn}
                 label="􀁍 Deposit"
                 onPress={onDeposit}
                 radiusAndroid={24}
+                textColor={colors.textColorClaimAndBurn}
                 weight="bold"
               />
             </SheetActionButtonRow>
-            <Divider color={colors.rowDividerLight} zIndex={0} />
+            <Divider
+              backgroundColor={colors.modalBackground}
+              color={colors.divider}
+              zIndex={0}
+            />
 
             {savingsDataArr.map(savingsItem => (
               <Column
@@ -139,7 +145,11 @@ const HolySavingsSheet = () => {
               </Column>
             ))}
 
-            <Divider color={colors.rowDividerLight} zIndex={0} />
+            <Divider
+              backgroundColor={colors.modalBackground}
+              color={colors.divider}
+              zIndex={0}
+            />
             {/* <SavingsPredictionStepper
               asset={underlying}
               balance={

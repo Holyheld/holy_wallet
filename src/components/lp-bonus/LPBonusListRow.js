@@ -16,8 +16,8 @@ import { colors, padding, position } from '@rainbow-me/styles';
 import ShadowStack from 'react-native-shadow-stack';
 
 const LPBonusListRowShadows = [
-  [0, 10, 30, colors.dark, 0.2],
-  [0, 5, 15, colors.dark, 0.4],
+  [0, 10, 30, colors.transparent, 0.2],
+  [0, 5, 15, colors.transparent, 0.4],
 ];
 
 const neverRerender = () => true;

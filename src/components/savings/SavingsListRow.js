@@ -104,7 +104,7 @@ const SavingsListRow = ({ totalBalance, currentSaving, savings }) => {
             {!isNaN(displayValue) ? (
               <RowWithMargins align="center" margin={8} paddingLeft={4}>
                 <Text
-                  color={colors.blueGreyDark}
+                  color={colors.textColor}
                   letterSpacing="roundedTightest"
                   opacity={0.5}
                   size="lmedium"

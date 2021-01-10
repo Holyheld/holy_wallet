@@ -64,14 +64,19 @@ const LPBonusSheet = () => {
           />
           <SheetActionButtonRow>
             <SheetActionButton
-              color={colors.dark}
+              color={colors.buttonClaimAndBurn}
               label="Claim"
               onPress={onClaim}
               radiusAndroid={24}
+              textColor={colors.textColorClaimAndBurn}
               weight="bold"
             />
           </SheetActionButtonRow>
-          <Divider color={colors.rowDividerLight} zIndex={0} />
+          <Divider
+            backgroundColor={colors.modalBackground}
+            color={colors.divider}
+            zIndex={0}
+          />
           <Column paddingBottom={9} paddingTop={4}>
             <LPBonusCoinRow
               additionalShare="0.1"
@@ -80,7 +85,11 @@ const LPBonusSheet = () => {
               symbol="HH"
             />
           </Column>
-          <Divider color={colors.rowDividerLight} zIndex={0} />
+          <Divider
+            backgroundColor={colors.modalBackground}
+            color={colors.divider}
+            zIndex={0}
+          />
           {/* <SavingsPredictionStepper
               asset={underlying}
               balance={

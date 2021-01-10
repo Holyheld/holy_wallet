@@ -57,7 +57,7 @@ const HolySavingsWithdrawModalWrapper = () => {
 
   const testID = params?.testID;
   return (
-    <HolySavingsWithdraModal
+    <HolySavingsWithdrawModal
       currentSavings={currentSavings}
       savings={savings}
       testID={testID}
@@ -65,7 +65,7 @@ const HolySavingsWithdrawModalWrapper = () => {
   );
 };
 
-const HolySavingsWithdraModal = ({ currentSaving, testID }) => {
+const HolySavingsWithdrawModal = ({ currentSaving, testID }) => {
   const {
     navigate,
     setParams,
