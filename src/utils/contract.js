@@ -3,6 +3,7 @@ import { Contract } from '@ethersproject/contracts';
 import { captureException } from '@sentry/react-native';
 import { toHex, web3Provider } from '../handlers/web3';
 import { loadWallet } from '../model/wallet';
+import store from '../redux/store';
 import { ethUnits } from '../references';
 import erc20ABI from '../references/erc20-abi.json';
 import logger from 'logger';
@@ -10,10 +11,15 @@ import logger from 'logger';
 const estimateApproveWithExchange = async (spender, exchange) => {
   try {
     logger.sentry('exchange estimate approve', { exchange, spender });
-    const gasLimit = await exchange.estimateGas.approve(spender, MaxUint256);
+    const { accountAddress } = store.getState().settings;
+
+    const gasLimit = await exchange.estimateGas.approve(spender, MaxUint256, {
+      from: accountAddress,
+    });
     return gasLimit ? gasLimit.toString() : ethUnits.basic_approval;
   } catch (error) {
     logger.sentry('error estimateApproveWithExchange');
+    logger.sentry(error);
     captureException(error);
     return ethUnits.basic_approval;
   }

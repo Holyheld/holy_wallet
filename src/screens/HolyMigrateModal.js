@@ -94,7 +94,6 @@ const HolyMigrateModal = ({ holyV1Asset, testID }) => {
   const address = get(holyV1Asset, 'address');
 
   const defaultGasLimit = 160000;
-  const estimateRap = estimateHolyMigrateCompound;
   const type = exchangeModalTypes.holyMigrate;
 
   const dispatch = useDispatch();
@@ -118,12 +117,17 @@ const HolyMigrateModal = ({ holyV1Asset, testID }) => {
 
   const updateGasLimit = useCallback(async () => {
     try {
-      const gasLimit = await estimateRap();
+      const gasLimit = await estimateHolyMigrateCompound(
+        amountToMigrate,
+        holyV1Asset
+      );
+      logger.sentry('new gas limit:', gasLimit);
       updateTxFee(gasLimit);
     } catch (error) {
+      logger.sentry('gas limit error:', error);
       updateTxFee(defaultGasLimit);
     }
-  }, [defaultGasLimit, estimateRap, updateTxFee]);
+  }, [defaultGasLimit, updateTxFee, amountToMigrate, holyV1Asset]);
 
   // Update gas limit
   useEffect(() => {
@@ -136,12 +140,12 @@ const HolyMigrateModal = ({ holyV1Asset, testID }) => {
     };
   }, [dispatch]);
 
-  // Set default gas limit
-  useEffect(() => {
-    setTimeout(() => {
-      updateTxFee(defaultGasLimit);
-    }, 1000);
-  }, [defaultGasLimit, updateTxFee]);
+  // // Set default gas limit
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     updateTxFee(defaultGasLimit);
+  //   }, 1000);
+  // }, [defaultGasLimit, updateTxFee]);
 
   // Liten to gas prices, Uniswap reserves updates
   useEffect(() => {

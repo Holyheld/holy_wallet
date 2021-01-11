@@ -1,13 +1,45 @@
-import { concat } from 'lodash';
+import { concat, reduce } from 'lodash';
+import { add } from '../helpers/utilities';
 import { rapsAddOrUpdate } from '../redux/raps';
 import store from '../redux/store';
+import { ethUnits } from '../references';
 import { HOLY_PASSAGE_ADDRESS } from '../references/holy';
+import { holyMigrateEstimation } from './actions/holy_migrate';
 import { assetNeedsUnlocking } from './actions/unlock';
 import { createNewAction, createNewRap, RapActionTypes } from './common';
+import { contractUtils } from '@rainbow-me/utils';
 import logger from 'logger';
 
-export const estimateHolyMigrateCompound = async () => {
-  return 100000;
+export const estimateHolyMigrateCompound = async (amount, currency) => {
+  // create unlock rap
+  const { accountAddress } = store.getState().settings;
+  let gasLimits = [];
+
+  const swapAssetNeedsUnlocking = await assetNeedsUnlocking(
+    accountAddress,
+    amount,
+    currency,
+    HOLY_PASSAGE_ADDRESS
+  );
+
+  let migrationGasLimit = ethUnits.basic_approval;
+
+  if (swapAssetNeedsUnlocking) {
+    logger.log('[holy migrate estimation] we need unlock tokens ', amount);
+    const unlockGasLimit = await contractUtils.estimateApprove(
+      currency.address,
+      HOLY_PASSAGE_ADDRESS
+    );
+    logger.log('[holy migrate estimation] gas for approval ', unlockGasLimit);
+    gasLimits = concat(gasLimits, unlockGasLimit);
+  } else {
+    migrationGasLimit = holyMigrateEstimation();
+  }
+
+  gasLimits = concat(gasLimits, migrationGasLimit);
+  logger.log('[holy migrate estimation] gas for migration ', migrationGasLimit);
+
+  return reduce(gasLimits, (acc, limit) => add(acc, limit), '0');
 };
 
 const createHolyMigrateCompoundRap = async ({

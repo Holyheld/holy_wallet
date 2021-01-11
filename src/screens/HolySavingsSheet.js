@@ -71,8 +71,7 @@ const HolySavingsSheet = () => {
       navigate(Routes.SAVINGS_DEPOSIT_MODAL, {
         params: {
           params: {
-            defaultInputAsset: defaultSaving.underlying,
-            underlyingPrice: defaultSaving.underlyingPrice,
+            defaultInputCurrency: null,
           },
           screen: Routes.MAIN_EXCHANGE_SCREEN,
         },

@@ -9,6 +9,7 @@ import ChangeWalletSheet from '../screens/ChangeWalletSheet';
 import DepositModal from '../screens/DepositModal';
 import ExpandedAssetSheet from '../screens/ExpandedAssetSheet';
 import HolyMigrateModalWrapper from '../screens/HolyMigrateModal';
+import HolySavingsDepositModal from '../screens/HolySavingsDepositModal';
 import HolySavingsSheet from '../screens/HolySavingsSheet';
 import HolySavingsWithdrawModal from '../screens/HolySavingsWithdrawModal';
 import ImportSeedPhraseSheet from '../screens/ImportSeedPhraseSheet';
@@ -200,11 +201,11 @@ function MainNavigator() {
         name={Routes.HOLY_SAVINGS_WITHDRAW_MODAL}
         options={exchangePreset}
       />
-      {/* <Stack.Screen
-        component={HolySavingsDepositModalWrapper}
+      <Stack.Screen
+        component={HolySavingsDepositModal}
         name={Routes.HOLY_SAVINGS_DEPOSIT_MODAL}
         options={exchangePreset}
-      /> */}
+      />
       <Stack.Screen
         component={WithdrawModal}
         name={Routes.SAVINGS_WITHDRAW_MODAL}

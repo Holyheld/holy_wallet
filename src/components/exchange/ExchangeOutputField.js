@@ -42,6 +42,7 @@ export default function ExchangeOutputField({
   outputFieldRef,
   setOutputAmount,
   testID,
+  disableCurrencySelection,
 }) {
   return (
     <Container>
@@ -49,6 +50,7 @@ export default function ExchangeOutputField({
       <ExchangeField
         address={outputCurrencyAddress}
         amount={outputAmount}
+        disableCurrencySelection={disableCurrencySelection}
         onFocus={onFocus}
         onPressSelectCurrency={onPressSelectOutputCurrency}
         ref={outputFieldRef}

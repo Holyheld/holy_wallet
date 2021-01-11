@@ -1,8 +1,8 @@
 import { useCallback, useState } from 'react';
 import { greaterThanOrEqualTo } from '../helpers/utilities';
 
-export default function useHolyWithdrawInputs({
-  inputSaving,
+export default function useHolyDepositInputs({
+  inputCurrency,
   maxInputBalance,
 }) {
   const [isMax, setIsMax] = useState(false);
@@ -14,34 +14,20 @@ export default function useHolyWithdrawInputs({
       setInputAmount(newInputAmount);
       setIsMax(!!newInputAmount && newIsMax);
 
-      const newOutputAmount = newInputAmount; // USDc for both cases
-      if (inputSaving) {
+      if (inputCurrency) {
         const newIsSufficientBalance =
           !newInputAmount ||
           greaterThanOrEqualTo(maxInputBalance, newInputAmount);
 
         setIsSufficientBalance(newIsSufficientBalance);
-        setOutputAmount(newOutputAmount);
       }
     },
-    [inputSaving, maxInputBalance]
+    [inputCurrency, maxInputBalance]
   );
 
-  const updateOutputAmount = useCallback(
-    newOutputAmount => {
-      setOutputAmount(newOutputAmount);
-      if (inputSaving) {
-        const newInputAmount = newOutputAmount;
-        const newIsSufficientBalance =
-          !newInputAmount ||
-          greaterThanOrEqualTo(maxInputBalance, newInputAmount);
-
-        setIsSufficientBalance(newIsSufficientBalance);
-        setInputAmount(newInputAmount);
-      }
-    },
-    [inputSaving, maxInputBalance]
-  );
+  const updateOutputAmount = useCallback(newOutputAmount => {
+    setOutputAmount(newOutputAmount);
+  }, []);
 
   return {
     inputAmount,
