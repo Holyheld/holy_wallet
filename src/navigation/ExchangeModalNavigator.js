@@ -6,7 +6,6 @@ import { Keyboard, View } from 'react-native';
 import { useValue } from 'react-native-redash';
 import { useMemoOne } from 'use-memo-one';
 import CurrencySelectModal from '../screens/CurrencySelectModal';
-import HolySavingsSelectModal from '../screens/HolySavingsSelectModal';
 import ModalScreen from '../screens/ModalScreen';
 import SwapModalScreen from '../screens/SwapModal';
 import { deviceUtils } from '../utils';
@@ -210,11 +209,6 @@ export function ExchangeNavigatorFactory(SwapModal = SwapModalScreen) {
             component={CurrencySelectModal}
             initialParams={initialParams}
             name={Routes.CURRENCY_SELECT_SCREEN}
-          />
-          <Tabs.Screen
-            component={HolySavingsSelectModal}
-            initialParams={initialParams}
-            name={Routes.HOLY_SAVINGS_SELECT_SCREEN}
           />
         </Tabs.Navigator>
         {ios && (

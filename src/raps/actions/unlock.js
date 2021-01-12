@@ -78,6 +78,7 @@ const unlock = async (wallet, currentRap, index, parameters) => {
     approval = result?.approval;
   } catch (e) {
     logger.sentry('Error approving');
+    logger.sentry(e);
     captureException(e);
     throw e;
   }

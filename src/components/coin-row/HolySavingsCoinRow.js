@@ -30,7 +30,7 @@ const Content = styled(Column).attrs({ justify: 'space-between' })`
   opacity: ${({ isHidden }) => (isHidden ? 0.4 : 1)};
 `;
 
-const BottomRow = ({ apy, additionalShare, symbol }) => {
+const BottomRow = ({ apy, additionalShare }) => {
   return (
     <Fragment>
       <APYPill small value={apy} />
@@ -44,7 +44,7 @@ const BottomRow = ({ apy, additionalShare, symbol }) => {
             weight="semibold"
           >
             {' '}
-            {additionalShare + ' ' + symbol}
+            {'$' + additionalShare}
           </Text>
         </Column>
       </RowWithMargins>
@@ -59,7 +59,7 @@ const TopRow = ({ balance, symbol }) => (
         {symbol}
       </CoinName>
     </FlexItem>
-    <BalanceText>{balance + ' ' + symbol}</BalanceText>
+    <BalanceText>{'$' + balance}</BalanceText>
   </Row>
 );
 

@@ -4,6 +4,7 @@ import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import NetworkTypes from '../helpers/networkTypes';
 import { explorerInit } from '../redux/explorer';
+import { holySavingsRefreshState } from '../redux/holy';
 import { uniqueTokensRefreshState } from '../redux/uniqueTokens';
 import { uniswapUpdateLiquidityState } from '../redux/uniswapLiquidity';
 import { fetchWalletNames } from '../redux/wallets';
@@ -17,6 +18,8 @@ export default function useRefreshAccountData() {
   const { refetchSavings } = useSavingsAccount();
 
   const refreshAccountData = useCallback(async () => {
+    const holySavings = dispatch(holySavingsRefreshState());
+
     // Refresh unique tokens for Rinkeby
     if (network === NetworkTypes.rinkeby) {
       const getUniqueTokens = dispatch(uniqueTokensRefreshState());
@@ -25,7 +28,7 @@ export default function useRefreshAccountData() {
 
     // Nothing to refresh for other testnets
     if (network !== NetworkTypes.mainnet) {
-      return Promise.all([delay(1250)]);
+      return Promise.all([delay(1250), holySavings]);
     }
 
     try {
@@ -41,6 +44,7 @@ export default function useRefreshAccountData() {
         getUniqueTokens,
         refetchSavings(true),
         explorer,
+        holySavings,
       ]);
     } catch (error) {
       logger.log('Error refreshing data', error);

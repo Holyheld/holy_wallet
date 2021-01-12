@@ -90,9 +90,9 @@ const SettingsPages = {
   },
 };
 
-const EmptyButtonPlaceholder = styled.View`
-  flex: 1;
-`;
+// const EmptyButtonPlaceholder = styled.View`
+//   flex: 1;
+// `;
 const Container = styled.View`
   flex: 1;
   overflow: hidden;
@@ -184,17 +184,21 @@ export default function SettingsModal() {
         <Stack.Navigator
           screenOptions={{
             ...settingsOptions,
+            // eslint-disable-next-line react/display-name
+            headerLeft: props => <BackButton {...props} textChevron />,
             headerRight: renderHeaderRight,
-            ...(android && {
-              // eslint-disable-next-line react/display-name
-              headerRight: () => <EmptyButtonPlaceholder />,
-              // eslint-disable-next-line react/display-name
-              headerTitle: props => <SettingsTitle {...props} />,
-              ...(android && {
-                // eslint-disable-next-line react/display-name
-                headerLeft: props => <BackButton {...props} textChevron />,
-              }),
-            }),
+            // eslint-disable-next-line react/display-name
+            headerTitle: props => <SettingsTitle {...props} />,
+            // ...(android && {
+            //   // eslint-disable-next-line react/display-name
+            //   headerRight: () => <EmptyButtonPlaceholder />,
+            //   // eslint-disable-next-line react/display-name
+            //   headerTitle: props => <SettingsTitle {...props} />,
+            //   ...(android && {
+            //     // eslint-disable-next-line react/display-name
+            //     headerLeft: props => <BackButton {...props} textChevron />,
+            //   }),
+            // }),
           }}
         >
           <Stack.Screen

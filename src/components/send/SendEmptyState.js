@@ -43,7 +43,7 @@ const SendEmptyState = () => {
 
   const icon = (
     <Icon
-      color={colors.alpha(colors.blueGreyDark, 0.06)}
+      color={colors.textColor}
       height={88}
       name="send"
       style={{
@@ -60,7 +60,7 @@ const SendEmptyState = () => {
 
   return (
     <Centered
-      backgroundColor={colors.white}
+      backgroundColor={colors.modalBackground}
       flex={1}
       justify="space-between"
       paddingBottom={sheetVerticalOffset + 19}

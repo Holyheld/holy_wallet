@@ -52,6 +52,7 @@ const ProfileImage = styled(ImageAvatar)`
 `;
 
 const WalletProfileDivider = styled(Divider).attrs({
+  backgroundColor: colors.modalBackground,
   borderRadius: 1,
   color: colors.divider,
   inset: false,

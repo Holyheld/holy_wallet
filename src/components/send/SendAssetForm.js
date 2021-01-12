@@ -14,9 +14,9 @@ import { colors, padding, position } from '@rainbow-me/styles';
 import ShadowStack from 'react-native-shadow-stack';
 
 const AssetRowShadow = [
-  [0, 1, 0, colors.transparent, 0.01],
-  [0, 4, 12, colors.transparent, 0.04],
-  [0, 8, 23, colors.transparent, 0.05],
+  [0, 1, 0, colors.modalBackground, 0.01],
+  [0, 4, 12, colors.modalBackground, 0.04],
+  [0, 8, 23, colors.modalBackground, 0.05],
 ];
 
 const Container = styled(Column)`

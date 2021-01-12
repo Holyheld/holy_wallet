@@ -22,6 +22,7 @@ const Container = styled(Row).attrs({ align: 'center' })`
 `;
 
 const FakeNotchThing = styled(ShadowStack).attrs({
+  backgroundColor: colors.modalBackground,
   shadows: FakeNotchShadow,
 })`
   height: ${notchPaddingValue};
@@ -42,6 +43,7 @@ export default function ExchangeOutputField({
   outputFieldRef,
   setOutputAmount,
   testID,
+  disableCurrencySelection,
 }) {
   return (
     <Container>
@@ -49,6 +51,7 @@ export default function ExchangeOutputField({
       <ExchangeField
         address={outputCurrencyAddress}
         amount={outputAmount}
+        disableCurrencySelection={disableCurrencySelection}
         onFocus={onFocus}
         onPressSelectCurrency={onPressSelectOutputCurrency}
         ref={outputFieldRef}

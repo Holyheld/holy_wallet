@@ -48,7 +48,13 @@ const HolySavingsSheet = () => {
   const onWithdraw = useCallback(() => {
     if (!isReadOnlyWallet) {
       navigate(Routes.HOLY_SAVINGS_WITHDRAW_MODAL, {
-        currentSavings: defaultSaving,
+        params: {
+          params: {
+            currentSaving: defaultSaving,
+          },
+          screen: Routes.MAIN_EXCHANGE_SCREEN,
+        },
+        screen: Routes.MAIN_EXCHANGE_NAVIGATOR,
       });
 
       analytics.track('Navigated to HolySavingsWithdrawModal', {
@@ -65,8 +71,7 @@ const HolySavingsSheet = () => {
       navigate(Routes.SAVINGS_DEPOSIT_MODAL, {
         params: {
           params: {
-            defaultInputAsset: defaultSaving.underlying,
-            underlyingPrice: defaultSaving.underlyingPrice,
+            defaultInputCurrency: null,
           },
           screen: Routes.MAIN_EXCHANGE_SCREEN,
         },
@@ -139,7 +144,7 @@ const HolySavingsSheet = () => {
                 <HolySavingsCoinRow
                   additionalShare="0.111"
                   apy={savingsItem.apy}
-                  balance={savingsItem.tokenBalance}
+                  balance={savingsItem.balance}
                   symbol={savingsItem.underlying.symbol}
                 />
               </Column>

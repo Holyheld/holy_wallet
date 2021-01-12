@@ -142,7 +142,7 @@ export const useAnimatedValue = initialValue => {
 const images = [
   {
     delay: 0,
-    id: 'glass',
+    id: 'neon-rainbow',
     rotate: '0deg',
     scale: 0.4,
     source: ios ? { uri: 'neon-rainbow' } : HolyNeonRainbow,
@@ -151,7 +151,7 @@ const images = [
   },
   {
     delay: 20,
-    id: 'stone',
+    id: 'white',
     rotate: '0deg',
     scale: 0.29,
     source: ios ? { uri: 'white' } : HolyWhite,
@@ -160,7 +160,7 @@ const images = [
   },
   {
     delay: 40,
-    id: 'fur',
+    id: 'glass-orange',
     rotate: '0deg',
     scale: 0.4,
     source: ios ? { uri: 'glass-orange' } : HolyGlassOrange,
@@ -169,7 +169,7 @@ const images = [
   },
   {
     delay: 60,
-    id: 'fiber',
+    id: 'glass-rainbow',
     rotate: '-360deg',
     scale: 0.2826666667,
     source: ios ? { uri: 'glass-rainbow' } : HolyGlassRainbow,
@@ -178,7 +178,7 @@ const images = [
   },
   {
     delay: 80,
-    id: 'gold',
+    id: 'neon',
     rotate: '360deg',
     scale: 0.3,
     source: ios ? { uri: 'neon' } : HolyNeon,
@@ -328,13 +328,13 @@ export default function WelcomeScreen() {
     };
   }, [contentAnimation, hideSplashScreen, createWalletButtonAnimation]);
 
-  const buttonStyle = useMemoOne(
-    () => ({
-      transform: [{ scale: createWalletButtonAnimation.current }],
-      zIndex: 10,
-    }),
-    [createWalletButtonAnimation]
-  );
+  // const buttonStyle = useMemoOne(
+  //   () => ({
+  //     transform: [{ scale: createWalletButtonAnimation.current }],
+  //     zIndex: 10,
+  //   }),
+  //   [createWalletButtonAnimation]
+  // );
 
   const contentStyle = useMemoOne(
     () => ({
@@ -358,6 +358,9 @@ export default function WelcomeScreen() {
 
   const createWalletButtonProps = useMemoOne(() => {
     return {
+      darkShadowStyle: {
+        opacity: 0,
+      },
       emoji: 'luggage',
       height: 50,
       shadowStyle: {
@@ -393,7 +396,7 @@ export default function WelcomeScreen() {
         width: 248,
       },
       text: 'I already have one',
-      textColor: colors.white,
+      textColor: colors.textColor,
     };
   }, [rValue]);
 
@@ -405,7 +408,7 @@ export default function WelcomeScreen() {
 
       <ContentWrapper style={contentStyle}>
         <HolyText color={colors.textColor} />
-        <ButtonWrapper style={buttonStyle}>
+        <ButtonWrapper>
           <RainbowButton
             onPress={onCreateWallet}
             testID="new-wallet-button"

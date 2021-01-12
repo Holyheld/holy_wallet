@@ -30,39 +30,7 @@ export default function useWalletSectionsData() {
 
   const { refetchSavings, shouldRefetchSavings } = useSavingsAccount(true);
 
-  // console.log('uniswap');
-  // console.log(uniswap);
-
   const walletSections = useMemo(() => {
-    // TODO: get data from network
-    /*let holySavings = [
-      {
-
-        apy: '2.96',
-        balance:"10",
-        underlying: {
-          symbol: 'yUSD',
-          address: '0x6b175474e89094c44da98b954eedeac495271d0f', // TODO: real address
-        },
-      },
-      {
-        apy: '4.96',
-        balance:"44",
-        underlying: {
-          symbol: 'yCRV',
-          address: '0x6b175474e89094c44da98b954eedeac495271d0f', // TODO: real address
-        },
-      },
-      {
-        apy: '10',
-        balance:"55",
-        underlying: {
-          symbol: '3CRV',
-          address: '0x6b175474e89094c44da98b954eedeac495271d0f', // TODO: real address
-        },
-      }
-    ];*/
-
     let holyTreasury = [{}];
     let holyEarlyBonus = [{}];
     const accountInfo = {

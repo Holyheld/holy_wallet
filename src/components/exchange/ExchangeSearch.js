@@ -102,7 +102,15 @@ const timingConfig = {
 };
 
 const ExchangeSearch = (
-  { isFetching, isSearching, onChangeText, onFocus, searchQuery, testID },
+  {
+    isFetching,
+    isSearching,
+    onChangeText,
+    onFocus,
+    searchQuery,
+    testID,
+    placeholder,
+  },
   ref
 ) => {
   const handleClearInput = useCallback(() => {
@@ -171,7 +179,7 @@ const ExchangeSearch = (
       <SearchInput
         onChangeText={onChangeText}
         onFocus={onFocus}
-        placeholder="Search Uniswap"
+        placeholder={placeholder}
         ref={ref}
         testID={testID + '-input'}
         value={searchQuery}

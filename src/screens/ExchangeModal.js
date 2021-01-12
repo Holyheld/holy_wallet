@@ -594,6 +594,7 @@ export default function ExchangeModal({
               onPressSelectInputCurrency={navigateToSelectInputCurrency}
               setInputAmount={updateInputAmount}
               setNativeAmount={updateNativeAmount}
+              showNative
               testID={testID + '-input'}
             />
             {showOutputField && (

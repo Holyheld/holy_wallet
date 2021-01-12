@@ -1,7 +1,7 @@
 import { Contract } from '@ethersproject/contracts';
 import { captureException } from '@sentry/react-native';
 import { get } from 'lodash';
-import { toHex } from '../../handlers/web3';
+import { toHex, web3Provider } from '../../handlers/web3';
 import ProtocolTypes from '../../helpers/protocolTypes';
 import TransactionStatusTypes from '../../helpers/transactionStatusTypes';
 import TransactionTypes from '../../helpers/transactionTypes';
@@ -10,10 +10,41 @@ import { loadWallet } from '../../model/wallet';
 import { dataAddNewTransaction } from '../../redux/data';
 import { rapsAddOrUpdate } from '../../redux/raps';
 import store from '../../redux/store';
+import { ethUnits } from '../../references';
 import { HOLY_PASSAGE_ABI, HOLY_PASSAGE_ADDRESS } from '../../references/holy';
 import logger from 'logger';
 
 const NOOP = () => undefined;
+
+export const holyMigrateEstimation = async () => {
+  logger.sentry(
+    '[holy migrate estimation] executing holy migration estimation'
+  );
+
+  const { accountAddress } = store.getState().settings;
+
+  logger.sentry('[holy migrate estimation] for address:', accountAddress);
+
+  const holyPassage = new Contract(
+    HOLY_PASSAGE_ADDRESS,
+    HOLY_PASSAGE_ABI,
+    web3Provider
+  );
+
+  try {
+    logger.sentry('holy_migrate estimate');
+    const gasLimit = await holyPassage.estimateGas.migrate({
+      from: accountAddress,
+    });
+    logger.sentry('holy_migrate estimate: ' + gasLimit.toString());
+    return gasLimit ? gasLimit.toString() : ethUnits.basic_migration;
+  } catch (error) {
+    logger.sentry('error holy_migrate estimate');
+    logger.sentry(error);
+    captureException(error);
+    return ethUnits.basic_migration;
+  }
+};
 
 const holyMigrate = async (wallet, currentRap, index, parameters) => {
   logger.log('[holy migrate] start holy migrate!');
@@ -21,7 +52,7 @@ const holyMigrate = async (wallet, currentRap, index, parameters) => {
   const { dispatch } = store;
 
   let gasPrice = get(selectedGasPrice, 'value.amount');
-  const gasLimit = 120000; // TODO: method in contract to estimate migration?
+  const gasLimit = await holyMigrateEstimation();
 
   let migration;
 
