@@ -1,7 +1,7 @@
 ![](https://pbs.twimg.com/profile_banners/1103191459409420288/1573207178/1500x500)
 ## Holyheld — DeFi neobanking service.
 
-Holyheld makes the internet economy easy and available to everyone. The app abstracts blockchain complexity so that you can finally get great financial service with all DeFi benefits. You can earn highest and safest yield on your digital assets with our automatic portfolio management system. You can also send, receive and swap 3000+ digital assets on Ethereum.  We are still at Alpha stage and a lot of features are hidden, but we’re planning to expand. Soon we’ll be offering convenient virtual and physical debit cards, digital assets across all blockchain and networks. 
+Holyheld makes the internet economy easy and available to everyone. The app abstracts blockchain complexity so that you can finally get great financial service with all DeFi benefits. You can earn highest and safest yield on your digital assets with our automatic portfolio management system. You can also send, receive and swap 3000+ digital assets on Ethereum.  
 
 ## What can you do?
 
@@ -26,5 +26,14 @@ Every $HH holder gets claimable bonuses from the treasury that can be used to co
 * **Track your NFT portfolio.**
 Keep track of your digital art portfolio. Holyheld supports ERC721 and ERC1155 tokens, so that you can always check on your beauties. 
 
+## What's next?
+We are still at Alpha stage and a lot of features are hidden, but we’re planning to expand. Soon we’ll be offering:
+* Fiat on/off ramp
+* In-app chat customer support
+* Virtual and physical debit cards
+* Multichain support
+* Portfolio concierge
+* Smart suggestions
+
 ## Credits
-This version of a wallet is based on the best open-source Ethereum wallet that has ever existed - [Rainbow])https://rainbow.me). We are deep fans of the Rainbow and $SOCKS, so we decided to continue the great work done by the open-source community. 
+This version of a wallet is based on the best open-source Ethereum wallet that has ever existed - [Rainbow](https://rainbow.me). We are deep fans of the Rainbow and $SOCKS, so we decided to continue the great work done by the open-source community. 
