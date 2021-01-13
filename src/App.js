@@ -19,7 +19,7 @@ import branch from 'react-native-branch';
 import CodePush from 'react-native-code-push';
 
 import {
-  REACT_APP_SEGMENT_API_WRITE_KEY,
+  // REACT_APP_SEGMENT_API_WRITE_KEY,
   SENTRY_ENDPOINT,
   SENTRY_ENVIRONMENT,
 } from 'react-native-dotenv';
@@ -228,13 +228,13 @@ class App extends Component {
       analytics.identify(identifier);
     }
 
-    await analytics.setup(REACT_APP_SEGMENT_API_WRITE_KEY, {
-      ios: {
-        trackDeepLinks: true,
-      },
-      trackAppLifecycleEvents: true,
-      trackAttributionData: true,
-    });
+    // await analytics.setup(REACT_APP_SEGMENT_API_WRITE_KEY, {
+    //   ios: {
+    //     trackDeepLinks: true,
+    //   },
+    //   trackAppLifecycleEvents: true,
+    //   trackAttributionData: true,
+    // });
   };
 
   handleAppStateChange = async nextAppState => {
