@@ -9,6 +9,7 @@ import {
 } from 'react-native-redash';
 import styled from 'styled-components/primitives';
 import { interpolate } from '../animations';
+import { CoinIcon } from '../coin-icon';
 import { Centered } from '../layout';
 import { Text } from '../text';
 import { padding } from '@rainbow-me/styles';
@@ -21,6 +22,7 @@ const Container = styled(Centered)`
 const MigrateInfo = ({ asset, amount }) => {
   const isVisible = !!(asset && amount);
   const symbol = get(asset, 'symbol');
+  const address = get(asset, 'address');
 
   const prevAmountRef = useRef();
   useEffect(() => {
@@ -76,8 +78,16 @@ const MigrateInfo = ({ asset, amount }) => {
       testID="swap-info"
     >
       <Container>
+        <CoinIcon
+          address={address}
+          flex={0}
+          marginRight={5}
+          size={20}
+          symbol={symbol}
+          testID="swap-info-container"
+        />
         <Text color="grey" size="smedium" weight="medium">
-          Migrating for{' '}
+          Swapping for{' '}
         </Text>
         <Text color="white" size="smedium" weight="semibold">
           {`${amountToDisplay}  ${symbol}`}

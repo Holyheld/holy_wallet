@@ -31,7 +31,8 @@ import createHolyMigrateCompoundRap, {
   estimateHolyMigrateCompound,
 } from '../raps/holyMigrateCompound';
 import { multicallClearState } from '../redux/multicall';
-import { useBlockPolling, useGas } from '@rainbow-me/hooks';
+import { HH_V2_ADDRESS } from '../references/holy';
+import { useAccountSettings, useBlockPolling, useGas } from '@rainbow-me/hooks';
 import Routes from '@rainbow-me/routes';
 import { colors, position } from '@rainbow-me/styles';
 import { backgroundTask } from '@rainbow-me/utils';
@@ -88,10 +89,17 @@ const HolyMigrateModal = ({ holyV1Asset, testID }) => {
   const {
     params: { tabTransitionPosition },
   } = useRoute();
+  const { network } = useAccountSettings();
 
   const amountToMigrate = get(holyV1Asset, 'balance.amount');
   const symbol = get(holyV1Asset, 'symbol');
   const address = get(holyV1Asset, 'address');
+
+  const hhCoinV2 = {
+    address: HH_V2_ADDRESS(network), // from testnet
+    symbol: 'HH',
+    type: 'token',
+  };
 
   const defaultGasLimit = 160000;
   const type = exchangeModalTypes.holyMigrate;
@@ -265,9 +273,7 @@ const HolyMigrateModal = ({ holyV1Asset, testID }) => {
           </FloatingPanel>
           <MigrateInfo
             amount={amountToMigrate}
-            asset={{
-              symbol: symbol,
-            }}
+            asset={hhCoinV2}
             testID="migrate-info-button"
           />
 

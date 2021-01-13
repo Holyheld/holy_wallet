@@ -2,9 +2,14 @@ import { useSelector } from 'react-redux';
 import { createSelector } from 'reselect';
 
 const holySavingsTokens = state => state.holy.savingsTokens;
+const holyEarlyLPBonus = state => state.holy.earlyLPBonus;
 
 const withSavings = holySavingsTokens => {
   return holySavingsTokens;
+};
+
+const withEarlyLPBonus = holyEarlyLPBonus => {
+  return { bonus: holyEarlyLPBonus };
 };
 
 const withSavingsAssetsInWallet = holySavingsTokens => {
@@ -36,8 +41,17 @@ const withHolySavingsAssetsInWalletSelector = createSelector(
   withSavingsAssetsInWallet
 );
 
+const withHolyEarlyLPBonusSelector = createSelector(
+  [holyEarlyLPBonus],
+  withEarlyLPBonus
+);
+
 export function useHolySavings() {
   return useSelector(withHolySavingsSelector);
+}
+
+export function useHolyEarlyLPBonus() {
+  return useSelector(withHolyEarlyLPBonusSelector);
 }
 
 export function useHolySavingsWithBalance() {

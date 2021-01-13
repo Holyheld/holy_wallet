@@ -238,7 +238,10 @@ const parseTransaction = (
     internalTransactions = [ethInternalTransaction];
   }
 
-  if (transaction.type === TransactionTypes.trade) {
+  if (
+    transaction.type === TransactionTypes.trade ||
+    transaction.type === TransactionTypes.migration
+  ) {
     internalTransactions = transformTradeRefund(internalTransactions);
   }
   internalTransactions = internalTransactions.map((internalTxn, index) => {
@@ -405,6 +408,9 @@ export const getTransactionLabel = ({
 
   if (type === TransactionTypes.trade && isFromAccount)
     return TransactionStatusTypes.swapped;
+
+  if (type === TransactionTypes.migration)
+    return TransactionStatusTypes.migrated;
 
   if (type === TransactionTypes.authorize)
     return TransactionStatusTypes.approved;

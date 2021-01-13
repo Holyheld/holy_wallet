@@ -4,6 +4,7 @@ export default {
   deposited: 'deposited',
   depositing: 'depositing',
   failed: 'failed',
+  migrated: 'migrated',
   migrating: 'migrating',
   purchased: 'purchased',
   purchasing: 'purchasing',

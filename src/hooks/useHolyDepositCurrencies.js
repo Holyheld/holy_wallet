@@ -90,9 +90,9 @@ export default function useHolyDepositCurrencies({
       navigate(Routes.CURRENCY_SELECT_SCREEN, {
         category: 'holy savings',
         headerTitle: 'Deposite',
-        onSelectCurrency: updateOutputSaving,
+        onSelectSaving: updateOutputSaving,
         restoreFocusOnSwapModal: () => setParams({ focused: true }),
-        type: currencySelectionTypes.input,
+        type: currencySelectionTypes.output,
         useHolySavingsSelect: true,
       });
       blockInteractions();

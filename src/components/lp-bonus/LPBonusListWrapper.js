@@ -5,10 +5,11 @@ import { OpacityToggler } from '../animations';
 import LPBonusListHeader from './LPBonusListHeader';
 import LPBonusListRow from './LPBonusListRow';
 
-const renderLPBonusListRow = item =>
-  item?.underlying ? (
+const renderLPBonusListRow = item => {
+  return item?.underlying ? (
     <LPBonusListRow key={item?.underlying.symbol} {...item} />
   ) : null;
+};
 
 export default function LPBonusListWrapper({ assets, totalValue = '0' }) {
   const { isLPBonusOpen, toggleOpenLPBonus } = useOpenLPBonus();

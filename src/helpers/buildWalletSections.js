@@ -18,6 +18,7 @@ import {
 } from '../redux/editOptions';
 import { setOpenSmallBalances } from '../redux/openStateSettings';
 import store from '../redux/store';
+import { HH_V2_ADDRESS } from '../references/holy';
 import {
   amountOfShowedCoins,
   buildCoinsList,
@@ -198,16 +199,20 @@ const withBalanceHolySavingsSection = (holySavings, priceOfEther) => {
   return section;
 };
 
-const withBalanceHolyEarlyBonusSection = (earlyBonus, priceOfEther) => {
+const withBalanceHolyEarlyBonusSection = (
+  earlyBonus,
+  network,
+  priceOfEther
+) => {
   let holyBonusAssets = [];
 
   if (priceOfEther) {
     holyBonusAssets = map(earlyBonus, () => {
       return {
-        balance: '0',
+        balance: earlyBonus.bonus,
         underlying: {
-          address: '0x39eae99e685906ff1c11a962a743440d0a1a6e09',
-          symbol: 'HOLY',
+          address: HH_V2_ADDRESS(network),
+          symbol: 'HH',
         },
       };
     });
@@ -382,7 +387,7 @@ const withBalanceSection = (
   //}
 
   //if (networkTypes.mainnet === network) {
-  balanceSectionData.push(holyTreasury);
+  //balanceSectionData.push(holyTreasury);
   //}
 
   //if (networkTypes.mainnet === network) {
@@ -527,7 +532,7 @@ const balanceHolyTreasurySelector = createSelector(
 );
 
 const balanceHolyEarlyBonusSelector = createSelector(
-  [holyEarlyLPBonusSelector, ethPriceSelector],
+  [holyEarlyLPBonusSelector, networkSelector, ethPriceSelector],
   withBalanceHolyEarlyBonusSection
 );
 

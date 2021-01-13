@@ -5,6 +5,7 @@ import { rapsAddOrUpdate } from '../redux/raps';
 import store from '../redux/store';
 import depositCompound from './actions/depositCompound';
 import holyMigrate from './actions/holy_migrate';
+import { holySavingsWithdraw } from './actions/holy_savings_withdraw';
 import swap from './actions/swap';
 import unlock from './actions/unlock';
 import withdrawCompound from './actions/withdrawCompound';
@@ -41,7 +42,7 @@ const findActionByType = type => {
       return holyMigrate;
     case RapActionTypes.holySavingsWithdraw:
       // TODO: do holy migrate
-      return NOOP;
+      return holySavingsWithdraw;
     case RapActionTypes.holySavingsDeposit:
       // TODO: do holy migrate
       return NOOP;
