@@ -1,4 +1,4 @@
-package me.rainbow;
+package com.holyheld;
 import android.os.Bundle;
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;
@@ -6,7 +6,7 @@ import com.facebook.react.ReactRootView;
 import com.swmansion.gesturehandler.react.RNGestureHandlerEnabledRootView;
 import org.devio.rn.splashscreen.SplashScreen;
 import io.branch.rnbranch.*;
-import me.rainbow.NativeModules.RNBackHandler.RNBackHandlerPackage;
+import com.holyheld.NativeModules.RNBackHandler.RNBackHandlerPackage;
 import android.webkit.WebView;
 
 import android.content.Intent;
@@ -26,7 +26,7 @@ public class MainActivity extends ReactActivity {
    */
   @Override
   protected String getMainComponentName() {
-    return "Rainbow";
+    return "HolyWallet";
   }
 
   @Override
@@ -47,7 +47,7 @@ public class MainActivity extends ReactActivity {
       super.onNewIntent(intent);
       setIntent(intent);
     }
-  
+
   @Override
   protected ReactActivityDelegate createReactActivityDelegate() {
     return new ReactActivityDelegate(this, getMainComponentName()) {

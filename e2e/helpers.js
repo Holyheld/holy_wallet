@@ -94,7 +94,7 @@ export async function scrollUpTo(elementId, distance, direction) {
 }
 
 export async function goToURL(inputURL) {
-  await device.openURL({ sourceApp: 'me.rainbow', url: inputURL });
+  await device.openURL({ sourceApp: 'com.holyheld', url: inputURL });
 }
 
 export function checkIfVisible(elementId) {

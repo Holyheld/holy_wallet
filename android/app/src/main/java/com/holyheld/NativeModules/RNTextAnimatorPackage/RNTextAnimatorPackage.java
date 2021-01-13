@@ -1,4 +1,4 @@
-package me.rainbow.NativeModules.RNTextAnimatorPackage;
+package com.holyheld.NativeModules.RNTextAnimatorPackage;
 
 import android.graphics.Color;
 import android.os.Build;

@@ -1,4 +1,4 @@
-package me.rainbow;
+package com.holyheld;
 
 import android.app.Application;
 import android.content.Context;
@@ -12,11 +12,11 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import com.microsoft.codepush.react.CodePush;
 import io.branch.rnbranch.RNBranchModule;
-import me.rainbow.NativeModules.RNBip39.RNBip39Package;
-import me.rainbow.NativeModules.RNBackHandler.RNBackHandlerPackage;
-import me.rainbow.NativeModules.RNReview.RNReviewPackage;
-import me.rainbow.NativeModules.RNTextAnimatorPackage.RNTextAnimatorPackage;
-import me.rainbow.NativeModules.RNZoomableButton.RNZoomableButtonPackage;
+import com.holyheld.NativeModules.RNBip39.RNBip39Package;
+import com.holyheld.NativeModules.RNBackHandler.RNBackHandlerPackage;
+import com.holyheld.NativeModules.RNReview.RNReviewPackage;
+import com.holyheld.NativeModules.RNTextAnimatorPackage.RNTextAnimatorPackage;
+import com.holyheld.NativeModules.RNZoomableButton.RNZoomableButtonPackage;
 
 import com.facebook.react.bridge.JSIModulePackage;
 import com.swmansion.gesturehandler.react.RNZoomableButtonManager;
@@ -92,7 +92,7 @@ public class MainApplication extends Application implements ReactApplication {
          We use reflection here to pick up the class that initializes Flipper,
         since Flipper library is not available in release mode
         */
-        Class<?> aClass = Class.forName("me.rainbow.ReactNativeFlipper");
+        Class<?> aClass = Class.forName("com.holyheld.ReactNativeFlipper");
         aClass
             .getMethod("initializeFlipper", Context.class, ReactInstanceManager.class)
             .invoke(null, context, reactInstanceManager);

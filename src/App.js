@@ -19,7 +19,7 @@ import branch from 'react-native-branch';
 import CodePush from 'react-native-code-push';
 
 import {
-  // REACT_APP_SEGMENT_API_WRITE_KEY,
+  REACT_APP_SEGMENT_API_WRITE_KEY,
   SENTRY_ENDPOINT,
   SENTRY_ENVIRONMENT,
 } from 'react-native-dotenv';
@@ -79,8 +79,8 @@ if (__DEV__) {
     const dist = VersionNumber.buildVersion;
     // In order for sourcemaps to work on android,
     // the release needs to be named with the following format
-    // me.holy@1.0+4
-    const releaseName = `me.holy@${VersionNumber.appVersion}+${dist}`;
+    // com.holyheld@1.0+4
+    const releaseName = `com.holyheld@${VersionNumber.appVersion}+${dist}`;
     sentryOptions.release = releaseName;
     // and we also need to manually set the dist to the versionCode value
     sentryOptions.dist = dist.toString();
@@ -92,7 +92,7 @@ CodePush.getUpdateMetadata(CodePush.UpdateState.RUNNING).then(update => {
   if (update) {
     // eslint-disable-next-line import/no-deprecated
     Sentry.setRelease(
-      `me.rainbow-${VersionNumber.appVersion}-codepush:${update.label}`
+      `com.holyheld-${VersionNumber.appVersion}-codepush:${update.label}`
     );
   }
 });
@@ -228,13 +228,13 @@ class App extends Component {
       analytics.identify(identifier);
     }
 
-    // await analytics.setup(REACT_APP_SEGMENT_API_WRITE_KEY, {
-    //   ios: {
-    //     trackDeepLinks: true,
-    //   },
-    //   trackAppLifecycleEvents: true,
-    //   trackAttributionData: true,
-    // });
+    await analytics.setup(REACT_APP_SEGMENT_API_WRITE_KEY, {
+      ios: {
+        trackDeepLinks: true,
+      },
+      trackAppLifecycleEvents: true,
+      trackAttributionData: true,
+    });
   };
 
   handleAppStateChange = async nextAppState => {
@@ -293,4 +293,4 @@ const AppWithCodePush = CodePush({
   installMode: CodePush.InstallMode.ON_NEXT_RESUME,
 })(AppWithRedux);
 
-AppRegistry.registerComponent('Rainbow', () => AppWithCodePush);
+AppRegistry.registerComponent('HolyWallet', () => AppWithCodePush);

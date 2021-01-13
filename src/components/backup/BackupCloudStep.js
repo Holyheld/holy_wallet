@@ -31,13 +31,13 @@ import logger from 'logger';
 
 const DescriptionText = styled(Text).attrs(({ isTinyPhone }) => ({
   align: 'center',
-  color: colors.blueGreyDark50,
+  color: colors.textColor,
   lineHeight: 'looser',
   size: isTinyPhone ? 'lmedium' : 'large',
 }))``;
 
 const ImportantText = styled(DescriptionText).attrs({
-  color: colors.blueGreyDark60,
+  color: colors.textColorPrimary,
   weight: 'medium',
 })``;
 
@@ -52,7 +52,7 @@ const Masthead = styled(Centered).attrs({
 const MastheadIcon = styled(GradientText).attrs({
   align: 'center',
   angle: false,
-  colors: colors.gradients.rainbow,
+  colors: [colors.textColorPrimary, colors.textColorPrimary],
   end: { x: 0, y: 0.5 },
   size: 43,
   start: { x: 1, y: 0.5 },
@@ -61,6 +61,7 @@ const MastheadIcon = styled(GradientText).attrs({
 })``;
 
 const Title = styled(Text).attrs(({ isTinyPhone }) => ({
+  color: colors.textColorTitle,
   size: isTinyPhone ? 'large' : 'big',
   weight: 'bold',
 }))`

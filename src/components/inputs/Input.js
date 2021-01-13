@@ -4,8 +4,8 @@ import styled from 'styled-components/primitives';
 import { buildTextStyles, colors } from '@rainbow-me/styles';
 
 const defaultSelectionColor = ios
-  ? colors.appleBlue
-  : colors.appleBlueTransparent;
+  ? colors.textColorPrimary
+  : colors.textColorPrimary;
 
 const TextInput = styled(TextInputPrimitive)`
   /* our Input uses same styling system as our <Text /> component */

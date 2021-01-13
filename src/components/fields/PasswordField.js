@@ -32,12 +32,13 @@ const PasswordInput = styled(Input).attrs({
   autoCompleteType: 'password',
   blurOnSubmit: false,
   passwordRules: `minlength: ${cloudBackupPasswordMinLength};`,
-  placeholderTextColor: colors.alpha(colors.blueGreyDark, 0.4),
+  placeholderTextColor: colors.textColorMuted,
   secureTextEntry: true,
   selectTextOnFocus: true,
   size: 'large',
   type: 'password',
   weight: 'semibold',
+  width: 'auto',
 })`
   ${padding(0, 40, 2.5, 19)};
   height: 100%;

@@ -237,7 +237,7 @@ export default function SettingsSection({
         {isReviewAvailable && (
           <ListItem
             icon={<Emoji name="red_heart" />}
-            label="Review Rainbow"
+            label="Review Holyheld"
             onPress={onPressReview}
             testID="review-section"
           />

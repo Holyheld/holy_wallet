@@ -1,4 +1,4 @@
-package me.rainbow.NativeModules.RNZoomableButton;
+package com.holyheld.NativeModules.RNZoomableButton;
 
 import com.facebook.react.ReactPackage;
 import com.facebook.react.bridge.NativeModule;
