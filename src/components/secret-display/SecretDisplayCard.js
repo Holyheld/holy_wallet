@@ -1,36 +1,11 @@
 import { times } from 'lodash';
 import React, { useMemo } from 'react';
-import LinearGradient from 'react-native-linear-gradient';
 import styled from 'styled-components/primitives';
 import CopyTooltip from '../copy-tooltip';
 import { Centered, ColumnWithMargins, Row, RowWithMargins } from '../layout';
 import { Text } from '../text';
 import WalletTypes from '@rainbow-me/helpers/walletTypes';
-import { colors, fonts, padding, position } from '@rainbow-me/styles';
-import ShadowStack from 'react-native-shadow-stack';
-
-const CardBorderRadius = 25;
-
-const BackgroundGradient = styled(LinearGradient).attrs({
-  // colors: colors.gradients.offWhite,
-  colors: [colors.modalBackgroundLighter, colors.modalBackgroundLighter],
-  end: { x: 0.5, y: 1 },
-  start: { x: 0.5, y: 0 },
-})`
-  ${position.cover};
-  border-radius: ${CardBorderRadius};
-`;
-
-const CardShadow = styled(ShadowStack).attrs({
-  ...position.coverAsObject,
-  borderRadius: CardBorderRadius,
-  shadows: [
-    [0, 10, 30, colors.dark, 0.1],
-    [0, 5, 15, colors.dark, 0.04],
-  ],
-})`
-  elevation: 15;
-`;
+import { colors, fonts, padding } from '@rainbow-me/styles';
 
 const Content = styled(Centered)`
   ${padding(19, 30, 24)};
@@ -89,12 +64,6 @@ function SeedWordGrid({ seed }) {
 export default function SecretDisplayCard({ seed, type }) {
   return (
     <Centered>
-      {ios && (
-        <>
-          <CardShadow />
-          <BackgroundGradient />
-        </>
-      )}
       <Content>
         <CopyTooltip
           textColor={colors.textColorPrimary}

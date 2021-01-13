@@ -62,8 +62,8 @@ def flipper_post_install(installer)
  end
 end
 
-target 'Rainbow' do
-  # Pods for Rainbow
+target 'Holyheld' do
+  # Pods for Holyheld
   config = use_native_modules!
   use_react_native!(:path => config["reactNativePath"])
 

@@ -18,7 +18,6 @@
 		15E531D5242B28EF00797B89 /* UIImageViewWithPersistentAnimations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E531D4242B28EF00797B89 /* UIImageViewWithPersistentAnimations.swift */; };
 		15E531DA242DAB7100797B89 /* NotificationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 15E531D9242DAB7100797B89 /* NotificationManager.m */; };
 		24979E8920F84250007EB0DA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 24979E7720F84004007EB0DA /* GoogleService-Info.plist */; };
-		356973DFA8A8728D633A27DA /* libPods-Rainbow.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 37DDCE5B5EFF34936F06C8B8 /* libPods-Rainbow.a */; };
 		3CBE29CD2381E43900BE05AC /* Dummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBE29CC2381E43900BE05AC /* Dummy.swift */; };
 		6630540924A38A1900E5B030 /* RainbowText.m in Sources */ = {isa = PBXBuildFile; fileRef = 6630540824A38A1900E5B030 /* RainbowText.m */; };
 		6635730624939991006ACFA6 /* SafeStoreReview.m in Sources */ = {isa = PBXBuildFile; fileRef = 6635730524939991006ACFA6 /* SafeStoreReview.m */; };
@@ -32,6 +31,7 @@
 		A4277D9F23CBD1910042BAF4 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4277D9E23CBD1910042BAF4 /* Extensions.swift */; };
 		A4277DA323CFE85F0042BAF4 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4277DA223CFE85F0042BAF4 /* Theme.swift */; };
 		A44A4EEE23EC928900B543F1 /* CoinIconWithProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44A4EED23EC928900B543F1 /* CoinIconWithProgressBar.swift */; };
+		A459C86705A097D46D6A2006 /* libPods-Holyheld.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 044A5CA04B2CDBFA174F531B /* libPods-Holyheld.a */; };
 		A4704B4823C546DA00E50E4B /* TransactionListViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4704B4023C546D900E50E4B /* TransactionListViewCell.swift */; };
 		A4704B4923C546DA00E50E4B /* TransactionListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4704B4123C546D900E50E4B /* TransactionListView.swift */; };
 		A4704B4D23C546DA00E50E4B /* TransactionListViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4704B4623C546D900E50E4B /* TransactionListViewCell.xib */; };
@@ -64,21 +64,21 @@
 /* Begin PBXFileReference section */
 		008F07F21AC5B25A0029DE68 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		00E356F21AD99517003FC87E /* RainbowTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RainbowTests.m; sourceTree = "<group>"; };
-		11CCA3399B351ABE3E5296FE /* Pods-Rainbow.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rainbow.release.xcconfig"; path = "Target Support Files/Pods-Rainbow/Pods-Rainbow.release.xcconfig"; sourceTree = "<group>"; };
-		13B07F961A680F5B00A75B9A /* Rainbow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Rainbow.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = Rainbow/AppDelegate.h; sourceTree = "<group>"; };
-		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = Rainbow/AppDelegate.mm; sourceTree = "<group>"; };
+		00E356F21AD99517003FC87E /* HolyheldTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HolyheldTests.m; sourceTree = "<group>"; };
+		044A5CA04B2CDBFA174F531B /* libPods-Holyheld.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Holyheld.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07F961A680F5B00A75B9A /* Holyheld.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Holyheld.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = Holyheld/AppDelegate.h; sourceTree = "<group>"; };
+		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = Holyheld/AppDelegate.mm; sourceTree = "<group>"; };
 		13B07FB21A68108700A75B9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Rainbow/Images.xcassets; sourceTree = "<group>"; };
-		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Rainbow/Info.plist; sourceTree = "<group>"; };
-		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Rainbow/main.m; sourceTree = "<group>"; };
+		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Holyheld/Images.xcassets; sourceTree = "<group>"; };
+		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Holyheld/Info.plist; sourceTree = "<group>"; };
+		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Holyheld/main.m; sourceTree = "<group>"; };
 		1539422724C7C7E100E4A9D1 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		1539422C24C7CF9300E4A9D1 /* SettingsBundleHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsBundleHelper.swift; sourceTree = "<group>"; };
 		153D1AAB24777130007E4723 /* TransactionListLoadingViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionListLoadingViewCell.swift; sourceTree = "<group>"; };
 		153D1AAD24777214007E4723 /* TransactionListLoadingViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TransactionListLoadingViewCell.xib; sourceTree = "<group>"; };
-		157155032418733F009B698B /* RainbowRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = RainbowRelease.entitlements; path = Rainbow/RainbowRelease.entitlements; sourceTree = "<group>"; };
-		157155042418734C009B698B /* RainbowDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = RainbowDebug.entitlements; path = Rainbow/RainbowDebug.entitlements; sourceTree = "<group>"; };
+		157155032418733F009B698B /* HolyheldRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = HolyheldRelease.entitlements; path = Holyheld/HolyheldRelease.entitlements; sourceTree = "<group>"; };
+		157155042418734C009B698B /* HolyheldDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = HolyheldDebug.entitlements; path = Holyheld/HolyheldDebug.entitlements; sourceTree = "<group>"; };
 		15DC38CD247E0E0900919009 /* release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = release.xcconfig; sourceTree = SOURCE_ROOT; };
 		15DC38CE247E0E0900919009 /* debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = debug.xcconfig; sourceTree = SOURCE_ROOT; };
 		15DC38CF247E0E0A00919009 /* localrelease.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = localrelease.xcconfig; sourceTree = SOURCE_ROOT; };
@@ -98,12 +98,9 @@
 		24979E7C20F84004007EB0DA /* FirebaseCoreDiagnostics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseCoreDiagnostics.framework; path = Frameworks/FirebaseCoreDiagnostics.framework; sourceTree = "<group>"; };
 		24979E7D20F84005007EB0DA /* module.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; name = module.modulemap; path = Frameworks/module.modulemap; sourceTree = "<group>"; };
 		24979E7E20F84005007EB0DA /* nanopb.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = nanopb.framework; path = Frameworks/nanopb.framework; sourceTree = "<group>"; };
-		2837FCCEA7D33A4F128B7574 /* Pods-Rainbow.localrelease.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rainbow.localrelease.xcconfig"; path = "Target Support Files/Pods-Rainbow/Pods-Rainbow.localrelease.xcconfig"; sourceTree = "<group>"; };
-		37DDCE5B5EFF34936F06C8B8 /* libPods-Rainbow.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Rainbow.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		3C379D5D20FD1F92009AF81F /* Rainbow.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = Rainbow.entitlements; path = Rainbow/Rainbow.entitlements; sourceTree = "<group>"; };
+		3C379D5D20FD1F92009AF81F /* Holyheld.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = Holyheld.entitlements; path = Holyheld/Holyheld.entitlements; sourceTree = "<group>"; };
 		3CBE29CB2381E43800BE05AC /* Rainbow-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Rainbow-Bridging-Header.h"; sourceTree = "<group>"; };
 		3CBE29CC2381E43900BE05AC /* Dummy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dummy.swift; sourceTree = "<group>"; };
-		466CDCBFE61F83D2AE1C7410 /* Pods-Rainbow.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rainbow.debug.xcconfig"; path = "Target Support Files/Pods-Rainbow/Pods-Rainbow.debug.xcconfig"; sourceTree = "<group>"; };
 		6630540824A38A1900E5B030 /* RainbowText.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RainbowText.m; sourceTree = "<group>"; };
 		6635730524939991006ACFA6 /* SafeStoreReview.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SafeStoreReview.m; sourceTree = "<group>"; };
 		668A9E253DAF444A90ECB997 /* SFMono-Medium.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SFMono-Medium.otf"; path = "../src/assets/fonts/SFMono-Medium.otf"; sourceTree = "<group>"; };
@@ -116,6 +113,7 @@
 		66A28EAF24CAF1B500410A88 /* TestFlight.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestFlight.m; sourceTree = "<group>"; };
 		66A29CCA2511074500481F4A /* ReaHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReaHeader.h; sourceTree = SOURCE_ROOT; };
 		66FEC91523EDA13F00A0F367 /* RoundedCornerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedCornerView.swift; sourceTree = "<group>"; };
+		7C94689C7258EDA2A0F3FCB7 /* Pods-Holyheld.localrelease.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Holyheld.localrelease.xcconfig"; path = "Target Support Files/Pods-Holyheld/Pods-Holyheld.localrelease.xcconfig"; sourceTree = "<group>"; };
 		95F2888C850F40C8A26E083B /* SFMono-Regular.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SFMono-Regular.otf"; path = "../src/assets/fonts/SFMono-Regular.otf"; sourceTree = "<group>"; };
 		98AED33BAB4247CEBEF8464D /* libz.tbd */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		9DEADFA4826D4D0BAA950D21 /* libRNFIRMessaging.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNFIRMessaging.a; sourceTree = "<group>"; };
@@ -142,7 +140,6 @@
 		A4D04BA823D12F99008C1DEC /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		A4D04BAB23D12FD5008C1DEC /* ButtonManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ButtonManager.m; sourceTree = "<group>"; };
 		A4F8DACA23DF85DF00560E47 /* TransactionListBaseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionListBaseCell.swift; sourceTree = "<group>"; };
-		A8846B6B5BC96732D5A4A107 /* Pods-Rainbow.staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rainbow.staging.xcconfig"; path = "Target Support Files/Pods-Rainbow/Pods-Rainbow.staging.xcconfig"; sourceTree = "<group>"; };
 		AA6228EA24272B200078BDAA /* SF-Pro-Rounded-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SF-Pro-Rounded-Semibold.otf"; path = "../src/assets/fonts/SF-Pro-Rounded-Semibold.otf"; sourceTree = "<group>"; };
 		AA6228EB24272B200078BDAA /* SF-Pro-Rounded-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SF-Pro-Rounded-Bold.otf"; path = "../src/assets/fonts/SF-Pro-Rounded-Bold.otf"; sourceTree = "<group>"; };
 		AA6228EC24272B200078BDAA /* SF-Pro-Rounded-Heavy.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SF-Pro-Rounded-Heavy.otf"; path = "../src/assets/fonts/SF-Pro-Rounded-Heavy.otf"; sourceTree = "<group>"; };
@@ -150,6 +147,9 @@
 		AA6228EE24272B200078BDAA /* SF-Pro-Rounded-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SF-Pro-Rounded-Regular.otf"; path = "../src/assets/fonts/SF-Pro-Rounded-Regular.otf"; sourceTree = "<group>"; };
 		B0C692B061D7430D8194DC98 /* ToolTipMenuTests.xctest */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = ToolTipMenuTests.xctest; sourceTree = "<group>"; };
 		D755E71324B04FEE9C691D14 /* libRNFirebase.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNFirebase.a; sourceTree = "<group>"; };
+		E34D361C362B17C346CBF41F /* Pods-Holyheld.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Holyheld.debug.xcconfig"; path = "Target Support Files/Pods-Holyheld/Pods-Holyheld.debug.xcconfig"; sourceTree = "<group>"; };
+		E4ECD24D00E22F3AC61ECC95 /* Pods-Holyheld.staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Holyheld.staging.xcconfig"; path = "Target Support Files/Pods-Holyheld/Pods-Holyheld.staging.xcconfig"; sourceTree = "<group>"; };
+		E55AFA63AF0128422038A7F7 /* Pods-Holyheld.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Holyheld.release.xcconfig"; path = "Target Support Files/Pods-Holyheld/Pods-Holyheld.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
@@ -161,20 +161,20 @@
 			files = (
 				ED2971652150620600B7C4FE /* JavaScriptCore.framework in Frameworks */,
 				C72F456C99A646399192517D /* libz.tbd in Frameworks */,
-				356973DFA8A8728D633A27DA /* libPods-Rainbow.a in Frameworks */,
+				A459C86705A097D46D6A2006 /* libPods-Holyheld.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		00E356EF1AD99517003FC87E /* RainbowTests */ = {
+		00E356EF1AD99517003FC87E /* HolyheldTests */ = {
 			isa = PBXGroup;
 			children = (
-				00E356F21AD99517003FC87E /* RainbowTests.m */,
+				00E356F21AD99517003FC87E /* HolyheldTests.m */,
 				00E356F01AD99517003FC87E /* Supporting Files */,
 			);
-			path = RainbowTests;
+			path = HolyheldTests;
 			sourceTree = "<group>";
 		};
 		00E356F01AD99517003FC87E /* Supporting Files */ = {
@@ -185,18 +185,18 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		13B07FAE1A68108700A75B9A /* Rainbow */ = {
+		13B07FAE1A68108700A75B9A /* Holyheld */ = {
 			isa = PBXGroup;
 			children = (
 				1539422B24C7CF7B00E4A9D1 /* Settings */,
 				66A1FEAE24AB63D600C3F539 /* RNCoolModals */,
 				15E531D7242DAB3500797B89 /* NSNotifications */,
 				15E531D6242B28F800797B89 /* Animations */,
-				157155042418734C009B698B /* RainbowDebug.entitlements */,
-				157155032418733F009B698B /* RainbowRelease.entitlements */,
+				157155042418734C009B698B /* HolyheldDebug.entitlements */,
+				157155032418733F009B698B /* HolyheldRelease.entitlements */,
 				A4D04BA723D12F27008C1DEC /* Button */,
 				A4277DA023CBD3590042BAF4 /* Transactions */,
-				3C379D5D20FD1F92009AF81F /* Rainbow.entitlements */,
+				3C379D5D20FD1F92009AF81F /* Holyheld.entitlements */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.mm */,
@@ -212,7 +212,7 @@
 				1539422724C7C7E100E4A9D1 /* Settings.bundle */,
 				66A28EAF24CAF1B500410A88 /* TestFlight.m */,
 			);
-			name = Rainbow;
+			name = Holyheld;
 			sourceTree = "<group>";
 		};
 		1539422B24C7CF7B00E4A9D1 /* Settings */ = {
@@ -281,7 +281,7 @@
 				24979E7E20F84005007EB0DA /* nanopb.framework */,
 				24979E3620F84003007EB0DA /* Protobuf.framework */,
 				98AED33BAB4247CEBEF8464D /* libz.tbd */,
-				37DDCE5B5EFF34936F06C8B8 /* libPods-Rainbow.a */,
+				044A5CA04B2CDBFA174F531B /* libPods-Holyheld.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -310,9 +310,9 @@
 			isa = PBXGroup;
 			children = (
 				15DC38CC247E0DCC00919009 /* Config */,
-				13B07FAE1A68108700A75B9A /* Rainbow */,
+				13B07FAE1A68108700A75B9A /* Holyheld */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
-				00E356EF1AD99517003FC87E /* RainbowTests */,
+				00E356EF1AD99517003FC87E /* HolyheldTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				DCAC1D8CC45E468FBB7E1395 /* Resources */,
@@ -327,7 +327,7 @@
 		83CBBA001A601CBA00E9B192 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				13B07F961A680F5B00A75B9A /* Rainbow.app */,
+				13B07F961A680F5B00A75B9A /* Holyheld.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -397,10 +397,10 @@
 		C640359C0E6575CE0A7ECD73 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				466CDCBFE61F83D2AE1C7410 /* Pods-Rainbow.debug.xcconfig */,
-				11CCA3399B351ABE3E5296FE /* Pods-Rainbow.release.xcconfig */,
-				2837FCCEA7D33A4F128B7574 /* Pods-Rainbow.localrelease.xcconfig */,
-				A8846B6B5BC96732D5A4A107 /* Pods-Rainbow.staging.xcconfig */,
+				E34D361C362B17C346CBF41F /* Pods-Holyheld.debug.xcconfig */,
+				E55AFA63AF0128422038A7F7 /* Pods-Holyheld.release.xcconfig */,
+				7C94689C7258EDA2A0F3FCB7 /* Pods-Holyheld.localrelease.xcconfig */,
+				E4ECD24D00E22F3AC61ECC95 /* Pods-Holyheld.staging.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -422,9 +422,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		13B07F861A680F5B00A75B9A /* Rainbow */ = {
+		13B07F861A680F5B00A75B9A /* Holyheld */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "Rainbow" */;
+			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "Holyheld" */;
 			buildPhases = (
 				B2BF48CC79AEFAAAA7A76369 /* [CP] Check Pods Manifest.lock */,
 				13B07F871A680F5B00A75B9A /* Sources */,
@@ -439,9 +439,9 @@
 			);
 			dependencies = (
 			);
-			name = Rainbow;
+			name = Holyheld;
 			productName = "Hello World";
-			productReference = 13B07F961A680F5B00A75B9A /* Rainbow.app */;
+			productReference = 13B07F961A680F5B00A75B9A /* Holyheld.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -454,7 +454,7 @@
 				ORGANIZATIONNAME = Facebook;
 				TargetAttributes = {
 					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = L74NQAQB8H;
+						DevelopmentTeam = 8B4LT9GVCS;
 						LastSwiftMigration = 1120;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -468,7 +468,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "Rainbow" */;
+			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "Holyheld" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -482,7 +482,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				13B07F861A680F5B00A75B9A /* Rainbow */,
+				13B07F861A680F5B00A75B9A /* Holyheld */,
 			);
 		};
 /* End PBXProject section */
@@ -525,7 +525,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export SENTRY_PROPERTIES=sentry.properties\nexport NODE_ARGS=--max-old-space-size=2048\nif [[ ! \"$CONFIGURATION\" = *Debug* ]]; then\n    DEST=$CONFIGURATION_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH\n    export EXTRA_PACKAGER_ARGS=\"--sourcemap-output $DEST/main.jsbundle.map\"\nfi\n\n../node_modules/@sentry/cli/bin/sentry-cli react-native xcode  ../node_modules/react-native/scripts/react-native-xcode.sh\n\nif [[ ! \"$CONFIGURATION\" = *Debug* ]]; then\n    cp $DEST/main.jsbundle* ../ios/\nfi\n";
+			shellScript = "export PATH=\"$PATH:/Users/sine/.nvm/versions/node/v12.20.1/bin\"\nexport SENTRY_PROPERTIES=sentry.properties\nexport NODE_ARGS=--max-old-space-size=2048\nif [[ ! \"$CONFIGURATION\" = *Debug* ]]; then\n    DEST=$CONFIGURATION_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH\n    export EXTRA_PACKAGER_ARGS=\"--sourcemap-output $DEST/main.jsbundle.map\"\nfi\n\n../node_modules/@sentry/cli/bin/sentry-cli react-native xcode  ../node_modules/react-native/scripts/react-native-xcode.sh\n\nif [[ ! \"$CONFIGURATION\" = *Debug* ]]; then\n    cp $DEST/main.jsbundle* ../ios/\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		9FF961FEA7AF435FA18ED988 /* Upload Debug Symbols to Sentry */ = {
@@ -540,7 +540,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export SENTRY_PROPERTIES=sentry.properties\n../node_modules/@sentry/cli/bin/sentry-cli upload-dsym";
+			shellScript = "export PATH=\"$PATH:/Users/sine/.nvm/versions/node/v12.20.1/bin\"\nexport SENTRY_PROPERTIES=sentry.properties\n../node_modules/@sentry/cli/bin/sentry-cli upload-dsym\n";
 		};
 		A4451ED5032E4036E311CE0C /* [CP-User] [RNFB] Crashlytics Configuration */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -567,7 +567,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Rainbow-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-Holyheld-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -580,7 +580,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Rainbow/Pods-Rainbow-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Holyheld/Pods-Holyheld-resources.sh",
 				"${PODS_CONFIGURATION_BUILD_DIR}/RNImageCropPicker/QBImagePicker.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/React-Core/AccessibilityResources.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/TOCropViewController/TOCropViewControllerBundle.bundle",
@@ -593,7 +593,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Rainbow/Pods-Rainbow-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Holyheld/Pods-Holyheld-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -649,7 +649,7 @@
 				13B07FB21A68108700A75B9A /* Base */,
 			);
 			name = LaunchScreen.xib;
-			path = Rainbow;
+			path = Holyheld;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -657,19 +657,19 @@
 /* Begin XCBuildConfiguration section */
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 466CDCBFE61F83D2AE1C7410 /* Pods-Rainbow.debug.xcconfig */;
+			baseConfigurationReference = E34D361C362B17C346CBF41F /* Pods-Holyheld.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_OPTIMIZATION = time;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = Rainbow/RainbowDebug.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Holyheld/HolyheldDebug.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEAD_CODE_STRIPPING = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = L74NQAQB8H;
+				DEVELOPMENT_TEAM = 8B4LT9GVCS;
 				ENABLE_BITCODE = NO;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -699,7 +699,7 @@
 					"$(SRCROOT)/../node_modules/react-native-firebase/ios/RNFirebase/**",
 					"$(SRCROOT)/../node_modules/react-native/Libraries/LinkingIOS/**",
 				);
-				INFOPLIST_FILE = Rainbow/Info.plist;
+				INFOPLIST_FILE = Holyheld/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
@@ -707,7 +707,7 @@
 					"$(PROJECT_DIR)",
 				);
 				LLVM_LTO = YES;
-				MARKETING_VERSION = 1.2.41;
+				MARKETING_VERSION = 1.2.42;
 				OTHER_CFLAGS = (
 					"$(inherited)",
 					"-DFB_SONARKIT_ENABLED=1",
@@ -717,8 +717,8 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = me.rainbow;
-				PRODUCT_NAME = Rainbow;
+				PRODUCT_BUNDLE_IDENTIFIER = com.holyheld;
+				PRODUCT_NAME = Holyheld;
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Rainbow-Bridging-Header.h";
@@ -730,18 +730,18 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 11CCA3399B351ABE3E5296FE /* Pods-Rainbow.release.xcconfig */;
+			baseConfigurationReference = E55AFA63AF0128422038A7F7 /* Pods-Holyheld.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_OPTIMIZATION = "";
 				CLANG_ENABLE_MODULES = YES;
 				CODEPUSH_KEY = "CHq9hB40PBZqHTxL-f-Wd_rK4anl1e7a8912-936f-4ce7-8505-32a075039f51";
-				CODE_SIGN_ENTITLEMENTS = Rainbow/RainbowRelease.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CODE_SIGN_ENTITLEMENTS = Holyheld/HolyheldRelease.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = L74NQAQB8H;
+				DEVELOPMENT_TEAM = 8B4LT9GVCS;
 				ENABLE_BITCODE = NO;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -759,7 +759,7 @@
 					"$(SRCROOT)/../node_modules/react-native-firebase/ios/RNFirebase/**",
 					"$(SRCROOT)/../node_modules/react-native/Libraries/LinkingIOS/**",
 				);
-				INFOPLIST_FILE = Rainbow/Info.plist;
+				INFOPLIST_FILE = Holyheld/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
@@ -767,7 +767,7 @@
 					"$(PROJECT_DIR)",
 				);
 				LLVM_LTO = YES;
-				MARKETING_VERSION = 1.2.41;
+				MARKETING_VERSION = 1.2.42;
 				OTHER_CFLAGS = (
 					"$(inherited)",
 					"-DFB_SONARKIT_ENABLED=1",
@@ -777,10 +777,10 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = me.rainbow;
-				PRODUCT_NAME = Rainbow;
+				PRODUCT_BUNDLE_IDENTIFIER = com.holyheld;
+				PRODUCT_NAME = Holyheld;
 				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "match AppStore me.rainbow";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Rainbow-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -827,18 +827,18 @@
 		};
 		2C6A799821127ED9003AFB37 /* Staging */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A8846B6B5BC96732D5A4A107 /* Pods-Rainbow.staging.xcconfig */;
+			baseConfigurationReference = E4ECD24D00E22F3AC61ECC95 /* Pods-Holyheld.staging.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_OPTIMIZATION = "";
 				CLANG_ENABLE_MODULES = YES;
 				CODEPUSH_KEY = "Xf8eimmB0-W22TRNCwL9tZNO9xev1e7a8912-936f-4ce7-8505-32a075039f51";
-				CODE_SIGN_ENTITLEMENTS = Rainbow/Rainbow.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Holyheld/Holyheld.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = L74NQAQB8H;
+				DEVELOPMENT_TEAM = 8B4LT9GVCS;
 				ENABLE_BITCODE = NO;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -855,7 +855,7 @@
 					"$(SRCROOT)/../node_modules/@ledgerhq/react-native-passcode-auth",
 					"$(SRCROOT)/../node_modules/react-native-firebase/ios/RNFirebase/**",
 				);
-				INFOPLIST_FILE = Rainbow/Info.plist;
+				INFOPLIST_FILE = Holyheld/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
@@ -863,7 +863,7 @@
 					"$(PROJECT_DIR)",
 				);
 				LLVM_LTO = YES;
-				MARKETING_VERSION = 1.2.41;
+				MARKETING_VERSION = 1.2.42;
 				OTHER_CFLAGS = (
 					"$(inherited)",
 					"-DFB_SONARKIT_ENABLED=1",
@@ -873,8 +873,8 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = me.rainbow;
-				PRODUCT_NAME = Rainbow;
+				PRODUCT_BUNDLE_IDENTIFIER = com.holyheld;
+				PRODUCT_NAME = Holyheld;
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Rainbow-Bridging-Header.h";
@@ -924,18 +924,18 @@
 		};
 		2C87B79A2197FA1900682EC4 /* LocalRelease */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2837FCCEA7D33A4F128B7574 /* Pods-Rainbow.localrelease.xcconfig */;
+			baseConfigurationReference = 7C94689C7258EDA2A0F3FCB7 /* Pods-Holyheld.localrelease.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_OPTIMIZATION = time;
 				CLANG_ENABLE_MODULES = YES;
 				CODEPUSH_KEY = "";
-				CODE_SIGN_ENTITLEMENTS = Rainbow/Rainbow.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Holyheld/Holyheld.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = L74NQAQB8H;
+				DEVELOPMENT_TEAM = 8B4LT9GVCS;
 				ENABLE_BITCODE = NO;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -952,7 +952,7 @@
 					"$(SRCROOT)/../node_modules/@ledgerhq/react-native-passcode-auth",
 					"$(SRCROOT)/../node_modules/react-native-firebase/ios/RNFirebase/**",
 				);
-				INFOPLIST_FILE = Rainbow/Info.plist;
+				INFOPLIST_FILE = Holyheld/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
@@ -960,7 +960,7 @@
 					"$(PROJECT_DIR)",
 				);
 				LLVM_LTO = YES;
-				MARKETING_VERSION = 1.2.41;
+				MARKETING_VERSION = 1.2.42;
 				OTHER_CFLAGS = (
 					"$(inherited)",
 					"-DFB_SONARKIT_ENABLED=1",
@@ -970,8 +970,8 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = me.rainbow;
-				PRODUCT_NAME = Rainbow;
+				PRODUCT_BUNDLE_IDENTIFIER = com.holyheld;
+				PRODUCT_NAME = Holyheld;
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Rainbow-Bridging-Header.h";
@@ -1063,7 +1063,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "Rainbow" */ = {
+		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "Holyheld" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				13B07F941A680F5B00A75B9A /* Debug */,
@@ -1074,7 +1074,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "Rainbow" */ = {
+		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "Holyheld" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				83CBBA201A601CBA00E9B192 /* Debug */,

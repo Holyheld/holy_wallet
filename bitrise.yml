@@ -98,8 +98,8 @@ workflows:
         title: Fastlane - Submit to Testflight
     - xcode-project-info@2:
         inputs:
-        - xcodeproj_path: ios/Rainbow.xcodeproj
-        - info_plist_path: ios/Rainbow/Info.plist
+        - xcodeproj_path: ios/Holyheld.xcodeproj
+        - info_plist_path: ios/Holyheld/Info.plist
         title: Expose build number to ENV vars
     - yarn@0.1.1:
         inputs:
@@ -118,7 +118,7 @@ workflows:
             set -ex
 
             # get the values
-            INFO_XCODE_PROJ=./ios/Rainbow.xcodeproj/project.pbxproj
+            INFO_XCODE_PROJ=./ios/Holyheld.xcodeproj/project.pbxproj
             version=$(cat "${INFO_XCODE_PROJ}" | grep "MARKETING_VERSION" | head -n 1 | sed  's/[^0-9\.]//g')
 
             # expose the env vars for subsequent steps

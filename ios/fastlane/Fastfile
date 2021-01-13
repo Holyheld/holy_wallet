@@ -16,15 +16,15 @@ platform :ios do
   desc "Refresh dSYMs"
   lane :refresh_dsyms do
     upload_symbols_to_crashlytics(
-      dsym_path: './Rainbow.app.dSYM.zip'
+      dsym_path: './Holyheld.app.dSYM.zip'
     )
     sentry_upload_dsym(
-      dsym_path: './Rainbow.app.dSYM.zip'
+      dsym_path: './Holyheld.app.dSYM.zip'
     )
 
     version_from_plist = get_version_number
 
-    release_version = "me.rainbow-#{version_from_plist}"
+    release_version = "com.holyheld-#{version_from_plist}"
 
     dist = (latest_testflight_build_number(version: get_version_number) + 1).to_s
 
@@ -54,32 +54,32 @@ platform :ios do
     })
 
     update_info_plist(
-      plist_path: "Rainbow/Info.plist",
-      display_name: "Rainbow"
+      plist_path: "Holyheld/Info.plist",
+      display_name: "Holyheld"
     )
     update_app_identifier(
-      app_identifier: "me.rainbow",
-      xcodeproj: "Rainbow.xcodeproj",
-      plist_path: "Rainbow/Info.plist",
+      app_identifier: "com.holyheld",
+      xcodeproj: "Holyheld.xcodeproj",
+      plist_path: "Holyheld/Info.plist",
     )
     match(
       force: true,
       type: "appstore",
-      app_identifier: "me.rainbow",
+      app_identifier: "com.holyheld",
       git_url: "git@github.com:rainbow-me/rainbow-code-signing.git"
     )
     automatic_code_signing(
       use_automatic_signing: false
     )
     gym(
-      workspace: "Rainbow.xcworkspace",
-      scheme: "Rainbow",
+      workspace: "Holyheld.xcworkspace",
+      scheme: "Holyheld",
       include_symbols: true,
       configuration: "Release",
       export_method: "app-store",
     )
     pilot(
-      app_identifier: "me.rainbow",
+      app_identifier: "com.holyheld",
       skip_waiting_for_build_processing: true
     )
   end

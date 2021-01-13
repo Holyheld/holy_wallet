@@ -112,7 +112,7 @@ const AddFundsInterstitial = ({ network, offsetY = 0 }) => {
           <Fragment>
             <Title>Fund your wallet with ETH</Title>
             <Paragraph>
-              Send from Coinbase or another exchange—or ask a friend!
+              Send from Coinbase or another exchange, wallet or ask a friend!
             </Paragraph>
           </Fragment>
         ) : (

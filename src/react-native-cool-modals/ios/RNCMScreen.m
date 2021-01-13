@@ -7,7 +7,7 @@
 #import <React/RCTTouchHandler.h>
 
 // lib
-#import "Rainbow-Swift.h"
+#import "Holyheld-Swift.h"
 
 
 @interface RNCMScreenView () <UIAdaptivePresentationControllerDelegate, RCTInvalidating>

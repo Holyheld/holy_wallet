@@ -26,7 +26,7 @@ public class MainActivity extends ReactActivity {
    */
   @Override
   protected String getMainComponentName() {
-    return "HolyWallet";
+    return "Holyheld";
   }
 
   @Override

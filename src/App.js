@@ -293,4 +293,4 @@ const AppWithCodePush = CodePush({
   installMode: CodePush.InstallMode.ON_NEXT_RESUME,
 })(AppWithRedux);
 
-AppRegistry.registerComponent('HolyWallet', () => AppWithCodePush);
+AppRegistry.registerComponent('Holyheld', () => AppWithCodePush);

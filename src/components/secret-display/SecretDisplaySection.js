@@ -130,7 +130,7 @@ export default function SecretDisplaySection({
               <SecretDisplayCard seed={seed} type={type} />
             </Fragment>
           ) : (
-            <LoadingSpinner color={colors.blueGreyDark50} />
+            <LoadingSpinner color={colors.textColorPrimary} />
           )}
         </Fragment>
       ) : (

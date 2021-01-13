@@ -7,7 +7,7 @@
 
 #import "Firebase.h"
 #import "AppDelegate.h"
-#import "Rainbow-Swift.h"
+#import "Holyheld-Swift.h"
 #import <RNBranch/RNBranch.h>
 #import <React/RCTBridge.h>
 #import <React/RCTBundleURLProvider.h>
@@ -91,7 +91,7 @@ RCT_EXPORT_METHOD(hideAnimated) {
   // React Native - Defaults
   self.bridge = [[RCTBridge alloc] initWithDelegate:self launchOptions:launchOptions];
   RCTRootView *rootView = [[RCTRootView alloc] initWithBridge:self.bridge
-                                                   moduleName:@"Rainbow"
+                                                   moduleName:@"Holyheld"
                                             initialProperties:nil];
 
   rootView.backgroundColor = [[UIColor alloc] initWithRed:1.0f green:1.0f blue:1.0f alpha:1];

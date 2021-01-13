@@ -6,7 +6,7 @@
 //
 
 #import <React/RCTConvert.h>
-#import "Rainbow-Swift.h"
+#import "Holyheld-Swift.h"
 
 @interface RCTConvert (TransactionList)
 

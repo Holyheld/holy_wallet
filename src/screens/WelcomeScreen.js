@@ -367,11 +367,11 @@ export default function WelcomeScreen() {
         opacity: 0,
       },
       style: {
-        backgroundColor: colors.buttonSecondary,
+        backgroundColor: colors.buttonPrimary,
         width: 248,
       },
       text: 'Get a new wallet',
-      textColor: colors.textColor,
+      textColor: colors.textColorPrimaryButton,
     };
   }, [rValue]);
 
@@ -407,7 +407,7 @@ export default function WelcomeScreen() {
       ))}
 
       <ContentWrapper style={contentStyle}>
-        <HolyText color={colors.textColor} />
+        <HolyText color={colors.textColor} height={32} width={125} />
         <ButtonWrapper>
           <RainbowButton
             onPress={onCreateWallet}
