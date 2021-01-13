@@ -88,21 +88,22 @@ const LoadingSpinner = styled(android ? Spinner : ActivityIndicator).attrs({
 `;
 
 const FooterButton = styled(MiniButton).attrs({
+  backgroundColor: colors.buttonPrimary,
   compensateForTransformOrigin: true,
   testID: 'import-sheet-button',
   transformOrigin: 'right',
 })``;
 
 const KeyboardSizeView = styled(KeyboardArea)`
-  background-color: ${colors.white};
+  background-color: ${colors.pageBackground};
 `;
 
-const SecretTextArea = styled(Input).attrs({
+const SecretTextArea = styled(Input).attrs(({ color }) => ({
   align: 'center',
   autoCapitalize: 'none',
   autoCorrect: false,
   autoFocus: true,
-  color: colors.textColor,
+  color,
   enablesReturnKeyAutomatically: true,
   keyboardType: android ? 'visible-password' : 'default',
   lineHeight: 'looser',
@@ -114,7 +115,7 @@ const SecretTextArea = styled(Input).attrs({
   size: 'large',
   spellCheck: false,
   weight: 'semibold',
-})`
+}))`
   margin-bottom: ${android ? 55 : 0};
   min-height: ${android ? 100 : 50};
   width: 100%;
@@ -373,7 +374,7 @@ export default function ImportSeedPhraseSheet() {
         </Text>
         <SecretTextAreaContainer>
           <SecretTextArea
-            color={isSecretValid ? colors.appleBlue : colors.dark}
+            color={isSecretValid ? colors.textColorMuted : colors.textColor}
             onChangeText={handleSetSeedPhrase}
             onFocus={handleFocus}
             onSubmitEditing={handlePressImportButton}
@@ -397,12 +398,12 @@ export default function ImportSeedPhraseSheet() {
                 {busy ? (
                   <LoadingSpinner />
                 ) : (
-                  <Text color="white" weight="semibold">
+                  <Text color={colors.textColorPrimaryButton} weight="semibold">
                     􀂍{' '}
                   </Text>
                 )}
                 <Text
-                  color="white"
+                  color={colors.textColorPrimaryButton}
                   testID="import-sheet-button-label"
                   weight="semibold"
                 >
@@ -417,7 +418,7 @@ export default function ImportSeedPhraseSheet() {
               onPress={handlePressPasteButton}
             >
               <Text
-                color="white"
+                color={colors.textColorPrimaryButton}
                 testID="import-sheet-button-label"
                 weight="semibold"
               >
