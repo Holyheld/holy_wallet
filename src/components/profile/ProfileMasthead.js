@@ -1,5 +1,5 @@
 import Clipboard from '@react-native-community/clipboard';
-import analytics from '@segment/analytics-react-native';
+// import analytics from '@segment/analytics-react-native';
 import { find } from 'lodash';
 import React, { useCallback, useRef } from 'react';
 import ImagePicker from 'react-native-image-crop-picker';
@@ -64,13 +64,13 @@ const AccountName = styled(TruncatedText).attrs({
   padding-right: 6;
 `;
 
-const AddCashButton = styled(RainbowButton).attrs({
-  overflowMargin: 30,
-  skipTopMargin: true,
-  type: 'addCash',
-})`
-  margin-top: 16;
-`;
+// const AddCashButton = styled(RainbowButton).attrs({
+//   overflowMargin: 30,
+//   skipTopMargin: true,
+//   type: 'addCash',
+// })`
+//   margin-top: 16;
+// `;
 
 const MigrateButton = styled(RainbowButton).attrs({
   label: 'Migrate Holy',
@@ -246,27 +246,27 @@ export default function ProfileMasthead({
     }
   }, [navigate, isReadOnlyWallet, holyV1Asset]);
 
-  const handlePressAddCash = useCallback(() => {
-    if (isDamaged) {
-      showWalletErrorAlert();
-      return;
-    }
+  // const handlePressAddCash = useCallback(() => {
+  //   if (isDamaged) {
+  //     showWalletErrorAlert();
+  //     return;
+  //   }
 
-    analytics.track('Tapped Add Cash', {
-      category: 'add cash',
-    });
+  //   analytics.track('Tapped Add Cash', {
+  //     category: 'add cash',
+  //   });
 
-    if (ios) {
-      navigate(Routes.ADD_CASH_FLOW);
-    } else {
-      navigate(Routes.WYRE_WEBVIEW_NAVIGATOR, {
-        params: {
-          address: accountAddress,
-        },
-        screen: Routes.WYRE_WEBVIEW,
-      });
-    }
-  }, [accountAddress, navigate, isDamaged]);
+  //   if (ios) {
+  //     navigate(Routes.ADD_CASH_FLOW);
+  //   } else {
+  //     navigate(Routes.WYRE_WEBVIEW_NAVIGATOR, {
+  //       params: {
+  //         address: accountAddress,
+  //       },
+  //       screen: Routes.WYRE_WEBVIEW,
+  //     });
+  //   }
+  // }, [accountAddress, navigate, isDamaged]);
 
   const handlePressChangeWallet = useCallback(() => {
     navigate(Routes.CHANGE_WALLET_SHEET);
@@ -300,7 +300,7 @@ export default function ProfileMasthead({
         <Row>
           <AccountName deviceWidth={deviceWidth}>{accountName}</AccountName>
           <DropdownArrow>
-            <Icon color={colors.dark} direction="down" name="caret" />
+            <Icon color={colors.textColor} direction="down" name="caret" />
           </DropdownArrow>
         </Row>
       </ButtonPressAnimation>
@@ -337,7 +337,7 @@ export default function ProfileMasthead({
           }}
         />
       </RowWithMargins>
-      {addCashAvailable && <AddCashButton onPress={handlePressAddCash} />}
+      {/* {addCashAvailable && <AddCashButton onPress={handlePressAddCash} />} */}
       {<MigrateButton onPress={handleMigrateHoly} />}
       {showBottomDivider && <ProfileMastheadDivider />}
     </Column>

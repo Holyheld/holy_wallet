@@ -81,7 +81,7 @@ class TransactionListViewCell: TransactionListBaseCell {
             self.coinImage.image = self.generateTextImage(transaction.symbol, backgroundColor: color)
           } else {
             self.coinImage.image = image
-            self.coinImage.layer.backgroundColor = UIColor.white.cgColor
+            self.coinImage.layer.backgroundColor = UIColor.HolyTheme.skeleton.cgColor
           }
           self.coinImage.layer.cornerRadius = self.coinImage.frame.width * 0.5
         }
@@ -155,8 +155,8 @@ class TransactionListViewCell: TransactionListBaseCell {
   }
   
   private func setStatusColor(_ transaction: Transaction) {
-    let transactionColors = UIColor.RainbowTheme.Transactions.self
-    var color = transactionColors.blueGreyDark70
+    let transactionColors = UIColor.HolyTheme.self
+    var color = transactionColors.textColor
     
     if transaction.pending {
       if transaction.status == "swapping" {
@@ -174,13 +174,13 @@ class TransactionListViewCell: TransactionListBaseCell {
   }
   
   private func setBottomRowStyles(_ transaction: Transaction) {
-    let transactionColors = UIColor.RainbowTheme.Transactions.self
-    var coinNameColor = transactionColors.dark
-    var nativeDisplayColor = transactionColors.blueGreyDark50
+    let transactionColors = UIColor.HolyTheme.self
+    var coinNameColor = transactionColors.textColor
+    var nativeDisplayColor = transactionColors.textColor
     var nativeDisplayFont = UIFont(name: "SFRounded-Regular", size: 16)
     
     if transaction.status == "sent" {
-      nativeDisplayColor = transactionColors.dark
+      nativeDisplayColor = transactionColors.textColor
       nativeDisplay.text = "- " + transaction.nativeDisplay
     }
     if transaction.status == "received" || transaction.status == "purchased" {
@@ -188,7 +188,7 @@ class TransactionListViewCell: TransactionListBaseCell {
       nativeDisplayFont = UIFont(name: "SFRounded-Medium", size: 16)
     }
     if transaction.status == "swapped" {
-      coinNameColor = transactionColors.blueGreyDark50
+      coinNameColor = transactionColors.textColor
       nativeDisplayColor = transactionColors.dark
       nativeDisplay.text = "- " + transaction.nativeDisplay
     }

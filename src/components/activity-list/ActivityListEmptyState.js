@@ -27,7 +27,7 @@ const ActivityListEmptyState = ({ children, emoji, label }) => (
       <Centered>
         <Text
           align="center"
-          color={colors.emptyStateText}
+          color={colors.textColorMuted}
           letterSpacing="roundedMedium"
           lineHeight={24}
           size="lmedium"

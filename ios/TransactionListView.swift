@@ -72,7 +72,7 @@ class TransactionListView: UIView, UITableViewDelegate, UITableViewDataSource {
       
       header.accountImage.alpha = 1.0
       header.accountImage.image = image
-      shadowLayer.shadowColor = UIColor.gray.cgColor
+      shadowLayer.shadowColor = UIColor.HolyTheme.dark.cgColor
     } else {
       header.accountImage.alpha = 0.0
     }
@@ -275,7 +275,7 @@ class TransactionListView: UIView, UITableViewDelegate, UITableViewDataSource {
     shadowLayer.shadowRadius = 5
     shadowLayer.zPosition = -1
 
-    secondShadowLayer.shadowColor = UIColor.RainbowTheme.Transactions.dark.cgColor
+    secondShadowLayer.shadowColor = UIColor.HolyTheme.dark.cgColor
     secondShadowLayer.shadowOffset = CGSize(width: 0, height: 2)
     secondShadowLayer.shadowOpacity = 0.2
     secondShadowLayer.shadowPath = circle.cgPath
@@ -288,7 +288,9 @@ class TransactionListView: UIView, UITableViewDelegate, UITableViewDataSource {
     header.accountImage.layer.cornerRadius = header.accountBackground.frame.width / 2.0
     header.accountImage.clipsToBounds = true
     
-    headerSeparator.backgroundColor = UIColor.RainbowTheme.Transactions.rowDividerLight
+    headerSeparator.backgroundColor = UIColor.HolyTheme.divider
+    
+    tableView.backgroundColor = UIColor.HolyTheme.pageBackground
     tableView.tableHeaderView = header
     addSubview(tableView)
   }
@@ -301,7 +303,7 @@ class TransactionListView: UIView, UITableViewDelegate, UITableViewDataSource {
   override func layoutSubviews() {
     tableView.frame = self.bounds
     header.frame = CGRect(x: 0, y: 0, width: tableView.bounds.width, height: addCashAvailable ? 260 : 185)
-    headerSeparator.frame = CGRect(x: 19, y: header.frame.size.height - 2, width: tableView.bounds.width - 19, height: 2)
+    headerSeparator.frame = CGRect(x: 19, y: header.frame.size.height - 2, width: tableView.bounds.width - 38, height: 2)
     headerSeparator.roundLeftCorners()
   }
   
@@ -324,9 +326,9 @@ class TransactionListView: UIView, UITableViewDelegate, UITableViewDataSource {
     
     label.text = section.title
     label.font = UIFont(name: "SFRounded-Bold", size: 20)
-    label.textColor = UIColor.RainbowTheme.Transactions.dark
+    label.textColor = UIColor.HolyTheme.textColor
     label.addCharacterSpacing()
-    view.backgroundColor = .white
+    view.backgroundColor = UIColor.HolyTheme.pageBackground
     view.addSubview(label)
     
     return view
