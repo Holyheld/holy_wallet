@@ -1,10 +1,12 @@
 import { useRoute } from '@react-navigation/native';
 import { get } from 'lodash';
 import React, { Fragment, useCallback, useEffect, useState } from 'react';
+import { View } from 'react-native';
 import Animated, { Extrapolate } from 'react-native-reanimated';
 import { useAndroidBackHandler } from 'react-navigation-backhandler';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components/primitives';
+import ActivityIndicator from '../components/ActivityIndicator';
 import { interpolate } from '../components/animations';
 import { CoinIcon } from '../components/coin-icon';
 import {
@@ -81,6 +83,7 @@ const HolyMigrateModalWrapper = () => {
   const { params } = useRoute();
   const holyV1Asset = params?.holyV1Asset;
   const testID = params?.testID;
+
   return <HolyMigrateModal holyV1Asset={holyV1Asset} testID={testID} />;
 };
 
@@ -90,6 +93,14 @@ const HolyMigrateModal = ({ holyV1Asset, testID }) => {
     params: { tabTransitionPosition },
   } = useRoute();
   const { network } = useAccountSettings();
+
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+  }, []);
 
   const amountToMigrate = get(holyV1Asset, 'balance.amount');
   const symbol = get(holyV1Asset, 'symbol');
@@ -216,95 +227,107 @@ const HolyMigrateModal = ({ holyV1Asset, testID }) => {
         backgroundColor={colors.transparent}
         direction="column"
       >
-        <AnimatedFloatingPanels
-          margin={0}
-          paddingTop={24}
-          style={{
-            opacity: android
-              ? 1
-              : interpolate(tabTransitionPosition, {
-                  extrapolate: Extrapolate.CLAMP,
-                  inputRange: [0, 0, 1],
-                  outputRange: [1, 1, 0],
-                }),
-            transform: [
-              {
-                scale: android
-                  ? 1
-                  : interpolate(tabTransitionPosition, {
-                      extrapolate: Animated.Extrapolate.CLAMP,
-                      inputRange: [0, 0, 1],
-                      outputRange: [1, 1, 0.9],
-                    }),
-              },
-              {
-                translateX: android
-                  ? 0
-                  : interpolate(tabTransitionPosition, {
-                      extrapolate: Animated.Extrapolate.CLAMP,
-                      inputRange: [0, 0, 1],
-                      outputRange: [0, 0, -8],
-                    }),
-              },
-            ],
-          }}
-        >
-          <FloatingPanel
-            overflow="visible"
-            paddingBottom={26}
-            radius={39}
-            testID={testID}
+        {isLoading ? (
+          <View
+            style={{ alignItems: 'center', flex: 1, justifyContent: 'center' }}
           >
-            <ExchangeModalHeader
-              onPressDetails={() => {}}
-              showDetailsButton={false}
-              testID={testID + '-header'}
-              title="Migrate"
-            />
-            <Container>
-              <InnerContainer>
-                <FieldRow>
-                  <CoinIcon address={address} size={CoinSize} symbol={symbol} />
-
-                  <Input editable={false} value={amountToMigrate} />
-                </FieldRow>
-              </InnerContainer>
-            </Container>
-          </FloatingPanel>
-          <MigrateInfo
-            amount={amountToMigrate}
-            asset={hhCoinV2}
-            testID="migrate-info-button"
-          />
-
-          <Fragment>
-            <Centered
-              flexShrink={0}
-              paddingHorizontal={15}
-              paddingTop={24}
-              width="100%"
+            <ActivityIndicator color="#FFFFFF" />
+          </View>
+        ) : (
+          <AnimatedFloatingPanels
+            margin={0}
+            paddingTop={24}
+            style={{
+              opacity: android
+                ? 1
+                : interpolate(tabTransitionPosition, {
+                    extrapolate: Extrapolate.CLAMP,
+                    inputRange: [0, 0, 1],
+                    outputRange: [1, 1, 0],
+                  }),
+              transform: [
+                {
+                  scale: android
+                    ? 1
+                    : interpolate(tabTransitionPosition, {
+                        extrapolate: Animated.Extrapolate.CLAMP,
+                        inputRange: [0, 0, 1],
+                        outputRange: [1, 1, 0.9],
+                      }),
+                },
+                {
+                  translateX: android
+                    ? 0
+                    : interpolate(tabTransitionPosition, {
+                        extrapolate: Animated.Extrapolate.CLAMP,
+                        inputRange: [0, 0, 1],
+                        outputRange: [0, 0, -8],
+                      }),
+                },
+              ],
+            }}
+          >
+            <FloatingPanel
+              overflow="visible"
+              paddingBottom={26}
+              radius={39}
+              testID={testID}
             >
-              <ConfirmExchangeButton
-                isAuthorizing={isAuthorizing}
-                isDeposit={false}
-                isSufficientBalance
-                isSufficientGas={isSufficientGas}
-                isSufficientLiquidity
-                onSubmit={handleSubmit}
-                slippage={slippage}
-                testID={testID + '-confirm'}
-                type={type}
+              <ExchangeModalHeader
+                onPressDetails={() => {}}
+                showDetailsButton={false}
+                testID={testID + '-header'}
+                title="Migrate"
               />
-            </Centered>
-          </Fragment>
+              <Container>
+                <InnerContainer>
+                  <FieldRow>
+                    <CoinIcon
+                      address={address}
+                      size={CoinSize}
+                      symbol={symbol}
+                    />
 
-          <GasSpeedButton
-            dontBlur
-            onCustomGasBlur={() => {}}
-            testID={testID + '-gas'}
-            type={type}
-          />
-        </AnimatedFloatingPanels>
+                    <Input editable={false} value={amountToMigrate} />
+                  </FieldRow>
+                </InnerContainer>
+              </Container>
+            </FloatingPanel>
+            <MigrateInfo
+              amount={amountToMigrate}
+              asset={hhCoinV2}
+              testID="migrate-info-button"
+            />
+
+            <Fragment>
+              <Centered
+                flexShrink={0}
+                paddingHorizontal={15}
+                paddingTop={24}
+                width="100%"
+              >
+                <ConfirmExchangeButton
+                  isAuthorizing={isAuthorizing}
+                  isDeposit={false}
+                  isSufficientBalance
+                  isSufficientGas={isSufficientGas}
+                  isSufficientLiquidity
+                  onSubmit={handleSubmit}
+                  slippage={slippage}
+                  testID={testID + '-confirm'}
+                  type={type}
+                />
+              </Centered>
+            </Fragment>
+
+            <GasSpeedButton
+              dontBlur
+              onCustomGasBlur={() => {}}
+              testID={testID + '-gas'}
+              type={type}
+            />
+          </AnimatedFloatingPanels>
+        )}
       </Centered>
     </Wrapper>
   );
