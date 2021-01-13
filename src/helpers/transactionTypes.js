@@ -5,6 +5,7 @@ export default {
   deployment: 'deployment',
   deposit: 'deposit',
   execution: 'execution',
+  migration: 'migration',
   purchase: 'purchase',
   receive: 'receive',
   repay: 'repay',

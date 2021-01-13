@@ -17,8 +17,6 @@ import {
   ConfirmExchangeButton,
   ExchangeInputField,
   ExchangeModalHeader,
-  ExchangeOutputField,
-  SlippageWarning,
 } from '../components/exchange';
 import { FloatingPanel, FloatingPanels } from '../components/floating-panels';
 import { GasSpeedButton } from '../components/gas';
@@ -98,8 +96,6 @@ const HolySavingsDepositModal = ({ defaultInputCurrency, testID }) => {
 
   const {
     inputCurrency,
-    navigateToSelectInputCurrency,
-    navigateToSelectOutputSaving,
     outputSaving,
     previousInputCurrency,
   } = useHolyDepositCurrencies({
@@ -122,7 +118,6 @@ const HolySavingsDepositModal = ({ defaultInputCurrency, testID }) => {
   const { nativeCurrency } = useAccountSettings();
 
   const [isAuthorizing, setIsAuthorizing] = useState(false);
-  const [slippage] = useState(null);
   const { maxInputBalance, updateMaxInputBalance } = useMaxInputBalance();
 
   useAndroidBackHandler(() => {
@@ -149,14 +144,14 @@ const HolySavingsDepositModal = ({ defaultInputCurrency, testID }) => {
     isSufficientBalance,
     nativeAmount,
     // outputAmount,
-    outputAmountDisplay,
+    // outputAmount,
     // setIsSufficientBalance,
     updateInputAmount,
     updateNativeAmount,
-    updateOutputAmount,
   } = useHolyDepositInputs({
     inputCurrency,
     maxInputBalance: maxInputBalance,
+    outputFieldRef,
     outputSaving,
   });
 
@@ -257,8 +252,6 @@ const HolySavingsDepositModal = ({ defaultInputCurrency, testID }) => {
     stopWeb3Listener,
     updateDefaultGasLimit,
   ]);
-
-  const isSlippageWarningVisible = isSufficientBalance && !!inputAmount;
 
   const handlePressMaxBalance = useCallback(async () => {
     updateInputAmount(maxInputBalance, true);
@@ -361,7 +354,7 @@ const HolySavingsDepositModal = ({ defaultInputCurrency, testID }) => {
               onPressDetails={() => {}}
               showDetailsButton={false}
               testID={testID + '-header'}
-              title="Withdraw"
+              title="Deposit"
             />
             <ExchangeInputField
               inputAmount={inputAmount}
@@ -373,33 +366,12 @@ const HolySavingsDepositModal = ({ defaultInputCurrency, testID }) => {
               nativeFieldRef={nativeFieldRef}
               onFocus={handleFocus}
               onPressMaxBalance={handlePressMaxBalance}
-              onPressSelectInputCurrency={navigateToSelectInputCurrency}
               setInputAmount={updateInputAmount}
               setNativeAmount={updateNativeAmount}
               showNative
               testID={testID + '-input'}
             />
-            <ExchangeOutputField
-              onFocus={handleFocus}
-              onPressSelectOutputCurrency={navigateToSelectOutputSaving}
-              outputAmount={outputAmountDisplay}
-              outputCurrencyAddress={get(
-                outputSaving,
-                'underlying.address',
-                null
-              )}
-              outputCurrencySymbol={get(
-                outputSaving,
-                'underlying.symbol',
-                null
-              )}
-              outputFieldRef={outputFieldRef}
-              setOutputAmount={updateOutputAmount}
-              testID={testID + '-output'}
-            />
           </FloatingPanel>
-
-          {isSlippageWarningVisible && <SlippageWarning slippage={slippage} />}
 
           <Fragment>
             <Centered
@@ -416,7 +388,6 @@ const HolySavingsDepositModal = ({ defaultInputCurrency, testID }) => {
                 isSufficientGas={isSufficientGas}
                 isSufficientLiquidity
                 onSubmit={handleSubmit}
-                slippage={slippage}
                 testID={testID + '-confirm'}
                 type={type}
               />

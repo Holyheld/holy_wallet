@@ -16,50 +16,60 @@ import logger from 'logger';
 
 const NOOP = () => undefined;
 
-export const holyMigrateEstimation = async () => {
-  logger.sentry(
-    '[holy migrate estimation] executing holy migration estimation'
-  );
+export const holySavingsWithdrawEstimation = async inputAmount => {
+  logger.sentry('[holy savings withdraw estimation] estimation');
 
   const { accountAddress, network } = store.getState().settings;
+
   const contractAddress = HOLY_PASSAGE_ADDRESS(network);
   const contractABI = HOLY_PASSAGE_ABI;
 
-  logger.sentry('[holy migrate estimation] for address:', accountAddress);
+  logger.sentry(
+    '[holy savings withdraw estimation] for address:',
+    accountAddress
+  );
 
+  // TODO: change to withdraw function
   const holyPassage = new Contract(contractAddress, contractABI, web3Provider);
 
   try {
-    logger.sentry('holy_migrate estimate');
-    const gasLimit = await holyPassage.estimateGas.migrate({
+    logger.sentry('holy savings withdraw estimation');
+    const gasLimit = await holyPassage.estimateGas.migrate(inputAmount, {
       from: accountAddress,
     });
-    const gasLimitString = gasLimit.toString();
-    logger.sentry('holy_migrate estimate: ' + gasLimitString);
-    return gasLimit ? gasLimitString : ethUnits.basic_holy_migration;
+    logger.sentry('holy_savings_withdraw estimate: ' + gasLimit.toString());
+    return gasLimit
+      ? gasLimit.toString()
+      : ethUnits.basic_holy_savings_withdraw;
   } catch (error) {
-    logger.sentry('error holy_migrate estimate');
+    logger.sentry('error holy_savings_withdraw estimate');
     logger.sentry(error);
     captureException(error);
-    return ethUnits.basic_holy_migration;
+    return ethUnits.basic_holy_savings_withdraw;
   }
 };
 
-const holyMigrate = async (wallet, currentRap, index, parameters) => {
-  logger.log('[holy migrate] start holy migrate!');
+export const holySavingsWithdraw = async (
+  wallet,
+  currentRap,
+  index,
+  parameters
+) => {
+  logger.log('[holy savings withdraw] start holy withdraw!');
   const {
     accountAddress,
-    amount,
-    currency,
     network,
+    inputAmount,
+    inputCurrency,
     selectedGasPrice,
   } = parameters;
   const { dispatch } = store;
-  const contractAddress = HOLY_PASSAGE_ADDRESS(network);
-  const contractABI = HOLY_PASSAGE_ABI;
 
   let gasPrice = get(selectedGasPrice, 'value.amount');
-  const gasLimit = await holyMigrateEstimation();
+  const gasLimit = await holySavingsWithdrawEstimation();
+
+  const contractAddress = HOLY_PASSAGE_ADDRESS(network);
+  const contractABI = HOLY_PASSAGE_ABI;
 
   let migration;
 
@@ -67,7 +77,7 @@ const holyMigrate = async (wallet, currentRap, index, parameters) => {
   if (!walletToUse) return null;
 
   try {
-    logger.sentry('[holy migrate] executing holy migration', {
+    logger.sentry('[holy savings withdraw] executing holy migration', {
       gasLimit,
       gasPrice,
     });
@@ -81,58 +91,57 @@ const holyMigrate = async (wallet, currentRap, index, parameters) => {
 
     migration = await holyPassage.migrate(transactionParams);
   } catch (e) {
-    logger.sentry('[holy migrate] error executing holy migration');
-    logger.sentry(e);
+    logger.sentry('[holy savings withdraw] error executing holy migration');
     captureException(e);
     throw e;
   }
 
-  logger.log('[holy migrate] response', migration);
+  logger.log('[holy savings withdraw] response', migration);
   currentRap.actions[index].transaction.hash = migration.hash;
   dispatch(rapsAddOrUpdate(currentRap.id, currentRap));
   logger.log(
-    '[holy migrate] adding a new holy migrate txn to migration',
+    '[holy savings withdraw] adding a new holy migrate txn to migration',
     migration.hash
   );
   const newTransaction = {
-    amount: amount,
-    asset: currency,
+    amount: inputAmount,
+    asset: inputCurrency,
     from: accountAddress,
     hash: migration.hash,
     nonce: get(migration, 'nonce'),
     protocol: ProtocolTypes.holy.name,
-    status: TransactionStatusTypes.migrating,
+    status: TransactionStatusTypes.withdrawing,
     to: get(migration, 'to'),
-    type: TransactionTypes.migration,
+    type: TransactionTypes.trade,
   };
-  logger.log('[holy migrate] adding new txn', newTransaction);
-  await dispatch(dataAddNewTransaction(newTransaction, accountAddress));
-  logger.log('[holy migrate] calling the callback');
+  logger.log('[holy savings withdraw] adding new txn', newTransaction);
+  await dispatch(dataAddNewTransaction(newTransaction, accountAddress, true));
+  logger.log('[holy savings withdraw] calling the callback');
   currentRap.callback();
   currentRap.callback = NOOP;
   try {
-    logger.log('[holy migrate] waiting for the holy migration to go thru');
+    logger.log(
+      '[holy savings withdraw] waiting for the holy migration to go thru'
+    );
     const receipt = await walletToUse.provider.waitForTransaction(
       migration.hash
     );
-    logger.log('[holy migrate] receipt:', receipt);
+    logger.log('[holy savings withdraw] receipt:', receipt);
     if (!isZero(receipt.status)) {
       currentRap.actions[index].transaction.confirmed = true;
       dispatch(rapsAddOrUpdate(currentRap.id, currentRap));
-      logger.log('[holy migrate] updated raps');
+      logger.log('[holy savings withdraw] updated raps');
       return;
     } else {
-      logger.log('[holy migrate] status not success');
+      logger.log('[holy savings withdraw] status not success');
       currentRap.actions[index].transaction.confirmed = false;
       dispatch(rapsAddOrUpdate(currentRap.id, currentRap));
       return null;
     }
   } catch (error) {
-    logger.log('[holy migrate] error waiting for holy migrate', error);
+    logger.log('[holy savings withdraw] error waiting for holy migrate', error);
     currentRap.actions[index].transaction.confirmed = false;
     dispatch(rapsAddOrUpdate(currentRap.id, currentRap));
     return null;
   }
 };
-
-export default holyMigrate;

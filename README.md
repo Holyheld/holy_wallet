@@ -1,63 +1,39 @@
 ![](https://pbs.twimg.com/profile_banners/1103191459409420288/1573207178/1500x500)
-## Requirements
+## Holyheld — DeFi neobanking service.
 
-* A computer running macOS.
-* NVM installed or Node.js 12: https://github.com/creationix/nvm
-* Install CocoaPods by running `sudo gem install cocoapods`
-* Install Watchman `brew install watchman`
-* Install the latest version of XCode: https://developer.apple.com/xcode/
+Holyheld makes the internet economy easy and available to everyone. The app abstracts blockchain complexity so that you can finally get great financial service with all DeFi benefits. You can earn highest and safest yield on your digital assets with our automatic portfolio management system. You can also send, receive and swap 3000+ digital assets on Ethereum.  
 
-## How to run the project
+## What can you do?
 
-If you are new to React Native, this is a helpful introduction: https://facebook.github.io/react-native/docs/getting-started.html
+* **Create, import and export non-custodial wallets.**
+Holyheld is a non-custodial wallet. It means that the wallet is created and owned only by you. You can import or export other wallets in the app, and use cloud back up for your private keys.
 
-1. Clone the GitHub repository to your machine.
+* **Send, receive and swap 3000+ tokens on Ethereum.**
+With Holyheld you can easily swap across all 3000+ tokens available on Ethereum network. Swap, send or receive any ERC20 or ERC721 tokens. All swaps are done using smart decentralized exchanges aggregator to ensure for the lowest fees and best rates.
 
-2. Run `nvm use 12` to use set the version of node for this project.
+* **Migrate $HOLY to $HH.**
+Early users migration from $HOLY to $HH is now available in the app. Simply swap your old tokens to new tokens in a tap.
 
-3. Set up your .env file, use our env.example as a guide.
+* **Deposit and earn yield on your assets.**
+If you choose to earn highest and safest yield on your digital assets, we will not disappoint you. Holyheld has proprietary robo advisory architecture that ensures lowest fees, highest available yield on the market, and safety via stablecoins. Savings on the internet doesn’t have to be boring or complicated, watch your savings grow real-time.
 
-    ___Note that some features are currently not accessible, we are working with our Data Providers in order to provide open source API Keys!___
+* **Access and claim bonus multiplier tokens.**
+Early users participating in the LP program can now also track and claim their bonus multiplier tokens right in the app. Check your daily unlock amount, total value and standing performance.
 
-    Here are some resources to generate your own API keys:
+* **Access and claim your Yield Treasury share.**
+Every $HH holder gets claimable bonuses from the treasury that can be used to cover expenses in the app. Keep track of your claimable bonuses, perform claim & burn or simply watch your share grow in real-time.
 
-    * Etherscan: https://etherscan.io/apis
-    * Infura: https://infura.io/
-    * ETH Gas Station: https://docs.ethgasstation.info/
+* **Track your NFT portfolio.**
+Keep track of your digital art portfolio. Holyheld supports ERC721 and ERC1155 tokens, so that you can always check on your beauties. 
 
-4. Run `yarn` to get all of the packages required.
+## What's next?
+We are still at Alpha stage and a lot of features are hidden, but we’re planning to expand. Soon we’ll be offering:
+* Fiat on/off ramp
+* In-app chat customer support
+* Virtual and physical debit cards
+* Multichain support
+* Portfolio concierge
+* Smart suggestions
 
-5. Run `yarn install-bundle`.
-
-6. Install required Pods by running `yarn install-pods`.
-
-7. Run `yarn start` to start the React Native Bundler.
-
-8. Open `rainbow-wallet/ios/RainbowWallet.xcworkspace` in XCode.
-
-9. Run the project by clicking the play button.
-
-## CodePush
-
-In order to use code push you must be logged into the correct Microsoft App Center account.
-
-### Prerequisites
-```
-npm install -g code-push
-code-push login
-```
-
-At this point you will be required to log into the account tied to the code push public keys in Info.plist
-
-### Deployment
-```
-code-push release-react RainbowWallet-iOS ios -d <DEPLOYMENT>
-```
-
-The deployment can either be `Staging` or `Production` depending on the mode of the application you wish to update was built in through XCode.
-
-### Local Builds
-
-In order to build the application in "release" mode but not use the code push distribution you must build the application using the scheme `LocalRelease`.
-
-Building the application with the `Staging` scheme or `Release` scheme will result in your bundle being replaced by the live code push deployment on resume of the application.
+## Credits
+This version of a wallet is based on the best open-source Ethereum wallet that has ever existed - [Rainbow](https://rainbow.me). We are deep fans of the Rainbow and $SOCKS, so we decided to continue the great work done by the open-source community. 

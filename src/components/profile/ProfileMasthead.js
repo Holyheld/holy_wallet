@@ -1,11 +1,11 @@
 import Clipboard from '@react-native-community/clipboard';
-// import analytics from '@segment/analytics-react-native';
 import { find } from 'lodash';
 import React, { useCallback, useRef } from 'react';
 import ImagePicker from 'react-native-image-crop-picker';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components/primitives';
 import { walletsSetSelected, walletsUpdate } from '../../redux/wallets';
+import { HOLY_V1_ADDRESS } from '../../references/holy';
 import Divider from '../Divider';
 import { Alert } from '../alerts';
 import { ButtonPressAnimation } from '../animations';
@@ -22,6 +22,7 @@ import useExperimentalFlag, {
 import showWalletErrorAlert from '@rainbow-me/helpers/support';
 import {
   useAccountProfile,
+  useAccountSettings,
   useAsset,
   useDimensions,
   useWallets,
@@ -64,14 +65,6 @@ const AccountName = styled(TruncatedText).attrs({
   padding-right: 6;
 `;
 
-// const AddCashButton = styled(RainbowButton).attrs({
-//   overflowMargin: 30,
-//   skipTopMargin: true,
-//   type: 'addCash',
-// })`
-//   margin-top: 16;
-// `;
-
 const MigrateButton = styled(RainbowButton).attrs({
   label: 'Migrate Holy',
   overflowMargin: 30,
@@ -100,6 +93,7 @@ export default function ProfileMasthead({
   showBottomDivider = true,
 }) {
   const { wallets, selectedWallet, isDamaged, isReadOnlyWallet } = useWallets();
+  const { network } = useAccountSettings();
   // const {
   //   isWalletEthZero,
   //   refetchSavings,
@@ -108,7 +102,7 @@ export default function ProfileMasthead({
   // TODO: get balance of holy coin?
 
   const holyCoinV1 = {
-    address: '0xe211f0268797Fe96c91247fBF5ea7A902876818E', // from testnet
+    address: HOLY_V1_ADDRESS(network), // from testnet
     type: 'token',
   };
 
@@ -246,28 +240,6 @@ export default function ProfileMasthead({
     }
   }, [navigate, isReadOnlyWallet, holyV1Asset]);
 
-  // const handlePressAddCash = useCallback(() => {
-  //   if (isDamaged) {
-  //     showWalletErrorAlert();
-  //     return;
-  //   }
-
-  //   analytics.track('Tapped Add Cash', {
-  //     category: 'add cash',
-  //   });
-
-  //   if (ios) {
-  //     navigate(Routes.ADD_CASH_FLOW);
-  //   } else {
-  //     navigate(Routes.WYRE_WEBVIEW_NAVIGATOR, {
-  //       params: {
-  //         address: accountAddress,
-  //       },
-  //       screen: Routes.WYRE_WEBVIEW,
-  //     });
-  //   }
-  // }, [accountAddress, navigate, isDamaged]);
-
   const handlePressChangeWallet = useCallback(() => {
     navigate(Routes.CHANGE_WALLET_SHEET);
   }, [navigate]);
@@ -337,7 +309,6 @@ export default function ProfileMasthead({
           }}
         />
       </RowWithMargins>
-      {/* {addCashAvailable && <AddCashButton onPress={handlePressAddCash} />} */}
       {<MigrateButton onPress={handleMigrateHoly} />}
       {showBottomDivider && <ProfileMastheadDivider />}
     </Column>

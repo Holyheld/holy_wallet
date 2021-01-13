@@ -45,18 +45,16 @@ const LPBonusListRowShadowStack = styled(ShadowStack).attrs(
   })
 )``;
 
-const LPBonusListRow = ({ underlying }) => {
+const LPBonusListRow = ({ balance, underlying }) => {
   const { width: deviceWidth } = useDimensions();
   const { navigate } = useNavigation();
 
-  const BonusBalance = '10.00';
-
   const onButtonPress = useCallback(() => {
     navigate(Routes.LP_BONUS_SHEET, {
-      balance: BonusBalance,
-      lifetimeSupplyInterestAccrued: '10',
+      balance: balance,
+      lifetimeSupplyInterestAccrued: '0',
     });
-  }, [navigate]);
+  }, [navigate, balance]);
 
   return (
     <ButtonPressAnimation
@@ -88,7 +86,7 @@ const LPBonusListRow = ({ underlying }) => {
                 size="lmedium"
                 weight="bold"
               >
-                0.000000000 HH
+                {balance} HH
               </Text>
             </RowWithMargins>
             <APYPill value="22" />
@@ -100,6 +98,7 @@ const LPBonusListRow = ({ underlying }) => {
 };
 
 LPBonusListRow.propTypes = {
+  balance: PropTypes.string,
   underlying: PropTypes.object,
 };
 

@@ -12,14 +12,17 @@ import logger from 'logger';
 
 export const estimateHolyMigrateCompound = async (amount, currency) => {
   // create unlock rap
-  const { accountAddress } = store.getState().settings;
+  const { accountAddress, network } = store.getState().settings;
+
   let gasLimits = [];
+
+  const contractAddress = HOLY_PASSAGE_ADDRESS(network);
 
   const swapAssetNeedsUnlocking = await assetNeedsUnlocking(
     accountAddress,
     amount,
     currency,
-    HOLY_PASSAGE_ADDRESS
+    contractAddress
   );
 
   let migrationGasLimit = ethUnits.basic_approval;
@@ -28,12 +31,12 @@ export const estimateHolyMigrateCompound = async (amount, currency) => {
     logger.log('[holy migrate estimation] we need unlock tokens ', amount);
     const unlockGasLimit = await contractUtils.estimateApprove(
       currency.address,
-      HOLY_PASSAGE_ADDRESS
+      contractAddress
     );
     logger.log('[holy migrate estimation] gas for approval ', unlockGasLimit);
     gasLimits = concat(gasLimits, unlockGasLimit);
   } else {
-    migrationGasLimit = holyMigrateEstimation();
+    migrationGasLimit = await holyMigrateEstimation();
   }
 
   gasLimits = concat(gasLimits, migrationGasLimit);
@@ -52,13 +55,14 @@ const createHolyMigrateCompoundRap = async ({
   let actions = [];
 
   // create unlock rap
-  const { accountAddress } = store.getState().settings;
+  const { accountAddress, network } = store.getState().settings;
+  const contractAddress = HOLY_PASSAGE_ADDRESS(network);
 
   const swapAssetNeedsUnlocking = await assetNeedsUnlocking(
     accountAddress,
     amount,
     currency,
-    HOLY_PASSAGE_ADDRESS
+    contractAddress
   );
 
   if (swapAssetNeedsUnlocking) {
@@ -67,7 +71,8 @@ const createHolyMigrateCompoundRap = async ({
       accountAddress,
       amount: amount,
       assetToUnlock: currency,
-      contractAddress: HOLY_PASSAGE_ADDRESS,
+      contractAddress: contractAddress,
+      network,
       selectedGasPrice,
     });
     actions = concat(actions, unlock);
@@ -81,6 +86,7 @@ const createHolyMigrateCompoundRap = async ({
     accountAddress,
     amount,
     currency,
+    network,
     selectedGasPrice,
   });
   actions = concat(actions, migrate);

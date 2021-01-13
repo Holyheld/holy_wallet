@@ -50,7 +50,7 @@ const HolySavingsSheet = () => {
       navigate(Routes.HOLY_SAVINGS_WITHDRAW_MODAL, {
         params: {
           params: {
-            currentSaving: defaultSaving,
+            savingBalance: totalBalance,
           },
           screen: Routes.MAIN_EXCHANGE_SCREEN,
         },
@@ -59,18 +59,19 @@ const HolySavingsSheet = () => {
 
       analytics.track('Navigated to HolySavingsWithdrawModal', {
         category: 'holy savings',
-        label: defaultSaving.underlying.symbol,
+        label: 'HOLY WITHDRAW',
       });
     } else {
       Alert.alert(`You need to import the wallet in order to do this`);
     }
-  }, [isReadOnlyWallet, navigate, defaultSaving]);
+  }, [isReadOnlyWallet, navigate, totalBalance]);
 
   const onDeposit = useCallback(() => {
     if (!isReadOnlyWallet) {
-      navigate(Routes.SAVINGS_DEPOSIT_MODAL, {
+      navigate(Routes.HOLY_SAVINGS_DEPOSIT_MODAL, {
         params: {
           params: {
+            currentSaving: defaultSaving,
             defaultInputCurrency: null,
           },
           screen: Routes.MAIN_EXCHANGE_SCREEN,

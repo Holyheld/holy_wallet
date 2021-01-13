@@ -1,17 +1,24 @@
 import { rapsAddOrUpdate } from '../redux/raps';
 import store from '../redux/store';
+import { holySavingsWithdrawEstimation } from './actions/holy_savings_withdraw';
 import { createNewAction, createNewRap, RapActionTypes } from './common';
 import logger from 'logger';
 
-export const estimateHolySavingsWithdrawCompound = async () => {
-  return 100000;
+export const estimateHolySavingsWithdrawCompound = async ({ inputAmount }) => {
+  const estimationGas = holySavingsWithdrawEstimation(inputAmount);
+  logger.log(
+    '[holy savings withdraw estimation] gas for withdraw ',
+    estimationGas
+  );
+
+  return estimationGas;
 };
 
 const createHolySavingsWithdrawCompoundRap = async ({
   callback,
   inputAmount,
   inputCurrency,
-  isMax,
+  outputCurrency,
   selectedGasPrice,
 }) => {
   logger.log('[holy withdraw rap] amount', inputAmount);
@@ -23,8 +30,8 @@ const createHolySavingsWithdrawCompoundRap = async ({
     accountAddress,
     inputAmount,
     inputCurrency,
-    isMax,
     network,
+    outputCurrency,
     selectedGasPrice,
   });
   const actions = [withdraw];

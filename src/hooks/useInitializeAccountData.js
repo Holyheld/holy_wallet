@@ -2,8 +2,8 @@ import { captureException } from '@sentry/react-native';
 import { useCallback } from 'react';
 import { InteractionManager } from 'react-native';
 import { useDispatch } from 'react-redux';
+import { refreshHoly } from '../handlers/holy';
 import { explorerInit } from '../redux/explorer';
-import { holySavingsRefreshState } from '../redux/holy';
 import { uniqueTokensRefreshState } from '../redux/uniqueTokens';
 import { uniswapGetAllExchanges, uniswapPairsInit } from '../redux/uniswap';
 import logger from 'logger';
@@ -18,9 +18,9 @@ export default function useInitializeAccountData() {
         dispatch(explorerInit());
       });
 
-      InteractionManager.runAfterInteractions(() => {
-        logger.sentry('Initialize holy savings data');
-        dispatch(holySavingsRefreshState());
+      InteractionManager.runAfterInteractions(async () => {
+        logger.sentry('Initialize holy data');
+        await dispatch(refreshHoly());
       });
 
       InteractionManager.runAfterInteractions(async () => {
