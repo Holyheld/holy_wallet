@@ -84,7 +84,7 @@ function APYPill({ small, value }) {
         size={small ? 'smedium' : 'lmedium'}
         weight="semibold"
       >
-        {value}%
+        {value}x
       </TextComponent>
     </Centered>
   );
