@@ -1,6 +1,8 @@
 export default {
   approved: 'approved',
   approving: 'approving',
+  claimed: 'claimed',
+  claiming: 'claiming',
   deposited: 'deposited',
   depositing: 'depositing',
   failed: 'failed',

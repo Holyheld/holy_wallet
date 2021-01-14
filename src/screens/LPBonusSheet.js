@@ -14,6 +14,7 @@ import {
 } from '../components/sheet';
 import { useDimensions, useWallets } from '@rainbow-me/hooks';
 import { useNavigation } from '@rainbow-me/navigation';
+import Routes from '@rainbow-me/routes';
 import { colors, position } from '@rainbow-me/styles';
 
 export const SheetEmptyHeight = 313;
@@ -37,6 +38,9 @@ const LPBonusSheet = () => {
   const onClaim = useCallback(() => {
     if (!isReadOnlyWallet) {
       // TODO: Claim LP bonus
+      navigate(Routes.HOLY_CLAIM_LP_BONUS, {
+        bonusToClaimBalance: balance,
+      });
     } else {
       Alert.alert(`You need to import the wallet in order to do this`);
     }

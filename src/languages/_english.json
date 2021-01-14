@@ -57,7 +57,7 @@
       "backup_success": "Your wallet has been backed up successfully!"
     },
     "account": {
-      "tab_balances": "Balances",
+      "tab_balances": "Holyheld",
       "tab_balances_empty_state": "Balance",
       "tab_collectibles": "Collectibles",
       "tab_transactions": "Transactions",

@@ -78,7 +78,7 @@ export default function ListHeader({
           {children}
         </Content>
         {showDivider && <Divider color={colors.divider} />}
-        {!isSticky && title !== 'Balances' && (
+        {!isSticky && title !== 'Holyheld' && (
           <StickyBackgroundBlocker
             deviceDimensions={deviceDimensions}
             isEditMode={isCoinListEdited}

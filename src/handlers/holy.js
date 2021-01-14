@@ -11,7 +11,7 @@ const holySavingsRefreshState = () => async dispatch => {
   const savings = [
     {
       apy: '1.5',
-      balance: '10',
+      balance: '0',
       native: {
         price: {
           amount: '1',
@@ -37,7 +37,7 @@ const holyEarlyLPBonusesRefresh = () => async (dispatch, getState) => {
   try {
     logger.sentry('refreshing HOLY early LP bonuses');
     const claimableBonus = await holyPassage.getClaimableBonus();
-    logger.sentry('HOLY early LP bonuses: ' + claimableBonus);
+    logger.sentry('HOLY claimable bonuses: ' + claimableBonus);
     dispatch(
       holyUpdateEarlyLPBonus(claimableBonus ? claimableBonus.toString() : '0')
     );

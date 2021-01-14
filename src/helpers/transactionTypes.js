@@ -2,6 +2,7 @@ export default {
   authorize: 'authorize',
   borrow: 'borrow',
   cancel: 'cancel',
+  claim: 'claim',
   deployment: 'deployment',
   deposit: 'deposit',
   execution: 'execution',

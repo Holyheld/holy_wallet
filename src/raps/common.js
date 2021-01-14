@@ -4,6 +4,7 @@ import { get, join, map } from 'lodash';
 import { rapsAddOrUpdate } from '../redux/raps';
 import store from '../redux/store';
 import depositCompound from './actions/depositCompound';
+import holyClaim from './actions/holy_claim';
 import holyMigrate from './actions/holy_migrate';
 import { holySavingsWithdraw } from './actions/holy_savings_withdraw';
 import swap from './actions/swap';
@@ -15,6 +16,7 @@ const NOOP = () => undefined;
 
 export const RapActionTypes = {
   depositCompound: 'depositCompound',
+  holyBonusClaim: 'holyBonusClaim',
   holyMigrate: 'holyMigrate',
   holySavingsDeposit: 'holySavingsDeposit',
   holySavingsWithdraw: 'holySavingsWithdraw',
@@ -46,6 +48,8 @@ const findActionByType = type => {
     case RapActionTypes.holySavingsDeposit:
       // TODO: do holy migrate
       return NOOP;
+    case RapActionTypes.holyBonusClaim:
+      return holyClaim;
     default:
       return NOOP;
   }

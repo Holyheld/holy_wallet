@@ -1,6 +1,6 @@
 import Clipboard from '@react-native-community/clipboard';
-import { find } from 'lodash';
-import React, { useCallback, useRef } from 'react';
+import { find, get } from 'lodash';
+import React, { useCallback, useMemo, useRef } from 'react';
 import ImagePicker from 'react-native-image-crop-picker';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components/primitives';
@@ -10,6 +10,7 @@ import Divider from '../Divider';
 import { Alert } from '../alerts';
 import { ButtonPressAnimation } from '../animations';
 import { RainbowButton } from '../buttons';
+import RainbowButtonTypes from '../buttons/rainbow-button/RainbowButtonTypes';
 import { FloatingEmojis } from '../floating-emojis';
 import { Icon } from '../icons';
 import { Centered, Column, Row, RowWithMargins } from '../layout';
@@ -88,18 +89,11 @@ const ProfileMastheadDivider = styled(Divider).attrs({
 `;
 
 export default function ProfileMasthead({
-  addCashAvailable,
   recyclerListRef,
   showBottomDivider = true,
 }) {
   const { wallets, selectedWallet, isDamaged, isReadOnlyWallet } = useWallets();
   const { network } = useAccountSettings();
-  // const {
-  //   isWalletEthZero,
-  //   refetchSavings,
-  //   sections,
-  // } = useWalletSectionsData();
-  // TODO: get balance of holy coin?
 
   const holyCoinV1 = {
     address: HOLY_V1_ADDRESS(network), // from testnet
@@ -107,9 +101,11 @@ export default function ProfileMasthead({
   };
 
   const holyV1Asset = useAsset(holyCoinV1);
-  //console.log(uniswapAssetsInWallet);
-  //console.log('holyV1Asset');
-  //console.log(holyV1Asset);
+
+  const isMigrationButton = useMemo(() => {
+    const holyV1Balance = get(holyV1Asset, 'balance.amount', '0');
+    return holyV1Balance !== '0';
+  }, [holyV1Asset]);
 
   const onNewEmoji = useRef();
   const setOnNewEmoji = useCallback(
@@ -255,12 +251,7 @@ export default function ProfileMasthead({
   }, [accountAddress, isDamaged]);
 
   return (
-    <Column
-      align="center"
-      height={addCashAvailable ? 335 : 260}
-      marginBottom={24}
-      marginTop={0}
-    >
+    <Column align="center" height={260} marginBottom={24} marginTop={0}>
       <AvatarCircle
         accountColor={accountColor}
         accountSymbol={accountSymbol}
@@ -309,7 +300,13 @@ export default function ProfileMasthead({
           }}
         />
       </RowWithMargins>
-      {<MigrateButton onPress={handleMigrateHoly} />}
+
+      <MigrateButton
+        disabled={!isMigrationButton}
+        onPress={handleMigrateHoly}
+        type={RainbowButtonTypes.addCash}
+      />
+
       {showBottomDivider && <ProfileMastheadDivider />}
     </Column>
   );

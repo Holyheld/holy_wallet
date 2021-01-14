@@ -124,7 +124,7 @@ LPBonusListHeader.propTypes = {
 };
 
 LPBonusListHeader.defaultProps = {
-  emoji: 'dna',
+  emoji: 'wrapped_gift',
   showSumValue: false,
   sumValue: '0',
   title: 'Early LP Bonus',

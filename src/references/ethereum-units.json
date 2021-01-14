@@ -2,6 +2,7 @@
   "basic_approval": 550000,
   "basic_deposit": 420000,
   "basic_deposit_eth": 200000,
+  "basic_holy_claim": 145000,
   "basic_holy_migration": 145000,
   "basic_holy_savings_deposit": 120000,
   "basic_holy_savings_withdraw": 120000,

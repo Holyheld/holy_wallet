@@ -1,7 +1,12 @@
-import { Contract } from '@ethersproject/contracts';
 import { useRoute } from '@react-navigation/native';
 import { get } from 'lodash';
-import React, { Fragment, useCallback, useEffect, useState } from 'react';
+import React, {
+  Fragment,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react';
 import { ActivityIndicator, View } from 'react-native';
 import Animated, { Extrapolate } from 'react-native-reanimated';
 import { useAndroidBackHandler } from 'react-navigation-backhandler';
@@ -18,8 +23,6 @@ import {
 import ExchangeInput from '../components/exchange/ExchangeInput';
 import { FloatingPanel, FloatingPanels } from '../components/floating-panels';
 import { GasSpeedButton } from '../components/gas';
-import MigrateBonusInfo from '../components/holy-migrate/MigrateBonusInfo';
-import MigrateInfo from '../components/holy-migrate/MigrateInfo';
 import {
   Centered,
   ColumnWithMargins,
@@ -27,30 +30,24 @@ import {
   Row,
   RowWithMargins,
 } from '../components/layout';
-import { web3Provider } from '../handlers/web3';
+import LPBonusInfo from '../components/lp-bonus/LPBonusInfo';
 import exchangeModalTypes from '../helpers/exchangeModalTypes';
-import {
-  convertAmountToNativeAmount,
-  fromWei,
-  lessThan,
-  subtract,
-} from '../helpers/utilities';
+import { convertAmountToNativeAmount } from '../helpers/utilities';
 import { loadWallet } from '../model/wallet';
 import { useNavigation } from '../navigation/Navigation';
 import useStatusBarManaging from '../navigation/useStatusBarManaging';
 import { executeRap } from '../raps/common';
-import createHolyMigrateCompoundRap, {
-  estimateHolyMigrateCompound,
-} from '../raps/holyMigrateCompound';
+import createHolyClaimCompoundRap, {
+  estimateHolyClaimCompound,
+} from '../raps/holyClaimCompound';
 import { multicallClearState } from '../redux/multicall';
+import { HH_V2_ADDRESS } from '../references/holy';
 import {
-  HH_V2_ADDRESS,
-  HOLY_PASSAGE_ABI,
-  HOLY_PASSAGE_ADDRESS,
-  HOLY_VISOR_ABI,
-  HOLY_VISOR_ADDRESS,
-} from '../references/holy';
-import { useAccountSettings, useBlockPolling, useGas } from '@rainbow-me/hooks';
+  useAccountSettings,
+  useAsset,
+  useBlockPolling,
+  useGas,
+} from '@rainbow-me/hooks';
 import Routes from '@rainbow-me/routes';
 import { colors, position } from '@rainbow-me/styles';
 import { backgroundTask } from '@rainbow-me/utils';
@@ -103,107 +100,57 @@ const Input = styled(ExchangeInput).attrs({
   height: ${ExchangeFieldHeight + (android ? 20 : 0)};
 `;
 
-const HolyMigrateModalWrapper = () => {
+const HolyClaimModalWrapper = () => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   android && useStatusBarManaging();
   const { params } = useRoute();
-  const holyV1Asset = params?.holyV1Asset;
+  const bonusToClaimBalance = params?.bonusToClaimBalance;
   const testID = params?.testID;
 
-  return <HolyMigrateModal holyV1Asset={holyV1Asset} testID={testID} />;
+  return (
+    <HolyClaimModal bonusToClaimBalance={bonusToClaimBalance} testID={testID} />
+  );
 };
 
-const HolyMigrateModal = ({ holyV1Asset, testID }) => {
+const HolyClaimModal = ({ bonusToClaimBalance, testID }) => {
   const { navigate, setParams } = useNavigation();
   const {
     params: { tabTransitionPosition },
   } = useRoute();
-  const { network, accountAddress } = useAccountSettings();
+  const { network } = useAccountSettings();
 
   const [isLoading, setIsLoading] = useState(true);
   const { nativeCurrency } = useAccountSettings();
 
-  const [bonusMigrateNeed, setBonusMigrateNeed] = useState(0);
-
   useEffect(() => {
-    async function loadMigrationData() {
-      logger.sentry('Loading migrate data...');
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+  }, []);
 
-      try {
-        const visorAddress = HOLY_VISOR_ADDRESS(network);
-        const visorABI = HOLY_VISOR_ABI;
+  const amountToClaim = bonusToClaimBalance;
 
-        const holyVisor = new Contract(visorAddress, visorABI, web3Provider);
+  const hhCoinV2 = useMemo(() => {
+    return {
+      address: HH_V2_ADDRESS(network), // from testnet
+      symbol: 'HH',
+      type: 'token',
+    };
+  }, [network]);
 
-        const passageAddress = HOLY_PASSAGE_ADDRESS(network);
-        const passageABI = HOLY_PASSAGE_ABI;
+  const hhV2Asset = useAsset(hhCoinV2);
 
-        const holyPassage = new Contract(
-          passageAddress,
-          passageABI,
-          web3Provider
-        );
+  const symbol = get(hhV2Asset, 'symbol');
+  const address = get(hhV2Asset, 'address');
 
-        logger.sentry('loading migration data');
-        let bonusAmountCap = await holyVisor.bonusAmountCaps(accountAddress);
-        logger.sentry('bonus cap:', bonusAmountCap);
-        if (bonusAmountCap) {
-          bonusAmountCap = bonusAmountCap.toString();
-        } else {
-          bonusAmountCap = '0';
-        }
-
-        let migratedTokens = await holyPassage.migratedTokens(accountAddress);
-        logger.sentry('migrated tokens:', migratedTokens);
-        if (migratedTokens) {
-          migratedTokens = migratedTokens.toString();
-        } else {
-          migratedTokens = '0';
-        }
-
-        if (lessThan(migratedTokens, bonusAmountCap)) {
-          let needForBonus = subtract(bonusAmountCap, migratedTokens);
-
-          needForBonus = fromWei(needForBonus);
-          logger.sentry(
-            'cap is less than migrated tokens - you need ',
-            needForBonus,
-            ' for full bonus'
-          );
-          setBonusMigrateNeed(needForBonus);
-        } else {
-          logger.sentry('cap is bigger than migrated tokens - no bonus');
-          setBonusMigrateNeed('0');
-        }
-
-        setIsLoading(false);
-      } catch (error) {
-        logger.sentry('loading migration data error: ', error);
-        setBonusMigrateNeed(0);
-        setIsLoading(false);
-      }
-    }
-    loadMigrationData();
-  }, [accountAddress, network]);
-
-  const amountToMigrate = get(holyV1Asset, 'balance.amount');
-  const symbol = get(holyV1Asset, 'symbol');
-  const address = get(holyV1Asset, 'address');
-
-  const hhCoinV2 = {
-    address: HH_V2_ADDRESS(network), // from testnet
-    symbol: 'HH',
-    type: 'token',
-  };
-
-  const newNativePrice = get(holyV1Asset, 'native.price.amount', null);
+  const newNativePrice = get(hhV2Asset, 'native.price.amount', '0');
   const nativeAmount = convertAmountToNativeAmount(
-    amountToMigrate,
+    amountToClaim,
     newNativePrice
   );
 
   const defaultGasLimit = 160000;
-  const type = exchangeModalTypes.holyMigrate;
+  const type = exchangeModalTypes.lpBonusClaim;
 
   const dispatch = useDispatch();
   const {
@@ -226,17 +173,14 @@ const HolyMigrateModal = ({ holyV1Asset, testID }) => {
 
   const updateGasLimit = useCallback(async () => {
     try {
-      const gasLimit = await estimateHolyMigrateCompound(
-        amountToMigrate,
-        holyV1Asset
-      );
+      const gasLimit = await estimateHolyClaimCompound(amountToClaim, hhCoinV2);
       logger.sentry('new gas limit:', gasLimit);
       updateTxFee(gasLimit);
     } catch (error) {
       logger.sentry('gas limit error:', error);
       updateTxFee(defaultGasLimit);
     }
-  }, [defaultGasLimit, updateTxFee, amountToMigrate, holyV1Asset]);
+  }, [defaultGasLimit, updateTxFee, amountToClaim, hhCoinV2]);
 
   // Update gas limit
   useEffect(() => {
@@ -281,7 +225,7 @@ const HolyMigrateModal = ({ holyV1Asset, testID }) => {
         const wallet = await loadWallet();
         if (!wallet) {
           setIsAuthorizing(false);
-          logger.sentry(`aborting holy migrate due to missing wallet`);
+          logger.sentry(`aborting holy lp bonus claim due to missing wallet`);
           return;
         }
 
@@ -290,23 +234,23 @@ const HolyMigrateModal = ({ holyV1Asset, testID }) => {
           setParams({ focused: false });
           navigate(Routes.PROFILE_SCREEN);
         };
-        const rap = await createHolyMigrateCompoundRap({
-          amount: amountToMigrate,
+        const rap = await createHolyClaimCompoundRap({
+          amount: amountToClaim,
           callback,
-          currency: holyV1Asset,
+          currency: hhCoinV2,
           selectedGasPrice,
         });
-        logger.log('[holy migrate] rap', rap);
+        logger.log('[holy lp claim] rap', rap);
         await executeRap(wallet, rap);
-        logger.log('[holy migrate] executed rap!');
+        logger.log('[holy lp claim] executed rap!');
       } catch (error) {
         setIsAuthorizing(false);
-        logger.log('[holy migrate] error submitting migrate', error);
+        logger.log('[holy lp claim] error submitting claim lp bonus', error);
         setParams({ focused: false });
         navigate(Routes.WALLET_SCREEN);
       }
     });
-  }, [amountToMigrate, selectedGasPrice, setParams, navigate, holyV1Asset]);
+  }, [amountToClaim, selectedGasPrice, setParams, navigate, hhCoinV2]);
 
   return (
     <Wrapper>
@@ -378,7 +322,7 @@ const HolyMigrateModal = ({ holyV1Asset, testID }) => {
                       symbol={symbol}
                     />
 
-                    <Input editable={false} value={amountToMigrate} />
+                    <Input editable={false} value={amountToClaim} />
                   </FieldRow>
                 </InnerContainer>
                 <NativeFieldRow>
@@ -392,15 +336,10 @@ const HolyMigrateModal = ({ holyV1Asset, testID }) => {
                 </NativeFieldRow>
               </Container>
             </FloatingPanel>
-            <MigrateInfo
-              amount={amountToMigrate}
+            <LPBonusInfo
+              amount={amountToClaim}
               asset={hhCoinV2}
               testID="migrate-info-button"
-            />
-            <MigrateBonusInfo
-              amount={bonusMigrateNeed}
-              asset={holyV1Asset}
-              testID="migrate-bonus-info-button"
             />
 
             <Fragment>
@@ -423,6 +362,7 @@ const HolyMigrateModal = ({ holyV1Asset, testID }) => {
                 />
               </Centered>
             </Fragment>
+
             <GasSpeedButton
               dontBlur
               onCustomGasBlur={() => {}}
@@ -436,4 +376,4 @@ const HolyMigrateModal = ({ holyV1Asset, testID }) => {
   );
 };
 
-export default HolyMigrateModalWrapper;
+export default HolyClaimModalWrapper;

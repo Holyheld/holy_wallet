@@ -10,7 +10,6 @@ import logger from 'logger';
 
 const estimateApproveWithExchange = async (spender, exchange) => {
   try {
-    logger.sentry('exchange estimate approve', { exchange, spender });
     const { accountAddress } = store.getState().settings;
 
     const gasLimit = await exchange.estimateGas.approve(spender, MaxUint256, {
