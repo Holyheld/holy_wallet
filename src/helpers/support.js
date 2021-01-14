@@ -3,7 +3,7 @@ import { debounce } from 'lodash';
 import Mailer from 'react-native-mail';
 import { Alert } from '../components/alerts';
 
-const SupportEmailAddress = 'support@rainbow.me';
+const SupportEmailAddress = 'support@holyheld.com';
 
 const setClipboardToSupportEmail = () =>
   Clipboard.setString(SupportEmailAddress);
@@ -34,7 +34,7 @@ const messageSupport = () => Mailer.mail(supportEmailOptions, handleMailError);
 
 const supportEmailOptions = {
   recipients: [SupportEmailAddress],
-  subject: '🌈️ Rainbow Support',
+  subject: 'Holyheld Support',
 };
 
 export default function showWalletErrorAlert() {

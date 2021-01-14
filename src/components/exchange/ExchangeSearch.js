@@ -1,7 +1,7 @@
 import { isEmpty } from 'lodash';
 import React, { useCallback, useEffect, useRef } from 'react';
 import FastImage from 'react-native-fast-image';
-import RadialGradient from 'react-native-radial-gradient';
+// import RadialGradient from 'react-native-radial-gradient';
 import Animated, {
   NewEasing,
   repeat,
@@ -15,33 +15,33 @@ import { ClearInputDecorator, Input } from '../inputs';
 import { Row } from '../layout';
 import { Text } from '../text';
 import { colors, margin, padding } from '@rainbow-me/styles';
-import { deviceUtils } from '@rainbow-me/utils';
+// import { deviceUtils } from '@rainbow-me/utils';
 
 export const ExchangeSearchHeight = 40;
-const ExchangeSearchWidth = deviceUtils.dimensions.width - 30;
+// const ExchangeSearchWidth = deviceUtils.dimensions.width - 30;
 
 const Container = styled(Row)`
   ${margin(0, 15, 8)};
   ${padding(0, 37, 0, 12)};
-  background-color: ${colors.transparent};
+  background-color: ${colors.modalBackgroundLighter};
   border-radius: ${ExchangeSearchHeight / 2};
   height: ${ExchangeSearchHeight};
   overflow: hidden;
 `;
 
-const BackgroundGradient = styled(RadialGradient).attrs({
-  center: [ExchangeSearchWidth, ExchangeSearchWidth / 2],
-  colors: ['#FCFDFE', '#F0F2F5'],
-})`
-  position: absolute;
-  height: ${ExchangeSearchWidth};
-  top: ${-(ExchangeSearchWidth - ExchangeSearchHeight) / 2};
-  transform: scaleY(${ExchangeSearchHeight / ExchangeSearchWidth});
-  width: ${ExchangeSearchWidth};
-`;
+// const BackgroundGradient = styled(RadialGradient).attrs({
+//   center: [ExchangeSearchWidth, ExchangeSearchWidth / 2],
+//   colors: ['#FCFDFE', '#F0F2F5'],
+// })`
+//   position: absolute;
+//   height: ${ExchangeSearchWidth};
+//   top: ${-(ExchangeSearchWidth - ExchangeSearchHeight) / 2};
+//   transform: scaleY(${ExchangeSearchHeight / ExchangeSearchWidth});
+//   width: ${ExchangeSearchWidth};
+// `;
 
 const SearchIcon = styled(Text).attrs({
-  color: colors.alpha(colors.blueGreyDark, 0.5),
+  color: colors.textColor,
   size: 'large',
   weight: 'semibold',
 })``;
@@ -54,14 +54,14 @@ const SearchInput = styled(Input).attrs({
   autoCapitalize: 'words',
   blurOnSubmit: false,
   clearTextOnFocus: true,
-  color: colors.alpha(colors.blueGreyDark, 0.8),
+  color: colors.textColor,
   enablesReturnKeyAutomatically: true,
   keyboardAppearance: 'dark',
   keyboardType: 'ascii-capable',
   lineHeight: 'loose',
-  placeholderTextColor: colors.alpha(colors.blueGreyDark, 0.5),
+  placeholderTextColor: colors.textColorMuted,
   returnKeyType: 'search',
-  selectionColor: colors.appleBlue,
+  selectionColor: colors.textColorPrimary,
   size: 'large',
   spellCheck: false,
   weight: 'semibold',
@@ -78,7 +78,7 @@ const SearchInput = styled(Input).attrs({
 const SearchSpinner = styled(FastImage).attrs({
   resizeMode: FastImage.resizeMode.contain,
   source: Spinner,
-  tintColor: colors.alpha(colors.blueGreyDark, 0.6),
+  tintColor: colors.textColor,
 })`
   height: 20;
   width: 20;
@@ -169,7 +169,7 @@ const ExchangeSearch = (
 
   return (
     <Container>
-      <BackgroundGradient />
+      {/* <BackgroundGradient /> */}
       <SearchIconWrapper style={searchIconStyle}>
         <SearchIcon>􀊫</SearchIcon>
       </SearchIconWrapper>

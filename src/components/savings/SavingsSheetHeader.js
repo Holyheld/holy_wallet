@@ -15,7 +15,7 @@ const SavingsSheetHeader = ({ balance, lifetimeAccruedInterest }) => (
     >
       Savings
     </Text>
-    <DollarFigure decimals={2} value={balance} />
+    <DollarFigure currencySymbol="$" decimals={2} value={balance} />
     <RowWithMargins align="center" margin={4} marginTop={1}>
       <Text
         align="center"

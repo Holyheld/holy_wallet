@@ -42,7 +42,6 @@ const CopyButtonRow = styled(RowWithMargins).attrs({
   justify: 'start',
   margin: 6,
 })`
-  background-color: ${colors.transparent};
   height: 34;
 `;
 

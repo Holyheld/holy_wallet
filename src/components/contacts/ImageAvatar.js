@@ -42,7 +42,7 @@ const ImageAvatar = ({ image, size = 'medium', ...props }) => {
   const { dimensions, shadow } = sizeConfigs[size];
 
   const shadows = useMemo(
-    () => (size === 'small' ? buildSmallShadows(colors.dark) : shadow),
+    () => (size === 'small' ? buildSmallShadows(colors.shadowDarker) : shadow),
     [shadow, size]
   );
 

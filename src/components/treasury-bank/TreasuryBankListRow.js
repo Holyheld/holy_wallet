@@ -1,5 +1,4 @@
 import React, { useCallback } from 'react';
-import LinearGradient from 'react-native-linear-gradient';
 import styled from 'styled-components/primitives';
 import { useNavigation } from '../../navigation/Navigation';
 
@@ -9,29 +8,13 @@ import { Centered, Row, RowWithMargins } from '../layout';
 import { Emoji, Text } from '../text';
 import APYPill from './APYPill';
 import { useDimensions } from '@rainbow-me/hooks';
-import { colors, padding, position } from '@rainbow-me/styles';
+import { colors, padding } from '@rainbow-me/styles';
 import ShadowStack from 'react-native-shadow-stack';
 
 const TreasuryBankListRowShadows = [
   [0, 10, 30, colors.dark, 0.2],
   [0, 5, 15, colors.dark, 0.4],
 ];
-
-const neverRerender = () => true;
-// eslint-disable-next-line react/display-name
-const TreasuryBankListRowGradient = React.memo(
-  () => (
-    <LinearGradient
-      borderRadius={49}
-      colors={[colors.rowBackground, colors.rowBackgroundSecondary]}
-      end={{ x: 0.5, y: 1 }}
-      pointerEvents="none"
-      start={{ x: 0.5, y: 0 }}
-      style={position.coverAsObject}
-    />
-  ),
-  neverRerender
-);
 
 const TreasuryBankListRowShadowStack = styled(ShadowStack).attrs(
   ({ deviceWidth }) => ({
@@ -64,7 +47,6 @@ const TreasuryBankListRow = () => {
     >
       <Centered direction="column" marginBottom={15}>
         <TreasuryBankListRowShadowStack deviceWidth={deviceWidth}>
-          <TreasuryBankListRowGradient />
           <Row
             align="center"
             css={padding(9, 10, 10, 20)}

@@ -5528,7 +5528,7 @@
       "symbol": "DAI",
       "extensions": {
         "color": "#F0B340",
-        "isRainbowCurated": true,
+        "isRainbowCurated": false,
         "isVerified": true
       }
     },
@@ -14812,7 +14812,7 @@
       "name": "Dai If Trump Loses ",
       "symbol": "NOTRUMP",
       "extensions": {
-        "isVerified": true
+        "isVerified": false
       }
     },
     {

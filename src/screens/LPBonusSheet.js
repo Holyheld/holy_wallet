@@ -70,6 +70,7 @@ const LPBonusSheet = () => {
               radiusAndroid={24}
               textColor={colors.textColorClaimAndBurn}
               weight="bold"
+              width="auto"
             />
           </SheetActionButtonRow>
           <Divider

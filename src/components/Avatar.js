@@ -17,8 +17,8 @@ const Avatar = ({ size, source }) => (
   <ShadowStack
     {...borders.buildCircleAsObject(size)}
     shadows={[
-      [0, 3, 5, colors.dark, 0.2],
-      [0, 6, 10, colors.dark, 0.14],
+      [0, 3, 5, colors.shadowDarker, 0.2],
+      [0, 6, 10, colors.shadowDarker, 0.14],
     ]}
   >
     <Container size={size}>

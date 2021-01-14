@@ -3,10 +3,13 @@ import PropTypes from 'prop-types';
 
 import React, { useCallback, useEffect } from 'react';
 import { InteractionManager } from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
 import styled from 'styled-components/primitives';
 import { useNavigation } from '../../navigation/Navigation';
 import Routes from '../../navigation/routesNames';
+import {
+  SavingsSheetEmptyHeight,
+  SavingsSheetHeight,
+} from '../../screens/HolySavingsSheet';
 
 import { ButtonPressAnimation } from '../animations';
 import { Centered, Row, RowWithMargins } from '../layout';
@@ -14,7 +17,7 @@ import { Emoji, Text } from '../text';
 import APYPill from './APYPill';
 import SavingsListRowEmptyState from './SavingsListRowEmptyState';
 import { useDimensions } from '@rainbow-me/hooks';
-import { colors, padding, position } from '@rainbow-me/styles';
+import { colors, padding } from '@rainbow-me/styles';
 import ShadowStack from 'react-native-shadow-stack';
 
 const SavingsListRowShadows = [
@@ -24,24 +27,9 @@ const SavingsListRowShadows = [
 
 const NOOP = () => undefined;
 
-const neverRerender = () => true;
-// eslint-disable-next-line react/display-name
-const SavingsListRowGradient = React.memo(
-  () => (
-    <LinearGradient
-      borderRadius={49}
-      colors={[colors.rowBackground, colors.rowBackgroundSecondary]}
-      end={{ x: 0.5, y: 1 }}
-      pointerEvents="none"
-      start={{ x: 0.5, y: 0 }}
-      style={position.coverAsObject}
-    />
-  ),
-  neverRerender
-);
-
 const SavingsListRowShadowStack = styled(ShadowStack).attrs(
   ({ deviceWidth }) => ({
+    backgroundColor: colors.modalBackground,
     borderRadius: 49,
     height: 49,
     shadows: SavingsListRowShadows,
@@ -57,6 +45,8 @@ const SavingsListRow = ({ totalBalance, currentSaving, savings }) => {
     navigate(Routes.SAVINGS_SHEET, {
       currentSaving: currentSaving,
       lifetimeAccruedInterest: 0.1,
+      longFormHeight:
+        totalBalance === '0' ? SavingsSheetEmptyHeight : SavingsSheetHeight,
       savings: savings,
       totalBalance: totalBalance,
     });
@@ -86,7 +76,6 @@ const SavingsListRow = ({ totalBalance, currentSaving, savings }) => {
     >
       <Centered direction="column" marginBottom={15}>
         <SavingsListRowShadowStack deviceWidth={deviceWidth}>
-          <SavingsListRowGradient />
           <Row
             align="center"
             css={padding(9, 10, 10, 20)}

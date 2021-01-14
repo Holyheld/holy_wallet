@@ -771,7 +771,7 @@ class RecyclerAssetList extends Component {
         onRefresh={this.handleRefresh}
         refreshing={this.state.isRefreshing}
         style={ios ? {} : { top: 20 }}
-        tintColor={colors.alpha(colors.blueGreyDark, 0.4)}
+        tintColor={colors.textColor}
       />
     );
   }

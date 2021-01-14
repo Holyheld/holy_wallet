@@ -15,7 +15,7 @@ const LPBonusSheetHeader = ({ balance, lifetimeAccruedInterest }) => (
     >
       EARLY LP BONUS
     </Text>
-    <DollarFigure decimals={2} value={balance} />
+    <DollarFigure decimals={0} value={balance} />
     <RowWithMargins align="center" margin={4} marginTop={1}>
       <Text
         align="center"

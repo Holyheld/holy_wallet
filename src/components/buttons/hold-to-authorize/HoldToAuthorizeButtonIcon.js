@@ -5,7 +5,7 @@ import styled from 'styled-components/primitives';
 import { interpolate, ScaleInAnimation } from '../../animations';
 import { BiometryIcon, Icon } from '../../icons';
 import { Centered } from '../../layout';
-import { position } from '@rainbow-me/styles';
+import { colors, position } from '@rainbow-me/styles';
 
 const { cond, divide, greaterThan } = Animated;
 
@@ -15,10 +15,14 @@ const Container = styled(Centered)`
   position: absolute;
 `;
 
-const HoldToAuthorizeButtonIcon = ({ animatedValue, biometryType }) => (
+const HoldToAuthorizeButtonIcon = ({
+  color = colors.textColor,
+  animatedValue,
+  biometryType,
+}) => (
   <Container>
     <ScaleInAnimation alignItems="flex-start" value={animatedValue}>
-      <BiometryIcon biometryType={biometryType} />
+      <BiometryIcon biometryType={biometryType} color={color} />
     </ScaleInAnimation>
     <ScaleInAnimation
       alignItems="center"
@@ -41,6 +45,7 @@ const HoldToAuthorizeButtonIcon = ({ animatedValue, biometryType }) => (
 HoldToAuthorizeButtonIcon.propTypes = {
   animatedValue: PropTypes.object,
   biometryType: PropTypes.string,
+  color: PropTypes.string,
 };
 
 const arePropsEqual = (prev, next) => prev.biometryType === next.biometryType;

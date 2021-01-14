@@ -8,7 +8,7 @@ import Routes from '@rainbow-me/routes';
 import { colors } from '@rainbow-me/styles';
 
 const FabShadow = [
-  [0, 10, 30, colors.dark, 0.4],
+  [0, 10, 30, colors.shadowDarker, 0.4],
   [0, 5, 15, colors.paleBlue, 0.5],
 ];
 

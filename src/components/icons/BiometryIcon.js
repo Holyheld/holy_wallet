@@ -6,10 +6,12 @@ import BiometryTypes from '@rainbow-me/helpers/biometryTypes';
 import { colors, position } from '@rainbow-me/styles';
 import { magicMemo } from '@rainbow-me/utils';
 
-const BiometryTypeIcon = styled(Icon).attrs(({ type }) => ({
-  color: colors.white,
-  name: type.toLowerCase(),
-}))`
+const BiometryTypeIcon = styled(Icon).attrs(
+  ({ type, color = colors.textColor }) => ({
+    color: color,
+    name: type.toLowerCase(),
+  })
+)`
   ${position.size('100%')}
 `;
 
@@ -44,10 +46,10 @@ const Container = styled(Centered).attrs({
       : ''}
 `;
 
-const BiometryIcon = ({ biometryType, ...props }) =>
+const BiometryIcon = ({ biometryType, color = colors.textColor, ...props }) =>
   !biometryType || biometryType === 'none' ? null : (
     <Container {...props} type={biometryType}>
-      <BiometryTypeIcon type={biometryType} />
+      <BiometryTypeIcon color={color} type={biometryType} />
     </Container>
   );
 

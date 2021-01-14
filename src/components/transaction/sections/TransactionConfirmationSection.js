@@ -39,7 +39,7 @@ const NativeAmount = styled(Text).attrs({
   margin-top: 19;
 `;
 
-const coinIconShadow = [[0, 3, 9, colors.dark, 0.2]];
+const coinIconShadow = [[0, 3, 9, colors.shadowDarker, 0.2]];
 
 const TransactionConfirmationSection = ({
   asset: { amount, nativeAmountDisplay, symbol },

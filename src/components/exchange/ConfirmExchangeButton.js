@@ -5,9 +5,9 @@ import { SlippageWarningThresholdInBips } from './SlippageWarning';
 import { colors } from '@rainbow-me/styles';
 
 const ConfirmExchangeButtonShadows = [
-  [0, 3, 5, colors.transparent, 0.2],
-  [0, 6, 10, colors.transparent, 0.14],
-  [0, 1, 18, colors.transparent, 0.12],
+  [0, 3, 5, colors.shadowDarker, 0.2],
+  [0, 6, 10, colors.shadowDarker, 0.14],
+  [0, 1, 18, colors.shadowDarker, 0.12],
 ];
 
 const ConfirmExchangeButton = ({

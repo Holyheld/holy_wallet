@@ -9,8 +9,8 @@ import ShadowStack from 'react-native-shadow-stack';
 export const CoinIconSize = 40;
 
 const defaultShadow = [
-  [0, 10, 30, colors.dark, 0.2],
-  [0, 5, 15, colors.dark, 0.4],
+  [0, 10, 30, colors.shadowDarker, 0.2],
+  [0, 5, 15, colors.shadowDarker, 0.4],
 ];
 
 const CoinIcon = ({

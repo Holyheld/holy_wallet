@@ -7,8 +7,8 @@ import Routes from '@rainbow-me/routes';
 import { colors } from '@rainbow-me/styles';
 
 const FabShadow = [
-  [0, 10, 30, colors.transparent, 0.4],
-  [0, 5, 15, colors.transparent, 0.5],
+  [0, 10, 30, colors.shadowDarker, 0.4],
+  [0, 5, 15, colors.shadowDarker, 0.5],
 ];
 
 const HamburgerFab = ({ disabled, ...props }) => {

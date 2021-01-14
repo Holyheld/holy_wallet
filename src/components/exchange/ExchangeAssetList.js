@@ -42,7 +42,7 @@ const HeaderTitleGradient = styled(GradientText).attrs({
 })``;
 
 const HeaderTitleWrapper = styled.View`
-  width: ${android ? '150' : '143'}px;
+  width: ${android ? '250' : '243'}px;
 `;
 
 const ExchangeAssetSectionListHeader = ({ section }) => {

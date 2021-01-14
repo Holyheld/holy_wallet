@@ -118,7 +118,7 @@ const GasSpeedButtonContainer = styled(Column)`
 `;
 
 const WalletLabel = styled(Text).attrs({
-  color: colors.alpha(colors.blueGreyDark, 0.5),
+  color: colors.textColor,
   letterSpacing: 'roundedMedium',
   size: 'smedium',
   weight: 'semibold',
@@ -127,9 +127,7 @@ const WalletLabel = styled(Text).attrs({
 `;
 
 const WalletText = styled(Text).attrs(({ balanceTooLow }) => ({
-  color: balanceTooLow
-    ? colors.avatarColor[7]
-    : colors.alpha(colors.blueGreyDark, 0.8),
+  color: balanceTooLow ? colors.avatarColor[7] : colors.textColor,
   size: 'larger',
   weight: balanceTooLow ? 'bold' : 'semibold',
 }))``;
@@ -732,7 +730,7 @@ const TransactionConfirmationScreen = () => {
       >
         <Column>
           <AnimatedSheet
-            backgroundColor={colors.white}
+            backgroundColor={colors.pageBackground}
             borderRadius={39}
             direction="column"
             marginTop={marginTop}
@@ -755,7 +753,7 @@ const TransactionConfirmationScreen = () => {
             <Row marginBottom={5}>
               <Text
                 align="center"
-                color={colors.alpha(colors.blueGreyDark, 0.8)}
+                color={colors.textColor}
                 letterSpacing="roundedMedium"
                 size="large"
                 weight="bold"
@@ -767,7 +765,7 @@ const TransactionConfirmationScreen = () => {
               isAuthenticated && (
                 <Text
                   align="center"
-                  color={colors.appleBlue}
+                  color={colors.textColor}
                   letterSpacing="roundedMedium"
                   size="large"
                   weight="bold"
@@ -787,7 +785,11 @@ const TransactionConfirmationScreen = () => {
                 {methodName || 'Placeholder'}
               </Text>
             </Centered>
-            <Divider color={colors.rowDividerLight} inset={[0, 143.5]} />
+            <Divider
+              backgroundColor={colors.pageBackground}
+              color={colors.divider}
+              inset={[0, 143.5]}
+            />
             {renderTransactionSection()}
             {renderTransactionButtons()}
             <RowWithMargins css={padding(0, 24, 30)} margin={15}>
@@ -797,7 +799,9 @@ const TransactionConfirmationScreen = () => {
                   <Column marginTop={ios ? 2 : 8}>
                     <ContactAvatar
                       color={
-                        isNaN(accountColor) ? colors.skeleton : accountColor
+                        isNaN(accountColor)
+                          ? colors.skeletonColor
+                          : accountColor
                       }
                       size="smaller"
                       value={accountSymbol}

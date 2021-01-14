@@ -76,10 +76,10 @@ export default function useChartThrottledPoints({
     colors.modalBackground
   );
 
-  const color = isColorDarker ? colors.buttonSecondary : colorForAsset;
+  const color = isColorDarker ? colors.buttonClaimAndBurn : colorForAsset;
 
   const textColor = isColorDarker
-    ? colors.textColorSecondaryButton
+    ? colors.textColorClaimAndBurn
     : colors.textColor;
 
   // const color = useColorForAsset(assetForColor);

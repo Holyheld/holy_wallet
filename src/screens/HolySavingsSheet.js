@@ -23,7 +23,7 @@ import Routes from '@rainbow-me/routes';
 import { colors, position } from '@rainbow-me/styles';
 
 export const SavingsSheetEmptyHeight = 313;
-export const SavingsSheetHeight = android ? 510 : 452;
+export const SavingsSheetHeight = android ? 410 : 352;
 
 const Container = styled(Centered).attrs({ direction: 'column' })`
   ${position.cover};

@@ -61,6 +61,8 @@ let base = {
   rowDivider: 'rgba(60, 66, 82, 0.03)', // '60, 66, 82, 0.03'
   rowDividerExtraLight: 'rgba(60, 66, 82, 0.015)', // '60, 66, 82, 0.015'
   rowDividerLight: 'rgba(60, 66, 82, 0.02)', // '60, 66, 82, 0.02'
+  shadow: '#222222',
+  shadowDarker: '#000000',
   shadowGrey: '#6F6F6F', // '111, 111, 111'
   sheetBackground: '#25292E',
   shimmer: '#EDEEF1', // '237, 238, 241'

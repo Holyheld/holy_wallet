@@ -56,13 +56,13 @@ const AddButton = enhanceButton(({ onPress }) => (
     type="pill"
   >
     <FastImage
-      color={colors.textColorPrimaryButton}
       source={AddContactIcon}
       style={{
         height: 14.7,
         margin: 1.525,
         width: 19,
       }}
+      tintColor={colors.textColorPrimaryButton}
     />
   </Button>
 ));

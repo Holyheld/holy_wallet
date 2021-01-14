@@ -5,7 +5,7 @@ import { Alert } from '../components/alerts';
 import useClipboard from './useClipboard';
 
 export default function useEmailRainbow({
-  emailAddress = 'support@rainbow.me',
+  emailAddress = 'support@holyheld.com',
   subject = 'feedback',
 }) {
   const { setClipboard } = useClipboard();
@@ -13,7 +13,7 @@ export default function useEmailRainbow({
   const emailOptions = useMemo(
     () => ({
       recipients: [emailAddress],
-      subject: `🌈️ Rainbow ${upperFirst(subject)}`,
+      subject: `Holyheld ${upperFirst(subject)}`,
     }),
     [emailAddress, subject]
   );

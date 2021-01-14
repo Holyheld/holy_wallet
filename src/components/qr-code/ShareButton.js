@@ -8,13 +8,13 @@ import { colors } from '@rainbow-me/styles';
 import ShadowStack from 'react-native-shadow-stack';
 
 const shadows = [
-  [0, 10, 30, colors.dark, 0.2],
-  [0, 5, 15, colors.dark, 0.4],
+  [0, 10, 30, colors.shadowDarker, 0.2],
+  [0, 5, 15, colors.shadowDarker, 0.4],
 ];
 
 const Label = styled(Text).attrs({
   align: 'center',
-  color: colors.white,
+  color: colors.textColor,
   size: 'larger',
   weight: 'bold',
 })`
@@ -37,7 +37,7 @@ export default function ShareButton({ accountAddress, ...props }) {
       {...props}
     >
       <ShadowStack
-        backgroundColor={colors.dark}
+        backgroundColor={colors.shadowDarker}
         borderRadius={28}
         height={56}
         shadows={shadows}

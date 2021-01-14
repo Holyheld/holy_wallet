@@ -1,43 +1,28 @@
 import PropTypes from 'prop-types';
 import React, { useCallback } from 'react';
 
-import LinearGradient from 'react-native-linear-gradient';
 import styled from 'styled-components/primitives';
 
 import { useNavigation } from '../../navigation/Navigation';
 import Routes from '../../navigation/routesNames';
+import { SheetHeight } from '../../screens/LPBonusSheet';
 import { ButtonPressAnimation } from '../animations';
 import { CoinIcon } from '../coin-icon';
 import { Centered, Row, RowWithMargins } from '../layout';
 import { Text } from '../text';
 import APYPill from './APYPill';
 import { useDimensions } from '@rainbow-me/hooks';
-import { colors, padding, position } from '@rainbow-me/styles';
+import { colors, padding } from '@rainbow-me/styles';
 import ShadowStack from 'react-native-shadow-stack';
 
 const LPBonusListRowShadows = [
-  [0, 10, 30, colors.transparent, 0.2],
-  [0, 5, 15, colors.transparent, 0.4],
+  [0, 10, 30, colors.shadowDarker, 0.2],
+  [0, 5, 15, colors.shadowDarker, 0.4],
 ];
-
-const neverRerender = () => true;
-// eslint-disable-next-line react/display-name
-const LPBonusListRowGradient = React.memo(
-  () => (
-    <LinearGradient
-      borderRadius={49}
-      colors={[colors.rowBackground, colors.rowBackgroundSecondary]}
-      end={{ x: 0.5, y: 1 }}
-      pointerEvents="none"
-      start={{ x: 0.5, y: 0 }}
-      style={position.coverAsObject}
-    />
-  ),
-  neverRerender
-);
 
 const LPBonusListRowShadowStack = styled(ShadowStack).attrs(
   ({ deviceWidth }) => ({
+    backgroundColor: colors.modalBackground,
     borderRadius: 49,
     height: 49,
     shadows: LPBonusListRowShadows,
@@ -53,6 +38,7 @@ const LPBonusListRow = ({ balance, underlying }) => {
     navigate(Routes.LP_BONUS_SHEET, {
       balance: balance,
       lifetimeSupplyInterestAccrued: '0',
+      longFormHeight: SheetHeight,
     });
   }, [navigate, balance]);
 
@@ -64,7 +50,6 @@ const LPBonusListRow = ({ balance, underlying }) => {
     >
       <Centered direction="column" marginBottom={15}>
         <LPBonusListRowShadowStack deviceWidth={deviceWidth}>
-          <LPBonusListRowGradient />
           <Row
             align="center"
             css={padding(9, 10, 10, 20)}

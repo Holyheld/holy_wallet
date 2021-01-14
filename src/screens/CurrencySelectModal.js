@@ -133,7 +133,7 @@ function CurrencySelectModal() {
         filteredBest.length &&
           filteredList.push({
             data: filteredBest,
-            title: '􀇻 Rainbow Verified',
+            title: '􀇻 Holyheld Verified',
             useGradientText: IS_TESTING !== 'true',
           });
 
@@ -159,7 +159,7 @@ function CurrencySelectModal() {
         filteredList = [
           {
             data: concat(favorites, curatedAssets),
-            title: '􀇻 Rainbow Verified',
+            title: '􀇻 Holyheld Verified',
             useGradientText: IS_TESTING !== 'true',
           },
         ];

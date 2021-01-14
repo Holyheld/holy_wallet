@@ -62,7 +62,7 @@ const SheetActionButton = ({
   label,
   size,
   testID,
-  textColor = colors.white,
+  textColor = colors.textColorSecondaryButton,
   weight = 'semibold',
   ...props
 }) => {

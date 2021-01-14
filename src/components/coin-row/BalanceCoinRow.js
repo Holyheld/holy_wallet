@@ -38,7 +38,8 @@ const BalanceCoinRowCoinCheckButton = styled(CoinCheckButton).attrs({
 const PercentageText = styled(BottomRowText).attrs({
   align: 'right',
 })`
-  ${({ isPositive }) => (isPositive ? `color: ${colors.green};` : null)};
+  ${({ isPositive }) =>
+    isPositive ? `color: ${colors.green};` : colors.textColorMuted};
 `;
 
 const BottomRowContainer = ios

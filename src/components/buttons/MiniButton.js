@@ -9,13 +9,13 @@ import ShadowStack from 'react-native-shadow-stack';
 
 const shadows = {
   default: [
-    [0, 2, 5, colors.dark, 0.15],
-    [0, 6, 10, colors.dark, 0.14],
-    [0, 1, 18, colors.dark, 0.08],
+    [0, 2, 5, colors.shadow, 0.15],
+    [0, 6, 10, colors.shadow, 0.14],
+    [0, 1, 18, colors.shadow, 0.08],
   ],
   disabled: [
-    [0, 2, 6, colors.dark, 0.06],
-    [0, 3, 9, colors.dark, 0.08],
+    [0, 2, 6, colors.shadow, 0.06],
+    [0, 3, 9, colors.shadow, 0.08],
   ],
 };
 
@@ -32,7 +32,8 @@ const Content = styled(RowWithMargins).attrs({
 export default function MiniButton({
   activeButtonColor = colors.buttonPrimary,
   disabledButtonColor = colors.buttonDisabled,
-  textColor = colors.textColor,
+  textColor = colors.textColorPrimaryButton,
+  disabledTextColor = colors.textColorSecondaryButton,
   borderRadius = 15,
   children,
   disabled,
@@ -61,7 +62,10 @@ export default function MiniButton({
         />
         <Content>
           {typeof children === 'string' ? (
-            <Text color={textColor} weight="semibold">
+            <Text
+              color={disabled ? disabledTextColor : textColor}
+              weight="semibold"
+            >
               {children}
             </Text>
           ) : (

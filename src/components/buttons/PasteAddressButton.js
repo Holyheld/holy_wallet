@@ -8,7 +8,8 @@ import { deviceUtils } from '@rainbow-me/utils';
 
 export default function PasteAddressButton({
   onPress,
-  textColor = colors.textColor,
+  textColor = colors.textColorPrimaryButton,
+  textColorDisabled = colors.textColorSecondaryButton,
 }) {
   const [isValid, setIsValid] = useState(false);
   const { onInvalidPaste } = useInvalidPaste();
@@ -44,14 +45,21 @@ export default function PasteAddressButton({
     });
   }, [enablePaste, getClipboard, onInvalidPaste, onPress]);
 
+  const isDisabled = deviceUtils.isIOS14
+    ? !hasClipboardData
+    : clipboard && !isValid;
+
   return (
     <MiniButton
-      disabled={deviceUtils.isIOS14 ? !hasClipboardData : clipboard && !isValid}
+      disabled={isDisabled}
       onPress={handlePress}
       testID="paste-address-button"
       {...(android && { height: 30, overflowMargin: 15, width: 60 })}
     >
-      <Text color={textColor} weight="semibold">
+      <Text
+        color={isDisabled ? textColorDisabled : textColor}
+        weight="semibold"
+      >
         Paste
       </Text>
     </MiniButton>

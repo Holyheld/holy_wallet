@@ -26,20 +26,20 @@ const ButtonBorderRadius = 30;
 const ButtonHeight = 59;
 const SmallButtonHeight = 46;
 
-const ButtonDisabledBgColor = {
-  dark: colors.darkGrey,
-  light: colors.lightGrey,
-};
+// const ButtonDisabledBgColor = {
+//   dark: colors.darkGrey,
+//   light: colors.lightGrey,
+// };
 
 const ButtonShadows = {
   default: [
-    [0, 3, 5, colors.dark, 0.2],
-    [0, 6, 10, colors.dark, 0.14],
-    [0, 1, 18, colors.dark, 0.12],
+    [0, 3, 5, colors.shadow, 0.2],
+    [0, 6, 10, colors.shadow, 0.14],
+    [0, 1, 18, colors.shadow, 0.12],
   ],
   disabled: [
-    [0, 2, 6, colors.dark, 0.06],
-    [0, 3, 9, colors.dark, 0.08],
+    [0, 2, 6, colors.shadow, 0.06],
+    [0, 3, 9, colors.shadow, 0.08],
   ],
 };
 
@@ -202,7 +202,7 @@ class HoldToAuthorizeButton extends PureComponent {
       smallButton,
       style,
       testID,
-      theme,
+      // theme,
       ...props
     } = this.props;
 
@@ -211,7 +211,7 @@ class HoldToAuthorizeButton extends PureComponent {
 
     let bgColor = backgroundColor;
     if (disabled) {
-      bgColor = disabledBackgroundColor || ButtonDisabledBgColor[theme];
+      bgColor = disabledBackgroundColor; // || ButtonDisabledBgColor[theme];
     }
 
     return (
@@ -242,6 +242,7 @@ class HoldToAuthorizeButton extends PureComponent {
                       <HoldToAuthorizeButtonIcon
                         animatedValue={this.longPressProgress}
                         biometryType={biometryType}
+                        color={colors.textColorPrimaryButton}
                       />
                     )}
                     {android && (isAuthorizing || this.props.isAuthorizing) && (

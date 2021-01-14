@@ -11,9 +11,9 @@ import ShadowStack from 'react-native-shadow-stack';
 export const FloatingActionButtonSize = 56;
 
 export const FloatingActionButtonShadow = [
-  [0, 2, 5, colors.dark, 0.2],
-  [0, 6, 10, colors.dark, 0.14],
-  [0, 1, 18, colors.dark, 0.12],
+  [0, 2, 5, colors.shadowDarker, 0.2],
+  [0, 6, 10, colors.shadowDarker, 0.14],
+  [0, 1, 18, colors.shadowDarker, 0.12],
 ];
 
 const Content = styled(Centered)`
