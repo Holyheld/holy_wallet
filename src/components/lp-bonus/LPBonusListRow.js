@@ -3,6 +3,7 @@ import React, { useCallback } from 'react';
 
 import styled from 'styled-components/primitives';
 
+import { useHolyBonusRate } from '../../hooks/useHolySavings';
 import { useNavigation } from '../../navigation/Navigation';
 import Routes from '../../navigation/routesNames';
 import { SheetHeight } from '../../screens/LPBonusSheet';
@@ -33,6 +34,8 @@ const LPBonusListRowShadowStack = styled(ShadowStack).attrs(
 const LPBonusListRow = ({ balance, underlying }) => {
   const { width: deviceWidth } = useDimensions();
   const { navigate } = useNavigation();
+
+  const { bonusRate } = useHolyBonusRate();
 
   const onButtonPress = useCallback(() => {
     navigate(Routes.LP_BONUS_SHEET, {
@@ -74,7 +77,7 @@ const LPBonusListRow = ({ balance, underlying }) => {
                 {balance} HH
               </Text>
             </RowWithMargins>
-            <APYPill value="22" />
+            <APYPill value={bonusRate} />
           </Row>
         </LPBonusListRowShadowStack>
       </Centered>

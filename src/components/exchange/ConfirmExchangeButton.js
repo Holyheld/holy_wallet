@@ -42,6 +42,9 @@ const ConfirmExchangeButton = ({
     case ExchangeModalTypes.holyDeposit:
       label = 'Hold to deposit';
       break;
+    case ExchangeModalTypes.lpBonusClaim:
+      label = 'Hold to claim';
+      break;
     default:
       label = 'Hold to Swap';
   }
