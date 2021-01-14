@@ -407,7 +407,7 @@ export default function WelcomeScreen() {
       ))}
 
       <ContentWrapper style={contentStyle}>
-        <HolyText color={colors.textColor} height={32} width={125} />
+        <HolyText color={colors.textColor} height={50} width={200} />
         <ButtonWrapper>
           <RainbowButton
             onPress={onCreateWallet}

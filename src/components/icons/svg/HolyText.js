@@ -4,11 +4,11 @@ import { Path } from 'react-native-svg';
 import Svg from '../Svg';
 import { colors } from '@rainbow-me/styles';
 
-const HolyText = ({ color, ...props }) => (
+const HolyText = ({ color, height = 32, width = 125, ...props }) => (
   <Svg
-    height={32}
+    height={height}
     viewBox="0 0 504 48"
-    width={125}
+    width={width}
     xmlns="http://www.w3.org/2000/svg"
     {...props}
   >
