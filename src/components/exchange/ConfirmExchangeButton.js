@@ -40,7 +40,7 @@ const ConfirmExchangeButton = ({
       label = 'Hold to withdraw';
       break;
     case ExchangeModalTypes.holyDeposit:
-      label = 'Hold to deposite';
+      label = 'Hold to deposit';
       break;
     default:
       label = 'Hold to Swap';

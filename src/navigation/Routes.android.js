@@ -8,6 +8,7 @@ import BackupSheet from '../screens/BackupSheet';
 import ChangeWalletSheet from '../screens/ChangeWalletSheet';
 import DepositModal from '../screens/DepositModal';
 import ExpandedAssetSheet from '../screens/ExpandedAssetSheet';
+import HolyClaimModalWrapper from '../screens/HolyClaimModal';
 import HolyMigrateModalWrapper from '../screens/HolyMigrateModal';
 import HolySavingsDepositModal from '../screens/HolySavingsDepositModal';
 import HolySavingsSheet from '../screens/HolySavingsSheet';
@@ -169,6 +170,11 @@ function MainNavigator() {
       <Stack.Screen
         component={HolyMigrateModalWrapper}
         name={Routes.HOLY_MIGRATE_MODAL}
+        options={exchangePreset}
+      />
+      <Stack.Screen
+        component={HolyClaimModalWrapper}
+        name={Routes.HOLY_CLAIM_LP_BONUS}
         options={exchangePreset}
       />
       <Stack.Screen

@@ -4,10 +4,11 @@ import styled from 'styled-components/primitives';
 import { useNavigation } from '../../navigation/Navigation';
 import { magicMemo } from '../../utils';
 import Divider from '../Divider';
-import { CoinIcon } from '../coin-icon';
+//import { CoinIcon } from '../coin-icon';
 import { Centered, ColumnWithMargins } from '../layout';
 import { SheetActionButton } from '../sheet';
 import { Br, GradientText, Text } from '../text';
+import SavingsIcon from './SavingsIcon';
 import Routes from '@rainbow-me/routes';
 import { colors, padding } from '@rainbow-me/styles';
 
@@ -22,7 +23,7 @@ const BodyText = styled(Text).attrs({
   lineHeight: 'looser',
   size: 'large',
 })`
-  padding-bottom: 30;
+  padding-bottom: 10;
 `;
 
 const GradientAPYHeadingText = styled(GradientText).attrs({
@@ -55,20 +56,22 @@ const SavingsSheetEmptyState = ({ isReadOnlyWallet, apy, underlying }) => {
 
   return (
     <Centered direction="column" paddingTop={9}>
-      <CoinIcon size={50} symbol="DAI" />
+      <SavingsIcon />
       <Centered marginBottom={12} marginTop={15}>
         <APYHeadingText>Get </APYHeadingText>
         <GradientAPYHeadingText>{apy}%</GradientAPYHeadingText>
-        <APYHeadingText> on your dollars</APYHeadingText>
+        <APYHeadingText> on your assets</APYHeadingText>
       </Centered>
       <BodyText>
-        With digital dollars like Dai, saving <Br />
-        earns you more than ever before
+        With digital protocol like <Br />
+        Yearn.finance, your money is <Br />
+        earning you more than ever before
       </BodyText>
       <Divider color={colors.rowDividerLight} inset={[0, 42]} />
       <ColumnWithMargins css={padding(19, 15)} margin={19} width="100%">
         <SheetActionButton
           color={colors.swapPurple}
+          fullWidth
           label="􀁍 Deposit from Wallet"
           onPress={onDeposit}
           size="big"

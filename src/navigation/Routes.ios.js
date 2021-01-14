@@ -10,6 +10,7 @@ import BackupSheet from '../screens/BackupSheet';
 import ChangeWalletSheet from '../screens/ChangeWalletSheet';
 import DepositModal from '../screens/DepositModal';
 import ExpandedAssetSheet from '../screens/ExpandedAssetSheet';
+import HolyClaimModalWrapper from '../screens/HolyClaimModal';
 import HolyMigrateModalWrapper from '../screens/HolyMigrateModal';
 import HolySavingsDepositModal from '../screens/HolySavingsDepositModal';
 import HolySavingsSheet from '../screens/HolySavingsSheet';
@@ -340,6 +341,11 @@ function NativeStackNavigator() {
       <NativeStack.Screen
         component={HolyMigrateModalWrapper}
         name={Routes.HOLY_MIGRATE_MODAL}
+        options={nativeStackDefaultConfigWithoutStatusBar}
+      />
+      <NativeStack.Screen
+        component={HolyClaimModalWrapper}
+        name={Routes.HOLY_CLAIM_LP_BONUS}
         options={nativeStackDefaultConfigWithoutStatusBar}
       />
       {isNativeStackAvailable ? (

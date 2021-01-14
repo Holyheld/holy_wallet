@@ -4,44 +4,6 @@
     "inputs": [
       {
         "indexed": true,
-        "internalType": "address",
-        "name": "user",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "amount",
-        "type": "uint256"
-      }
-    ],
-    "name": "ClaimedBonus",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "user",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "amount",
-        "type": "uint256"
-      }
-    ],
-    "name": "Migrated",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
         "internalType": "bytes32",
         "name": "role",
         "type": "bytes32"
@@ -113,6 +75,51 @@
     "type": "event"
   },
   {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "weightedPrice",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "weightedMarketCap",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "bonusPortionUnlocked",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "bonusTotalUnlocked",
+        "type": "uint256"
+      }
+    ],
+    "name": "UnlockOracleUpdate",
+    "type": "event"
+  },
+  {
+    "inputs": [],
+    "name": "BONUSORACLE_ROLE",
+    "outputs": [
+      {
+        "internalType": "bytes32",
+        "name": "",
+        "type": "bytes32"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true
+  },
+  {
     "inputs": [],
     "name": "DEFAULT_ADMIN_ROLE",
     "outputs": [
@@ -127,13 +134,19 @@
     "constant": true
   },
   {
-    "inputs": [],
-    "name": "bonusClaimEnabled",
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "name": "bonusAmountCaps",
     "outputs": [
       {
-        "internalType": "bool",
+        "internalType": "uint256",
         "name": "",
-        "type": "bool"
+        "type": "uint256"
       }
     ],
     "stateMutability": "view",
@@ -148,7 +161,7 @@
         "type": "address"
       }
     ],
-    "name": "claimedBonusTokens",
+    "name": "bonusMultipliers",
     "outputs": [
       {
         "internalType": "uint256",
@@ -269,14 +282,8 @@
     "constant": true
   },
   {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "name": "migratedTokens",
+    "inputs": [],
+    "name": "prevWeightedMarketCap",
     "outputs": [
       {
         "internalType": "uint256",
@@ -290,68 +297,12 @@
   },
   {
     "inputs": [],
-    "name": "migrationEnabled",
-    "outputs": [
-      {
-        "internalType": "bool",
-        "name": "",
-        "type": "bool"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function",
-    "constant": true
-  },
-  {
-    "inputs": [],
-    "name": "migrationEndTimestamp",
+    "name": "prevWeightedPrice",
     "outputs": [
       {
         "internalType": "uint256",
         "name": "",
         "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function",
-    "constant": true
-  },
-  {
-    "inputs": [],
-    "name": "migrationStartTimestamp",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function",
-    "constant": true
-  },
-  {
-    "inputs": [],
-    "name": "newToken",
-    "outputs": [
-      {
-        "internalType": "contract HHToken",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function",
-    "constant": true
-  },
-  {
-    "inputs": [],
-    "name": "oldToken",
-    "outputs": [
-      {
-        "internalType": "contract IERC20",
-        "name": "",
-        "type": "address"
       }
     ],
     "stateMutability": "view",
@@ -395,40 +346,110 @@
     "type": "function"
   },
   {
-    "inputs": [
+    "inputs": [],
+    "name": "sealUnlock",
+    "outputs": [
       {
-        "internalType": "address",
-        "name": "_oldToken",
-        "type": "address"
-      },
-      {
-        "internalType": "address",
-        "name": "_newToken",
-        "type": "address"
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
       }
     ],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true
+  },
+  {
+    "inputs": [],
+    "name": "totalAmountUnlocked",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true
+  },
+  {
+    "inputs": [],
+    "name": "totalBonusTokens",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true
+  },
+  {
+    "inputs": [],
+    "name": "weightedMarketCap",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true
+  },
+  {
+    "inputs": [],
+    "name": "weightedPrice",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true
+  },
+  {
+    "inputs": [],
     "name": "initialize",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
   },
   {
-    "inputs": [],
-    "name": "emergencyMigrate",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_account",
+        "type": "address"
+      }
+    ],
+    "name": "bonusInfo",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true
   },
   {
     "inputs": [],
-    "name": "migrate",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "getClaimableBonus",
+    "name": "bonusTotalUnlocked",
     "outputs": [
       {
         "internalType": "uint256",
@@ -442,7 +463,7 @@
   },
   {
     "inputs": [],
-    "name": "getClaimableMigrationBonus",
+    "name": "bonusTotalTokens",
     "outputs": [
       {
         "internalType": "uint256",
@@ -455,8 +476,19 @@
     "constant": true
   },
   {
-    "inputs": [],
-    "name": "claimBonus",
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "newWeightedMarketCap",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "newWeightedPrice",
+        "type": "uint256"
+      }
+    ],
+    "name": "UnlockUpdate",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -464,12 +496,12 @@
   {
     "inputs": [
       {
-        "internalType": "address",
-        "name": "_address",
-        "type": "address"
+        "internalType": "uint256",
+        "name": "_totalBonusTokens",
+        "type": "uint256"
       }
     ],
-    "name": "claimBonusForAddress",
+    "name": "setTotalAmount",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -478,68 +510,41 @@
     "inputs": [
       {
         "internalType": "address[]",
-        "name": "addresses",
+        "name": "_accounts",
         "type": "address[]"
-      }
-    ],
-    "name": "airdropBonuses",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "_visorAddress",
-        "type": "address"
-      }
-    ],
-    "name": "setHolyVisor",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "_fromTimestamp",
-        "type": "uint256"
       },
       {
+        "internalType": "uint256[]",
+        "name": "_multipliers",
+        "type": "uint256[]"
+      },
+      {
+        "internalType": "uint256[]",
+        "name": "_amountCaps",
+        "type": "uint256[]"
+      }
+    ],
+    "name": "setData",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "sealUnlockAmount",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
         "internalType": "uint256",
-        "name": "_toTimestamp",
+        "name": "_unlockedAmount",
         "type": "uint256"
       }
     ],
-    "name": "setMigrationWindow",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "bool",
-        "name": "_enableMigration",
-        "type": "bool"
-      }
-    ],
-    "name": "setMigrationEnabled",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "bool",
-        "name": "_enableBonusClaim",
-        "type": "bool"
-      }
-    ],
-    "name": "setBonusClaimEnabled",
+    "name": "setUnlockAmount",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"

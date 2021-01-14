@@ -717,6 +717,10 @@ class RecyclerAssetList extends Component {
       return `holyTreasuryContainer`;
     }
 
+    if (row.item && row.item.holyEarlyBonusContainer) {
+      return `holyEarlyBonusContainer`;
+    }
+
     if (index === dataProvider._data.length - 1) {
       return 'footer';
     }

@@ -412,6 +412,8 @@ export const getTransactionLabel = ({
   if (type === TransactionTypes.migration)
     return TransactionStatusTypes.migrated;
 
+  if (type === TransactionTypes.claim) return TransactionStatusTypes.claimed;
+
   if (type === TransactionTypes.authorize)
     return TransactionStatusTypes.approved;
   if (type === TransactionTypes.purchase)

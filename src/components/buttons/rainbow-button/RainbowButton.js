@@ -2,7 +2,7 @@ import MaskedView from '@react-native-community/masked-view';
 import React from 'react';
 import FastImage from 'react-native-fast-image';
 import styled from 'styled-components/primitives';
-import AddCashIconSource from '../../../assets/addCashIcon.png';
+import AddHolyLogoIconSource from '../../../assets/holy_logo.png';
 import { ButtonPressAnimation } from '../../animations';
 import { RowWithMargins } from '../../layout';
 import { Text } from '../../text';
@@ -14,10 +14,12 @@ import ShadowView from 'react-native-shadow-stack/ShadowView';
 
 const AddCashIcon = styled(FastImage).attrs({
   resizeMode: FastImage.resizeMode.contain,
-  source: AddCashIconSource,
+  source: AddHolyLogoIconSource,
 })`
-  ${position.size(45)};
-  margin-top: 7;
+  ${position.size(25)};
+  margin-top: 3;
+  padding-left: 20;
+  padding-right: 30;
 `;
 
 const ButtonContainer = styled(MaskedView).attrs({
@@ -81,7 +83,7 @@ const RainbowButton = ({
 
   height = type === RainbowButtonTypes.small ? 46 : height;
   strokeWidth = disabled ? 0.5 : strokeWidth;
-  width = type === RainbowButtonTypes.addCash ? 155 : width || maxButtonWidth;
+  width = type === RainbowButtonTypes.addCash ? 185 : width || maxButtonWidth;
 
   const outerButtonMask = (
     <OuterButton height={height} strokeWidth={strokeWidth} width={width} />
@@ -112,9 +114,7 @@ const RainbowButton = ({
         />
         <ButtonContent type={type}>
           {type === RainbowButtonTypes.addCash && <AddCashIcon />}
-          <ButtonLabel type={type}>
-            {type === RainbowButtonTypes.addCash ? 'Add Cash' : label}
-          </ButtonLabel>
+          <ButtonLabel type={type}>{label}</ButtonLabel>
         </ButtonContent>
       </ButtonContainer>
     </ButtonPressAnimation>

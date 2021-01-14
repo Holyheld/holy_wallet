@@ -14,6 +14,7 @@ const Routes = {
   EXCHANGE_MODAL: 'ExchangeModal',
   EXPANDED_ASSET_SCREEN: 'ExpandedAssetScreen',
   EXPANDED_ASSET_SHEET: 'ExpandedAssetSheet',
+  HOLY_CLAIM_LP_BONUS: 'HolyClaimLPBonus',
   HOLY_MIGRATE_MODAL: 'HolyMigrateModal',
   HOLY_SAVINGS_DEPOSIT_MODAL: 'HolySavingDepositModal',
   HOLY_SAVINGS_SELECT_SCREEN: 'HolySavingsSelectScreen',
