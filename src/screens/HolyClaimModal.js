@@ -311,7 +311,7 @@ const HolyClaimModal = ({ bonusToClaimBalance, testID }) => {
                 onPressDetails={() => {}}
                 showDetailsButton={false}
                 testID={testID + '-header'}
-                title="Migrate"
+                title="Claim"
               />
               <Container>
                 <InnerContainer>

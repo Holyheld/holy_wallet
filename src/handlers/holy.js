@@ -1,7 +1,17 @@
 import { Contract } from '@ethersproject/contracts';
 import { captureException } from '@sentry/react-native';
-import { holyUpdateEarlyLPBonus, holyUpdateSavings } from '../redux/holy';
-import { HOLY_PASSAGE_ABI, HOLY_PASSAGE_ADDRESS } from '../references/holy';
+import BigNumber from 'bignumber.js';
+import {
+  holyUpdateBonusRate,
+  holyUpdateEarlyLPBonus,
+  holyUpdateSavings,
+} from '../redux/holy';
+import {
+  HOLY_PASSAGE_ABI,
+  HOLY_PASSAGE_ADDRESS,
+  HOLY_VISOR_ABI,
+  HOLY_VISOR_ADDRESS,
+} from '../references/holy';
 import { web3Provider } from './web3';
 import logger from 'logger';
 
@@ -28,7 +38,7 @@ const holySavingsRefreshState = () => async dispatch => {
 };
 
 const holyEarlyLPBonusesRefresh = () => async (dispatch, getState) => {
-  const { network } = getState().settings;
+  const { network, accountAddress } = getState().settings;
   const contractAddress = HOLY_PASSAGE_ADDRESS(network);
   const contractABI = HOLY_PASSAGE_ABI;
 
@@ -36,16 +46,36 @@ const holyEarlyLPBonusesRefresh = () => async (dispatch, getState) => {
 
   try {
     logger.sentry('refreshing HOLY early LP bonuses');
-    const claimableBonus = await holyPassage.getClaimableBonus();
-    logger.sentry('HOLY claimable bonuses: ' + claimableBonus);
-    dispatch(
-      holyUpdateEarlyLPBonus(claimableBonus ? claimableBonus.toString() : '0')
-    );
+    let claimableBonus = await holyPassage.getClaimableBonus();
+    logger.sentry('HOLY bonus rate in WEI: ', claimableBonus);
+    claimableBonus = new BigNumber(claimableBonus.toString());
+    logger.sentry('HOLY claimable bonuses: ', claimableBonus);
+    dispatch(holyUpdateEarlyLPBonus(claimableBonus.toString()));
   } catch (error) {
     logger.sentry('error refreshing HOLY early LP bonuses');
     logger.sentry(error);
     captureException(error);
     dispatch(holyUpdateEarlyLPBonus('0'));
+  }
+
+  const visorAddress = HOLY_VISOR_ADDRESS(network);
+  const visorABI = HOLY_VISOR_ABI;
+
+  const holyVisor = new Contract(visorAddress, visorABI, web3Provider);
+
+  try {
+    logger.sentry('refreshing HOLY bonus rate');
+    let bonusRate = await holyVisor.bonusMultipliers(accountAddress);
+    logger.sentry('HOLY bonus rate in WEI: ', bonusRate);
+    bonusRate = new BigNumber(bonusRate.toString());
+    bonusRate = bonusRate.dividedBy(new BigNumber(10).pow(new BigNumber(18)));
+    logger.sentry('HOLY bonus rate: ', bonusRate);
+    dispatch(holyUpdateBonusRate(bonusRate.toString()));
+  } catch (error) {
+    logger.sentry('error refreshing HOLY bonus rate');
+    logger.sentry(error);
+    captureException(error);
+    dispatch(holyUpdateBonusRate('1'));
   }
 };
 

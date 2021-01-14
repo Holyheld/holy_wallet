@@ -3,6 +3,7 @@ import { createSelector } from 'reselect';
 
 const holySavingsTokens = state => state.holy.savingsTokens;
 const holyEarlyLPBonus = state => state.holy.earlyLPBonus;
+const holyBonusRate = state => state.holy.bonusRate;
 
 const withSavings = holySavingsTokens => {
   return holySavingsTokens;
@@ -10,6 +11,10 @@ const withSavings = holySavingsTokens => {
 
 const withEarlyLPBonus = holyEarlyLPBonus => {
   return { bonus: holyEarlyLPBonus };
+};
+
+const withBonusRate = bonusRate => {
+  return { bonusRate };
 };
 
 const withSavingsAssetsInWallet = holySavingsTokens => {
@@ -46,12 +51,21 @@ const withHolyEarlyLPBonusSelector = createSelector(
   withEarlyLPBonus
 );
 
+const withHolyBonusRateSelector = createSelector(
+  [holyBonusRate],
+  withBonusRate
+);
+
 export function useHolySavings() {
   return useSelector(withHolySavingsSelector);
 }
 
 export function useHolyEarlyLPBonus() {
   return useSelector(withHolyEarlyLPBonusSelector);
+}
+
+export function useHolyBonusRate() {
+  return useSelector(withHolyBonusRateSelector);
 }
 
 export function useHolySavingsWithBalance() {

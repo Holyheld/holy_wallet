@@ -4,6 +4,7 @@ import produce from 'immer';
 const HOLY_CLEAR_STATE = 'holy/HOLY_CLEAR_STATE';
 const HOLY_UPDATE_SAVINGS = 'holy/HOLY_UPDATE_SAVINGS';
 const HOLY_UPDATE_EARLY_LP_BONUSES = 'holy/HOLY_UPDATE_EARLY_LP_BONUSES';
+const HOLY_UPDATE_BONUS_RATE = 'holy/HOLY_UPDATE_BONUS_RATE';
 
 // -- Actions --------------------------------------------------------------- //
 
@@ -21,8 +22,16 @@ export const holyUpdateEarlyLPBonus = earlyLPBonus => dispatch => {
   });
 };
 
+export const holyUpdateBonusRate = bonusRate => dispatch => {
+  dispatch({
+    payload: bonusRate,
+    type: HOLY_UPDATE_BONUS_RATE,
+  });
+};
+
 // -- Reducer --------------------------------------------------------------- //
 export const INITIAL_HOLY_STATE = {
+  bonusRate: '1.00',
   earlyLPBonus: '0',
   savingsTokens: [
     {
@@ -51,6 +60,9 @@ export default (state = INITIAL_HOLY_STATE, action) =>
         break;
       case HOLY_UPDATE_EARLY_LP_BONUSES:
         draft.earlyLPBonus = action.payload;
+        break;
+      case HOLY_UPDATE_BONUS_RATE:
+        draft.bonusRate = action.payload;
         break;
       default:
         break;

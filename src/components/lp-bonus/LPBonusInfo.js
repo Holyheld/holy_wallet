@@ -87,7 +87,7 @@ const LPBonusInfo = ({ asset, amount }) => {
           testID="claim-info-container"
         />
         <Text color="grey" size="smedium" weight="medium">
-          Claim for{' '}
+          Claiming{' '}
         </Text>
         <Text color="white" size="smedium" weight="semibold">
           {`${amountToDisplay}  ${symbol}`}
