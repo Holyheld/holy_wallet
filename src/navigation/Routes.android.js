@@ -170,7 +170,7 @@ function MainNavigator() {
       <Stack.Screen
         component={HamburgerSheet}
         name={Routes.HAMBURGER_SHEET}
-        options={sheetPreset}
+        options={expandedPreset}
       />
       <Stack.Screen
         component={HolyMigrateModalWrapper}

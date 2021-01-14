@@ -6,7 +6,7 @@ import useWallets from '../hooks/useWallets';
 import { colors } from '@rainbow-me/styles';
 
 const Whitespace = styled.View`
-  background-color: ${colors.blueGreyDark};
+  background-color: ${colors.modalBackground};
   bottom: -400px;
   height: 400px;
   position: absolute;

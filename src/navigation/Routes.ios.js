@@ -341,7 +341,14 @@ function NativeStackNavigator() {
       <NativeStack.Screen
         component={HamburgerSheet}
         name={Routes.HAMBURGER_SHEET}
-        options={nativeStackDefaultConfigWithoutStatusBar}
+        options={{
+          allowsDragToDismiss: true,
+          backgroundColor: '#25292E',
+          backgroundOpacity: 0.7,
+          customStack: true,
+          springDamping: 1,
+          transitionDuration: 0.25,
+        }}
       />
       <NativeStack.Screen
         component={HolyMigrateModalWrapper}
