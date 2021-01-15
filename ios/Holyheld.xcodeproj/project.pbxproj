@@ -717,7 +717,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.holyheld;
+				PRODUCT_BUNDLE_IDENTIFIER = com.holyheld.wallet;
 				PRODUCT_NAME = Holyheld;
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -777,7 +777,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.holyheld;
+				PRODUCT_BUNDLE_IDENTIFIER = com.holyheld.wallet;
 				PRODUCT_NAME = Holyheld;
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -873,7 +873,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.holyheld;
+				PRODUCT_BUNDLE_IDENTIFIER = com.holyheld.wallet;
 				PRODUCT_NAME = Holyheld;
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -970,7 +970,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.holyheld;
+				PRODUCT_BUNDLE_IDENTIFIER = com.holyheld.wallet;
 				PRODUCT_NAME = Holyheld;
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";

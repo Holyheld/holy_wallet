@@ -1,7 +1,7 @@
 import { captureException } from '@sentry/react-native';
 import { sortBy } from 'lodash';
 import RNCloudFs from 'react-native-cloud-fs';
-import { RAINBOW_MASTER_KEY } from 'react-native-dotenv';
+import { HOLYHELD_MASTER_KEY } from 'react-native-dotenv';
 import RNFS from 'react-native-fs';
 import AesEncryptor from '../handlers/aesEncryption';
 import { logger } from '../utils';
@@ -170,13 +170,13 @@ export async function getDataFromCloud(backupPassword, filename = null) {
 
 export async function backupUserDataIntoCloud(data) {
   const filename = USERDATA_FILE;
-  const password = RAINBOW_MASTER_KEY;
+  const password = HOLYHELD_MASTER_KEY;
   return encryptAndSaveDataToCloud(data, password, filename);
 }
 
 export async function fetchUserDataFromCloud() {
   const filename = USERDATA_FILE;
-  const password = RAINBOW_MASTER_KEY;
+  const password = HOLYHELD_MASTER_KEY;
   return getDataFromCloud(password, filename);
 }
 
