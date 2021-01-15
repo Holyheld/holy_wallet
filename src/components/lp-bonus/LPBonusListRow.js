@@ -1,5 +1,6 @@
+import BigNumber from 'bignumber.js';
 import PropTypes from 'prop-types';
-import React, { useCallback } from 'react';
+import React, { useCallback, useMemo } from 'react';
 
 import LinearGradient from 'react-native-linear-gradient';
 import styled from 'styled-components/primitives';
@@ -59,6 +60,10 @@ const LPBonusListRow = ({ balance, underlying }) => {
     });
   }, [navigate, balance]);
 
+  const diplayedBalance = useMemo(() => new BigNumber(balance).toFixed(8), [
+    balance,
+  ]);
+
   return (
     <ButtonPressAnimation
       onPress={onButtonPress}
@@ -90,7 +95,7 @@ const LPBonusListRow = ({ balance, underlying }) => {
                 size="lmedium"
                 weight="bold"
               >
-                {balance} HH
+                {diplayedBalance} HH
               </Text>
             </RowWithMargins>
             <APYPill value={bonusRate} />

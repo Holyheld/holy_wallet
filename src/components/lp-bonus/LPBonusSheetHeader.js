@@ -1,39 +1,37 @@
+import BigNumber from 'bignumber.js';
 import PropTypes from 'prop-types';
-import React from 'react';
-import { Centered, RowWithMargins } from '../layout';
-import { DollarFigure, Text } from '../text';
+import React, { useMemo } from 'react';
+import { Centered, Row } from '../layout';
+import { Text } from '../text';
 import { colors, padding } from '@rainbow-me/styles';
 
-const LPBonusSheetHeader = ({ balance, lifetimeAccruedInterest }) => (
-  <Centered css={padding(17, 0, 8)} direction="column">
-    <Text
-      color={colors.alpha(colors.blueGreyDark, 0.5)}
-      letterSpacing="uppercase"
-      size="smedium"
-      uppercase
-      weight="semibold"
-    >
-      EARLY LP BONUS
-    </Text>
-    <DollarFigure decimals={2} value={balance} />
-    <RowWithMargins align="center" margin={4} marginTop={1}>
+const LPBonusSheetHeader = ({ balance }) => {
+  const diplayedBalance = useMemo(() => new BigNumber(balance).toFixed(8), [
+    balance,
+  ]);
+
+  return (
+    <Centered css={padding(17, 0, 8)} direction="column">
       <Text
-        align="center"
-        color={colors.green}
-        letterSpacing="roundedTight"
-        lineHeight="loose"
-        size="large"
+        color={colors.alpha(colors.blueGreyDark, 0.5)}
+        letterSpacing="uppercase"
+        size="smedium"
+        uppercase
         weight="semibold"
       >
-        {lifetimeAccruedInterest}
+        EARLY LP BONUS
       </Text>
-    </RowWithMargins>
-  </Centered>
-);
+      <Row>
+        <Text letterSpacing="zero" size="h1" weight="heavy">
+          {diplayedBalance}
+        </Text>
+      </Row>
+    </Centered>
+  );
+};
 
 LPBonusSheetHeader.propTypes = {
   balance: PropTypes.string,
-  lifetimeAccruedInterest: PropTypes.string,
 };
 
 export default LPBonusSheetHeader;

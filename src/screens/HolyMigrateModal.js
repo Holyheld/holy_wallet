@@ -1,7 +1,13 @@
 import { Contract } from '@ethersproject/contracts';
 import { useRoute } from '@react-navigation/native';
 import { get } from 'lodash';
-import React, { Fragment, useCallback, useEffect, useState } from 'react';
+import React, {
+  Fragment,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react';
 import { ActivityIndicator, View } from 'react-native';
 import Animated, { Extrapolate } from 'react-native-reanimated';
 import { useAndroidBackHandler } from 'react-navigation-backhandler';
@@ -30,10 +36,13 @@ import {
 import { web3Provider } from '../handlers/web3';
 import exchangeModalTypes from '../helpers/exchangeModalTypes';
 import {
+  add,
   convertAmountToNativeAmount,
   fromWei,
+  greaterThan,
   lessThan,
   subtract,
+  updatePrecisionToDisplay,
 } from '../helpers/utilities';
 import { loadWallet } from '../model/wallet';
 import { useNavigation } from '../navigation/Navigation';
@@ -124,6 +133,7 @@ const HolyMigrateModal = ({ holyV1Asset, testID }) => {
   const { nativeCurrency } = useAccountSettings();
 
   const [bonusMigrateNeed, setBonusMigrateNeed] = useState(0);
+  const [bonusClaimable, setBonusCLaimable] = useState(0);
 
   useEffect(() => {
     async function loadMigrationData() {
@@ -145,24 +155,36 @@ const HolyMigrateModal = ({ holyV1Asset, testID }) => {
         );
 
         logger.sentry('loading migration data');
-        let bonusAmountCap = await holyVisor.bonusAmountCaps(accountAddress);
-        logger.sentry('bonus cap:', bonusAmountCap);
+        let bonusAmountCap = await holyVisor.bonusAmountCaps(accountAddress, {
+          from: accountAddress,
+        });
+        logger.sentry('bonus cap HEX:', bonusAmountCap);
         if (bonusAmountCap) {
           bonusAmountCap = bonusAmountCap.toString();
         } else {
           bonusAmountCap = '0';
         }
+        logger.sentry('bonus cap:', bonusAmountCap);
 
-        let migratedTokens = await holyPassage.migratedTokens(accountAddress);
-        logger.sentry('migrated tokens:', migratedTokens);
+        let migratedTokens = await holyPassage.migratedTokens(accountAddress, {
+          from: accountAddress,
+        });
+        logger.sentry('migrated tokens HEX:', migratedTokens);
         if (migratedTokens) {
           migratedTokens = migratedTokens.toString();
         } else {
           migratedTokens = '0';
         }
+        logger.sentry('migrated tokens:', migratedTokens);
 
-        if (lessThan(migratedTokens, bonusAmountCap)) {
-          let needForBonus = subtract(bonusAmountCap, migratedTokens);
+        const migratedPlusCurrent = add(migratedTokens, migratedTokens);
+        logger.sentry(
+          'migrated tokens plus current migration amount:',
+          migratedPlusCurrent
+        );
+
+        if (lessThan(migratedPlusCurrent, bonusAmountCap)) {
+          let needForBonus = subtract(bonusAmountCap, migratedPlusCurrent);
 
           needForBonus = fromWei(needForBonus);
           logger.sentry(
@@ -172,9 +194,29 @@ const HolyMigrateModal = ({ holyV1Asset, testID }) => {
           );
           setBonusMigrateNeed(needForBonus);
         } else {
-          logger.sentry('cap is bigger than migrated tokens - no bonus');
+          logger.sentry(
+            'cap is bigger than migrated and ready for migrate tokens - bonus already is max'
+          );
           setBonusMigrateNeed('0');
         }
+
+        let claimableMigrationBonus = await holyPassage.getClaimableMigrationBonus(
+          {
+            from: accountAddress,
+          }
+        );
+        logger.sentry(
+          'claimable migration bonus HEX:',
+          claimableMigrationBonus
+        );
+        if (claimableMigrationBonus) {
+          claimableMigrationBonus = claimableMigrationBonus.toString();
+        } else {
+          claimableMigrationBonus = '0';
+        }
+        claimableMigrationBonus = fromWei(claimableMigrationBonus);
+        logger.sentry('claimable migration bonus:', claimableMigrationBonus);
+        setBonusCLaimable(claimableMigrationBonus);
 
         setIsLoading(false);
       } catch (error) {
@@ -215,6 +257,11 @@ const HolyMigrateModal = ({ holyV1Asset, testID }) => {
     updateTxFee,
   } = useGas();
   const { initWeb3Listener, stopWeb3Listener } = useBlockPolling();
+
+  const amountToMigrateDisplay = useMemo(
+    () => updatePrecisionToDisplay(amountToMigrate, newNativePrice, true),
+    [amountToMigrate, newNativePrice]
+  );
 
   const [isAuthorizing, setIsAuthorizing] = useState(false);
   const [slippage] = useState(null);
@@ -378,7 +425,7 @@ const HolyMigrateModal = ({ holyV1Asset, testID }) => {
                       symbol={symbol}
                     />
 
-                    <Input editable={false} value={amountToMigrate} />
+                    <Input editable={false} value={amountToMigrateDisplay} />
                   </FieldRow>
                 </InnerContainer>
                 <NativeFieldRow>
@@ -395,6 +442,7 @@ const HolyMigrateModal = ({ holyV1Asset, testID }) => {
             <MigrateInfo
               amount={amountToMigrate}
               asset={hhCoinV2}
+              bonusAmount={bonusClaimable}
               testID="migrate-info-button"
             />
             <MigrateBonusInfo
@@ -413,7 +461,7 @@ const HolyMigrateModal = ({ holyV1Asset, testID }) => {
                 <ConfirmExchangeButton
                   isAuthorizing={isAuthorizing}
                   isDeposit={false}
-                  isSufficientBalance
+                  isSufficientBalance={greaterThan(amountToMigrate, '0')}
                   isSufficientGas={isSufficientGas}
                   isSufficientLiquidity
                   onSubmit={handleSubmit}
