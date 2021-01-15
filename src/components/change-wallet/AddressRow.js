@@ -39,7 +39,7 @@ const sx = StyleSheet.create({
     width: 60,
   },
   editIcon: {
-    color: colors.appleBlue,
+    color: colors.textColor,
     fontFamily: fonts.family.SFProRounded,
     fontSize: getFontSize(fonts.size.large),
     fontWeight: fonts.weight.medium,

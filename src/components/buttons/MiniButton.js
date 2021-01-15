@@ -41,7 +41,7 @@ export default function MiniButton({
   scaleTo = 1.1,
   width,
   height,
-  ...props
+  // ...props
 }) {
   return (
     <ButtonPressAnimation
@@ -49,7 +49,6 @@ export default function MiniButton({
       onPress={onPress}
       radiusAndroid={borderRadius}
       scaleTo={scaleTo}
-      {...props}
     >
       <View style={{ borderRadius, overflow: 'hidden' }}>
         <ShadowStack

@@ -4,7 +4,7 @@ import { magicMemo } from '../../utils';
 import ButtonPressAnimation, {
   ScaleButtonZoomableAndroid,
 } from '../animations/ButtonPressAnimation';
-import { Centered, InnerBorder } from '../layout';
+import { Centered } from '../layout';
 import { borders, colors, position } from '@rainbow-me/styles';
 import ShadowStack from 'react-native-shadow-stack';
 
@@ -18,7 +18,6 @@ export const FloatingActionButtonShadow = [
 
 const Content = styled(Centered)`
   ${position.cover};
-  background-color: ${({ backgroundColor }) => backgroundColor};
 `;
 
 const Wrapper = android ? ScaleButtonZoomableAndroid : ButtonPressAnimation;
@@ -61,11 +60,13 @@ const FloatingActionButton = ({
       {...props}
     >
       <ShadowStack
+        backgroundColor={disabled ? colors.grey : backgroundColor}
         {...borders.buildCircleAsObject(size)}
         hideShadow={disabled}
         shadows={shadows}
       >
         <ButtonPressAnimation
+          backgroundColor={disabled ? colors.grey : backgroundColor}
           disabled={disabled || ios}
           onPress={handlePress}
           reanimatedButton
@@ -76,7 +77,9 @@ const FloatingActionButton = ({
         >
           <Content backgroundColor={disabled ? colors.grey : backgroundColor}>
             {typeof children === 'function' ? children({ size }) : children}
-            {!disabled && <InnerBorder opacity={0.06} radius={size / 2} />}
+            {/*{!disabled && (*/}
+            {/*  <InnerBorder color="red" opacity={0.06} radius={size / 2} />*/}
+            {/*)}*/}
           </Content>
         </ButtonPressAnimation>
       </ShadowStack>

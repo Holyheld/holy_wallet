@@ -20,7 +20,7 @@ const Container = styled(Centered).attrs({
 
 const Overlay = styled(Centered)`
   ${padding(19, 19, 22)};
-  background-color: ${colors.alpha(colors.buttonPrimary, 0.15)};
+  background-color: ${colors.alpha(colors.textColorPrimary, 0.15)};
   border-radius: ${20};
   overflow: hidden;
 `;

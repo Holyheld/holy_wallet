@@ -19,7 +19,7 @@ const Content = styled(RowWithMargins).attrs({ align: 'center', margin: 7 })`
 const CaretIcon = styled(FastImage).attrs({
   resizeMode: FastImage.resizeMode.contain,
   source: CaretImageSource,
-  tintColor: colors.textColor,
+  tintColor: colors.textColorPrimaryButton,
 })`
   height: 18;
   top: 0.5;
@@ -59,7 +59,7 @@ const TokenSelectionButton = ({
   >
     <ButtonShadows
       {...position.coverAsObject}
-      backgroundColor={!symbol ? colors.buttonPrimary : colors.buttonSecondary}
+      backgroundColor={colors.buttonPrimary}
       borderRadius={borderRadius}
       elevation={ios ? 0 : 8}
       height={46}
@@ -70,7 +70,7 @@ const TokenSelectionButton = ({
     <Content>
       <Text
         align="center"
-        color={!symbol ? colors.textColorPrimaryButton : colors.textColor}
+        color={colors.textColorPrimaryButton}
         size="large"
         testID={testID + '-text'}
         weight="bold"

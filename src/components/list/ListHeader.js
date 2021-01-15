@@ -77,7 +77,12 @@ export default function ListHeader({
           </Row>
           {children}
         </Content>
-        {showDivider && <Divider color={colors.divider} />}
+        {showDivider && (
+          <Divider
+            backgroundColor={colors.pageBackground}
+            color={colors.divider}
+          />
+        )}
         {!isSticky && title !== 'Holyheld' && (
           <StickyBackgroundBlocker
             deviceDimensions={deviceDimensions}

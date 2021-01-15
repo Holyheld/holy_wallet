@@ -9,7 +9,11 @@ import useOpenTreasuryBank from '../../hooks/useOpenTreasuryBank';
 import { Column } from '../layout';
 import { ListItemDivider } from '../list';
 import NavigationRow from './NavigationRow';
-import { useAccountSettings, useOpenSavings } from '@rainbow-me/hooks';
+import {
+  useAccountSettings,
+  useAccountTransactions,
+  useOpenSavings,
+} from '@rainbow-me/hooks';
 import { useNavigation } from '@rainbow-me/navigation';
 import Routes from '@rainbow-me/routes';
 import { colors } from '@rainbow-me/styles';
@@ -60,11 +64,17 @@ export default function NavigationList({
   scrollEnabled = false,
   showDividers = true,
 }) {
-  const { navigate } = useNavigation();
+  const { goBack, navigate } = useNavigation();
   const { network } = useAccountSettings();
   const { isSavingsOpen, toggleOpenSavings } = useOpenSavings();
   const { isTreasuryBankOpen, toggleOpenTreasuryBank } = useOpenTreasuryBank();
   const { isLPBonusOpen, toggleOpenLPBonus } = useOpenLPBonus();
+
+  // TODO replace with selectors
+  const accountTransactions = useAccountTransactions(true, true);
+  const { sections } = accountTransactions;
+
+  const isSectionsListEmpty = !sections || sections.length === 0;
 
   const rows = useMemo(
     () => [
@@ -72,7 +82,7 @@ export default function NavigationList({
         disabled: false,
         height: rowHeight,
         id: 'savingsItem',
-        isVisible: true,
+        isVisible: !isSectionsListEmpty,
         name: 'Savings',
         onPress: () => {
           if (!isSavingsOpen) {
@@ -85,7 +95,7 @@ export default function NavigationList({
         disabled: false,
         height: rowHeight,
         id: 'treasuryItem',
-        isVisible: true,
+        isVisible: false,
         name: 'Treasury',
         onPress: () => {
           if (!isTreasuryBankOpen) {
@@ -98,7 +108,7 @@ export default function NavigationList({
         disabled: false,
         height: rowHeight,
         id: 'earlyLPBonusItem',
-        isVisible: true,
+        isVisible: !isSectionsListEmpty,
         name: 'Early LP Bonus',
         onPress: () => {
           if (!isLPBonusOpen) {
@@ -111,7 +121,7 @@ export default function NavigationList({
         disabled: false,
         height: rowHeight,
         id: 'poolsItem',
-        isVisible: true,
+        isVisible: false,
         name: 'Pools',
         onPress: NOOP,
       },
@@ -119,11 +129,15 @@ export default function NavigationList({
         disabled: isReadOnlyWallet,
         height: rowHeight,
         id: 'swapItem',
-        isVisible: get(networkInfo[network], 'exchange_enabled'),
+        isVisible:
+          get(networkInfo[network], 'exchange_enabled') && !isSectionsListEmpty,
         name: 'Swap',
         onPress: () => {
           if (!isReadOnlyWallet) {
-            navigate(Routes.EXCHANGE_MODAL);
+            goBack();
+            setTimeout(() => {
+              navigate(Routes.EXCHANGE_MODAL);
+            }, 50);
           } else {
             Alert.alert(`You need to import the wallet in order to do this`);
           }
@@ -133,11 +147,14 @@ export default function NavigationList({
         disabled: isReadOnlyWallet,
         height: rowHeight,
         id: 'sendItem',
-        isVisible: true,
+        isVisible: !isSectionsListEmpty,
         name: 'Send',
         onPress: () => {
           if (!isReadOnlyWallet) {
-            navigate(Routes.SEND_FLOW);
+            goBack();
+            setTimeout(() => {
+              navigate(Routes.SEND_FLOW);
+            }, 50);
           } else {
             Alert.alert(`You need to import the wallet in order to do this`);
           }
@@ -145,9 +162,11 @@ export default function NavigationList({
       },
     ],
     [
+      goBack,
       isLPBonusOpen,
       isReadOnlyWallet,
       isSavingsOpen,
+      isSectionsListEmpty,
       isTreasuryBankOpen,
       navigate,
       network,
@@ -158,8 +177,22 @@ export default function NavigationList({
   );
 
   const rowsToRender = useMemo(() => {
-    return rows.filter(r => !r.disabled && r.isVisible);
-  }, [rows]);
+    const r = rows.filter(r => !r.disabled && r.isVisible);
+    return r.length === 0
+      ? [
+          {
+            disabled: false,
+            height: rowHeight,
+            id: 'placeholder',
+            isVisible: true,
+            name: '👻 No items here. Import a non-empty wallet first',
+            onPress: () => {
+              goBack();
+            },
+          },
+        ]
+      : r;
+  }, [goBack, rows]);
 
   const rowsLength = useMemo(() => {
     return rowsToRender.length;

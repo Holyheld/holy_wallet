@@ -80,7 +80,7 @@ const Footer = styled(Row).attrs({
 `;
 
 const LoadingSpinner = styled(android ? Spinner : ActivityIndicator).attrs({
-  color: 'white',
+  color: colors.textColorPrimaryButton,
   size: 15,
 })`
   margin-right: 5;
@@ -88,7 +88,6 @@ const LoadingSpinner = styled(android ? Spinner : ActivityIndicator).attrs({
 `;
 
 const FooterButton = styled(MiniButton).attrs({
-  backgroundColor: colors.buttonPrimary,
   compensateForTransformOrigin: true,
   testID: 'import-sheet-button',
   transformOrigin: 'right',
@@ -132,7 +131,7 @@ const Sheet = styled(Column).attrs({
 })`
   ${borders.buildRadius('top', isNativeStackAvailable ? 0 : 16)};
   ${padding(0, 15, sheetBottomPadding)};
-  background-color: ${colors.sheetBackground};
+  background-color: ${colors.modalBackground};
   z-index: 1;
 `;
 

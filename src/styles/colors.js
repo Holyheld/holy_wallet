@@ -67,7 +67,7 @@ let base = {
   sheetBackground: '#25292E',
   shimmer: '#EDEEF1', // '237, 238, 241'
   skeleton: '#F6F7F8', // '246, 247, 248'
-  skeletonColor: '#25292E',
+  skeletonColor: '#444444',
   swapButton: '#575CFF',
   swapButtonSecondary: '#6F00A3',
   swapButtonText: '#34FFFF',
