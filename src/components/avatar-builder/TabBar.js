@@ -38,11 +38,7 @@ const TabBar = ({ categoryKeys, activeCategory, onPress }) => {
             />
           )}
           <Icon
-            color={
-              category === activeCategory
-                ? null
-                : colors.alpha(colors.blueGreyDark, 0.4)
-            }
+            color={category === activeCategory ? null : colors.textColorMuted}
             name={category.icon}
           />
         </ButtonPressAnimation>

@@ -592,8 +592,8 @@ const styles = StyleSheet.create({
   },
   sectionHeaderWrap: {
     backgroundColor: colors.modalHeader,
-    // marginRight: 10,
-    // paddingLeft: 10,
+    marginRight: 10,
+    paddingLeft: 10,
   },
   sectionStickyHeaderWrap: {
     marginLeft: 12,
@@ -607,14 +607,14 @@ const styles = StyleSheet.create({
     fontWeight: fonts.weight.semibold,
     letterSpacing: fonts.letterSpacing.rounded,
     paddingBottom: 3.75,
-    // paddingLeft: 7,
-    // paddingRight: 7,
-    // paddingTop: 3.25 ,
+    paddingLeft: 7,
+    paddingRight: 7,
+    paddingTop: 3.25,
     textTransform: 'uppercase',
   },
   sectionStickyBlur: {
     borderRadius: 11,
-    // marginTop: 12,
+    marginTop: 12,
   },
   tabBar: {
     alignSelf: 'center',
