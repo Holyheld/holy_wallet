@@ -27,6 +27,8 @@ export default function NavigationRow({ title, onPress, disabled }) {
       <ButtonPressAnimation
         disabled={disabled}
         enableHapticFeedback
+        height="90%"
+        justifyContent="center"
         onLongPress={NOOP}
         onPress={onPress}
         scaleTo={0.95}

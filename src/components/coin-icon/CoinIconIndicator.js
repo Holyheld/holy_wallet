@@ -7,7 +7,7 @@ import { Centered } from '../layout';
 import { borders, colors, shadow } from '@rainbow-me/styles';
 
 const IndicatorIcon = styled(Icon).attrs(({ isPinned }) => ({
-  color: colors.white,
+  color: colors.textColor,
   name: isPinned ? 'pin' : 'hidden',
 }))`
   height: ${({ isPinned }) => (isPinned ? 13 : 10)};
@@ -17,8 +17,8 @@ const IndicatorIcon = styled(Icon).attrs(({ isPinned }) => ({
 
 const IndicatorIconContainer = styled(Centered)`
   ${borders.buildCircle(20)};
-  ${shadow.build(0, 4, 12, colors.blueGreyDark, 0.4)}
-  background-color: ${colors.blueGreyDark50};
+  ${shadow.build(0, 4, 12, colors.shadow, 0.4)}
+  background-color: ${colors.skeletonColor};
   bottom: 3;
   left: 10;
   position: absolute;

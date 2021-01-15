@@ -30,7 +30,7 @@ const StyledTouchable = styled(TouchableWithoutFeedback)`
 
 const PasswordInput = styled(Input).attrs({
   autoCompleteType: 'password',
-  backgroundColor: colors.modalBackground,
+  backgroundColor: colors.sectionItemBackground,
   blurOnSubmit: false,
   passwordRules: `minlength: ${cloudBackupPasswordMinLength};`,
   placeholderTextColor: colors.textColorMuted,
@@ -46,6 +46,7 @@ const PasswordInput = styled(Input).attrs({
 `;
 
 const ShadowContainer = styled(ShadowStack).attrs(({ deviceWidth }) => ({
+  backgroundColor: colors.modalBackground,
   borderRadius: 23,
   height: 46,
   shadows: [

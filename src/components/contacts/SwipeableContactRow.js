@@ -32,10 +32,11 @@ const RightAction = ({ onPress, progress, text, x }) => {
           css={margin(0, 10, 5, 10)}
           source={isEdit ? EditIcon : DeleteIcon}
           style={position.sizeAsObject(35)}
+          tintColor={isEdit ? colors.buttonPrimary : colors.red}
         />
         <Text
           align="center"
-          color={colors.alpha(colors.blueGreyDark, 0.4)}
+          color={colors.textColor}
           letterSpacing="roundedTight"
           size="smaller"
           weight="medium"

@@ -30,7 +30,7 @@ import logger from 'logger';
 
 const DescriptionText = styled(Text).attrs({
   align: 'center',
-  color: colors.alpha(colors.blueGreyDark, 0.5),
+  color: colors.textColor,
   lineHeight: 'looser',
   size: 'large',
 })`
@@ -57,6 +57,7 @@ const MastheadIcon = styled(GradientText).attrs({
 })``;
 
 const Title = styled(Text).attrs({
+  color: colors.textColorTitle,
   size: 'big',
   weight: 'bold',
 })`

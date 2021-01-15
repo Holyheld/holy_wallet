@@ -10,7 +10,7 @@ const ButtonBorderRadius = 15;
 const sx = StyleSheet.create({
   button: {
     ...position.centeredAsObject,
-    ...shadow.buildAsObject(0, 4, 6, colors.swapPurple, 0.4),
+    ...shadow.buildAsObject(0, 4, 6, colors.buttonPrimary, 0.4),
     backgroundColor: colors.buttonPrimary,
     borderRadius: ButtonBorderRadius,
     height: 30,
