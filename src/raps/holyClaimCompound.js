@@ -29,7 +29,7 @@ const createHolyClaimCompoundRap = async ({
   const { accountAddress, network } = store.getState().settings;
   // create a claim rap
   logger.log('[holy claim] making holy claim action');
-  const claimAction = createNewAction(RapActionTypes.holyCla, {
+  const claimAction = createNewAction(RapActionTypes.holyBonusClaim, {
     accountAddress,
     amount,
     currency,

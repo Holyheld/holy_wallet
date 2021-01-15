@@ -46,10 +46,16 @@ const holyEarlyLPBonusesRefresh = () => async (dispatch, getState) => {
 
   try {
     logger.sentry('refreshing HOLY early LP bonuses');
-    let claimableBonus = await holyPassage.getClaimableBonus();
+    let claimableBonus = await holyPassage.getClaimableBonus({
+      from: accountAddress,
+    });
     logger.sentry('HOLY bonus rate in WEI: ', claimableBonus);
     claimableBonus = new BigNumber(claimableBonus.toString());
+    claimableBonus = claimableBonus
+      .dividedBy(new BigNumber(10).pow(new BigNumber(18)))
+      .toFixed();
     logger.sentry('HOLY claimable bonuses: ', claimableBonus);
+
     dispatch(holyUpdateEarlyLPBonus(claimableBonus.toString()));
   } catch (error) {
     logger.sentry('error refreshing HOLY early LP bonuses');
@@ -65,7 +71,9 @@ const holyEarlyLPBonusesRefresh = () => async (dispatch, getState) => {
 
   try {
     logger.sentry('refreshing HOLY bonus rate');
-    let bonusRate = await holyVisor.bonusMultipliers(accountAddress);
+    let bonusRate = await holyVisor.bonusMultipliers(accountAddress, {
+      from: accountAddress,
+    });
     logger.sentry('HOLY bonus rate in WEI: ', bonusRate);
     bonusRate = new BigNumber(bonusRate.toString());
     bonusRate = bonusRate.dividedBy(new BigNumber(10).pow(new BigNumber(18)));

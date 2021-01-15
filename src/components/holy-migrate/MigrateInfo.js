@@ -1,6 +1,7 @@
+import BigNumber from 'bignumber.js';
 import { get } from 'lodash';
 import PropTypes from 'prop-types';
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useMemo, useRef } from 'react';
 import Animated from 'react-native-reanimated';
 import {
   bin,
@@ -8,6 +9,7 @@ import {
   useTimingTransition,
 } from 'react-native-redash';
 import styled from 'styled-components/primitives';
+import { greaterThan } from '../../helpers/utilities';
 import { interpolate } from '../animations';
 import { CoinIcon } from '../coin-icon';
 import { Centered } from '../layout';
@@ -19,7 +21,7 @@ const Container = styled(Centered)`
   width: 100%;
 `;
 
-const MigrateInfo = ({ asset, amount }) => {
+const MigrateInfo = ({ asset, amount, bonusAmount }) => {
   const isVisible = !!(asset && amount);
   const symbol = get(asset, 'symbol');
   const address = get(asset, 'address');
@@ -38,6 +40,16 @@ const MigrateInfo = ({ asset, amount }) => {
   if (amount === null) {
     amountToDisplay = prevAmount;
   }
+
+  const amountToDisplayRounded = useMemo(
+    () => new BigNumber(amountToDisplay).decimalPlaces(5).toString(),
+    [amountToDisplay]
+  );
+
+  const bonusToDisplayRounded = useMemo(
+    () => new BigNumber(bonusAmount).decimalPlaces(5).toString(),
+    [bonusAmount]
+  );
 
   const animation = useSpringTransition(bin(isVisible), {
     damping: 14,
@@ -87,11 +99,24 @@ const MigrateInfo = ({ asset, amount }) => {
           testID="swap-info-container"
         />
         <Text color="grey" size="smedium" weight="medium">
-          Swapping for{' '}
+          You will get{' '}
         </Text>
         <Text color="white" size="smedium" weight="semibold">
-          {`${amountToDisplay}  ${symbol}`}
+          {`${amountToDisplayRounded}  ${symbol}`}
         </Text>
+        {greaterThan(bonusAmount, '0') ? (
+          <>
+            <Text color="grey" size="smedium" weight="medium">
+              {' '}
+              and{' '}
+            </Text>
+            <Text color="white" size="smedium" weight="semibold">
+              {`${bonusToDisplayRounded}  ${symbol}`}
+            </Text>
+          </>
+        ) : (
+          <></>
+        )}
       </Container>
     </Animated.View>
   );

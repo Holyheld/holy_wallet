@@ -32,7 +32,7 @@ import {
 } from '../components/layout';
 import LPBonusInfo from '../components/lp-bonus/LPBonusInfo';
 import exchangeModalTypes from '../helpers/exchangeModalTypes';
-import { convertAmountToNativeAmount } from '../helpers/utilities';
+import { convertAmountToNativeAmount, greaterThan } from '../helpers/utilities';
 import { loadWallet } from '../model/wallet';
 import { useNavigation } from '../navigation/Navigation';
 import useStatusBarManaging from '../navigation/useStatusBarManaging';
@@ -352,7 +352,7 @@ const HolyClaimModal = ({ bonusToClaimBalance, testID }) => {
                 <ConfirmExchangeButton
                   isAuthorizing={isAuthorizing}
                   isDeposit={false}
-                  isSufficientBalance
+                  isSufficientBalance={greaterThan(amountToClaim, '0')}
                   isSufficientGas={isSufficientGas}
                   isSufficientLiquidity
                   onSubmit={handleSubmit}

@@ -1,6 +1,6 @@
+import BigNumber from 'bignumber.js';
 import { get } from 'lodash';
-import PropTypes from 'prop-types';
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useMemo, useRef } from 'react';
 import Animated from 'react-native-reanimated';
 import {
   bin,
@@ -38,6 +38,11 @@ const MigrateBonusInfo = ({ asset, amount }) => {
   if (amount === null) {
     amountToDisplay = prevAmount;
   }
+
+  const amountToDisplayRounded = useMemo(
+    () => new BigNumber(amountToDisplay).decimalPlaces(5).toString(),
+    [amountToDisplay]
+  );
 
   const animation = useSpringTransition(bin(isVisible), {
     damping: 14,
@@ -90,7 +95,7 @@ const MigrateBonusInfo = ({ asset, amount }) => {
           Migrate{' '}
         </Text>
         <Text color="white" size="smedium" weight="semibold">
-          {`${amountToDisplay}  ${symbol} `}
+          {`${amountToDisplayRounded}  ${symbol} `}
         </Text>
         <Text color="grey" size="smedium" weight="medium">
           more to access full bonus
@@ -98,11 +103,6 @@ const MigrateBonusInfo = ({ asset, amount }) => {
       </Container>
     </Animated.View>
   );
-};
-
-MigrateBonusInfo.propTypes = {
-  amount: PropTypes.number,
-  asset: PropTypes.object,
 };
 
 export default MigrateBonusInfo;

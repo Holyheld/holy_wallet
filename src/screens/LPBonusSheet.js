@@ -12,13 +12,14 @@ import {
   SheetActionButtonRow,
   SlackSheet,
 } from '../components/sheet';
+import { useHolyBonusRate } from '../hooks/useHolySavings';
 import { useDimensions, useWallets } from '@rainbow-me/hooks';
 import { useNavigation } from '@rainbow-me/navigation';
 import Routes from '@rainbow-me/routes';
 import { colors, position } from '@rainbow-me/styles';
 
 export const SheetEmptyHeight = 313;
-export const SheetHeight = android ? 410 : 352;
+export const SheetHeight = android ? 360 : 312;
 
 const Container = styled(Centered).attrs({ direction: 'column' })`
   ${position.cover};
@@ -32,8 +33,8 @@ const LPBonusSheet = () => {
   const { params } = useRoute();
   const insets = useSafeArea();
   const { isReadOnlyWallet } = useWallets();
+  const { bonusRate } = useHolyBonusRate();
   const balance = params['balance'];
-  const lifetimeSupplyInterestAccrued = params['lifetimeSupplyInterestAccrued'];
   const isEmpty = balance === 0;
   const onClaim = useCallback(() => {
     if (!isReadOnlyWallet) {
@@ -45,10 +46,6 @@ const LPBonusSheet = () => {
       Alert.alert(`You need to import the wallet in order to do this`);
     }
   }, [isReadOnlyWallet, navigate, balance]);
-
-  const apy = '2.960000';
-  const apyTruncated = parseFloat(apy).toFixed(2);
-  const shareText = `${apyTruncated}`;
 
   return (
     <Container
@@ -62,10 +59,7 @@ const LPBonusSheet = () => {
         contentHeight={isEmpty ? SheetEmptyHeight : SheetHeight}
       >
         <Fragment>
-          <LPBonusSheetHeader
-            balance={balance}
-            lifetimeAccruedInterest={lifetimeSupplyInterestAccrued}
-          />
+          <LPBonusSheetHeader balance={balance} lifetimeAccruedInterest={0} />
           <SheetActionButtonRow>
             <SheetActionButton
               color={colors.buttonClaimAndBurn}
@@ -83,12 +77,7 @@ const LPBonusSheet = () => {
             zIndex={0}
           />
           <Column paddingBottom={9} paddingTop={4}>
-            <LPBonusCoinRow
-              additionalShare="0.1"
-              balance={balance}
-              share={shareText}
-              symbol="HH"
-            />
+            <LPBonusCoinRow balance={balance} share={bonusRate} symbol="HH" />
           </Column>
           <Divider
             backgroundColor={colors.modalBackground}

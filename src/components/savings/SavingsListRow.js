@@ -13,8 +13,9 @@ import {
 
 import { ButtonPressAnimation } from '../animations';
 import { Centered, Row, RowWithMargins } from '../layout';
-import { Emoji, Text } from '../text';
+import { Text } from '../text';
 import APYPill from './APYPill';
+import SavingsIcon from './SavingsIcon';
 import SavingsListRowEmptyState from './SavingsListRowEmptyState';
 import { useDimensions } from '@rainbow-me/hooks';
 import { colors, padding } from '@rainbow-me/styles';
@@ -83,9 +84,7 @@ const SavingsListRow = ({ totalBalance, currentSaving, savings }) => {
             onPress={() => {}}
             scaleTo={0.96}
           >
-            <Centered>
-              <Emoji lineHeight="none" name="flag_united_states" size={20} />
-            </Centered>
+            <SavingsIcon size={23} />
             {!isNaN(displayValue) && totalBalance !== '0' ? (
               <RowWithMargins align="center" margin={8} paddingLeft={4}>
                 <Text
