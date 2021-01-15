@@ -19,7 +19,7 @@ InboxIcon.propTypes = {
 };
 
 InboxIcon.defaultProps = {
-  color: colors.appleBlue,
+  color: colors.textColor,
 };
 
 export default InboxIcon;

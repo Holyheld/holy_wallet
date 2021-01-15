@@ -7,6 +7,7 @@ const buildRgba = (color, alpha = 1) => `rgba(${chroma(color).rgb()},${alpha})`;
 
 let base = {
   appleBlue: '#0E76FD', // '14, 118, 253'
+  apyPillBackground: '#333333',
   black: '#000000', // '0, 0, 0'
   blueGreyDark: '#3C4252', // '60, 66, 82'
   blueGreyDark50: '#9DA0A8', // this color is blueGreyDark at 50% over white
@@ -61,6 +62,7 @@ let base = {
   rowDivider: 'rgba(60, 66, 82, 0.03)', // '60, 66, 82, 0.03'
   rowDividerExtraLight: 'rgba(60, 66, 82, 0.015)', // '60, 66, 82, 0.015'
   rowDividerLight: 'rgba(60, 66, 82, 0.02)', // '60, 66, 82, 0.02'
+  sectionItemBackground: '#444444',
   shadow: '#222222',
   shadowDarker: '#000000',
   shadowGrey: '#6F6F6F', // '111, 111, 111'

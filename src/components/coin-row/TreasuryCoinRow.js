@@ -1,9 +1,9 @@
 import React, { Fragment } from 'react';
 import styled from 'styled-components/primitives';
+import APYPill from '../APYPill';
 import { ButtonPressAnimation } from '../animations';
 import { Column, FlexItem, Row, RowWithMargins } from '../layout';
 import { Emoji, Text } from '../text';
-import APYPill from '../treasury-bank/APYPill';
 import BalanceText from './BalanceText';
 import CoinName from './CoinName';
 import { colors, padding } from '@rainbow-me/styles';
@@ -33,7 +33,7 @@ const Content = styled(Column).attrs({ justify: 'space-between' })`
 const BottomRow = ({ share, additionalShare, symbol }) => {
   return (
     <Fragment>
-      <APYPill small value={share} />
+      <APYPill postfix="x share" small value={share} />
       <RowWithMargins flex={1} margin={4}>
         <Column flex={1}>
           <Text

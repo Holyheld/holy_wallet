@@ -16,14 +16,21 @@ const Container = styled(RowWithMargins).attrs({
   padding-bottom: 2;
 `;
 
-const ProfileActionIcon = styled(Icon).attrs({
-  color: colors.textColor,
-})`
+const ProfileActionIcon = styled(Icon).attrs(({ color }) => ({
+  color,
+}))`
   ${({ iconSize }) => position.size(iconSize)};
   margin-top: 0.5;
 `;
 
-const ProfileAction = ({ icon, iconSize = 16, onPress, text, ...props }) => (
+const ProfileAction = ({
+  color = colors.textColorPrimary,
+  icon,
+  iconSize = 16,
+  onPress,
+  text,
+  ...props
+}) => (
   <ButtonPressAnimation
     onPress={onPress}
     overflowMargin={5}
@@ -31,9 +38,9 @@ const ProfileAction = ({ icon, iconSize = 16, onPress, text, ...props }) => (
     {...props}
   >
     <Container>
-      <ProfileActionIcon iconSize={iconSize} name={icon} />
+      <ProfileActionIcon color={color} iconSize={iconSize} name={icon} />
       <Text
-        color={colors.textColor}
+        color={color}
         letterSpacing="roundedMedium"
         lineHeight={19}
         size="lmedium"

@@ -154,12 +154,11 @@ export default class EmojiSelector extends PureComponent {
             <Text
               style={{
                 color: colors.black,
-                marginHorizontal: 10,
+                marginHorizontal: ios ? 10 : 17,
                 fontSize: Math.floor(this.state.colSize) - (ios ? 15 : 22),
                 height: (width - 21) / this.props.columns,
                 width: deviceUtils.dimensions.width,
                 letterSpacing: ios ? 8 : getBrand() === 'google' ? 11 : 8,
-                backgroundColor: colors.white,
               }}
             >
               {rowContent}
@@ -469,7 +468,7 @@ export default class EmojiSelector extends PureComponent {
               }}
             />
             <View
-              shadowColor={colors.black}
+              shadowColor={colors.shadow}
               shadowOffset={{ height: 0, width: 0 }}
               shadowOpacity={0.06}
               shadowRadius={0.5}
@@ -477,7 +476,11 @@ export default class EmojiSelector extends PureComponent {
             >
               <LinearGradient
                 borderRadius={19}
-                colors={['#FFFFFF', '#FFFFFF', '#F0F5FA']}
+                colors={[
+                  colors.modalBackground,
+                  colors.modalBackgroundLighter,
+                  colors.modalBackground,
+                ]}
                 end={{ x: 0.5, y: 1 }}
                 overflow="hidden"
                 pointerEvents="none"
@@ -535,7 +538,7 @@ EmojiSelector.defaultProps = {
   showSearchBar: true,
   showSectionTitles: true,
   showTabs: ios,
-  theme: '#007AFF',
+  theme: colors.textColorPrimary,
 };
 
 const styles = StyleSheet.create({
@@ -561,7 +564,7 @@ const styles = StyleSheet.create({
   search: {
     ...Platform.select({
       ios: {
-        backgroundColor: colors.alpha(colors.white, 0.75),
+        backgroundColor: colors.alpha(colors.modalHeader, 0.75),
         borderRadius: 10,
         height: 36,
         paddingLeft: 8,
@@ -570,12 +573,12 @@ const styles = StyleSheet.create({
     margin: 8,
   },
   searchbar_container: {
-    backgroundColor: colors.alpha(colors.white, 0.75),
+    backgroundColor: colors.alpha(colors.modalHeader, 0.75),
     width: '100%',
     zIndex: 1,
   },
   sectionHeader: {
-    color: colors.alpha(colors.blueGreyDark, 0.5),
+    color: colors.textColor,
     fontFamily: fonts.family.SFProRounded,
     fontSize: parseFloat(fonts.size.small),
     fontWeight: fonts.weight.semibold,
@@ -588,30 +591,30 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   sectionHeaderWrap: {
-    backgroundColor: colors.white,
-    marginRight: 10,
-    paddingLeft: 10,
+    backgroundColor: colors.modalHeader,
+    // marginRight: 10,
+    // paddingLeft: 10,
   },
   sectionStickyHeaderWrap: {
     marginLeft: 12,
     flex: 1,
   },
   sectionStickyHeader: {
-    backgroundColor: colors.alpha(colors.white, 0.7),
-    color: colors.alpha(colors.blueGreyDark, 0.5),
+    backgroundColor: colors.alpha(colors.modalHeader, 0.7),
+    color: colors.alpha(colors.textColor, 0.5),
     fontFamily: fonts.family.SFProRounded,
     fontSize: parseFloat(fonts.size.small),
     fontWeight: fonts.weight.semibold,
     letterSpacing: fonts.letterSpacing.rounded,
     paddingBottom: 3.75,
-    paddingLeft: 7,
-    paddingRight: 7,
-    paddingTop: 3.25,
+    // paddingLeft: 7,
+    // paddingRight: 7,
+    // paddingTop: 3.25 ,
     textTransform: 'uppercase',
   },
   sectionStickyBlur: {
     borderRadius: 11,
-    marginTop: 12,
+    // marginTop: 12,
   },
   tabBar: {
     alignSelf: 'center',

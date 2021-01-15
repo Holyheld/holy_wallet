@@ -48,6 +48,7 @@ export async function encryptAndSaveDataToCloud(data, password, filename) {
       password,
       JSON.stringify(data)
     );
+    logger.log(encryptedData);
     // Store it on the FS first
     const path = `${RNFS.DocumentDirectoryPath}/${filename}`;
     await RNFS.writeFile(path, encryptedData, 'utf8');
@@ -57,7 +58,9 @@ export async function encryptAndSaveDataToCloud(data, password, filename) {
     // Only available to our app
     const scope = 'hidden';
     if (android) {
+      logger.log('login of need');
       await RNCloudFs.loginIfNeeded();
+      logger.log('login of need');
     }
     const result = await RNCloudFs.copyToCloud({
       mimeType,
@@ -65,6 +68,7 @@ export async function encryptAndSaveDataToCloud(data, password, filename) {
       sourcePath: sourceUri,
       targetPath: destinationPath,
     });
+    logger.log('copied');
     // Now we need to verify the file has been stored in the cloud
     const exists = await RNCloudFs.fileExists(
       ios

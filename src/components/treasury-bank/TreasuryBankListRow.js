@@ -3,10 +3,10 @@ import styled from 'styled-components/primitives';
 import { useNavigation } from '../../navigation/Navigation';
 
 import Routes from '../../navigation/routesNames';
+import APYPill from '../APYPill';
 import { ButtonPressAnimation } from '../animations';
 import { Centered, Row, RowWithMargins } from '../layout';
 import { Emoji, Text } from '../text';
-import APYPill from './APYPill';
 import { useDimensions } from '@rainbow-me/hooks';
 import { colors, padding } from '@rainbow-me/styles';
 import ShadowStack from 'react-native-shadow-stack';
@@ -18,6 +18,7 @@ const TreasuryBankListRowShadows = [
 
 const TreasuryBankListRowShadowStack = styled(ShadowStack).attrs(
   ({ deviceWidth }) => ({
+    backgroundColor: colors.sectionItemBackground,
     borderRadius: 49,
     height: 49,
     shadows: TreasuryBankListRowShadows,

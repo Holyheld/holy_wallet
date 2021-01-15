@@ -82,7 +82,8 @@ const DropdownArrow = styled(Centered)`
 `;
 
 const ProfileMastheadDivider = styled(Divider).attrs({
-  color: colors.rowDividerLight,
+  background: colors.pageBackground,
+  color: colors.divider,
 })`
   bottom: 0;
   position: absolute;

@@ -56,8 +56,8 @@ const Content = styled(Centered)`
   width: 100%;
 `;
 
-const Title = styled(Text).attrs(({ smallButton }) => ({
-  color: colors.textColorPrimaryButton,
+const Title = styled(Text).attrs(({ smallButton, color }) => ({
+  color,
   size: smallButton ? 'large' : 'larger',
   weight: 'bold',
 }))`
@@ -75,10 +75,12 @@ const calculateReverseDuration = proc(longPressProgress =>
   multiply(divide(longPressProgress, 100), longPressProgressDurationMs)
 );
 
-const LoadingSpinner = styled(android ? Spinner : ActivityIndicator).attrs({
-  color: colors.textColorPrimaryButton,
-  size: 31,
-})`
+const LoadingSpinner = styled(android ? Spinner : ActivityIndicator).attrs(
+  ({ color }) => ({
+    color,
+    size: 31,
+  })
+)`
   left: 15;
   position: absolute;
 `;
@@ -189,11 +191,11 @@ class HoldToAuthorizeButton extends PureComponent {
 
   render() {
     const {
-      backgroundColor,
+      backgroundColor = colors.buttonPrimary,
       biometryType,
       children,
       disabled,
-      disabledBackgroundColor,
+      disabledBackgroundColor = colors.buttonSecondary,
       enableLongPress,
       hideBiometricIcon,
       hideInnerBorder,
@@ -202,6 +204,8 @@ class HoldToAuthorizeButton extends PureComponent {
       smallButton,
       style,
       testID,
+      textColor = colors.textColorPrimaryButton,
+      disabledTextColor = colors.textColorSecondaryButton,
       // theme,
       ...props
     } = this.props;
@@ -210,8 +214,10 @@ class HoldToAuthorizeButton extends PureComponent {
     const androidWidth = Dimensions.get('window').width - 30;
 
     let bgColor = backgroundColor;
+    let txtColor = textColor;
     if (disabled) {
       bgColor = disabledBackgroundColor; // || ButtonDisabledBgColor[theme];
+      txtColor = disabledTextColor;
     }
 
     return (
@@ -242,13 +248,13 @@ class HoldToAuthorizeButton extends PureComponent {
                       <HoldToAuthorizeButtonIcon
                         animatedValue={this.longPressProgress}
                         biometryType={biometryType}
-                        color={colors.textColorPrimaryButton}
+                        color={txtColor}
                       />
                     )}
                     {android && (isAuthorizing || this.props.isAuthorizing) && (
-                      <LoadingSpinner />
+                      <LoadingSpinner color={txtColor} />
                     )}
-                    <Title smallButton={smallButton}>
+                    <Title color={txtColor} smallButton={smallButton}>
                       {isAuthorizing || this.props.isAuthorizing
                         ? 'Authorizing'
                         : label}

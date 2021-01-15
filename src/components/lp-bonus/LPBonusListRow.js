@@ -8,11 +8,11 @@ import { useHolyBonusRate } from '../../hooks/useHolySavings';
 import { useNavigation } from '../../navigation/Navigation';
 import Routes from '../../navigation/routesNames';
 import { SheetHeight } from '../../screens/LPBonusSheet';
+import APYPill from '../APYPill';
 import { ButtonPressAnimation } from '../animations';
 import { CoinIcon } from '../coin-icon';
 import { Centered, Row, RowWithMargins } from '../layout';
 import { Text } from '../text';
-import APYPill from './APYPill';
 import { useDimensions } from '@rainbow-me/hooks';
 import { colors, padding } from '@rainbow-me/styles';
 import ShadowStack from 'react-native-shadow-stack';
@@ -24,7 +24,7 @@ const LPBonusListRowShadows = [
 
 const LPBonusListRowShadowStack = styled(ShadowStack).attrs(
   ({ deviceWidth }) => ({
-    backgroundColor: colors.modalBackground,
+    backgroundColor: colors.sectionItemBackground,
     borderRadius: 49,
     height: 49,
     shadows: LPBonusListRowShadows,
@@ -82,7 +82,7 @@ const LPBonusListRow = ({ balance, underlying }) => {
                 {diplayedBalance} HH
               </Text>
             </RowWithMargins>
-            <APYPill value={bonusRate} />
+            <APYPill postfix="x" value={bonusRate} />
           </Row>
         </LPBonusListRowShadowStack>
       </Centered>

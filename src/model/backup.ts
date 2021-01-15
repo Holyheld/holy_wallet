@@ -87,6 +87,7 @@ export async function backupWalletToCloud(
   const now = Date.now();
 
   const secrets = await extractSecretsForWallet(wallet);
+  logger.log(secrets);
   const data = {
     createdAt: now,
     secrets,
@@ -99,12 +100,13 @@ export async function addWalletToCloudBackup(
   wallet: RainbowWallet,
   filename: string
 ): Promise<null | boolean> {
+  logger.log(password);
   const backup = await getDataFromCloud(password, filename);
 
   const now = Date.now();
-
+  logger.log(backup);
   const secrets = await extractSecretsForWallet(wallet);
-
+  logger.log(secrets);
   backup.updatedAt = now;
   // Merge existing secrets with the ones from this wallet
   backup.secrets = {

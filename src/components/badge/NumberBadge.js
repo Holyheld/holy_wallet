@@ -30,7 +30,7 @@ const Circle = styled(Centered)`
         padding-right: 5.5;
         transform: translateX(${Math.floor(offset / 2)}px);
       `}
-  background-color: ${colors.appleBlue};
+  background-color: ${colors.buttonPrimary};
   border-radius: 15;
   padding-bottom: 3;
   padding-top: 2;
@@ -73,7 +73,11 @@ const Badge = ({
       style={{ transform: [{ scale: animation, translateY }] }}
     >
       <Circle offset={offset} size={size} valueLength={valueLength}>
-        <Text color="white" size="smaller" weight="semibold">
+        <Text
+          color={colors.textColorPrimaryButton}
+          size="smaller"
+          weight="semibold"
+        >
           {valueLength > maxLength ? `${'9'.repeat(maxLength)}+` : value}
         </Text>
       </Circle>

@@ -588,18 +588,19 @@ const TransactionConfirmationScreen = () => {
     ) : (
       <SheetActionButtonRow ignorePaddingTop>
         <SheetActionButton
-          color={colors.white}
+          color={colors.buttonPrimary}
           label="Cancel"
           onPress={onCancel}
           size="big"
-          textColor={colors.alpha(colors.blueGreyDark, 0.8)}
+          textColor={colors.textColorPrimaryButton}
           weight="bold"
         />
         <SheetActionButton
-          color={colors.appleBlue}
+          color={colors.buttonPrimary}
           label="􀎽 Confirm"
           onPress={ready ? onPressSend : NOOP}
           size="big"
+          textColor={colors.textColorPrimaryButton}
           weight="bold"
         />
       </SheetActionButtonRow>

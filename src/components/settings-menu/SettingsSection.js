@@ -46,7 +46,7 @@ export const SettingsExternalURLs = {
 const CheckmarkIcon = styled(Icon).attrs({
   name: 'checkmarkCircled',
 })`
-  box-shadow: 0px 4px 6px ${colors.alpha(colors.blueGreyDark50, 0.4)};
+  box-shadow: 0px 4px 6px ${colors.alpha(colors.shadow, 0.4)};
 `;
 
 const contentContainerStyle = { flex: 1 };
@@ -161,7 +161,12 @@ export default function SettingsSection({
     [wallets]
   );
 
-  const backupStatusColor = allBackedUp ? colors.green : colors.blueGreyDark50;
+  const backupStatusBackgroundColor = allBackedUp
+    ? colors.buttonPrimary
+    : colors.buttonSecondary;
+  const backupStatusColor = allBackedUp
+    ? colors.textColorPrimaryButton
+    : colors.textColorSecondaryButton;
 
   return (
     <Container scrollEnabled={isTinyPhone}>
@@ -177,7 +182,10 @@ export default function SettingsSection({
           >
             <ListItemArrowGroup>
               {areBackedUp ? (
-                <CheckmarkIcon color={backupStatusColor} />
+                <CheckmarkIcon
+                  backgroundColor={backupStatusBackgroundColor}
+                  color={backupStatusColor}
+                />
               ) : (
                 <WarningIcon />
               )}

@@ -9,7 +9,7 @@ import { buildTextStyles, colors } from '@rainbow-me/styles';
 const Input = styled(TextInputMask).attrs({
   allowFontScaling: false,
   keyboardType: 'decimal-pad',
-  selectionColor: colors.appleBlue,
+  selectionColor: colors.textColorPrimary,
 })`
   ${buildTextStyles};
   ${android ? 'font-weight: normal' : ''};

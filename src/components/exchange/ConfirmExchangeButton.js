@@ -69,8 +69,10 @@ const ConfirmExchangeButton = ({
 
   return (
     <HoldToAuthorizeButton
+      backgroundColor={colors.buttonPrimary}
       disabled={isDisabled}
-      disabledBackgroundColor={colors.buttonDisabled}
+      disabledBackgroundColor={colors.buttonSecondary}
+      disabledTextColor={colors.textColorSecondaryButton}
       flex={1}
       hideInnerBorder
       isAuthorizing={isAuthorizing}
@@ -78,6 +80,7 @@ const ConfirmExchangeButton = ({
       onLongPress={onSubmit}
       shadows={ConfirmExchangeButtonShadows}
       testID={testID}
+      textColor={colors.textColorPrimaryButton}
       theme="dark"
       {...props}
     />

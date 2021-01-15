@@ -63,7 +63,7 @@ const SavingsSheetEmptyState = ({ isReadOnlyWallet, apy, underlying }) => {
         <APYHeadingText> on your assets</APYHeadingText>
       </Centered>
       <BodyText>
-        With digital protocol like <Br />
+        With the digital protocol like <Br />
         Yearn.finance, your money is <Br />
         earning you more than ever before
       </BodyText>
@@ -74,11 +74,12 @@ const SavingsSheetEmptyState = ({ isReadOnlyWallet, apy, underlying }) => {
       />
       <ColumnWithMargins css={padding(19, 15)} margin={19} width="100%">
         <SheetActionButton
-          color={colors.swapPurple}
+          color={colors.buttonPrimary}
           fullWidth
           label="􀁍 Deposit from Wallet"
           onPress={onDeposit}
           size="big"
+          textColor={colors.textColorPrimaryButton}
         />
         {/*
           <SheetActionButton

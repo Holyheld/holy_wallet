@@ -1,10 +1,10 @@
 import BigNumber from 'bignumber.js';
 import React, { Fragment, useMemo } from 'react';
 import styled from 'styled-components/primitives';
+import APYPill from '../APYPill';
 import { ButtonPressAnimation } from '../animations';
 import { CoinIcon } from '../coin-icon';
 import { Column, FlexItem, Row, RowWithMargins } from '../layout';
-import APYPill from '../lp-bonus/APYPill';
 import { Text } from '../text';
 import BalanceText from './BalanceText';
 import CoinName from './CoinName';
@@ -35,7 +35,7 @@ const Content = styled(Column).attrs({ justify: 'space-between' })`
 const BottomRow = ({ share }) => {
   return (
     <Fragment>
-      <APYPill small value={share} />
+      <APYPill postfix="x" small value={share} />
       <RowWithMargins flex={1} margin={4}>
         <Column flex={1}>
           <Text

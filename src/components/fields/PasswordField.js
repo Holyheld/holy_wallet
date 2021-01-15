@@ -30,6 +30,7 @@ const StyledTouchable = styled(TouchableWithoutFeedback)`
 
 const PasswordInput = styled(Input).attrs({
   autoCompleteType: 'password',
+  backgroundColor: colors.modalBackground,
   blurOnSubmit: false,
   passwordRules: `minlength: ${cloudBackupPasswordMinLength};`,
   placeholderTextColor: colors.textColorMuted,
@@ -48,8 +49,8 @@ const ShadowContainer = styled(ShadowStack).attrs(({ deviceWidth }) => ({
   borderRadius: 23,
   height: 46,
   shadows: [
-    [0, 5, 15, colors.dark, 0.06],
-    [0, 10, 30, colors.dark, 0.12],
+    [0, 5, 15, colors.shadow, 0.06],
+    [0, 10, 30, colors.shadow, 0.12],
   ],
   width: Math.max(deviceWidth - 130, 245),
 }))`
@@ -90,7 +91,11 @@ const PasswordField = (
           {...props}
         />
         {isValid && (
-          <FieldAccessoryBadge color={colors.green} name="checkmarkCircled" />
+          <FieldAccessoryBadge
+            backgroundColor={colors.green}
+            color={colors.textColor}
+            name="checkmarkCircled"
+          />
         )}
         {isInvalid && (
           <FieldAccessoryBadge

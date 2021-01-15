@@ -7,7 +7,8 @@ import { ListItem } from '../list';
 import { colors } from '@rainbow-me/styles';
 
 const CheckmarkIcon = styled(Icon).attrs({
-  color: colors.buttonPrimary,
+  backgroundColor: colors.buttonPrimary,
+  color: colors.textColorPrimaryButton,
   name: 'checkmarkCircled',
 })`
   box-shadow: 0px 4px 6px transparent;

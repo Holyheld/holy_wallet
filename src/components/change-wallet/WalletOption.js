@@ -16,7 +16,7 @@ const Container = styled(Row).attrs({
 const WalletOption = ({ editMode, label, onPress }) => (
   <Container as={ButtonPressAnimation} disabled={editMode} onPress={onPress}>
     <Text
-      color={editMode ? colors.textColor : colors.textColorPrimary}
+      color={colors.textColorPrimary}
       letterSpacing="roundedMedium"
       size="lmedium"
       weight="bold"

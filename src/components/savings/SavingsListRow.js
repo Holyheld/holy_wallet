@@ -11,10 +11,10 @@ import {
   SavingsSheetHeight,
 } from '../../screens/HolySavingsSheet';
 
+import APYPill from '../APYPill';
 import { ButtonPressAnimation } from '../animations';
 import { Centered, Row, RowWithMargins } from '../layout';
 import { Text } from '../text';
-import APYPill from './APYPill';
 import SavingsIcon from './SavingsIcon';
 import SavingsListRowEmptyState from './SavingsListRowEmptyState';
 import { useDimensions } from '@rainbow-me/hooks';
@@ -30,7 +30,7 @@ const NOOP = () => undefined;
 
 const SavingsListRowShadowStack = styled(ShadowStack).attrs(
   ({ deviceWidth }) => ({
-    backgroundColor: colors.modalBackground,
+    backgroundColor: colors.sectionItemBackground,
     borderRadius: 49,
     height: 49,
     shadows: SavingsListRowShadows,

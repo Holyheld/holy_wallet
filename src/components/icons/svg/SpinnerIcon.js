@@ -22,7 +22,7 @@ SpinnerIcon.propTypes = {
 };
 
 SpinnerIcon.defaultProps = {
-  color: colors.appleBlue,
+  color: colors.textColor,
   size: 12,
 };
 

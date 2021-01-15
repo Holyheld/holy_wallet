@@ -29,13 +29,13 @@ const Container = styled(Column).attrs({
 `;
 
 const Label = styled(Text).attrs({
-  color: colors.alpha(colors.blueGreyDark, 0.6),
+  color: colors.alpha(colors.textColorPrimaryButton, 0.6),
   size: 'smedium',
   weight: 'semibold',
 })``;
 
 const ButtonLabel = styled(BorderlessButton).attrs({
-  color: colors.appleBlue,
+  color: colors.textColorPrimary,
   hitSlop: 40,
   opacity: 1,
   size: 'smedium',
@@ -46,14 +46,14 @@ const ButtonLabel = styled(BorderlessButton).attrs({
 
 const LittleBorderlessButton = ({ onPress, children, testID }) => (
   <ButtonLabel onPress={onPress} testID={testID} width={120}>
-    <Text color={colors.appleBlue} size="smedium" weight="bold">
+    <Text color={colors.textColor} size="smedium" weight="bold">
       {children}
     </Text>
   </ButtonLabel>
 );
 
 const BottomRightLabel = ({ formatter }) => (
-  <Label color={colors.white}>{formatter()}</Label>
+  <Label color={colors.textColor}>{formatter()}</Label>
 );
 
 const formatGasPrice = (gasPrice, nativeCurrency) => {
