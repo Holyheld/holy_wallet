@@ -53,13 +53,15 @@ const CheckmarkIcon = styled(Icon).attrs({
 `;
 
 const GreenCheck = styled(CheckmarkIcon).attrs({
-  color: colors.green,
+  backgroundColor: colors.green,
+  color: colors.textColor,
 })`
   box-shadow: 0px 4px 6px ${colors.alpha(colors.green, 0.4)};
 `;
 
 const GreyCheck = styled(CheckmarkIcon).attrs({
-  color: colors.blueGreyDark50,
+  backgroundColor: colors.buttonSecondary,
+  color: colors.textColorSecondaryButton,
 })`
   box-shadow: 0px 4px 6px ${colors.alpha(colors.blueGreyDark50, 0.4)};
 `;
