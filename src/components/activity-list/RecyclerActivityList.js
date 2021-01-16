@@ -117,8 +117,7 @@ export default class RecyclerActivityList extends PureComponent {
         } else {
           dim.height = this.props.isLoading
             ? deviceUtils.dimensions.height
-            : (this.props.addCashAvailable ? 278 : 203) +
-              (this.props.isEmpty ? 297 : 0);
+            : 278 + (this.props.isEmpty ? 297 : 0);
         }
       }
     );

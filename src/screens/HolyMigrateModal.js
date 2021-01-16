@@ -1,5 +1,6 @@
 import { Contract } from '@ethersproject/contracts';
 import { useRoute } from '@react-navigation/native';
+import BigNumber from 'bignumber.js';
 import { get } from 'lodash';
 import React, {
   Fragment,
@@ -41,6 +42,7 @@ import {
   fromWei,
   greaterThan,
   lessThan,
+  multiply,
   subtract,
   updatePrecisionToDisplay,
 } from '../helpers/utilities';
@@ -135,9 +137,11 @@ const HolyMigrateModal = ({ holyV1Asset, testID }) => {
   const [bonusMigrateNeed, setBonusMigrateNeed] = useState(0);
   const [bonusClaimable, setBonusCLaimable] = useState(0);
 
+  const amountToMigrate = get(holyV1Asset, 'balance.amount');
+
   useEffect(() => {
     async function loadMigrationData() {
-      logger.sentry('Loading migrate data...');
+      logger.log('Loading migrate data...');
 
       try {
         const visorAddress = HOLY_VISOR_ADDRESS(network);
@@ -154,31 +158,36 @@ const HolyMigrateModal = ({ holyV1Asset, testID }) => {
           web3Provider
         );
 
-        logger.sentry('loading migration data');
+        logger.log('loading migration data');
         let bonusAmountCap = await holyVisor.bonusAmountCaps(accountAddress, {
           from: accountAddress,
         });
-        logger.sentry('bonus cap HEX:', bonusAmountCap);
+        logger.log('bonus cap HEX:', bonusAmountCap);
         if (bonusAmountCap) {
           bonusAmountCap = bonusAmountCap.toString();
         } else {
           bonusAmountCap = '0';
         }
-        logger.sentry('bonus cap:', bonusAmountCap);
+        logger.log('bonus cap:', bonusAmountCap);
 
         let migratedTokens = await holyPassage.migratedTokens(accountAddress, {
           from: accountAddress,
         });
-        logger.sentry('migrated tokens HEX:', migratedTokens);
+        logger.log('migrated tokens HEX:', migratedTokens);
         if (migratedTokens) {
           migratedTokens = migratedTokens.toString();
         } else {
           migratedTokens = '0';
         }
-        logger.sentry('migrated tokens:', migratedTokens);
+        logger.log('migrated tokens:', migratedTokens);
+        const amountToMigratedWEI = multiply(
+          amountToMigrate,
+          new BigNumber(10).pow(18)
+        );
+        logger.log('amount to migrate in wei:', amountToMigratedWEI);
 
-        const migratedPlusCurrent = add(migratedTokens, migratedTokens);
-        logger.sentry(
+        const migratedPlusCurrent = add(migratedTokens, amountToMigratedWEI);
+        logger.log(
           'migrated tokens plus current migration amount:',
           migratedPlusCurrent
         );
@@ -187,14 +196,14 @@ const HolyMigrateModal = ({ holyV1Asset, testID }) => {
           let needForBonus = subtract(bonusAmountCap, migratedPlusCurrent);
 
           needForBonus = fromWei(needForBonus);
-          logger.sentry(
+          logger.log(
             'cap is less than migrated tokens - you need ',
             needForBonus,
             ' for full bonus'
           );
           setBonusMigrateNeed(needForBonus);
         } else {
-          logger.sentry(
+          logger.log(
             'cap is bigger than migrated and ready for migrate tokens - bonus already is max'
           );
           setBonusMigrateNeed('0');
@@ -228,7 +237,6 @@ const HolyMigrateModal = ({ holyV1Asset, testID }) => {
     loadMigrationData();
   }, [accountAddress, network]);
 
-  const amountToMigrate = get(holyV1Asset, 'balance.amount');
   const symbol = get(holyV1Asset, 'symbol');
   const address = get(holyV1Asset, 'address');
 

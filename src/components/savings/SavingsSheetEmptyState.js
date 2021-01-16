@@ -56,7 +56,7 @@ const SavingsSheetEmptyState = ({ isReadOnlyWallet, apy, underlying }) => {
 
   return (
     <Centered direction="column" paddingTop={9}>
-      <SavingsIcon />
+      <SavingsIcon size={51} withPair />
       <Centered marginBottom={12} marginTop={15}>
         <APYHeadingText>Get </APYHeadingText>
         <GradientAPYHeadingText>{apy}%</GradientAPYHeadingText>

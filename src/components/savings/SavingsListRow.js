@@ -84,19 +84,21 @@ const SavingsListRow = ({ totalBalance, currentSaving, savings }) => {
             onPress={() => {}}
             scaleTo={0.96}
           >
-            <SavingsIcon size={23} />
             {!isNaN(displayValue) && totalBalance !== '0' ? (
-              <RowWithMargins align="center" margin={8} paddingLeft={4}>
-                <Text
-                  color={colors.textColor}
-                  letterSpacing="roundedTightest"
-                  opacity={0.5}
-                  size="lmedium"
-                  weight="bold"
-                >
-                  {`$${displayValue}`}
-                </Text>
-              </RowWithMargins>
+              <>
+                <SavingsIcon size={23} />
+                <RowWithMargins align="center" margin={8} paddingLeft={4}>
+                  <Text
+                    color={colors.textColor}
+                    letterSpacing="roundedTightest"
+                    opacity={0.5}
+                    size="lmedium"
+                    weight="bold"
+                  >
+                    {`$${displayValue}`}
+                  </Text>
+                </RowWithMargins>
+              </>
             ) : (
               <SavingsListRowEmptyState onPress={NOOP} />
             )}
