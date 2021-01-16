@@ -332,7 +332,6 @@ const HolyMigrateModal = ({ holyV1Asset, testID }) => {
           return;
         }
 
-        setIsAuthorizing(false);
         const callback = () => {
           setParams({ focused: false });
           navigate(Routes.PROFILE_SCREEN);
@@ -346,6 +345,7 @@ const HolyMigrateModal = ({ holyV1Asset, testID }) => {
         logger.log('[holy migrate] rap', rap);
         await executeRap(wallet, rap);
         logger.log('[holy migrate] executed rap!');
+        setIsAuthorizing(false);
       } catch (error) {
         setIsAuthorizing(false);
         logger.log('[holy migrate] error submitting migrate', error);
