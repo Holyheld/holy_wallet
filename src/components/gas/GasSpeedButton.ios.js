@@ -28,11 +28,11 @@ const Container = styled(Column).attrs({
   width: 100%;
 `;
 
-const Label = styled(Text).attrs({
-  color: colors.alpha(colors.textColorPrimaryButton, 0.6),
+const Label = styled(Text).attrs(({ color = colors.textColor }) => ({
+  color: color,
   size: 'smedium',
   weight: 'semibold',
-})``;
+}))``;
 
 const ButtonLabel = styled(BorderlessButton).attrs({
   color: colors.textColorPrimary,
@@ -46,14 +46,14 @@ const ButtonLabel = styled(BorderlessButton).attrs({
 
 const LittleBorderlessButton = ({ onPress, children, testID }) => (
   <ButtonLabel onPress={onPress} testID={testID} width={120}>
-    <Text color={colors.textColor} size="smedium" weight="bold">
+    <Text color={colors.textColorPrimary} size="smedium" weight="bold">
       {children}
     </Text>
   </ButtonLabel>
 );
 
 const BottomRightLabel = ({ formatter }) => (
-  <Label color={colors.textColor}>{formatter()}</Label>
+  <Label color={colors.textColorMuted}>{formatter()}</Label>
 );
 
 const formatGasPrice = (gasPrice, nativeCurrency) => {
@@ -158,7 +158,7 @@ const GasSpeedButton = ({
   const renderGasPriceText = useCallback(
     animatedNumber => (
       <Text
-        color={colors.white}
+        color={colors.textColor}
         letterSpacing="roundedTight"
         size="lmedium"
         weight="bold"
@@ -380,7 +380,7 @@ const GasSpeedButton = ({
       </Row>
       <Row justify="space-between">
         {!isCustom ? (
-          <Label color={colors.textColor}>Network Fee</Label>
+          <Label color={colors.textColorMuted}>Network Fee</Label>
         ) : (
           <LittleBorderlessButton
             onPress={handleInputButtonManager}

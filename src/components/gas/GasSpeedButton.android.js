@@ -63,14 +63,14 @@ const GasInput = styled(Input).attrs({
 
 const LittleBorderlessButton = ({ onPress, children, testID }) => (
   <ButtonLabel onPress={onPress} testID={testID} width={120}>
-    <Text color={colors.textColor} size="smedium" weight="bold">
+    <Text color={colors.textColorPrimary} size="smedium" weight="bold">
       {children}
     </Text>
   </ButtonLabel>
 );
 
 const BottomRightLabel = ({ formatter }) => (
-  <Label color={colors.textColor}>{formatter()}</Label>
+  <Label color={colors.textColorMuted}>{formatter()}</Label>
 );
 
 const formatGasPrice = (gasPrice, nativeCurrency) => {
@@ -188,7 +188,7 @@ const GasSpeedButton = ({
   const renderGasPriceText = useCallback(
     animatedNumber => (
       <Text
-        color={colors.white}
+        color={colors.textColor}
         letterSpacing="roundedTight"
         size="lmedium"
         weight="bold"
@@ -402,7 +402,7 @@ const GasSpeedButton = ({
 
         <Row justify="space-between" style={{ height: 27 }}>
           {!isCustom ? (
-            <Label color={colors.textColor} height={10}>
+            <Label color={colors.textColorMuted} height={10}>
               Network Fee
             </Label>
           ) : (
