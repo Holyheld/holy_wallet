@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { getOnchainAssetBalance } from '../handlers/assets';
 import { dataUpdateAssets } from '../redux/data';
 import useAccountAssets from './useAccountAssets';
-import { logger } from '@rainbow-me/utils';
+import { logger } from '@holyheld-com/utils';
 
 export default function useUpdateAssetOnchainBalance() {
   const { allAssets } = useAccountAssets();

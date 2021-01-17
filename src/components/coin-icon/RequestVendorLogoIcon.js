@@ -5,7 +5,7 @@ import { initials } from '../../utils';
 import { Centered } from '../layout';
 import { Text } from '../text';
 import { CoinIconSize } from './CoinIcon';
-import { colors, position } from '@rainbow-me/styles';
+import { colors, position } from '@holyheld-com/styles';
 import ShadowStack from 'react-native-shadow-stack';
 
 const RVLIBorderRadius = 16.25;

@@ -22,7 +22,7 @@ import {
 } from '../coin-row';
 import SavingsListHeader from '../savings/SavingsListHeader';
 import TokenFamilyHeader from '../token-family/TokenFamilyHeader';
-import { colors } from '@rainbow-me/styles';
+import { colors } from '@holyheld-com/styles';
 
 const dividerMargin = 10;
 const dividerHeight = DividerSize + dividerMargin * 2;

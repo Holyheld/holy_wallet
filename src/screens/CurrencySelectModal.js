@@ -36,10 +36,10 @@ import {
   useTimeout,
   useUniswapAssets,
   useUniswapAssetsInWallet,
-} from '@rainbow-me/hooks';
-import Routes from '@rainbow-me/routes';
-import { position } from '@rainbow-me/styles';
-import { filterList, filterScams } from '@rainbow-me/utils';
+} from '@holyheld-com/hooks';
+import Routes from '@holyheld-com/routes';
+import { position } from '@holyheld-com/styles';
+import { filterList, filterScams } from '@holyheld-com/utils';
 
 const TabTransitionAnimation = styled(Animated.View)`
   ${position.size('100%')};

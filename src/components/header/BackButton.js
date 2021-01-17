@@ -4,8 +4,8 @@ import Icon from '../icons/Icon';
 import { Row } from '../layout';
 import Text from '../text/Text';
 import HeaderButton from './HeaderButton';
-import { useNavigation } from '@rainbow-me/navigation';
-import { colors, fonts, fontWithWidth } from '@rainbow-me/styles';
+import { useNavigation } from '@holyheld-com/navigation';
+import { colors, fonts, fontWithWidth } from '@holyheld-com/styles';
 
 const Container = styled(Row).attrs({ align: 'center' })`
   height: 44;

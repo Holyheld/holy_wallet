@@ -7,8 +7,8 @@ import { ContextMenu } from '../context-menu';
 import { Row } from '../layout';
 import SavingsListHeader from '../savings/SavingsListHeader';
 import { H1 } from '../text';
-// import { colors, padding, position } from '@rainbow-me/styles';
-import { colors, padding } from '@rainbow-me/styles';
+// import { colors, padding, position } from '@holyheld-com/styles';
+import { colors, padding } from '@holyheld-com/styles';
 
 export const ListHeaderHeight = 44;
 

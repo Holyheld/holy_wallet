@@ -5,10 +5,10 @@ import styled from 'styled-components/primitives';
 import { Row } from '../../../layout';
 import ChartHeaderTitle from './ChartHeaderTitle';
 
-import { ChartYLabel } from '@rainbow-me/animated-charts';
-import { useAccountSettings } from '@rainbow-me/hooks';
-import supportedNativeCurrencies from '@rainbow-me/references/native-currencies.json';
-import { colors, fonts, fontWithWidth } from '@rainbow-me/styles';
+import { ChartYLabel } from '@holyheld-com/animated-charts';
+import { useAccountSettings } from '@holyheld-com/hooks';
+import supportedNativeCurrencies from '@holyheld-com/references/native-currencies.json';
+import { colors, fonts, fontWithWidth } from '@holyheld-com/styles';
 
 const Label = styled(ChartYLabel)`
   color: ${colors.textColor};

@@ -15,17 +15,17 @@ import BackupSheetKeyboardLayout from './BackupSheetKeyboardLayout';
 import {
   cloudBackupPasswordMinLength,
   isCloudBackupPasswordValid,
-} from '@rainbow-me/handlers/cloudBackup';
-import { removeWalletData } from '@rainbow-me/handlers/localstorage/removeWallet';
-import WalletLoadingStates from '@rainbow-me/helpers/walletLoadingStates';
+} from '@holyheld-com/handlers/cloudBackup';
+import { removeWalletData } from '@holyheld-com/handlers/localstorage/removeWallet';
+import WalletLoadingStates from '@holyheld-com/helpers/walletLoadingStates';
 import {
   useAccountSettings,
   useDimensions,
   useWallets,
-} from '@rainbow-me/hooks';
-import { useNavigation } from '@rainbow-me/navigation';
-import Routes from '@rainbow-me/routes';
-import { colors, margin, padding } from '@rainbow-me/styles';
+} from '@holyheld-com/hooks';
+import { useNavigation } from '@holyheld-com/navigation';
+import Routes from '@holyheld-com/routes';
+import { colors, margin, padding } from '@holyheld-com/styles';
 
 const DescriptionText = styled(Text).attrs({
   align: 'center',

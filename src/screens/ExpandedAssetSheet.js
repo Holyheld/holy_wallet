@@ -11,8 +11,8 @@ import {
 } from '../components/expanded-state';
 import { Centered } from '../components/layout';
 import { useAsset, useDimensions } from '../hooks';
-import { useNavigation } from '@rainbow-me/navigation';
-import { position } from '@rainbow-me/styles';
+import { useNavigation } from '@holyheld-com/navigation';
+import { position } from '@holyheld-com/styles';
 
 const ScreenTypes = {
   token: ChartExpandedState,

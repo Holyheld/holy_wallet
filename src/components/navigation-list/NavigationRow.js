@@ -4,7 +4,7 @@ import colors from '../../styles/colors';
 import { ButtonPressAnimation } from '../animations';
 import { ColumnWithMargins, Row } from '../layout';
 import { Text } from '../text';
-import { deviceUtils } from '@rainbow-me/utils';
+import { deviceUtils } from '@holyheld-com/utils';
 
 const maxLabelWidth = deviceUtils.dimensions.width - 88;
 const NOOP = () => undefined;

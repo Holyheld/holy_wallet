@@ -1,8 +1,8 @@
 import React from 'react';
 import { Centered, ColumnWithMargins } from '../layout';
 import { Emoji, Text } from '../text';
-import { colors } from '@rainbow-me/styles';
-import { neverRerender } from '@rainbow-me/utils';
+import { colors } from '@holyheld-com/styles';
+import { neverRerender } from '@holyheld-com/utils';
 
 const NoResults = () => (
   <ColumnWithMargins centered margin={3}>

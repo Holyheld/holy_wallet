@@ -16,8 +16,8 @@ import { useReanimatedValue } from '../list/MarqueeList';
 import SheetHandleFixedToTop, {
   SheetHandleFixedToTopHeight,
 } from './SheetHandleFixedToTop';
-import { useNavigation } from '@rainbow-me/navigation';
-import { colors } from '@rainbow-me/styles';
+import { useNavigation } from '@holyheld-com/navigation';
+import { colors } from '@holyheld-com/styles';
 
 const deviceHeight = deviceUtils.dimensions.height;
 

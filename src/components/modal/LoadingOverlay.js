@@ -6,8 +6,8 @@ import Spinner from '../Spinner';
 import TouchableBackdrop from '../TouchableBackdrop';
 import { Centered, Column } from '../layout';
 import { Text } from '../text';
-import { colors, padding, position } from '@rainbow-me/styles';
-import { neverRerender } from '@rainbow-me/utils';
+import { colors, padding, position } from '@holyheld-com/styles';
+import { neverRerender } from '@holyheld-com/utils';
 
 const Container = styled(Centered).attrs({
   flex: android ? 1 : undefined,

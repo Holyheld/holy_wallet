@@ -9,8 +9,8 @@ import { Centered, ColumnWithMargins } from '../layout';
 import { SheetActionButton } from '../sheet';
 import { Br, GradientText, Text } from '../text';
 import SavingsIcon from './SavingsIcon';
-import Routes from '@rainbow-me/routes';
-import { colors, padding } from '@rainbow-me/styles';
+import Routes from '@holyheld-com/routes';
+import { colors, padding } from '@holyheld-com/styles';
 
 const APYHeadingText = styled(Text).attrs({
   size: 'big',

@@ -3,8 +3,8 @@ import styled from 'styled-components/primitives';
 import colors from '../../../styles/colors';
 import { Input } from '../../inputs';
 import { PlaceholderText } from '../../text';
-import { useMagicAutofocus } from '@rainbow-me/hooks';
-import { fonts, fontWithWidth } from '@rainbow-me/styles';
+import { useMagicAutofocus } from '@holyheld-com/hooks';
+import { fonts, fontWithWidth } from '@holyheld-com/styles';
 
 const NameInput = styled(Input).attrs(({ color = colors.textColor }) => ({
   align: 'center',

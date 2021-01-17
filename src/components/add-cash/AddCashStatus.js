@@ -21,8 +21,8 @@ import { Centered } from '../layout';
 import { Br, Emoji, Text } from '../text';
 import NeedHelpButton from './NeedHelpButton';
 import SupportButton from './SupportButton';
-import Routes from '@rainbow-me/routes';
-import { position } from '@rainbow-me/styles';
+import Routes from '@holyheld-com/routes';
+import { position } from '@holyheld-com/styles';
 
 const StatusMessageText = withProps({
   align: 'center',

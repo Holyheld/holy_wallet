@@ -4,7 +4,7 @@ import colors from '../../styles/colors';
 import { UnderlineField } from '../fields';
 import { RowWithMargins } from '../layout';
 import { Text } from '../text';
-import { useDimensions } from '@rainbow-me/hooks';
+import { useDimensions } from '@holyheld-com/hooks';
 
 export default function SendAssetFormField({
   autoFocus,

@@ -3,8 +3,8 @@ import { View } from 'react-native';
 import { useAnimatedStyle } from 'react-native-reanimated';
 import styled from 'styled-components/primitives';
 import { useRatio } from './useRatio';
-import { ChartXLabel } from '@rainbow-me/animated-charts';
-import { colors, fonts, fontWithWidth } from '@rainbow-me/styles';
+import { ChartXLabel } from '@holyheld-com/animated-charts';
+import { colors, fonts, fontWithWidth } from '@holyheld-com/styles';
 
 const Label = styled(ChartXLabel)`
   ${fontWithWidth(fonts.weight.medium)};

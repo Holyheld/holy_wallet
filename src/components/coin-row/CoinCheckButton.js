@@ -5,7 +5,13 @@ import { ButtonPressAnimation, OpacityToggler } from '../animations';
 import { CoinIconSize } from '../coin-icon';
 import { Icon } from '../icons';
 import { Row } from '../layout';
-import { borders, colors, padding, position, shadow } from '@rainbow-me/styles';
+import {
+  borders,
+  colors,
+  padding,
+  position,
+  shadow,
+} from '@holyheld-com/styles';
 
 const Container = styled.View`
   ${position.size(CoinIconSize)};

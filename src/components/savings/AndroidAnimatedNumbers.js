@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { findNodeHandle, NativeModules, TextInput } from 'react-native';
 import styled from 'styled-components/native';
 import { isSymbolStablecoin } from '../../helpers/savings';
-import { colors, fonts, fontWithWidth } from '@rainbow-me/styles';
+import { colors, fonts, fontWithWidth } from '@holyheld-com/styles';
 
 const TextChunk = styled(TextInput).attrs({
   editable: false,

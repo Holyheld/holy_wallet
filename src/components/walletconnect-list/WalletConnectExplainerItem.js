@@ -1,7 +1,7 @@
 import React from 'react';
 import { Column, FlexItem, Row } from '../layout';
 import { Emoji, Text, TruncatedText } from '../text';
-import { colors, padding } from '@rainbow-me/styles';
+import { colors, padding } from '@holyheld-com/styles';
 
 export default function WalletConnectExplainerItem({
   children,

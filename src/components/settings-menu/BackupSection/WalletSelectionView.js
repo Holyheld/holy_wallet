@@ -13,13 +13,13 @@ import { ContactAvatar } from '../../contacts';
 import { Icon } from '../../icons';
 import { Centered, Column, ColumnWithMargins, Row } from '../../layout';
 import { Text, TruncatedAddress } from '../../text';
-import Caret from '@rainbow-me/assets/family-dropdown-arrow.png';
-import WalletBackupTypes from '@rainbow-me/helpers/walletBackupTypes';
-import WalletTypes from '@rainbow-me/helpers/walletTypes';
-import { useWallets } from '@rainbow-me/hooks';
-import { useNavigation } from '@rainbow-me/navigation';
-import { colors, fonts, padding } from '@rainbow-me/styles';
-import { abbreviations, showActionSheetWithOptions } from '@rainbow-me/utils';
+import Caret from '@holyheld-com/assets/family-dropdown-arrow.png';
+import WalletBackupTypes from '@holyheld-com/helpers/walletBackupTypes';
+import WalletTypes from '@holyheld-com/helpers/walletTypes';
+import { useWallets } from '@holyheld-com/hooks';
+import { useNavigation } from '@holyheld-com/navigation';
+import { colors, fonts, padding } from '@holyheld-com/styles';
+import { abbreviations, showActionSheetWithOptions } from '@holyheld-com/utils';
 
 const CaretIcon = styled(FastImage).attrs({
   source: Caret,

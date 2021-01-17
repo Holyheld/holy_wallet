@@ -2,13 +2,13 @@ import { filter, find } from 'lodash';
 import { IS_TESTING } from 'react-native-dotenv';
 import { triggerOnSwipeLayout } from '../navigation/onNavigationStateChange';
 import { getKeychainIntegrityState } from './localstorage/globalSettings';
-import WalletBackupStepTypes from '@rainbow-me/helpers/walletBackupStepTypes';
-import WalletTypes from '@rainbow-me/helpers/walletTypes';
-import { Navigation } from '@rainbow-me/navigation';
+import WalletBackupStepTypes from '@holyheld-com/helpers/walletBackupStepTypes';
+import WalletTypes from '@holyheld-com/helpers/walletTypes';
+import { Navigation } from '@holyheld-com/navigation';
 
-import store from '@rainbow-me/redux/store';
-import { checkKeychainIntegrity } from '@rainbow-me/redux/wallets';
-import Routes from '@rainbow-me/routes';
+import store from '@holyheld-com/redux/store';
+import { checkKeychainIntegrity } from '@holyheld-com/redux/wallets';
+import Routes from '@holyheld-com/routes';
 import logger from 'logger';
 
 const BACKUP_SHEET_DELAY_MS = 3000;

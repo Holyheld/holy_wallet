@@ -5,7 +5,7 @@ import { magicMemo } from '../../utils';
 import { ButtonPressAnimation, OpacityToggler } from '../animations';
 import { Row } from '../layout';
 import { Text } from '../text';
-import { colors, padding, shadow } from '@rainbow-me/styles';
+import { colors, padding, shadow } from '@holyheld-com/styles';
 
 const ButtonContent = styled(Row).attrs({
   justify: 'center',

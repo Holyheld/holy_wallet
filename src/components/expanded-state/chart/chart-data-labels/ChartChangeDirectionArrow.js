@@ -7,7 +7,7 @@ import Animated, {
 import styled from 'styled-components/primitives';
 import { Icon } from '../../../icons';
 import { useRatio } from './useRatio';
-import { colors } from '@rainbow-me/styles';
+import { colors } from '@holyheld-com/styles';
 
 const AnimatedMaskedView = Animated.createAnimatedComponent(MaskedView);
 

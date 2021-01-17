@@ -19,7 +19,7 @@ import {
   useWyreApplePay,
 } from '../hooks';
 import { deviceUtils } from '../utils';
-import { borders, colors } from '@rainbow-me/styles';
+import { borders, colors } from '@holyheld-com/styles';
 
 const deviceHeight = deviceUtils.dimensions.height;
 const statusBarHeight = getStatusBarHeight(true);

@@ -7,7 +7,7 @@ import Spinner from '../Spinner';
 import Icon from '../icons/Icon';
 import { Row } from '../layout';
 import { Text } from '../text';
-import { colors, position } from '@rainbow-me/styles';
+import { colors, position } from '@holyheld-com/styles';
 
 const StatusProps = {
   [TransactionStatusTypes.approved]: {

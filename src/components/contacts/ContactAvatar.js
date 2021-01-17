@@ -3,7 +3,7 @@ import React, { useMemo } from 'react';
 import { getFirstGrapheme } from '../../utils';
 import { Centered } from '../layout';
 import { Text } from '../text';
-import { borders, colors } from '@rainbow-me/styles';
+import { borders, colors } from '@holyheld-com/styles';
 import ShadowStack from 'react-native-shadow-stack';
 
 const buildShadows = (color, size) => {

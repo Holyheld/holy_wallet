@@ -1,6 +1,6 @@
 import styled from 'styled-components/primitives';
 import { Text } from '../text';
-import { colors } from '@rainbow-me/styles';
+import { colors } from '@holyheld-com/styles';
 
 const TokenInfoHeading = styled(Text).attrs({
   color: colors.textColor,

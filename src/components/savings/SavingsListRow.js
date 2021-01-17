@@ -17,8 +17,8 @@ import { Centered, Row, RowWithMargins } from '../layout';
 import { Text } from '../text';
 import SavingsIcon from './SavingsIcon';
 import SavingsListRowEmptyState from './SavingsListRowEmptyState';
-import { useDimensions } from '@rainbow-me/hooks';
-import { colors, padding } from '@rainbow-me/styles';
+import { useDimensions } from '@holyheld-com/hooks';
+import { colors, padding } from '@holyheld-com/styles';
 import ShadowStack from 'react-native-shadow-stack';
 
 const SavingsListRowShadows = [

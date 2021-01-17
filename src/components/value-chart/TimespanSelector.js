@@ -3,8 +3,8 @@ import styled from 'styled-components/primitives';
 import { JellySelector } from '../jelly-selector';
 import { Centered, Row } from '../layout';
 import { Text } from '../text';
-import ChartTypes from '@rainbow-me/helpers/chartTypes';
-import { colors, padding } from '@rainbow-me/styles';
+import ChartTypes from '@holyheld-com/helpers/chartTypes';
+import { colors, padding } from '@holyheld-com/styles';
 
 const Container = styled(Centered)`
   padding-top: 30;

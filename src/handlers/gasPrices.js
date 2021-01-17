@@ -4,7 +4,7 @@ import {
   ETHERSCAN_API_KEY,
 } from 'react-native-dotenv';
 import { multiply } from '../helpers/utilities';
-import { ethUnits } from '@rainbow-me/references';
+import { ethUnits } from '@holyheld-com/references';
 
 /**
  * Configuration for Dapple API

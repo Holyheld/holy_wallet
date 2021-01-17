@@ -4,7 +4,7 @@ import Svg, { Circle, ClipPath, Defs, G, Image, Rect } from 'react-native-svg';
 import HornsLogo from '../../assets/sign_of_the_horns.png';
 import HornsLogoIos from '../../assets/sign_of_the_horns_ios.png';
 import { magicMemo } from '../../utils';
-import { colors } from '@rainbow-me/styles';
+import { colors } from '@holyheld-com/styles';
 
 const generateMatrix = (value, errorCorrectionLevel) => {
   const arr = Array.prototype.slice.call(

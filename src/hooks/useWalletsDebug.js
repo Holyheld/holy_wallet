@@ -26,7 +26,7 @@ import {
 } from '../utils/keychainConstants';
 import useInitializeWallet from './useInitializeWallet';
 import useWallets from './useWallets';
-import { colors } from '@rainbow-me/styles';
+import { colors } from '@holyheld-com/styles';
 import logger from 'logger';
 
 const keysOnly = keysWithValues => map(keysWithValues, item => item?.username);

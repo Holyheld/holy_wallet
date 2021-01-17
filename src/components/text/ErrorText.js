@@ -2,7 +2,7 @@ import React from 'react';
 import { Icon } from '../icons';
 import { RowWithMargins } from '../layout';
 import Monospace from './Monospace';
-import { colors } from '@rainbow-me/styles';
+import { colors } from '@holyheld-com/styles';
 
 export default function ErrorText({ color = colors.red, error }) {
   return (

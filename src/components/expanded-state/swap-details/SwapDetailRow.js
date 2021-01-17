@@ -2,7 +2,7 @@ import React from 'react';
 import { magicMemo } from '../../../utils';
 import { Row } from '../../layout';
 import { Text } from '../../text';
-import { colors } from '@rainbow-me/styles';
+import { colors } from '@holyheld-com/styles';
 
 const DetailsRow = ({ label, value, ...props }) => (
   <Row {...props} align="center" justify="space-between">

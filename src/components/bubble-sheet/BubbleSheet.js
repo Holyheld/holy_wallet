@@ -2,7 +2,7 @@ import React from 'react';
 import { useSafeArea } from 'react-native-safe-area-context';
 import styled from 'styled-components/primitives';
 import { Column } from '../layout';
-import { colors, shadow } from '@rainbow-me/styles';
+import { colors, shadow } from '@holyheld-com/styles';
 
 export const BubbleSheetBorderRadius = 30;
 

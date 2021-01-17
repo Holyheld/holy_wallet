@@ -4,8 +4,8 @@ import { bin, useSpringTransition } from 'react-native-redash';
 import styled from 'styled-components/primitives';
 import { useMemoOne } from 'use-memo-one';
 import { Row } from '../layout';
-import { borders, colors, position } from '@rainbow-me/styles';
-import { magicMemo } from '@rainbow-me/utils';
+import { borders, colors, position } from '@holyheld-com/styles';
+import { magicMemo } from '@holyheld-com/utils';
 
 const { add, divide, multiply, sub } = Animated;
 

@@ -4,9 +4,9 @@ import styled from 'styled-components/primitives';
 import borders from '../../styles/borders';
 import colors from '../../styles/colors';
 import { Row } from '../layout';
-import HolyCash from '@rainbow-me/assets/holy_cash.png';
-import SavingPair from '@rainbow-me/assets/saving-pair.png';
-import { magicMemo } from '@rainbow-me/utils';
+import HolyCash from '@holyheld-com/assets/holy_cash.png';
+import SavingPair from '@holyheld-com/assets/saving-pair.png';
+import { magicMemo } from '@holyheld-com/utils';
 import ShadowStack from 'react-native-shadow-stack';
 
 const DollarIcon = styled(FastImage).attrs(() => ({

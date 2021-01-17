@@ -10,7 +10,7 @@ import { Icon } from '../icons';
 import { Column } from '../layout';
 import SendAssetFormCollectible from './SendAssetFormCollectible';
 import SendAssetFormToken from './SendAssetFormToken';
-import { colors, padding, position } from '@rainbow-me/styles';
+import { colors, padding, position } from '@holyheld-com/styles';
 import ShadowStack from 'react-native-shadow-stack';
 
 const AssetRowShadow = [

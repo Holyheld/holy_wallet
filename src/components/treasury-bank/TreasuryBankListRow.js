@@ -7,8 +7,8 @@ import APYPill from '../APYPill';
 import { ButtonPressAnimation } from '../animations';
 import { Centered, Row, RowWithMargins } from '../layout';
 import { Emoji, Text } from '../text';
-import { useDimensions } from '@rainbow-me/hooks';
-import { colors, padding } from '@rainbow-me/styles';
+import { useDimensions } from '@holyheld-com/hooks';
+import { colors, padding } from '@holyheld-com/styles';
 import ShadowStack from 'react-native-shadow-stack';
 
 const TreasuryBankListRowShadows = [

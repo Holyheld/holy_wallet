@@ -4,8 +4,8 @@ import styled from 'styled-components/primitives';
 import CopyTooltip from '../copy-tooltip';
 import { Centered, ColumnWithMargins, Row, RowWithMargins } from '../layout';
 import { Text } from '../text';
-import WalletTypes from '@rainbow-me/helpers/walletTypes';
-import { colors, fonts, padding } from '@rainbow-me/styles';
+import WalletTypes from '@holyheld-com/helpers/walletTypes';
+import { colors, fonts, padding } from '@holyheld-com/styles';
 
 const Content = styled(Centered)`
   ${padding(19, 30, 24)};

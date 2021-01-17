@@ -9,8 +9,8 @@ import {
   JellySelectorColorIndicator,
   JellySelectorIndicator,
 } from './jelly-selector-indicator';
-import { colors } from '@rainbow-me/styles';
-import { magicMemo } from '@rainbow-me/utils';
+import { colors } from '@holyheld-com/styles';
+import { magicMemo } from '@holyheld-com/utils';
 
 const springTo = (node, toValue) =>
   spring(node, {

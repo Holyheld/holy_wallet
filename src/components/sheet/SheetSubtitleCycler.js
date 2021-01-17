@@ -10,7 +10,7 @@ import { magicMemo } from '../../utils';
 import { interpolate } from '../animations';
 import { Centered } from '../layout';
 import { Text } from '../text';
-import { colors, position } from '@rainbow-me/styles';
+import { colors, position } from '@holyheld-com/styles';
 
 const AnimatedText = Animated.createAnimatedComponent(Text);
 

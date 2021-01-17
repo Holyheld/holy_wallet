@@ -8,7 +8,7 @@ import {
   sortBy,
   upperFirst,
 } from 'lodash';
-import { showActionSheetWithOptions } from '@rainbow-me/utils';
+import { showActionSheetWithOptions } from '@holyheld-com/utils';
 
 const CUSTOM = 'custom';
 const FAST = 'fast';

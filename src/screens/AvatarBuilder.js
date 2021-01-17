@@ -13,7 +13,7 @@ import useAccountSettings from '../hooks/useAccountSettings';
 import { useNavigation } from '../navigation/Navigation';
 import { walletsSetSelected, walletsUpdate } from '../redux/wallets';
 import { deviceUtils } from '../utils';
-import { colors } from '@rainbow-me/styles';
+import { colors } from '@holyheld-com/styles';
 
 const AvatarCircleHeight = 65;
 const AvatarCircleMarginTop = 2;

@@ -7,7 +7,7 @@ import SlackBottomSheet from 'react-native-slack-bottom-sheet';
 import colors from '../../styles/colors';
 import DiscoverSheetContent from './DiscoverSheetContent';
 import DiscoverSheetContext from './DiscoverSheetContext';
-import { deviceUtils } from '@rainbow-me/utils';
+import { deviceUtils } from '@holyheld-com/utils';
 import {
   YABSForm,
   YABSScrollView,

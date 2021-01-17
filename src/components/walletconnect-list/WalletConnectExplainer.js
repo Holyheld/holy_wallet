@@ -3,7 +3,7 @@ import Divider from '../Divider';
 import { Centered, Column } from '../layout';
 import WalletConnectExplainerItem from './WalletConnectExplainerItem';
 import WalletConnectLearnMoreButton from './WalletConnectLearnMoreButton';
-import { margin, padding } from '@rainbow-me/styles';
+import { margin, padding } from '@holyheld-com/styles';
 
 export default function WalletConnectExplainer() {
   return (

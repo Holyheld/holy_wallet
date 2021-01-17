@@ -2,7 +2,7 @@ import { PropTypes } from 'prop-types';
 import React from 'react';
 import { withNeverRerender } from '../../hoc';
 import Divider from '../Divider';
-import { colors } from '@rainbow-me/styles';
+import { colors } from '@holyheld-com/styles';
 
 const ListItemDivider = ({
   inset,

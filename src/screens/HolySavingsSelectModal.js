@@ -15,9 +15,9 @@ import CurrencySelectionTypes from '../helpers/currencySelectionTypes';
 import { useHolySavingsWithBalance } from '../hooks/useHolySavings';
 import { delayNext } from '../hooks/useMagicAutofocus';
 import { useNavigation } from '../navigation/Navigation';
-import { useInteraction, usePrevious } from '@rainbow-me/hooks';
-import Routes from '@rainbow-me/routes';
-import { position } from '@rainbow-me/styles';
+import { useInteraction, usePrevious } from '@holyheld-com/hooks';
+import Routes from '@holyheld-com/routes';
+import { position } from '@holyheld-com/styles';
 
 const TabTransitionAnimation = styled(Animated.View)`
   ${position.size('100%')};

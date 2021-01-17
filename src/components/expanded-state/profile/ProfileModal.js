@@ -4,7 +4,7 @@ import isNativeStackAvailable from '../../../helpers/isNativeStackAvailable';
 import TouchableBackdrop from '../../TouchableBackdrop';
 import { AssetPanel, FloatingPanels } from '../../floating-panels';
 import { KeyboardFixedOpenLayout } from '../../layout';
-import { useDimensions } from '@rainbow-me/hooks';
+import { useDimensions } from '@holyheld-com/hooks';
 
 export default function ProfileModal({ onPressBackdrop, ...props }) {
   const { width: deviceWidth } = useDimensions();

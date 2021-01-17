@@ -8,7 +8,7 @@ import {
 } from '../../utils';
 import ImageWithCachedMetadata from '../ImageWithCachedMetadata';
 import { Centered } from '../layout';
-import { colors, fonts, position } from '@rainbow-me/styles';
+import { colors, fonts, position } from '@holyheld-com/styles';
 
 const fallbackTextStyles = {
   fontFamily: fonts.family.SFProRounded,

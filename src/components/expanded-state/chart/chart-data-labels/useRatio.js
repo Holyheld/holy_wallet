@@ -1,6 +1,6 @@
 import { useDerivedValue } from 'react-native-reanimated';
-import { useChartData } from '@rainbow-me/animated-charts';
-import useReactiveSharedValue from '@rainbow-me/animated-charts/helpers/useReactiveSharedValue';
+import { useChartData } from '@holyheld-com/animated-charts';
+import useReactiveSharedValue from '@holyheld-com/animated-charts/helpers/useReactiveSharedValue';
 
 export function useRatio(name) {
   const { originalY, data } = useChartData();

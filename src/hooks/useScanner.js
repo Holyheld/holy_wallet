@@ -10,8 +10,8 @@ import { useNavigation } from '../navigation/Navigation';
 import usePrevious from './usePrevious';
 import useWalletConnectConnections from './useWalletConnectConnections';
 import useWallets from './useWallets';
-import Routes from '@rainbow-me/routes';
-import { addressUtils, haptics } from '@rainbow-me/utils';
+import Routes from '@holyheld-com/routes';
+import { addressUtils, haptics } from '@holyheld-com/utils';
 import logger from 'logger';
 
 function useScannerState(enabled) {

@@ -5,9 +5,9 @@ import { Icon } from '../components/icons';
 import { SheetHandleFixedToTopHeight } from '../components/sheet';
 import { onDidPop, onWillPop } from './Navigation';
 import { appearListener } from './nativeStackHelpers';
-import WalletBackupStepTypes from '@rainbow-me/helpers/walletBackupStepTypes';
-import { colors, fonts } from '@rainbow-me/styles';
-import { deviceUtils, safeAreaInsetValues } from '@rainbow-me/utils';
+import WalletBackupStepTypes from '@holyheld-com/helpers/walletBackupStepTypes';
+import { colors, fonts } from '@holyheld-com/styles';
+import { deviceUtils, safeAreaInsetValues } from '@holyheld-com/utils';
 
 export const sharedCoolModalTopOffset = safeAreaInsetValues.top + 5;
 

@@ -11,7 +11,7 @@ import {
   SIGN_TRANSACTION,
 } from '../utils/signingMethods';
 import withAccountSettings from './withAccountSettings';
-import Routes from '@rainbow-me/routes';
+import Routes from '@holyheld-com/routes';
 
 const mapStateToProps = ({ data: { assets } }) => ({
   assets,

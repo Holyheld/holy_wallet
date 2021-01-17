@@ -3,7 +3,7 @@ import React from 'react';
 import { ButtonPressAnimation } from '../animations';
 import { Centered } from '../layout';
 import { Text } from '../text';
-import { colors, padding } from '@rainbow-me/styles';
+import { colors, padding } from '@holyheld-com/styles';
 
 const SupportButton = ({ label, onPress, ...props }) => {
   return (

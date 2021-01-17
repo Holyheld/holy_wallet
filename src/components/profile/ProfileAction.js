@@ -4,7 +4,7 @@ import { ButtonPressAnimation } from '../animations';
 import { Icon } from '../icons';
 import { RowWithMargins } from '../layout';
 import { Text } from '../text';
-import { colors, position } from '@rainbow-me/styles';
+import { colors, position } from '@holyheld-com/styles';
 
 const Container = styled(RowWithMargins).attrs({
   align: 'center',

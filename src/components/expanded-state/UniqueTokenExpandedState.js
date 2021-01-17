@@ -16,9 +16,9 @@ import {
   UniqueTokenExpandedStateHeader,
   UniqueTokenExpandedStateImage,
 } from './unique-token';
-import { useDimensions, useShowcaseTokens } from '@rainbow-me/hooks';
-import { colors } from '@rainbow-me/styles';
-import { magicMemo } from '@rainbow-me/utils';
+import { useDimensions, useShowcaseTokens } from '@holyheld-com/hooks';
+import { colors } from '@holyheld-com/styles';
+import { magicMemo } from '@holyheld-com/utils';
 
 const UniqueTokenExpandedState = ({ asset }) => {
   const {

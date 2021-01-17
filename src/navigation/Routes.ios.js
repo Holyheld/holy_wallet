@@ -54,7 +54,7 @@ import {
 import { onNavigationStateChange } from './onNavigationStateChange';
 import Routes from './routesNames';
 import { ExchangeModalNavigator } from './index';
-import isNativeStackAvailable from '@rainbow-me/helpers/isNativeStackAvailable';
+import isNativeStackAvailable from '@holyheld-com/helpers/isNativeStackAvailable';
 import createNativeStackNavigator from 'react-native-cool-modals/createNativeStackNavigator';
 
 const Stack = createStackNavigator();

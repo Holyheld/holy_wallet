@@ -6,8 +6,8 @@ import { useNavigation } from '../../navigation/Navigation';
 import { deviceUtils, magicMemo } from '../../utils';
 import { Row } from '../layout';
 import UniqueTokenCard from './UniqueTokenCard';
-import Routes from '@rainbow-me/routes';
-import { padding, position } from '@rainbow-me/styles';
+import Routes from '@holyheld-com/routes';
+import { padding, position } from '@holyheld-com/styles';
 
 const CardMargin = 15;
 const RowPadding = 19;

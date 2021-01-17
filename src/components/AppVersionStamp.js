@@ -3,8 +3,12 @@ import { Alert } from 'react-native';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import styled from 'styled-components/primitives';
 import { Text } from './text';
-import { useAppVersion, useTimeout, useWalletsDebug } from '@rainbow-me/hooks';
-import { colors } from '@rainbow-me/styles';
+import {
+  useAppVersion,
+  useTimeout,
+  useWalletsDebug,
+} from '@holyheld-com/hooks';
+import { colors } from '@holyheld-com/styles';
 
 const DEBUG_TAP_COUNT = 15;
 

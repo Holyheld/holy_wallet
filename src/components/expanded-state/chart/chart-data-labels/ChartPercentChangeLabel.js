@@ -8,8 +8,8 @@ import styled from 'styled-components/primitives';
 import { RowWithMargins } from '../../../layout';
 import ChartChangeDirectionArrow from './ChartChangeDirectionArrow';
 import { useRatio } from './useRatio';
-import { useChartData } from '@rainbow-me/animated-charts';
-import { colors, fonts, fontWithWidth } from '@rainbow-me/styles';
+import { useChartData } from '@holyheld-com/animated-charts';
+import { colors, fonts, fontWithWidth } from '@holyheld-com/styles';
 
 const AnimatedTextInput = Animated.createAnimatedComponent(TextInput);
 

@@ -11,7 +11,7 @@ import {
 } from '../components/expanded-state';
 import { Centered } from '../components/layout';
 import { useNavigation } from '../navigation/Navigation';
-import { padding, position } from '@rainbow-me/styles';
+import { padding, position } from '@holyheld-com/styles';
 
 const ModalTypes = {
   contact_profile: ContactProfileState,

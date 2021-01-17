@@ -5,8 +5,8 @@ import currencySelectionTypes from '../helpers/currencySelectionTypes';
 import { useNavigation } from '../navigation/Navigation';
 import { delayNext } from './useMagicAutofocus';
 import usePrevious from './usePrevious';
-import Routes from '@rainbow-me/routes';
-import { logger } from '@rainbow-me/utils';
+import Routes from '@holyheld-com/routes';
+import { logger } from '@holyheld-com/utils';
 
 export default function useHolyWithdrawCurrencies({
   defaultInputSaving,

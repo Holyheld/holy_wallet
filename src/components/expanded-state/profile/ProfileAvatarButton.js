@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import { ButtonPressAnimation } from '../../animations';
 import { ContactAvatar } from '../../contacts';
-import { colors } from '@rainbow-me/styles';
+import { colors } from '@holyheld-com/styles';
 
 const ProfileAvatarButton = ({
   color,

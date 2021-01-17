@@ -1,7 +1,7 @@
 import React from 'react';
 import { Path } from 'react-native-svg';
 import Svg from '../Svg';
-import { colors } from '@rainbow-me/styles';
+import { colors } from '@holyheld-com/styles';
 
 const CaretIcon = ({ color = colors.dark, size, ...props }, ref) => (
   <Svg

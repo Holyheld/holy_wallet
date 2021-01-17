@@ -2,9 +2,9 @@ import React from 'react';
 import styled from 'styled-components/primitives';
 import { Centered } from '../layout';
 import Icon from './Icon';
-import BiometryTypes from '@rainbow-me/helpers/biometryTypes';
-import { colors, position } from '@rainbow-me/styles';
-import { magicMemo } from '@rainbow-me/utils';
+import BiometryTypes from '@holyheld-com/helpers/biometryTypes';
+import { colors, position } from '@holyheld-com/styles';
+import { magicMemo } from '@holyheld-com/utils';
 
 const BiometryTypeIcon = styled(Icon).attrs(
   ({ type, color = colors.textColor }) => ({

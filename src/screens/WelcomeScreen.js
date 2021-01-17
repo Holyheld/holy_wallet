@@ -21,10 +21,10 @@ import {
 } from '../handlers/cloudBackup';
 import { cloudPlatform } from '../utils/platform';
 
-import { useHideSplashScreen } from '@rainbow-me/hooks';
-import { useNavigation } from '@rainbow-me/navigation';
-import Routes from '@rainbow-me/routes';
-import { colors, shadow } from '@rainbow-me/styles';
+import { useHideSplashScreen } from '@holyheld-com/hooks';
+import { useNavigation } from '@holyheld-com/navigation';
+import Routes from '@holyheld-com/routes';
+import { colors, shadow } from '@holyheld-com/styles';
 import logger from 'logger';
 
 const ButtonContainer = styled(Reanimated.View)`

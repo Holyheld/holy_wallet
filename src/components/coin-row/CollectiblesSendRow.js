@@ -11,7 +11,7 @@ import { Centered, InnerBorder } from '../layout';
 import { TruncatedText } from '../text';
 import CoinName from './CoinName';
 import CoinRow from './CoinRow';
-import { colors, padding } from '@rainbow-me/styles';
+import { colors, padding } from '@holyheld-com/styles';
 
 const dividerHeight = 22;
 const isTinyPhone = deviceUtils.dimensions.height <= 568;

@@ -7,7 +7,7 @@ import { HOLY_PASSAGE_ADDRESS } from '../references/holy';
 import { holyMigrateEstimation } from './actions/holy_migrate';
 import { assetNeedsUnlocking } from './actions/unlock';
 import { createNewAction, createNewRap, RapActionTypes } from './common';
-import { contractUtils } from '@rainbow-me/utils';
+import { contractUtils } from '@holyheld-com/utils';
 import logger from 'logger';
 
 export const estimateHolyMigrateCompound = async (amount, currency) => {

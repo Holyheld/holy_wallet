@@ -5,8 +5,8 @@ import { useDimensions } from '../../hooks';
 import TouchableBackdrop from '../TouchableBackdrop';
 import { Centered, Column } from '../layout';
 import SheetHandle from './SheetHandle';
-import { useNavigation } from '@rainbow-me/navigation';
-import { borders, colors } from '@rainbow-me/styles';
+import { useNavigation } from '@holyheld-com/navigation';
+import { borders, colors } from '@holyheld-com/styles';
 
 const Sheet = ({
   borderRadius,

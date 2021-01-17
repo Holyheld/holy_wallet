@@ -1,7 +1,7 @@
 import React from 'react';
 import { Path } from 'react-native-svg';
 import Svg from '../Svg';
-import { colors } from '@rainbow-me/styles';
+import { colors } from '@holyheld-com/styles';
 
 const CaretThinIcon = ({ color = colors.black, ...props }, ref) => (
   <Svg height="14" ref={ref} viewBox="0 0 7 14" width="7" {...props}>

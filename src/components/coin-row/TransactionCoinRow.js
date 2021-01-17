@@ -19,13 +19,13 @@ import BottomRowText from './BottomRowText';
 import CoinName from './CoinName';
 import CoinRow from './CoinRow';
 import TransactionStatusBadge from './TransactionStatusBadge';
-import Routes from '@rainbow-me/routes';
-import { colors } from '@rainbow-me/styles';
+import Routes from '@holyheld-com/routes';
+import { colors } from '@holyheld-com/styles';
 import {
   abbreviations,
   ethereumUtils,
   showActionSheetWithOptions,
-} from '@rainbow-me/utils';
+} from '@holyheld-com/utils';
 
 const containerStyles = css`
   padding-left: 19;

@@ -4,8 +4,8 @@ import { useNavigation } from '../../navigation/Navigation';
 import { magicMemo } from '../../utils';
 import { Icon } from '../icons';
 import FloatingActionButton from './FloatingActionButton';
-import Routes from '@rainbow-me/routes';
-import { colors } from '@rainbow-me/styles';
+import Routes from '@holyheld-com/routes';
+import { colors } from '@holyheld-com/styles';
 
 const FabShadow = [
   [0, 10, 30, colors.shadowDarker, 0.4],

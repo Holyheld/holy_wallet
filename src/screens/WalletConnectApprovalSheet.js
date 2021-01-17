@@ -21,10 +21,10 @@ import { Text } from '../components/text';
 import {
   getDappHostname,
   isDappAuthenticated,
-} from '@rainbow-me/helpers/dappNameHandler';
-import { useNavigation } from '@rainbow-me/navigation';
-import { colors } from '@rainbow-me/styles';
-import { ethereumUtils } from '@rainbow-me/utils';
+} from '@holyheld-com/helpers/dappNameHandler';
+import { useNavigation } from '@holyheld-com/navigation';
+import { colors } from '@holyheld-com/styles';
+import { ethereumUtils } from '@holyheld-com/utils';
 
 const DappLogo = styled(RequestVendorLogoIcon).attrs({
   backgroundColor: colors.transparent,

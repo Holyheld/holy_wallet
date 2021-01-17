@@ -11,7 +11,7 @@ import styled from 'styled-components/primitives';
 import { Row } from '../layout';
 import { Text } from '../text';
 import GasSpeedEmoji from './GasSpeedEmoji';
-import { gasUtils } from '@rainbow-me/utils';
+import { gasUtils } from '@holyheld-com/utils';
 
 const AnimatedRow = Animated.createAnimatedComponent(Row);
 

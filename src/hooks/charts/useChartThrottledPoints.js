@@ -1,14 +1,14 @@
 import { debounce } from 'lodash';
 import { useContext, useEffect, useMemo, useRef, useState } from 'react';
 import colors from '../../styles/colors';
-import { monotoneCubicInterpolation } from '@rainbow-me/animated-charts';
+import { monotoneCubicInterpolation } from '@holyheld-com/animated-charts';
 import {
   useChartData,
   useChartDataLabels,
   useColorForAsset,
-} from '@rainbow-me/hooks';
+} from '@holyheld-com/hooks';
 
-import { useNavigation } from '@rainbow-me/navigation';
+import { useNavigation } from '@holyheld-com/navigation';
 
 import { ModalContext } from 'react-native-cool-modals/NativeStackView';
 

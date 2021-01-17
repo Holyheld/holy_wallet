@@ -43,11 +43,11 @@ import {
   useSwapInputs,
   useUniswapCurrencies,
   useUniswapMarketDetails,
-} from '@rainbow-me/hooks';
-import { useNavigation } from '@rainbow-me/navigation';
-import Routes from '@rainbow-me/routes';
-import { colors, position } from '@rainbow-me/styles';
-import { backgroundTask, isNewValueForPath } from '@rainbow-me/utils';
+} from '@holyheld-com/hooks';
+import { useNavigation } from '@holyheld-com/navigation';
+import Routes from '@holyheld-com/routes';
+import { colors, position } from '@holyheld-com/styles';
+import { backgroundTask, isNewValueForPath } from '@holyheld-com/utils';
 
 import logger from 'logger';
 

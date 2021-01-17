@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { Path } from 'react-native-svg';
 import Svg from '../Svg';
-import { colors } from '@rainbow-me/styles';
+import { colors } from '@holyheld-com/styles';
 
 const HandleIcon = ({ color, ...props }) => (
   <Svg height="11" viewBox="0 0 37 11" width="37" {...props}>

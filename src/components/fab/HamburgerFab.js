@@ -2,9 +2,9 @@ import React, { useCallback } from 'react';
 import { magicMemo } from '../../utils';
 import { Icon } from '../icons';
 import FloatingActionButton from './FloatingActionButton';
-import { useNavigation } from '@rainbow-me/navigation';
-import Routes from '@rainbow-me/routes';
-import { colors } from '@rainbow-me/styles';
+import { useNavigation } from '@holyheld-com/navigation';
+import Routes from '@holyheld-com/routes';
+import { colors } from '@holyheld-com/styles';
 
 const FabShadow = [
   [0, 10, 30, colors.shadowDarker, 0.4],

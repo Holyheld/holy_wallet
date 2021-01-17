@@ -18,8 +18,8 @@ import { delayNext } from './useMagicAutofocus';
 import usePrevious from './usePrevious';
 import useUniswapAssetsInWallet from './useUniswapAssetsInWallet';
 import useUniswapCalls from './useUniswapCalls';
-import Routes from '@rainbow-me/routes';
-import { ethereumUtils, isNewValueForPath } from '@rainbow-me/utils';
+import Routes from '@holyheld-com/routes';
+import { ethereumUtils, isNewValueForPath } from '@holyheld-com/utils';
 import logger from 'logger';
 
 const isSameAsset = (newInputCurrency, previousInputCurrency) =>

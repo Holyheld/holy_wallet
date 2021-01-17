@@ -20,8 +20,8 @@ import { Text } from '../components/text';
 import WalletTypes from '../helpers/walletTypes';
 import { useDimensions, useWallets } from '../hooks';
 import { settingsOptions } from '../navigation/config';
-import { useNavigation } from '@rainbow-me/navigation';
-import { colors } from '@rainbow-me/styles';
+import { useNavigation } from '@holyheld-com/navigation';
+import { colors } from '@holyheld-com/styles';
 
 function cardStyleInterpolator({
   current,

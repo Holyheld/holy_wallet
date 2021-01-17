@@ -3,9 +3,9 @@ import styled from 'styled-components/primitives';
 import { Icon } from '../icons';
 import { RowWithMargins } from '../layout';
 import { Text } from '../text';
-import BiometryTypes from '@rainbow-me/helpers/biometryTypes';
-import { useBiometryType } from '@rainbow-me/hooks';
-import { colors } from '@rainbow-me/styles';
+import BiometryTypes from '@holyheld-com/helpers/biometryTypes';
+import { useBiometryType } from '@holyheld-com/hooks';
+import { colors } from '@holyheld-com/styles';
 
 const BiometryIcon = styled(Icon).attrs(({ biometryType, color }) => ({
   color,

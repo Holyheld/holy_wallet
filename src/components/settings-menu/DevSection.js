@@ -15,8 +15,8 @@ import { walletsUpdate } from '../../redux/wallets';
 import colors from '../../styles/colors';
 import { ListFooter, ListItem } from '../list';
 import { RadioListItem } from '../radio-list';
-import { useNavigation } from '@rainbow-me/navigation';
-import Routes from '@rainbow-me/routes';
+import { useNavigation } from '@holyheld-com/navigation';
+import Routes from '@holyheld-com/routes';
 import logger from 'logger';
 
 const DevSection = () => {

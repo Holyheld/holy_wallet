@@ -12,7 +12,7 @@ import colors from '../../styles/colors';
 import { interpolate } from '../animations';
 import { Centered } from '../layout';
 import { Text } from '../text';
-import { padding } from '@rainbow-me/styles';
+import { padding } from '@holyheld-com/styles';
 
 const Container = styled(Centered)`
   ${padding(19, 19, 2)};

@@ -18,12 +18,12 @@ import {
 } from '../components/walletconnect-list';
 import useExperimentalFlag, {
   DISCOVER_SHEET,
-} from '@rainbow-me/config/experimentalHooks';
-import { useHeight, useWalletConnectConnections } from '@rainbow-me/hooks';
-import { useNavigation } from '@rainbow-me/navigation';
-import { scrollPosition } from '@rainbow-me/navigation/ScrollPagerWrapper';
-import Routes from '@rainbow-me/routes';
-import { colors, position } from '@rainbow-me/styles';
+} from '@holyheld-com/config/experimentalHooks';
+import { useHeight, useWalletConnectConnections } from '@holyheld-com/hooks';
+import { useNavigation } from '@holyheld-com/navigation';
+import { scrollPosition } from '@holyheld-com/navigation/ScrollPagerWrapper';
+import Routes from '@holyheld-com/routes';
+import { colors, position } from '@holyheld-com/styles';
 
 const { call, greaterThan, onChange } = Animated;
 

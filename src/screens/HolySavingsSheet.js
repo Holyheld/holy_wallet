@@ -18,9 +18,9 @@ import {
   SlackSheet,
 } from '../components/sheet';
 import { useNavigation } from '../navigation/Navigation';
-import { useDimensions, useWallets } from '@rainbow-me/hooks';
-import Routes from '@rainbow-me/routes';
-import { colors, position } from '@rainbow-me/styles';
+import { useDimensions, useWallets } from '@holyheld-com/hooks';
+import Routes from '@holyheld-com/routes';
+import { colors, position } from '@holyheld-com/styles';
 
 export const SavingsSheetEmptyHeight = 313;
 export const SavingsSheetHeight = android ? 410 : 352;

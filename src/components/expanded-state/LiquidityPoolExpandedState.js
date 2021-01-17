@@ -16,7 +16,7 @@ import {
   TokenInfoSection,
 } from '../token-info';
 import Chart from '../value-chart/Chart';
-import { ChartPathProvider } from '@rainbow-me/animated-charts';
+import { ChartPathProvider } from '@holyheld-com/animated-charts';
 
 const heightWithoutChart = 373 + (android && 80);
 const heightWithChart = heightWithoutChart + 292;

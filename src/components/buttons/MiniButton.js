@@ -4,7 +4,7 @@ import styled from 'styled-components/primitives';
 import { ButtonPressAnimation } from '../animations';
 import { InnerBorder, RowWithMargins } from '../layout';
 import { Text } from '../text';
-import { colors, padding, position } from '@rainbow-me/styles';
+import { colors, padding, position } from '@holyheld-com/styles';
 import ShadowStack from 'react-native-shadow-stack';
 
 const shadows = {

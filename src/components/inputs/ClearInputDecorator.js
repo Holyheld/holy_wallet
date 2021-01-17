@@ -5,7 +5,7 @@ import { magicMemo } from '../../utils';
 import { ButtonPressAnimation } from '../animations';
 import { Centered } from '../layout';
 import { Text } from '../text';
-import { colors, position } from '@rainbow-me/styles';
+import { colors, position } from '@holyheld-com/styles';
 
 const Button = styled(Centered).attrs({
   scaleTo: 0.8,

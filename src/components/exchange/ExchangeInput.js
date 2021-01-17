@@ -4,7 +4,7 @@ import TextInputMask from 'react-native-text-input-mask';
 import styled from 'styled-components/primitives';
 import { magicMemo } from '../../utils';
 import { Text } from '../text';
-import { buildTextStyles, colors } from '@rainbow-me/styles';
+import { buildTextStyles, colors } from '@holyheld-com/styles';
 
 const Input = styled(TextInputMask).attrs({
   allowFontScaling: false,

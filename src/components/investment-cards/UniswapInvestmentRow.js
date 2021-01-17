@@ -8,9 +8,9 @@ import BalanceText from '../coin-row/BalanceText';
 import CoinName from '../coin-row/CoinName';
 import { initialLiquidityPoolExpandedStateSheetHeight } from '../expanded-state/LiquidityPoolExpandedState';
 import { FlexItem, Row } from '../layout';
-import { useNavigation } from '@rainbow-me/navigation';
-import Routes from '@rainbow-me/routes';
-import { colors } from '@rainbow-me/styles';
+import { useNavigation } from '@holyheld-com/navigation';
+import Routes from '@holyheld-com/routes';
+import { colors } from '@holyheld-com/styles';
 
 const formatPercentageString = percentString =>
   percentString

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import NavigationList from '../components/navigation-list/NavigationList';
 import { Sheet, SheetTitle } from '../components/sheet';
 import useWallets from '../hooks/useWallets';
-import { colors } from '@rainbow-me/styles';
+import { colors } from '@holyheld-com/styles';
 
 const Whitespace = styled.View`
   background-color: ${colors.modalBackground};

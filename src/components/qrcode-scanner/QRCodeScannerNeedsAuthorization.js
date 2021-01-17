@@ -5,7 +5,7 @@ import { ButtonPressAnimation } from '../animations';
 import { Icon } from '../icons';
 import { Centered } from '../layout';
 import { Text } from '../text';
-import { colors, margin, padding, position } from '@rainbow-me/styles';
+import { colors, margin, padding, position } from '@holyheld-com/styles';
 
 const Button = styled(ButtonPressAnimation).attrs({
   scaleTo: 1.1,

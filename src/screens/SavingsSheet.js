@@ -21,16 +21,16 @@ import {
   SheetActionButtonRow,
   SlackSheet,
 } from '../components/sheet';
-import { isSymbolStablecoin } from '@rainbow-me/helpers/savings';
-import { convertAmountToNativeDisplay } from '@rainbow-me/helpers/utilities';
+import { isSymbolStablecoin } from '@holyheld-com/helpers/savings';
+import { convertAmountToNativeDisplay } from '@holyheld-com/helpers/utilities';
 import {
   useAccountSettings,
   useDimensions,
   useWallets,
-} from '@rainbow-me/hooks';
-import { useNavigation } from '@rainbow-me/navigation';
-import Routes from '@rainbow-me/routes';
-import { colors, position } from '@rainbow-me/styles';
+} from '@holyheld-com/hooks';
+import { useNavigation } from '@holyheld-com/navigation';
+import Routes from '@holyheld-com/routes';
+import { colors, position } from '@holyheld-com/styles';
 
 export const SavingsSheetEmptyHeight = 313;
 export const SavingsSheetHeight = android ? 410 : 352;

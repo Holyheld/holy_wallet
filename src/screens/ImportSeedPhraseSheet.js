@@ -23,14 +23,14 @@ import {
   InvalidPasteToast,
   ToastPositionContainer,
 } from '../components/toasts';
-import { web3Provider } from '@rainbow-me/handlers/web3';
-import isNativeStackAvailable from '@rainbow-me/helpers/isNativeStackAvailable';
+import { web3Provider } from '@holyheld-com/handlers/web3';
+import isNativeStackAvailable from '@holyheld-com/helpers/isNativeStackAvailable';
 import {
   isENSAddressFormat,
   isValidWallet,
-} from '@rainbow-me/helpers/validators';
-import WalletBackupStepTypes from '@rainbow-me/helpers/walletBackupStepTypes';
-import walletLoadingStates from '@rainbow-me/helpers/walletLoadingStates';
+} from '@holyheld-com/helpers/validators';
+import WalletBackupStepTypes from '@holyheld-com/helpers/walletBackupStepTypes';
+import walletLoadingStates from '@holyheld-com/helpers/walletLoadingStates';
 import {
   useAccountSettings,
   useClipboard,
@@ -43,12 +43,12 @@ import {
   usePrevious,
   useTimeout,
   useWallets,
-} from '@rainbow-me/hooks';
-import { Navigation, useNavigation } from '@rainbow-me/navigation';
-import { sheetVerticalOffset } from '@rainbow-me/navigation/effects';
-import Routes from '@rainbow-me/routes';
-import { borders, colors, padding } from '@rainbow-me/styles';
-import { deviceUtils, ethereumUtils } from '@rainbow-me/utils';
+} from '@holyheld-com/hooks';
+import { Navigation, useNavigation } from '@holyheld-com/navigation';
+import { sheetVerticalOffset } from '@holyheld-com/navigation/effects';
+import Routes from '@holyheld-com/routes';
+import { borders, colors, padding } from '@holyheld-com/styles';
+import { deviceUtils, ethereumUtils } from '@holyheld-com/utils';
 import logger from 'logger';
 
 const sheetBottomPadding = 19;

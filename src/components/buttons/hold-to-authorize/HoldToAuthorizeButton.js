@@ -15,7 +15,7 @@ import Spinner from '../../Spinner';
 import { Centered, InnerBorder } from '../../layout';
 import { Text } from '../../text';
 import HoldToAuthorizeButtonIcon from './HoldToAuthorizeButtonIcon';
-import { colors, padding } from '@rainbow-me/styles';
+import { colors, padding } from '@holyheld-com/styles';
 import ShadowStack from 'react-native-shadow-stack';
 
 const { divide, multiply, proc } = Animated;

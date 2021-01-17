@@ -5,7 +5,7 @@ import Animated from 'react-native-reanimated';
 import styled from 'styled-components/primitives';
 import { useDimensions } from '../../hooks';
 import { Text } from '../text';
-import { colors } from '@rainbow-me/styles';
+import { colors } from '@holyheld-com/styles';
 
 const FontSizeMultiple = 0.24;
 const HeightMultiple = 0.288;

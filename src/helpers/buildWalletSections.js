@@ -26,8 +26,8 @@ import {
 } from './assets';
 //import networkTypes from './networkTypes';
 import { add, convertAmountToNativeDisplay } from './utilities';
-import Routes from '@rainbow-me/routes';
-import { ETH_ICON_URL, ethereumUtils } from '@rainbow-me/utils';
+import Routes from '@holyheld-com/routes';
+import { ETH_ICON_URL, ethereumUtils } from '@holyheld-com/utils';
 
 const allAssetsCountSelector = state => state.allAssetsCount;
 const allAssetsSelector = state => state.allAssets;

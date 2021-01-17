@@ -14,9 +14,9 @@ import {
   ChartPercentChangeLabel,
   ChartPriceLabel,
 } from './chart-data-labels';
-import { convertAmountToNativeDisplay } from '@rainbow-me/helpers/utilities';
-import { useAccountSettings, useBooleanState } from '@rainbow-me/hooks';
-import { colors, padding } from '@rainbow-me/styles';
+import { convertAmountToNativeDisplay } from '@holyheld-com/helpers/utilities';
+import { useAccountSettings, useBooleanState } from '@holyheld-com/hooks';
+import { colors, padding } from '@holyheld-com/styles';
 
 const { call, cond, onChange, useCode } = Animated;
 

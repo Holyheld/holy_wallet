@@ -15,7 +15,7 @@ import { parseAssetsNative } from '../parsers/accounts';
 import { erc20ABI } from '../references';
 import { UNISWAP_V1_EXCHANGE_ABI } from '../references/uniswap';
 import { web3Provider } from './web3';
-import { Asset, ParsedAddressAsset } from '@rainbow-me/entities';
+import { Asset, ParsedAddressAsset } from '@holyheld-com/entities';
 import logger from 'logger';
 
 interface UnderlyingToken extends Asset {

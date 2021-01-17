@@ -7,7 +7,7 @@ import { ButtonPressAnimation } from '../animations';
 import { Column, RowWithMargins } from '../layout';
 import { TruncatedAddress, TruncatedText } from '../text';
 import ContactAvatar from './ContactAvatar';
-import { colors, margin } from '@rainbow-me/styles';
+import { colors, margin } from '@holyheld-com/styles';
 
 const ContactAddress = styled(TruncatedAddress).attrs({
   align: 'left',

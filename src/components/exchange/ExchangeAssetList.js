@@ -5,8 +5,8 @@ import styled from 'styled-components/primitives';
 import { usePrevious } from '../../hooks';
 import { CoinRowHeight, ExchangeCoinRow } from '../coin-row';
 import { GradientText, Text } from '../text';
-import { colors, padding } from '@rainbow-me/styles';
-import { deviceUtils, magicMemo } from '@rainbow-me/utils';
+import { colors, padding } from '@holyheld-com/styles';
+import { deviceUtils, magicMemo } from '@holyheld-com/utils';
 
 const deviceWidth = deviceUtils.dimensions.width;
 

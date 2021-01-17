@@ -4,7 +4,7 @@ import styled from 'styled-components/primitives';
 import { ButtonPressAnimation } from '../../animations';
 import { Centered, InnerBorder } from '../../layout';
 import { Text } from '../../text';
-import { colors, padding } from '@rainbow-me/styles';
+import { colors, padding } from '@holyheld-com/styles';
 
 const ButtonSizeTypes = {
   default: {

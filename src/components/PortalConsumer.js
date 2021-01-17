@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { LoadingOverlay } from './modal';
-import { useWallets } from '@rainbow-me/hooks';
-import { sheetVerticalOffset } from '@rainbow-me/navigation/effects';
+import { useWallets } from '@holyheld-com/hooks';
+import { sheetVerticalOffset } from '@holyheld-com/navigation/effects';
 import { usePortal } from 'react-native-cool-modals/Portal';
 
 export default function PortalConsumer() {

@@ -7,7 +7,7 @@ import Divider from '../Divider';
 import { ButtonPressAnimation } from '../animations';
 import { Centered, Row } from '../layout';
 import { Text } from '../text';
-import { colors, padding } from '@rainbow-me/styles';
+import { colors, padding } from '@holyheld-com/styles';
 
 const WalletConnectLearnMoreButton = ({ onPressLearnMore }) => (
   <Row align="start">

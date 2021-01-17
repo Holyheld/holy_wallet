@@ -5,7 +5,7 @@ import { Text, TruncatedAddress } from '../../text';
 import TransactionMessage from '../TransactionMessage';
 import TransactionRow from '../TransactionRow';
 import TransactionSheet from '../TransactionSheet';
-import { colors } from '@rainbow-me/styles';
+import { colors } from '@holyheld-com/styles';
 
 const DefaultTransactionConfirmationSection = ({ address, data, value }) => (
   <TransactionSheet>

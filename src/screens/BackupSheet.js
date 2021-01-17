@@ -14,15 +14,15 @@ import { Column } from '../components/layout';
 import { SlackSheet } from '../components/sheet';
 import colors from '../styles/colors';
 import { cloudPlatform } from '../utils/platform';
-import WalletBackupStepTypes from '@rainbow-me/helpers/walletBackupStepTypes';
+import WalletBackupStepTypes from '@holyheld-com/helpers/walletBackupStepTypes';
 import {
   useDimensions,
   useRouteExistsInNavigationState,
   useWalletCloudBackup,
   useWallets,
-} from '@rainbow-me/hooks';
-import { useNavigation } from '@rainbow-me/navigation';
-import Routes from '@rainbow-me/routes';
+} from '@holyheld-com/hooks';
+import { useNavigation } from '@holyheld-com/navigation';
+import Routes from '@holyheld-com/routes';
 
 const onError = error => DelayedAlert({ title: error }, 500);
 

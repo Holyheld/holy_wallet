@@ -15,8 +15,8 @@ import {
 } from '../handlers/localstorage/globalSettings';
 import { useDimensions, useShakeAnimation } from '../hooks';
 import { useBlockBackButton } from '../hooks/useBlockBackButton';
-import { useNavigation } from '@rainbow-me/navigation';
-import { colors, padding } from '@rainbow-me/styles';
+import { useNavigation } from '@holyheld-com/navigation';
+import { colors, padding } from '@holyheld-com/styles';
 
 const Logo = styled(FastImage).attrs({
   source: HolyLogo,

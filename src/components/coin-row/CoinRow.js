@@ -4,7 +4,7 @@ import { useAccountSettings } from '../../hooks';
 import { CoinIcon, CoinIconSize } from '../coin-icon';
 import CoinIconGroup from '../coin-icon/CoinIconGroup';
 import { Column, Row } from '../layout';
-import { padding } from '@rainbow-me/styles';
+import { padding } from '@holyheld-com/styles';
 
 const CoinRowPaddingTop = 9;
 const CoinRowPaddingBottom = 10;

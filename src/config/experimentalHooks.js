@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { defaultConfig } from './experimental';
-import { RainbowContext } from '@rainbow-me/helpers/RainbowContext';
+import { RainbowContext } from '@holyheld-com/helpers/RainbowContext';
 
 const useExperimentalFlag = name => {
   if (IS_DEV) {

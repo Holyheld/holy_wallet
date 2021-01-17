@@ -3,7 +3,7 @@ import React from 'react';
 import styled from 'styled-components/primitives';
 import { CoinIcon } from '../coin-icon';
 import { Row } from '../layout';
-import { colors } from '@rainbow-me/styles';
+import { colors } from '@holyheld-com/styles';
 
 const componentWidth = 70;
 

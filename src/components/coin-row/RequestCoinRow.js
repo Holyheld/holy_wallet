@@ -14,10 +14,10 @@ import { RowWithMargins } from '../layout';
 import { Emoji, Text } from '../text';
 import CoinName from './CoinName';
 import CoinRow from './CoinRow';
-import { useNavigation } from '@rainbow-me/navigation';
-import { removeRequest } from '@rainbow-me/redux/requests';
-import Routes from '@rainbow-me/routes';
-import { colors } from '@rainbow-me/styles';
+import { useNavigation } from '@holyheld-com/navigation';
+import { removeRequest } from '@holyheld-com/redux/requests';
+import Routes from '@holyheld-com/routes';
+import { colors } from '@holyheld-com/styles';
 
 const getPercentageOfTimeElapsed = (startDate, endDate) => {
   const originalDifference = differenceInMinutes(endDate, startDate);

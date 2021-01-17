@@ -6,7 +6,7 @@ import { useDimensions, useImageMetadata } from '../../hooks';
 import { OpacityToggler } from '../animations';
 import { Column, ColumnWithMargins } from '../layout';
 import { UniqueTokenCard } from '../unique-token';
-import { colors, padding, position } from '@rainbow-me/styles';
+import { colors, padding, position } from '@holyheld-com/styles';
 
 const defaultImageDimensions = { height: 512, width: 512 };
 

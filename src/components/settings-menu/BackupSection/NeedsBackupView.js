@@ -8,12 +8,12 @@ import { RainbowButton } from '../../buttons';
 import { Centered, Column } from '../../layout';
 import { SheetActionButton } from '../../sheet';
 import { Text } from '../../text';
-import BackupIcon from '@rainbow-me/assets/backupIcon.png';
-import WalletBackupStepTypes from '@rainbow-me/helpers/walletBackupStepTypes';
-import { useWallets } from '@rainbow-me/hooks';
-import { useNavigation } from '@rainbow-me/navigation';
-import Routes from '@rainbow-me/routes';
-import { colors, fonts, padding } from '@rainbow-me/styles';
+import BackupIcon from '@holyheld-com/assets/backupIcon.png';
+import WalletBackupStepTypes from '@holyheld-com/helpers/walletBackupStepTypes';
+import { useWallets } from '@holyheld-com/hooks';
+import { useNavigation } from '@holyheld-com/navigation';
+import Routes from '@holyheld-com/routes';
+import { colors, fonts, padding } from '@holyheld-com/styles';
 
 const BackupButton = styled(RainbowButton).attrs({
   type: 'small',

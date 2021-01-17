@@ -4,16 +4,16 @@ import { useDispatch } from 'react-redux';
 import {
   getTopMovers,
   TOP_MOVERS_FROM_STORAGE,
-} from '@rainbow-me/handlers/localstorage/topMovers';
+} from '@holyheld-com/handlers/localstorage/topMovers';
 import {
   getWalletBalances,
   WALLET_BALANCES_FROM_STORAGE,
-} from '@rainbow-me/handlers/localstorage/walletBalances';
-import { contactsLoadState } from '@rainbow-me/redux/contacts';
-import { imageMetadataCacheLoadState } from '@rainbow-me/redux/imageMetadata';
-import { keyboardHeightsLoadState } from '@rainbow-me/redux/keyboardHeight';
-import { settingsLoadState } from '@rainbow-me/redux/settings';
-import { promiseUtils } from '@rainbow-me/utils';
+} from '@holyheld-com/handlers/localstorage/walletBalances';
+import { contactsLoadState } from '@holyheld-com/redux/contacts';
+import { imageMetadataCacheLoadState } from '@holyheld-com/redux/imageMetadata';
+import { keyboardHeightsLoadState } from '@holyheld-com/redux/keyboardHeight';
+import { settingsLoadState } from '@holyheld-com/redux/settings';
+import { promiseUtils } from '@holyheld-com/utils';
 import logger from 'logger';
 
 const loadTopMoversToCache = () =>

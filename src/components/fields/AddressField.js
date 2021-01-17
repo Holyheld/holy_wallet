@@ -6,9 +6,9 @@ import { checkIsValidAddressOrENS } from '../../helpers/validators';
 import { Input } from '../inputs';
 import { Row } from '../layout';
 import { Label } from '../text';
-import { useClipboard } from '@rainbow-me/hooks';
-import { colors } from '@rainbow-me/styles';
-import { abbreviations, addressUtils } from '@rainbow-me/utils';
+import { useClipboard } from '@holyheld-com/hooks';
+import { colors } from '@holyheld-com/styles';
+import { abbreviations, addressUtils } from '@holyheld-com/utils';
 
 const AddressInput = styled(Input).attrs({
   autoCapitalize: 'none',

@@ -5,7 +5,7 @@ import ButtonPressAnimation, {
   ScaleButtonZoomableAndroid,
 } from '../animations/ButtonPressAnimation';
 import { Centered } from '../layout';
-import { borders, colors, position } from '@rainbow-me/styles';
+import { borders, colors, position } from '@holyheld-com/styles';
 import ShadowStack from 'react-native-shadow-stack';
 
 export const FloatingActionButtonSize = 56;

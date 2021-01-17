@@ -1,6 +1,6 @@
 import styled from 'styled-components/primitives';
 import { TruncatedText } from '../../../text';
-import { colors } from '@rainbow-me/styles';
+import { colors } from '@holyheld-com/styles';
 
 const ChartHeaderTitle = styled(TruncatedText).attrs(
   ({ color = colors.text }) => ({

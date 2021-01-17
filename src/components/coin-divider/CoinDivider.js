@@ -12,7 +12,7 @@ import { Row, RowWithMargins } from '../layout';
 import CoinDividerAssetsValue from './CoinDividerAssetsValue';
 import CoinDividerEditButton from './CoinDividerEditButton';
 import CoinDividerOpenButton from './CoinDividerOpenButton';
-import { colors, padding } from '@rainbow-me/styles';
+import { colors, padding } from '@holyheld-com/styles';
 
 export const CoinDividerHeight = 30;
 

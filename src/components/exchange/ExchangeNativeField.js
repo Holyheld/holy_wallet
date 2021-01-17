@@ -5,7 +5,7 @@ import supportedNativeCurrencies from '../../references/native-currencies.json';
 import { Row } from '../layout';
 import { Text } from '../text';
 import ExchangeInput from './ExchangeInput';
-import { colors, fonts } from '@rainbow-me/styles';
+import { colors, fonts } from '@holyheld-com/styles';
 
 const CurrencySymbol = styled(Text).attrs(({ height }) => ({
   letterSpacing: 'roundedTight',

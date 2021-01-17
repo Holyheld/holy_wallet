@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Centered, Row } from '../layout';
 import { TruncatedText } from '../text';
 import ModalHeaderButton from './ModalHeaderButton';
-import { borders, colors, position } from '@rainbow-me/styles';
+import { borders, colors, position } from '@holyheld-com/styles';
 
 export const ModalHeaderHeight = 50;
 

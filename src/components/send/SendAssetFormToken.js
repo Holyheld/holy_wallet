@@ -4,7 +4,7 @@ import { useDimensions } from '../../hooks';
 import supportedNativeCurrencies from '../../references/native-currencies.json';
 import { Column, ColumnWithMargins } from '../layout';
 import SendAssetFormField from './SendAssetFormField';
-import { removeLeadingZeros } from '@rainbow-me/utils';
+import { removeLeadingZeros } from '@holyheld-com/utils';
 
 const footerMargin = 31;
 const FooterContainer = styled(ColumnWithMargins).attrs(({ deviceHeight }) => ({

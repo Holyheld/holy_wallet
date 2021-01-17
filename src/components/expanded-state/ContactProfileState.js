@@ -12,7 +12,7 @@ import CopyTooltip from '../copy-tooltip';
 import { Centered } from '../layout';
 import { Text, TruncatedAddress } from '../text';
 import { ProfileAvatarButton, ProfileModal, ProfileNameInput } from './profile';
-import { colors, margin, padding } from '@rainbow-me/styles';
+import { colors, margin, padding } from '@holyheld-com/styles';
 
 const AddressAbbreviation = styled(TruncatedAddress).attrs({
   align: 'center',

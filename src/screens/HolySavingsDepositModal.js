@@ -40,14 +40,14 @@ import {
   useGas,
   useMaxInputBalance,
   useSwapInputRefs,
-} from '@rainbow-me/hooks';
-import Routes from '@rainbow-me/routes';
-import { colors, position } from '@rainbow-me/styles';
+} from '@holyheld-com/hooks';
+import Routes from '@holyheld-com/routes';
+import { colors, position } from '@holyheld-com/styles';
 import {
   backgroundTask,
   ethereumUtils,
   isNewValueForPath,
-} from '@rainbow-me/utils';
+} from '@holyheld-com/utils';
 
 import logger from 'logger';
 

@@ -1,7 +1,7 @@
 import { mapKeys, mapValues, toLower } from 'lodash';
 import savingAssets from './compound/saving-assets.json';
 import tokenOverridesData from './token-overrides.json';
-import { Asset } from '@rainbow-me/entities';
+import { Asset } from '@holyheld-com/entities';
 
 export { default as chains } from './chains.json';
 export { default as compoundCERC20ABI } from './compound/compound-cerc20-abi.json';

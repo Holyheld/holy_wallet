@@ -2,7 +2,7 @@ import { VibrancyView } from '@react-native-community/blur';
 import { View } from 'react-native';
 import styled from 'styled-components/primitives';
 import { neverRerender } from '../../utils';
-import { colors } from '@rainbow-me/styles';
+import { colors } from '@holyheld-com/styles';
 
 export const HandleHeight = 5;
 

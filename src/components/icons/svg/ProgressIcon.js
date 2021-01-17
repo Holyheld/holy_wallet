@@ -4,7 +4,7 @@ import Animated from 'react-native-reanimated';
 import { G, Path } from 'react-native-svg';
 import { Centered } from '../../layout';
 import Svg from '../Svg';
-import { colors, position } from '@rainbow-me/styles';
+import { colors, position } from '@holyheld-com/styles';
 
 const AnimatedSvg = Animated.createAnimatedComponent(Svg);
 

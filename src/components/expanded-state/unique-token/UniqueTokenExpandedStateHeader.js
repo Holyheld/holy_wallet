@@ -8,7 +8,7 @@ import Pill from '../../Pill';
 import { ContextCircleButton } from '../../context-menu';
 import { ColumnWithMargins, FlexItem, Row, RowWithMargins } from '../../layout';
 import { Text } from '../../text';
-import { colors, padding } from '@rainbow-me/styles';
+import { colors, padding } from '@holyheld-com/styles';
 
 const contextButtonOptions = [
   'Share',

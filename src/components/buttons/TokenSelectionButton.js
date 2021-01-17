@@ -7,7 +7,7 @@ import { magicMemo } from '../../utils';
 import { ButtonPressAnimation } from '../animations';
 import { InnerBorder, RowWithMargins } from '../layout';
 import { Text } from '../text';
-import { colors, padding, position } from '@rainbow-me/styles';
+import { colors, padding, position } from '@holyheld-com/styles';
 import ShadowStack from 'react-native-shadow-stack';
 
 const Content = styled(RowWithMargins).attrs({ align: 'center', margin: 7 })`

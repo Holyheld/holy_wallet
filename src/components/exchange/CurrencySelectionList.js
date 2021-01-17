@@ -10,7 +10,7 @@ import { NoResults } from '../list';
 import { CurrencySelectModalHeaderHeight } from './CurrencySelectModalHeader';
 import ExchangeAssetList from './ExchangeAssetList';
 import { ExchangeSearchHeight } from './ExchangeSearch';
-import { position } from '@rainbow-me/styles';
+import { position } from '@holyheld-com/styles';
 
 const EmptyCurrencySelectionList = styled(EmptyAssetList).attrs({
   pointerEvents: 'none',

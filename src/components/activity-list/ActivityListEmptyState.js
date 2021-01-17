@@ -5,7 +5,7 @@ import styled from 'styled-components/primitives';
 import { deviceUtils } from '../../utils';
 import { Centered, Column } from '../layout';
 import { Text } from '../text';
-import { colors } from '@rainbow-me/styles';
+import { colors } from '@holyheld-com/styles';
 
 const verticalOffset = (deviceUtils.dimensions.height - 420) / 3;
 

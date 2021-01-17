@@ -13,10 +13,10 @@ import {
   SlackSheet,
 } from '../components/sheet';
 import { useHolyBonusRate } from '../hooks/useHolySavings';
-import { useDimensions, useWallets } from '@rainbow-me/hooks';
-import { useNavigation } from '@rainbow-me/navigation';
-import Routes from '@rainbow-me/routes';
-import { colors, position } from '@rainbow-me/styles';
+import { useDimensions, useWallets } from '@holyheld-com/hooks';
+import { useNavigation } from '@holyheld-com/navigation';
+import Routes from '@holyheld-com/routes';
+import { colors, position } from '@holyheld-com/styles';
 
 export const SheetEmptyHeight = 313;
 export const SheetHeight = android ? 360 : 312;

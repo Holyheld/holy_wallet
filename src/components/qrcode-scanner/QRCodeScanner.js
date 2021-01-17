@@ -7,9 +7,9 @@ import { Centered } from '../layout';
 import { ErrorText } from '../text';
 import QRCodeScannerCrosshair from './QRCodeScannerCrosshair';
 import QRCodeScannerNeedsAuthorization from './QRCodeScannerNeedsAuthorization';
-import SimulatorFakeCameraImageSource from '@rainbow-me/assets/simulator-fake-camera-image.jpg';
-import { useBooleanState, useScanner } from '@rainbow-me/hooks';
-import { colors, position } from '@rainbow-me/styles';
+import SimulatorFakeCameraImageSource from '@holyheld-com/assets/simulator-fake-camera-image.jpg';
+import { useBooleanState, useScanner } from '@holyheld-com/hooks';
+import { colors, position } from '@holyheld-com/styles';
 
 const Camera = styled(RNCamera)`
   ${position.cover};

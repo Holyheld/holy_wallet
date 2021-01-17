@@ -4,7 +4,7 @@ import colors from '../../styles/colors';
 import { ButtonPressAnimation } from '../animations';
 import { Row } from '../layout';
 import { Text } from '../text';
-import { padding } from '@rainbow-me/styles';
+import { padding } from '@holyheld-com/styles';
 
 const Container = styled(ButtonPressAnimation)`
   margin-right: 4;

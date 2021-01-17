@@ -4,7 +4,7 @@ import { Transition, Transitioning } from 'react-native-reanimated';
 import { sheetVerticalOffset } from '../../navigation/effects';
 import { Icon } from '../icons';
 import { Centered } from '../layout';
-import { colors } from '@rainbow-me/styles';
+import { colors } from '@holyheld-com/styles';
 
 const duration = 200;
 const transition = (

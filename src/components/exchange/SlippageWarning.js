@@ -7,7 +7,7 @@ import { convertBipsToPercentage } from '../../helpers/utilities';
 import { Icon } from '../icons';
 import { Row, RowWithMargins } from '../layout';
 import { AnimatedNumber as AnimatedNumberAndroid, Text } from '../text';
-import { colors, padding } from '@rainbow-me/styles';
+import { colors, padding } from '@holyheld-com/styles';
 
 export const SlippageWarningThresholdInBips = 500;
 const SevereSlippageThresholdInBips = SlippageWarningThresholdInBips * 2;

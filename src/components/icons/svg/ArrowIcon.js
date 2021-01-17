@@ -1,7 +1,7 @@
 import React from 'react';
 import { Path } from 'react-native-svg';
 import Svg from '../Svg';
-import { colors } from '@rainbow-me/styles';
+import { colors } from '@holyheld-com/styles';
 
 const ArrowIcon = (
   { color = colors.black, height = 10, width = 10, ...props },

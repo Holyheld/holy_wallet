@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components/primitives';
 import { ColumnWithMargins } from '../layout';
 import { Text } from '../text';
-import { colors, padding } from '@rainbow-me/styles';
+import { colors, padding } from '@holyheld-com/styles';
 
 const Container = styled(ColumnWithMargins).attrs({
   margin: 12,

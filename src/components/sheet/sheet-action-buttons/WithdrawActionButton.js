@@ -3,7 +3,7 @@ import React, { useCallback, useState } from 'react';
 import { neverRerender } from '../../../utils';
 // import { ComingSoonFloatingEmojis } from '../../floating-emojis';
 import SheetActionButton from './SheetActionButton';
-import { colors } from '@rainbow-me/styles';
+import { colors } from '@holyheld-com/styles';
 
 function WithdrawActionButton({ color = colors.white, symbol, ...props }) {
   const [didTrack, setDidTrack] = useState(false);

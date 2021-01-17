@@ -7,7 +7,7 @@ import { FabWrapperBottomPosition } from '../fab';
 import { Centered, Column } from '../layout';
 import AssetListHeader, { AssetListHeaderHeight } from './AssetListHeader';
 import AssetListItemSkeleton from './AssetListItemSkeleton';
-import { position } from '@rainbow-me/styles';
+import { position } from '@holyheld-com/styles';
 
 const Container = styled(Column)`
   ${position.size('100%')};

@@ -11,7 +11,7 @@ import Text from '../text/Text';
 import ActivityListEmptyState from './ActivityListEmptyState';
 import ActivityListHeader from './ActivityListHeader';
 import RecyclerActivityList from './RecyclerActivityList';
-import { colors } from '@rainbow-me/styles';
+import { colors } from '@holyheld-com/styles';
 
 const getItemLayout = (data, index) => ({
   index,

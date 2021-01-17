@@ -2,7 +2,7 @@ import { has } from 'lodash';
 import React from 'react';
 import styled from 'styled-components/primitives';
 import { Emoji } from '../text';
-import { gasUtils, magicMemo } from '@rainbow-me/utils';
+import { gasUtils, magicMemo } from '@holyheld-com/utils';
 
 const EmojiForGasSpeedType = {
   [gasUtils.FAST]: {

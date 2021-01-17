@@ -5,8 +5,8 @@ import styled from 'styled-components';
 import { SIGN_TYPED_DATA } from '../../utils/signingMethods';
 import { Row } from '../layout';
 import { Text } from '../text';
-import { colors, padding } from '@rainbow-me/styles';
-import { deviceUtils } from '@rainbow-me/utils';
+import { colors, padding } from '@holyheld-com/styles';
+import { deviceUtils } from '@holyheld-com/utils';
 
 const deviceWidth = deviceUtils.dimensions.width;
 const horizontalPadding = 24;

@@ -9,7 +9,7 @@ import { withNeverRerender } from '../../hoc';
 import { ButtonPressAnimation } from '../animations';
 import { Icon } from '../icons';
 import Button from './Button';
-import { colors } from '@rainbow-me/styles';
+import { colors } from '@holyheld-com/styles';
 
 const duration = 200;
 const transition = (

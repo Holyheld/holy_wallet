@@ -1,7 +1,7 @@
 import styled from 'styled-components/primitives';
 import { neverRerender } from '../../utils';
 import Divider from '../Divider';
-import { colors } from '@rainbow-me/styles';
+import { colors } from '@holyheld-com/styles';
 
 const SheetDivider = styled(Divider).attrs(
   ({ color = colors.divider, backgroundColor = colors.modalBackground }) => ({

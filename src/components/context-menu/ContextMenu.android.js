@@ -3,8 +3,8 @@ import React, { Fragment, useCallback } from 'react';
 import { ButtonPressAnimation } from '../animations';
 import { Icon } from '../icons';
 import { Centered } from '../layout';
-import { padding } from '@rainbow-me/styles';
-import { showActionSheetWithOptions } from '@rainbow-me/utils';
+import { padding } from '@holyheld-com/styles';
+import { showActionSheetWithOptions } from '@holyheld-com/utils';
 
 const ActionSheetProps = [
   'cancelButtonIndex',

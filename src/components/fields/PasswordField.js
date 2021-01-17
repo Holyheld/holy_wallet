@@ -3,9 +3,9 @@ import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import styled from 'styled-components';
 import { Icon } from '../icons';
 import { Input } from '../inputs';
-import { cloudBackupPasswordMinLength } from '@rainbow-me/handlers/cloudBackup';
-import { useDimensions } from '@rainbow-me/hooks';
-import { colors, padding, position } from '@rainbow-me/styles';
+import { cloudBackupPasswordMinLength } from '@holyheld-com/handlers/cloudBackup';
+import { useDimensions } from '@holyheld-com/hooks';
+import { colors, padding, position } from '@holyheld-com/styles';
 import ShadowStack from 'react-native-shadow-stack';
 
 const FieldAccessoryBadgeSize = 22;

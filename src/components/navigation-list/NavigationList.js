@@ -13,10 +13,10 @@ import {
   useAccountSettings,
   useAccountTransactions,
   useOpenSavings,
-} from '@rainbow-me/hooks';
-import { useNavigation } from '@rainbow-me/navigation';
-import Routes from '@rainbow-me/routes';
-import { colors } from '@rainbow-me/styles';
+} from '@holyheld-com/hooks';
+import { useNavigation } from '@holyheld-com/navigation';
+import Routes from '@holyheld-com/routes';
+import { colors } from '@holyheld-com/styles';
 
 const listTopPadding = 7.5;
 const rowHeight = 59;

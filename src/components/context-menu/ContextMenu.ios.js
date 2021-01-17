@@ -4,7 +4,7 @@ import ActionSheet from 'react-native-actionsheet';
 import { ButtonPressAnimation } from '../animations';
 import { Icon } from '../icons';
 import { Centered } from '../layout';
-import { padding } from '@rainbow-me/styles';
+import { padding } from '@holyheld-com/styles';
 
 const ActionSheetProps = [
   'cancelButtonIndex',

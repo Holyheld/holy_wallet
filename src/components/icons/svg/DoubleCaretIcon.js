@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { Path } from 'react-native-svg';
 import Svg from '../Svg';
-import { colors } from '@rainbow-me/styles';
+import { colors } from '@holyheld-com/styles';
 
 const DoubleCaretIcon = ({ color, ...props }) => (
   <Svg height="20" viewBox="0 0 13 20" width="13" {...props}>

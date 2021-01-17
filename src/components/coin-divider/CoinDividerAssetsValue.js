@@ -3,7 +3,7 @@ import styled from 'styled-components/primitives';
 import { convertAmountToNativeDisplay } from '../../helpers/utilities';
 import { OpacityToggler } from '../animations';
 import { Text } from '../text';
-import { colors, position } from '@rainbow-me/styles';
+import { colors, position } from '@holyheld-com/styles';
 
 const Container = styled(OpacityToggler)`
   ${position.centered};

@@ -16,8 +16,8 @@ import {
   TokenInfoSection,
 } from '../token-info';
 import Chart from '../value-chart/Chart';
-import { ChartPathProvider } from '@rainbow-me/animated-charts';
-import AssetInputTypes from '@rainbow-me/helpers/assetInputTypes';
+import { ChartPathProvider } from '@holyheld-com/animated-charts';
+import AssetInputTypes from '@holyheld-com/helpers/assetInputTypes';
 
 //add's StatusBar height to android
 const heightWithoutChart = 309 + (android && 24);

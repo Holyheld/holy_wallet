@@ -9,7 +9,7 @@ import SearchHeader from './SearchHeader';
 import Strategies from './StrategiesSection';
 import TopMoversSection from './TopMoversSection';
 import UniswapPools from './UniswapPoolsSection';
-import { colors, position } from '@rainbow-me/styles';
+import { colors, position } from '@holyheld-com/styles';
 
 const renderHeader = yPosition => <DiscoverSheetHeader yPosition={yPosition} />;
 

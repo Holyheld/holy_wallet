@@ -19,8 +19,8 @@ import AvatarCircle from './AvatarCircle';
 import ProfileAction from './ProfileAction';
 import useExperimentalFlag, {
   AVATAR_PICKER,
-} from '@rainbow-me/config/experimentalHooks';
-import showWalletErrorAlert from '@rainbow-me/helpers/support';
+} from '@holyheld-com/config/experimentalHooks';
+import showWalletErrorAlert from '@holyheld-com/helpers/support';
 import {
   useAccountProfile,
   useAccountSettings,
@@ -28,11 +28,11 @@ import {
   useDimensions,
   useWallets,
   //useWalletSectionsData,
-} from '@rainbow-me/hooks';
-import { useNavigation } from '@rainbow-me/navigation';
-import Routes from '@rainbow-me/routes';
-import { colors } from '@rainbow-me/styles';
-import { abbreviations, showActionSheetWithOptions } from '@rainbow-me/utils';
+} from '@holyheld-com/hooks';
+import { useNavigation } from '@holyheld-com/navigation';
+import Routes from '@holyheld-com/routes';
+import { colors } from '@holyheld-com/styles';
+import { abbreviations, showActionSheetWithOptions } from '@holyheld-com/utils';
 
 const dropdownArrowWidth = 21;
 

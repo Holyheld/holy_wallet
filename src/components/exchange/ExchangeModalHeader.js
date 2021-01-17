@@ -7,7 +7,7 @@ import { Icon } from '../icons';
 import { Column } from '../layout';
 import { SheetHandle } from '../sheet';
 import { Text } from '../text';
-import { colors, padding, position } from '@rainbow-me/styles';
+import { colors, padding, position } from '@holyheld-com/styles';
 
 const SheetHandleMargin = 6;
 

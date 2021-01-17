@@ -15,8 +15,8 @@ import { ButtonPressAnimation } from '../animations';
 import { CoinIcon } from '../coin-icon';
 import { Centered, InnerBorder, Row, RowWithMargins } from '../layout';
 import { Text } from '../text';
-import { useDimensions } from '@rainbow-me/hooks';
-import { colors, padding, position } from '@rainbow-me/styles';
+import { useDimensions } from '@holyheld-com/hooks';
+import { colors, padding, position } from '@holyheld-com/styles';
 import ShadowStack from 'react-native-shadow-stack';
 
 const LPBonusListRowShadows = [

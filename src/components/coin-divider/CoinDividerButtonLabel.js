@@ -3,7 +3,7 @@ import styled from 'styled-components/primitives';
 import { magicMemo } from '../../utils';
 import { OpacityToggler } from '../animations';
 import { Text } from '../text';
-import { colors } from '@rainbow-me/styles';
+import { colors } from '@holyheld-com/styles';
 
 const LabelText = styled(Text).attrs({
   color: colors.textColorSecondaryButton,

@@ -33,19 +33,19 @@ import {
   walletsSetSelected,
   walletsUpdate,
 } from '../redux/wallets';
-import WalletBackupTypes from '@rainbow-me/helpers/walletBackupTypes';
+import WalletBackupTypes from '@holyheld-com/helpers/walletBackupTypes';
 import {
   useAccountSettings,
   useInitializeWallet,
   useWallets,
-} from '@rainbow-me/hooks';
-import Routes from '@rainbow-me/routes';
-import { colors } from '@rainbow-me/styles';
+} from '@holyheld-com/hooks';
+import Routes from '@holyheld-com/routes';
+import { colors } from '@holyheld-com/styles';
 import {
   abbreviations,
   deviceUtils,
   showActionSheetWithOptions,
-} from '@rainbow-me/utils';
+} from '@holyheld-com/utils';
 
 import logger from 'logger';
 

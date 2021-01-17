@@ -5,7 +5,7 @@ import {
   pseudoRandomArrayItemFromString,
 } from '../utils';
 import useImageMetadata, { useImagesColors } from './useImageMetadata';
-import { colors } from '@rainbow-me/styles';
+import { colors } from '@holyheld-com/styles';
 
 export function useColorForAssets(assets) {
   const fallbackUrls = useMemo(

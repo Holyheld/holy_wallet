@@ -15,10 +15,10 @@ import useWallets from './useWallets';
 import {
   CLOUD_BACKUP_ERRORS,
   isCloudBackupAvailable,
-} from '@rainbow-me/handlers/cloudBackup';
-import { delay } from '@rainbow-me/helpers/utilities';
-import WalletBackupTypes from '@rainbow-me/helpers/walletBackupTypes';
-import walletLoadingStates from '@rainbow-me/helpers/walletLoadingStates';
+} from '@holyheld-com/handlers/cloudBackup';
+import { delay } from '@holyheld-com/helpers/utilities';
+import WalletBackupTypes from '@holyheld-com/helpers/walletBackupTypes';
+import walletLoadingStates from '@holyheld-com/helpers/walletLoadingStates';
 import logger from 'logger';
 
 function getUserError(e) {

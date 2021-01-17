@@ -5,11 +5,11 @@ import { FloatingEmojisTapper } from '../floating-emojis';
 import { AssetPanel, FloatingPanels } from '../floating-panels';
 import { Centered } from '../layout';
 import { Text } from '../text';
-import isNativeStackAvailable from '@rainbow-me/helpers/isNativeStackAvailable';
-import { useDimensions } from '@rainbow-me/hooks';
-import { supportedCountries } from '@rainbow-me/references/wyre';
-import { colors, padding } from '@rainbow-me/styles';
-import { neverRerender } from '@rainbow-me/utils';
+import isNativeStackAvailable from '@holyheld-com/helpers/isNativeStackAvailable';
+import { useDimensions } from '@holyheld-com/hooks';
+import { supportedCountries } from '@holyheld-com/references/wyre';
+import { colors, padding } from '@holyheld-com/styles';
+import { neverRerender } from '@holyheld-com/utils';
 
 const Panel = styled(FloatingPanels)`
   margin-bottom: ${({ deviceDimensions: { isTallPhone } }) =>

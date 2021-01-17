@@ -5,7 +5,7 @@ import styled from 'styled-components/primitives';
 import { useDimensions } from '../../hooks';
 import TouchableBackdrop from '../TouchableBackdrop';
 import { Centered, Column } from '../layout';
-import { colors, padding, position } from '@rainbow-me/styles';
+import { colors, padding, position } from '@holyheld-com/styles';
 
 const Container = styled(Centered).attrs(({ fixedToTop }) => ({
   direction: 'column',

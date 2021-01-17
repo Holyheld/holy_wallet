@@ -3,7 +3,7 @@ import React, { Children, Fragment } from 'react';
 import styled from 'styled-components';
 import Divider from '../Divider';
 import { Row } from '../layout';
-import { colors } from '@rainbow-me/styles';
+import { colors } from '@holyheld-com/styles';
 
 const Container = styled(Row)`
   border-top-color: ${colors.divider};

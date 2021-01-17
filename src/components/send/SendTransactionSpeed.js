@@ -4,7 +4,7 @@ import styled from 'styled-components/primitives';
 import { Button } from '../buttons';
 import { Row } from '../layout';
 import { Text } from '../text';
-import { colors } from '@rainbow-me/styles';
+import { colors } from '@holyheld-com/styles';
 
 const FeeButton = styled(Button).attrs({
   backgroundColor: colors.buttonSecondary,

@@ -44,10 +44,10 @@ import {
   useSendSavingsAccount,
   useTransactionConfirmation,
   useUpdateAssetOnchainBalance,
-} from '@rainbow-me/hooks';
-import Routes from '@rainbow-me/routes';
-import { borders, colors } from '@rainbow-me/styles';
-import { deviceUtils, gasUtils } from '@rainbow-me/utils';
+} from '@holyheld-com/hooks';
+import Routes from '@holyheld-com/routes';
+import { borders, colors } from '@holyheld-com/styles';
+import { deviceUtils, gasUtils } from '@holyheld-com/utils';
 import logger from 'logger';
 
 const sheetHeight = deviceUtils.dimensions.height - (android ? 30 : 10);

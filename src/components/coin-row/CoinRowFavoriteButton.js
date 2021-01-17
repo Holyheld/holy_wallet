@@ -5,8 +5,8 @@ import styled from 'styled-components/primitives';
 import { Centered } from '../layout';
 import { Text } from '../text';
 import { CoinRowHeight } from './CoinRow';
-import { colors, padding } from '@rainbow-me/styles';
-import { magicMemo } from '@rainbow-me/utils';
+import { colors, padding } from '@holyheld-com/styles';
+import { magicMemo } from '@holyheld-com/utils';
 
 const FavoriteButtonPadding = 19;
 

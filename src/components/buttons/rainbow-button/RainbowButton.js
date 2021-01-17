@@ -8,8 +8,8 @@ import { RowWithMargins } from '../../layout';
 import { Text } from '../../text';
 import RainbowButtonBackground from './RainbowButtonBackground';
 import RainbowButtonTypes from './RainbowButtonTypes';
-import { useDimensions } from '@rainbow-me/hooks';
-import { colors, position, shadow } from '@rainbow-me/styles';
+import { useDimensions } from '@holyheld-com/hooks';
+import { colors, position, shadow } from '@holyheld-com/styles';
 import ShadowView from 'react-native-shadow-stack/ShadowView';
 
 const AddCashIcon = styled(FastImage).attrs({

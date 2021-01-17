@@ -5,8 +5,8 @@ import { CoinIcon } from '../../coin-icon';
 import { Centered, Column, RowWithMargins } from '../../layout';
 import { Text, TruncatedText } from '../../text';
 import TransactionSheet from '../TransactionSheet';
-import { formatFixedDecimals } from '@rainbow-me/helpers/utilities';
-import { colors, padding } from '@rainbow-me/styles';
+import { formatFixedDecimals } from '@holyheld-com/helpers/utilities';
+import { colors, padding } from '@holyheld-com/styles';
 
 const Amount = styled(TruncatedText).attrs({
   color: colors.textColor,

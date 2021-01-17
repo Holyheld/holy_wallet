@@ -7,14 +7,14 @@ import { Column } from '../layout';
 import { SecretDisplaySection } from '../secret-display';
 import { SheetActionButton } from '../sheet';
 import { Nbsp, Text } from '../text';
-import WalletTypes from '@rainbow-me/helpers/walletTypes';
+import WalletTypes from '@holyheld-com/helpers/walletTypes';
 import {
   useDimensions,
   useWalletManualBackup,
   useWallets,
-} from '@rainbow-me/hooks';
-import { useNavigation } from '@rainbow-me/navigation';
-import { colors, padding } from '@rainbow-me/styles';
+} from '@holyheld-com/hooks';
+import { useNavigation } from '@holyheld-com/navigation';
+import { colors, padding } from '@holyheld-com/styles';
 
 const Content = styled(Column).attrs({
   align: 'center',

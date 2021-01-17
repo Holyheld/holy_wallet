@@ -10,7 +10,7 @@ import { Centered, ColumnWithMargins } from '../layout';
 import { Numpad, NumpadValue } from '../numpad';
 import AddCashFooter from './AddCashFooter';
 import AddCashSelector from './AddCashSelector';
-import { padding } from '@rainbow-me/styles';
+import { padding } from '@holyheld-com/styles';
 
 const currencies = ['DAI', 'ETH'];
 const minimumPurchaseAmountUSD = 1;

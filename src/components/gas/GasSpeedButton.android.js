@@ -17,7 +17,7 @@ import { Input } from '../inputs';
 import { Column, Row } from '../layout';
 import { AnimatedNumber, Text } from '../text';
 import GasSpeedLabelPager from './GasSpeedLabelPager';
-import { colors, fonts, fontWithWidth, margin } from '@rainbow-me/styles';
+import { colors, fonts, fontWithWidth, margin } from '@holyheld-com/styles';
 
 const { GasSpeedOrder, CUSTOM, FAST, SLOW } = gasUtils;
 

@@ -4,8 +4,8 @@ import { View } from 'react-native';
 import RadialGradient from 'react-native-radial-gradient';
 import styled from 'styled-components/primitives';
 import RainbowButtonTypes from './RainbowButtonTypes';
-import { colors, margin } from '@rainbow-me/styles';
-import { magicMemo } from '@rainbow-me/utils';
+import { colors, margin } from '@holyheld-com/styles';
+import { magicMemo } from '@holyheld-com/utils';
 
 const RainbowGradientColors = {
   inner: {

@@ -8,7 +8,7 @@ import { Text } from '../text';
 import BalanceText from './BalanceText';
 import CoinName from './CoinName';
 import CoinRow from './CoinRow';
-import { colors } from '@rainbow-me/styles';
+import { colors } from '@holyheld-com/styles';
 
 export const SavingsCoinRowHeight = 64;
 

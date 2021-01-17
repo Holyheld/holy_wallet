@@ -5,9 +5,9 @@ import { delayNext } from '../../hooks/useMagicAutofocus';
 import { BackButton } from '../header';
 import { Centered } from '../layout';
 import { TruncatedText } from '../text';
-import { useNavigation } from '@rainbow-me/navigation';
-import Routes from '@rainbow-me/routes';
-import { borders, colors, padding } from '@rainbow-me/styles';
+import { useNavigation } from '@holyheld-com/navigation';
+import Routes from '@holyheld-com/routes';
+import { borders, colors, padding } from '@holyheld-com/styles';
 
 const BackButtonWrapper = styled(Centered)`
   bottom: 0;

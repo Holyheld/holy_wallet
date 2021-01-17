@@ -12,8 +12,8 @@ import {
 } from '../animations';
 import { Row } from '../layout';
 import CoinDividerButtonLabel from './CoinDividerButtonLabel';
-import { colors, padding } from '@rainbow-me/styles';
-import { magicMemo } from '@rainbow-me/utils';
+import { colors, padding } from '@holyheld-com/styles';
+import { magicMemo } from '@holyheld-com/utils';
 
 const closedWidth = 52.5;
 

@@ -1,7 +1,7 @@
 import React, { Children, cloneElement } from 'react';
 import styled from 'styled-components/primitives';
 import { FlexItem, Row } from '../layout';
-import { padding } from '@rainbow-me/styles';
+import { padding } from '@holyheld-com/styles';
 
 const space = 9.5;
 

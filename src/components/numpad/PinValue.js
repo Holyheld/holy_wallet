@@ -2,7 +2,7 @@ import React from 'react';
 import Animated from 'react-native-reanimated';
 import styled from 'styled-components/primitives';
 import { Column, Flex } from '../../components/layout';
-import { colors } from '@rainbow-me/styles';
+import { colors } from '@holyheld-com/styles';
 
 const FilledValue = styled(Column)`
   background-color: ${colors.textColorPrimary};

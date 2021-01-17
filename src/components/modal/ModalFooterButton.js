@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { Icon } from '../icons';
 import { Centered } from '../layout';
 import { Text } from '../text';
-import { colors, position } from '@rainbow-me/styles';
+import { colors, position } from '@holyheld-com/styles';
 
 const ButtonIcon = styled(Icon)`
   ${position.maxSize('100%')};

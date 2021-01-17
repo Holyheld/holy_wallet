@@ -6,8 +6,8 @@ import { ContactAvatar } from '../contacts';
 import ImageAvatar from '../contacts/ImageAvatar';
 import { Centered } from '../layout';
 import HeaderButton from './HeaderButton';
-import Routes from '@rainbow-me/routes';
-import { colors } from '@rainbow-me/styles';
+import Routes from '@holyheld-com/routes';
+import { colors } from '@holyheld-com/styles';
 
 export default function ProfileHeaderButton() {
   const { navigate } = useNavigation();

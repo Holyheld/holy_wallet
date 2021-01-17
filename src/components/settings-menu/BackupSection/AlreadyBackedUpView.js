@@ -12,14 +12,14 @@ import { ButtonPressAnimation } from '../../animations';
 import { Centered, Column } from '../../layout';
 import { SheetActionButton } from '../../sheet';
 import { Text } from '../../text';
-import WalletBackupStepTypes from '@rainbow-me/helpers/walletBackupStepTypes';
-import WalletBackupTypes from '@rainbow-me/helpers/walletBackupTypes';
-import WalletTypes from '@rainbow-me/helpers/walletTypes';
-import { useWalletCloudBackup, useWallets } from '@rainbow-me/hooks';
-import { Navigation, useNavigation } from '@rainbow-me/navigation';
-import Routes from '@rainbow-me/routes';
-import { colors, fonts, padding, position, shadow } from '@rainbow-me/styles';
-import { showActionSheetWithOptions } from '@rainbow-me/utils';
+import WalletBackupStepTypes from '@holyheld-com/helpers/walletBackupStepTypes';
+import WalletBackupTypes from '@holyheld-com/helpers/walletBackupTypes';
+import WalletTypes from '@holyheld-com/helpers/walletTypes';
+import { useWalletCloudBackup, useWallets } from '@holyheld-com/hooks';
+import { Navigation, useNavigation } from '@holyheld-com/navigation';
+import Routes from '@holyheld-com/routes';
+import { colors, fonts, padding, position, shadow } from '@holyheld-com/styles';
+import { showActionSheetWithOptions } from '@holyheld-com/utils';
 
 const WalletBackupStatus = {
   CLOUD_BACKUP: 0,

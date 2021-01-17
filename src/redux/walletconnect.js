@@ -24,7 +24,7 @@ import { getFCMToken } from '../model/firebase';
 import { Navigation } from '../navigation';
 import { isSigningMethod } from '../utils/signingMethods';
 import { addRequestToApprove } from './requests';
-import Routes from '@rainbow-me/routes';
+import Routes from '@holyheld-com/routes';
 import logger from 'logger';
 
 // -- Constants --------------------------------------- //

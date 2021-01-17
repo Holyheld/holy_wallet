@@ -5,7 +5,7 @@ import { pure } from 'recompact';
 import Caret from '../../assets/family-dropdown-arrow.png';
 import { RowWithMargins } from '../layout';
 import { Text } from '../text';
-import { colors } from '@rainbow-me/styles';
+import { colors } from '@holyheld-com/styles';
 
 const ListItemArrowGroup = ({ children }) => (
   <RowWithMargins align="center" flex={1} justify="end" margin={7}>

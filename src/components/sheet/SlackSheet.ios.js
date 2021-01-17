@@ -7,7 +7,7 @@ import { Centered } from '../layout';
 import SheetHandleFixedToTop, {
   SheetHandleFixedToTopHeight,
 } from './SheetHandleFixedToTop';
-import { colors } from '@rainbow-me/styles';
+import { colors } from '@holyheld-com/styles';
 
 const Container = styled(Centered).attrs({ direction: 'column' })`
   background-color: ${({ backgroundColor }) => backgroundColor};

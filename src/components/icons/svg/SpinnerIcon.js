@@ -3,7 +3,7 @@ import React from 'react';
 import { Path } from 'react-native-svg';
 import { SpinAnimation } from '../../animations';
 import Svg from '../Svg';
-import { colors } from '@rainbow-me/styles';
+import { colors } from '@holyheld-com/styles';
 
 const SpinnerIcon = ({ color, size }) => (
   <SpinAnimation>

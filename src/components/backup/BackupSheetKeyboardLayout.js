@@ -6,10 +6,10 @@ import styled from 'styled-components';
 import { RainbowButton } from '../buttons';
 import { Column } from '../layout';
 import { SheetHandleFixedToTopHeight } from '../sheet';
-import KeyboardTypes from '@rainbow-me/helpers/keyboardTypes';
-import { useDimensions, useKeyboardHeight } from '@rainbow-me/hooks';
-import { sharedCoolModalTopOffset } from '@rainbow-me/navigation/config';
-import { colors, padding } from '@rainbow-me/styles';
+import KeyboardTypes from '@holyheld-com/helpers/keyboardTypes';
+import { useDimensions, useKeyboardHeight } from '@holyheld-com/hooks';
+import { sharedCoolModalTopOffset } from '@holyheld-com/navigation/config';
+import { colors, padding } from '@holyheld-com/styles';
 
 const Footer = styled(Column)`
   ${({ isTallPhone }) => padding(0, 15, isTallPhone ? 30 : 15)};

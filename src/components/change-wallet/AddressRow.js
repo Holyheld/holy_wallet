@@ -11,7 +11,7 @@ import ImageAvatar from '../contacts/ImageAvatar';
 import { Icon } from '../icons';
 import { Centered, Column, ColumnWithMargins, Row } from '../layout';
 import { TruncatedAddress, TruncatedText } from '../text';
-import { colors, fonts, getFontSize } from '@rainbow-me/styles';
+import { colors, fonts, getFontSize } from '@holyheld-com/styles';
 
 const maxAccountLabelWidth = deviceUtils.dimensions.width - 88;
 const NOOP = () => undefined;

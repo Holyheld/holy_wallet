@@ -7,9 +7,9 @@ import { RainbowButton } from '../buttons';
 import { Column, ColumnWithMargins } from '../layout';
 import { SheetActionButton } from '../sheet';
 import { Text } from '../text';
-import BackupIcon from '@rainbow-me/assets/backupIcon.png';
-import { colors, padding } from '@rainbow-me/styles';
-import { deviceUtils } from '@rainbow-me/utils';
+import BackupIcon from '@holyheld-com/assets/backupIcon.png';
+import { colors, padding } from '@holyheld-com/styles';
+import { deviceUtils } from '@holyheld-com/utils';
 
 const Footer = styled(ColumnWithMargins).attrs({
   margin: 19,

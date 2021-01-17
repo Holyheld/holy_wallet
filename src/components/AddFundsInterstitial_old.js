@@ -12,9 +12,9 @@ import { ButtonPressAnimation, ScaleButtonZoomableAndroid } from './animations';
 import { Icon } from './icons';
 import { Centered, Row, RowWithMargins } from './layout';
 import { Text } from './text';
-import { useNavigation } from '@rainbow-me/navigation';
-import Routes from '@rainbow-me/routes';
-import { colors, padding, position } from '@rainbow-me/styles';
+import { useNavigation } from '@holyheld-com/navigation';
+import Routes from '@holyheld-com/routes';
+import { colors, padding, position } from '@holyheld-com/styles';
 import ShadowStack from 'react-native-shadow-stack';
 
 const ButtonContainerHeight = 400;

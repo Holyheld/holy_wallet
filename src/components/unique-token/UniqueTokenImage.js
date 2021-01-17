@@ -5,7 +5,7 @@ import { magicMemo } from '../../utils';
 import ImageWithCachedMetadata from '../ImageWithCachedMetadata';
 import { Centered } from '../layout';
 import { Monospace } from '../text';
-import { colors, position } from '@rainbow-me/styles';
+import { colors, position } from '@holyheld-com/styles';
 
 const FallbackTextColorVariants = {
   dark: colors.textColor,

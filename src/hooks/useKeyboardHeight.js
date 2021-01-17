@@ -1,8 +1,8 @@
 import { useCallback, useEffect } from 'react';
 import { Keyboard } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import KeyboardTypes from '@rainbow-me/helpers/keyboardTypes';
-import { setKeyboardHeight } from '@rainbow-me/redux/keyboardHeight';
+import KeyboardTypes from '@holyheld-com/helpers/keyboardTypes';
+import { setKeyboardHeight } from '@holyheld-com/redux/keyboardHeight';
 
 const keyboardHeightsSelector = state => state.keyboardHeight.keyboardHeight;
 

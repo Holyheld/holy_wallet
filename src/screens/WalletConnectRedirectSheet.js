@@ -6,7 +6,7 @@ import { Sheet } from '../components/sheet';
 import { Text } from '../components/text';
 import { useAppState } from '../hooks';
 import { useNavigation } from '../navigation/Navigation';
-import { colors } from '@rainbow-me/styles';
+import { colors } from '@holyheld-com/styles';
 
 const BodyText = styled(Text).attrs({
   align: 'center',

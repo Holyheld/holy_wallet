@@ -3,7 +3,7 @@ import React from 'react';
 import { View } from 'react-native';
 import { Path } from 'react-native-svg';
 import Svg from '../Svg';
-import { colors } from '@rainbow-me/styles';
+import { colors } from '@holyheld-com/styles';
 
 const WarningCircledIcon = ({ color, ...props }) => (
   <View

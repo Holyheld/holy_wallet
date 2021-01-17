@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components/primitives';
 import { Flex } from '../layout';
 import { Text } from '../text';
-import { colors } from '@rainbow-me/styles';
+import { colors } from '@holyheld-com/styles';
 
 const SearchHeaderWrapper = styled(Flex).attrs({
   align: 'center',

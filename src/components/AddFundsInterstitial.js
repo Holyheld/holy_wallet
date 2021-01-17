@@ -12,9 +12,9 @@ import { ButtonPressAnimation } from './animations';
 import { Icon } from './icons';
 import { Centered, Row, RowWithMargins } from './layout';
 import { Text } from './text';
-import { useNavigation } from '@rainbow-me/navigation';
-import Routes from '@rainbow-me/routes';
-import { colors, padding } from '@rainbow-me/styles';
+import { useNavigation } from '@holyheld-com/navigation';
+import Routes from '@holyheld-com/routes';
+import { colors, padding } from '@holyheld-com/styles';
 
 const ButtonContainerHeight = 400;
 const ButtonContainerWidth = 261;

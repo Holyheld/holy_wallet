@@ -1,8 +1,8 @@
 import React, { useCallback } from 'react';
 import { useExpandedStateNavigation } from '../../../hooks';
 import SheetActionButton from './SheetActionButton';
-import Routes from '@rainbow-me/routes';
-import { colors } from '@rainbow-me/styles';
+import Routes from '@holyheld-com/routes';
+import { colors } from '@holyheld-com/styles';
 
 export default function SwapActionButton({
   color = colors.swapPurple,

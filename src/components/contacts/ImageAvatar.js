@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import { Image } from 'react-native';
 import styled from 'styled-components';
 import { Centered } from '../layout';
-import { borders, colors } from '@rainbow-me/styles';
+import { borders, colors } from '@holyheld-com/styles';
 import ShadowStack from 'react-native-shadow-stack';
 
 const buildSmallShadows = color => [

@@ -5,7 +5,7 @@ import styled from 'styled-components/primitives';
 import { interpolate, ScaleInAnimation } from '../../animations';
 import { BiometryIcon, Icon } from '../../icons';
 import { Centered } from '../../layout';
-import { colors, position } from '@rainbow-me/styles';
+import { colors, position } from '@holyheld-com/styles';
 
 const { cond, divide, greaterThan } = Animated;
 

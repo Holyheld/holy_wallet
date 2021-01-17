@@ -1,7 +1,7 @@
 import { useCallback, useMemo } from 'react';
 import { useValue } from 'react-native-redash';
-import ChartTypes from '@rainbow-me/helpers/chartTypes';
-import { toFixedDecimals } from '@rainbow-me/helpers/utilities';
+import ChartTypes from '@holyheld-com/helpers/chartTypes';
+import { toFixedDecimals } from '@holyheld-com/helpers/utilities';
 
 const formatPercentChange = (change = 0) => toFixedDecimals(change, 2);
 

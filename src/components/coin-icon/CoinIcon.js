@@ -3,7 +3,7 @@ import ReactCoinIcon from 'react-coin-icon';
 import { magicMemo } from '../../utils';
 import CoinIconFallback from './CoinIconFallback';
 import CoinIconIndicator from './CoinIconIndicator';
-import { borders, colors } from '@rainbow-me/styles';
+import { borders, colors } from '@holyheld-com/styles';
 import ShadowStack from 'react-native-shadow-stack';
 
 export const CoinIconSize = 40;

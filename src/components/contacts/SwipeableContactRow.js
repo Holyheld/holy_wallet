@@ -9,7 +9,7 @@ import { Centered, Row } from '../layout';
 import { Text } from '../text';
 import ContactRow from './ContactRow';
 import showDeleteContactActionSheet from './showDeleteContactActionSheet';
-import { colors, margin, position } from '@rainbow-me/styles';
+import { colors, margin, position } from '@holyheld-com/styles';
 
 const AnimatedCentered = Animated.createAnimatedComponent(Centered);
 

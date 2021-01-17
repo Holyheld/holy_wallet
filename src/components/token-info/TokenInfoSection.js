@@ -1,6 +1,6 @@
 import styled from 'styled-components/primitives';
 import { ColumnWithMargins } from '../layout';
-import { padding } from '@rainbow-me/styles';
+import { padding } from '@holyheld-com/styles';
 
 const TokenInfoSection = styled(ColumnWithMargins).attrs({
   margin: 15,

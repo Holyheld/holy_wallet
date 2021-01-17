@@ -12,7 +12,7 @@ import { interpolate } from '../animations';
 import { CoinIcon } from '../coin-icon';
 import { Centered } from '../layout';
 import { Text } from '../text';
-import { padding } from '@rainbow-me/styles';
+import { padding } from '@holyheld-com/styles';
 
 const Container = styled(Centered)`
   ${padding(19, 19, 2)};

@@ -4,7 +4,7 @@ import { magicMemo } from '../../utils';
 import { ButtonPressAnimation } from '../animations';
 import { InnerBorder } from '../layout';
 import UniqueTokenImage from './UniqueTokenImage';
-import { colors, shadow as shadowUtil } from '@rainbow-me/styles';
+import { colors, shadow as shadowUtil } from '@holyheld-com/styles';
 
 const UniqueTokenCardBorderRadius = 20;
 const UniqueTokenCardShadow = [0, 2, 6, colors.shadowDarker, 0.08];

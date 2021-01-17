@@ -4,7 +4,7 @@ import { withHandlers } from 'recompact';
 import styled from 'styled-components';
 import Icon from '../icons/Icon';
 import { ListItem } from '../list';
-import { colors } from '@rainbow-me/styles';
+import { colors } from '@holyheld-com/styles';
 
 const CheckmarkIcon = styled(Icon).attrs({
   backgroundColor: colors.buttonPrimary,

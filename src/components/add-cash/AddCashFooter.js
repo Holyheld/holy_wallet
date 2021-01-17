@@ -7,8 +7,8 @@ import { Icon } from '../icons';
 import { Centered, ColumnWithMargins, Row, RowWithMargins } from '../layout';
 import { Emoji, Text } from '../text';
 import ApplePayButton from './ApplePayButton';
-import Routes from '@rainbow-me/routes';
-import { colors, position } from '@rainbow-me/styles';
+import Routes from '@holyheld-com/routes';
+import { colors, position } from '@holyheld-com/styles';
 
 const AddCashFooter = ({ disabled, onDisabledPress, onSubmit, ...props }) => {
   const { isTallPhone, isTinyPhone } = useDimensions();

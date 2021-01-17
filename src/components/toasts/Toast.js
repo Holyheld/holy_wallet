@@ -7,8 +7,8 @@ import { interpolate } from '../animations';
 import { Icon } from '../icons';
 import { RowWithMargins } from '../layout';
 import { TruncatedText } from '../text';
-import { useDimensions } from '@rainbow-me/hooks';
-import { colors, padding, position, shadow } from '@rainbow-me/styles';
+import { useDimensions } from '@holyheld-com/hooks';
+import { colors, padding, position, shadow } from '@holyheld-com/styles';
 
 const springConfig = {
   damping: 14,

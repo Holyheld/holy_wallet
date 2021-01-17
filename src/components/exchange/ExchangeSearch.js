@@ -14,8 +14,8 @@ import Spinner from '../../assets/chartSpinner.png';
 import { ClearInputDecorator, Input } from '../inputs';
 import { Row } from '../layout';
 import { Text } from '../text';
-import { colors, margin, padding } from '@rainbow-me/styles';
-// import { deviceUtils } from '@rainbow-me/utils';
+import { colors, margin, padding } from '@holyheld-com/styles';
+// import { deviceUtils } from '@holyheld-com/utils';
 
 export const ExchangeSearchHeight = 40;
 // const ExchangeSearchWidth = deviceUtils.dimensions.width - 30;

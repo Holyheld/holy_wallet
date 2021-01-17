@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { Circle } from 'react-native-svg';
 import Svg from '../Svg';
-import { colors } from '@rainbow-me/styles';
+import { colors } from '@holyheld-com/styles';
 
 const DotIcon = ({ color, ...props }) => (
   <Svg height="7" viewBox="0 0 7 7" width="7" {...props}>

@@ -6,7 +6,7 @@ import { CoinIcon } from '../coin-icon';
 import { Row, RowWithMargins } from '../layout';
 import { EnDash } from '../text';
 import ExchangeInput from './ExchangeInput';
-import { colors } from '@rainbow-me/styles';
+import { colors } from '@holyheld-com/styles';
 
 const CoinSize = 40;
 const ExchangeFieldHeight = android ? 64 : 38;

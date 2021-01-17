@@ -15,9 +15,15 @@ import { Icon } from '../icons';
 import { ColumnWithMargins, RowWithMargins } from '../layout';
 import { Text } from '../text';
 import SecretDisplayCard from './SecretDisplayCard';
-import WalletTypes from '@rainbow-me/helpers/walletTypes';
-import { useWallets } from '@rainbow-me/hooks';
-import { colors, margin, padding, position, shadow } from '@rainbow-me/styles';
+import WalletTypes from '@holyheld-com/helpers/walletTypes';
+import { useWallets } from '@holyheld-com/hooks';
+import {
+  colors,
+  margin,
+  padding,
+  position,
+  shadow,
+} from '@holyheld-com/styles';
 import logger from 'logger';
 
 const AuthenticationText = styled(Text).attrs({

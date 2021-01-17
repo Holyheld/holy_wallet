@@ -15,7 +15,7 @@ import { deviceUtils } from '../../utils';
 import { interpolate } from '../animations';
 import { CoinRowHeight } from '../coin-row';
 import { ColumnWithMargins, Row, RowWithMargins } from '../layout';
-import { colors, padding, position } from '@rainbow-me/styles';
+import { colors, padding, position } from '@holyheld-com/styles';
 
 const { block, cond, set, startClock, stopClock } = Animated;
 

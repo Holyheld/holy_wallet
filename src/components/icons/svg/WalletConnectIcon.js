@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { Path } from 'react-native-svg';
 import Svg from '../Svg';
-import { colors } from '@rainbow-me/styles';
+import { colors } from '@holyheld-com/styles';
 
 const WalletConnectIcon = ({ color, ...props }) => (
   <Svg height="19" viewBox="0 0 31 19" width="31" {...props}>

@@ -18,7 +18,7 @@ import { EmptyAssetList } from '../asset-list';
 import { Column } from '../layout';
 import AddressRow from './AddressRow';
 import WalletOption from './WalletOption';
-import { colors, position } from '@rainbow-me/styles';
+import { colors, position } from '@holyheld-com/styles';
 
 const listTopPadding = 7.5;
 const rowHeight = 59;

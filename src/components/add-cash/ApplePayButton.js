@@ -6,7 +6,7 @@ import { mixColor, useTimingTransition } from 'react-native-redash';
 import { ButtonPressAnimation, interpolate } from '../animations';
 import { Icon } from '../icons';
 import { Centered, InnerBorder } from '../layout';
-import { colors, position } from '@rainbow-me/styles';
+import { colors, position } from '@holyheld-com/styles';
 import ShadowStack from 'react-native-shadow-stack';
 
 const AnimatedCenter = Animated.createAnimatedComponent(Centered);

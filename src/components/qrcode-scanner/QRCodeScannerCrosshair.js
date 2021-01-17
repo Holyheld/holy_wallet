@@ -4,8 +4,8 @@ import styled from 'styled-components/primitives';
 import { Icon } from '../icons';
 import { Centered } from '../layout';
 import { Text } from '../text';
-import { useDimensions } from '@rainbow-me/hooks';
-import { position } from '@rainbow-me/styles';
+import { useDimensions } from '@holyheld-com/hooks';
+import { position } from '@holyheld-com/styles';
 
 const CrossHairAspectRatio = 259 / 375;
 

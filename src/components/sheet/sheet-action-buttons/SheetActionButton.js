@@ -6,9 +6,9 @@ import { ButtonPressAnimation } from '../../animations';
 import { Icon } from '../../icons';
 import { Centered, InnerBorder, RowWithMargins } from '../../layout';
 import { Emoji, Text } from '../../text';
-import { containsEmoji } from '@rainbow-me/helpers/strings';
-import { useDimensions } from '@rainbow-me/hooks';
-import { colors, position } from '@rainbow-me/styles';
+import { containsEmoji } from '@holyheld-com/helpers/strings';
+import { useDimensions } from '@holyheld-com/hooks';
+import { colors, position } from '@holyheld-com/styles';
 import ShadowStack from 'react-native-shadow-stack';
 
 const addChartsStyling = isCharts =>

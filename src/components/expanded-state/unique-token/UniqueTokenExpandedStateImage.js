@@ -4,7 +4,7 @@ import { useDimensions, useImageMetadata } from '../../../hooks';
 import { magicMemo } from '../../../utils';
 import { Centered } from '../../layout';
 import { UniqueTokenImage } from '../../unique-token';
-import { margin, padding, position } from '@rainbow-me/styles';
+import { margin, padding, position } from '@holyheld-com/styles';
 
 const paddingHorizontal = 19;
 

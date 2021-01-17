@@ -3,7 +3,7 @@ import React from 'react';
 import Animated from 'react-native-reanimated';
 import stylePropType from 'react-style-proptype';
 import { interpolate } from './procs';
-import { position } from '@rainbow-me/styles';
+import { position } from '@holyheld-com/styles';
 
 const ScaleInAnimation = ({ range, scaleTo, style, value, ...props }) => (
   <Animated.View

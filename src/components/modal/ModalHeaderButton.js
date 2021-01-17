@@ -5,7 +5,7 @@ import { Button } from '../buttons';
 import { Icon } from '../icons';
 import { Row } from '../layout';
 import { Text as UnstyledText } from '../text';
-import { colors } from '@rainbow-me/styles';
+import { colors } from '@holyheld-com/styles';
 
 const BackArrow = styled(Icon).attrs({
   color: colors.textColor,

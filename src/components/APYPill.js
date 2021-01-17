@@ -5,7 +5,7 @@ import styled from 'styled-components/primitives';
 import { Centered } from './layout';
 
 import { GradientText } from './text';
-import { colors, position } from '@rainbow-me/styles';
+import { colors, position } from '@holyheld-com/styles';
 
 const sx = StyleSheet.create({
   container: {

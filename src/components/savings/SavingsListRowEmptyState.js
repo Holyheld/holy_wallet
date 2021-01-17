@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 import { ButtonPressAnimation } from '../animations';
 import { InnerBorder, RowWithMargins } from '../layout';
 import { Text } from '../text';
-import { colors, position, shadow } from '@rainbow-me/styles';
+import { colors, position, shadow } from '@holyheld-com/styles';
 
 const ButtonBorderRadius = 15;
 

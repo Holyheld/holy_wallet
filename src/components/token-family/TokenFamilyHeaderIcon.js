@@ -4,7 +4,7 @@ import styled from 'styled-components/primitives';
 import { initials } from '../../utils';
 import ImageWithCachedMetadata from '../ImageWithCachedMetadata';
 import { Emoji } from '../text';
-import { borders, colors } from '@rainbow-me/styles';
+import { borders, colors } from '@holyheld-com/styles';
 import ShadowStack from 'react-native-shadow-stack';
 
 const shadows = [

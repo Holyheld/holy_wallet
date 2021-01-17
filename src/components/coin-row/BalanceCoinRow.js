@@ -18,10 +18,13 @@ import BottomRowText from './BottomRowText';
 import CoinCheckButton from './CoinCheckButton';
 import CoinName from './CoinName';
 import CoinRow from './CoinRow';
-import { buildAssetUniqueIdentifier } from '@rainbow-me/helpers/assets';
-import { useCoinListEdited } from '@rainbow-me/hooks';
-import { colors } from '@rainbow-me/styles';
-import { isNewValueForObjectPaths, isNewValueForPath } from '@rainbow-me/utils';
+import { buildAssetUniqueIdentifier } from '@holyheld-com/helpers/assets';
+import { useCoinListEdited } from '@holyheld-com/hooks';
+import { colors } from '@holyheld-com/styles';
+import {
+  isNewValueForObjectPaths,
+  isNewValueForPath,
+} from '@holyheld-com/utils';
 
 const editTranslateOffsetInner = android ? -8 : 0;
 const editTranslateOffset = 32 - (android ? editTranslateOffsetInner : 0);

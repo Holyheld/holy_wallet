@@ -15,7 +15,7 @@ import store from '../redux/store';
 
 import { walletsSetSelected, walletsUpdate } from '../redux/wallets';
 import { hasKey } from './keychain';
-import { colors } from '@rainbow-me/styles';
+import { colors } from '@holyheld-com/styles';
 import logger from 'logger';
 
 export default async function runMigrations() {

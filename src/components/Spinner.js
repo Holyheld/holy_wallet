@@ -4,7 +4,7 @@ import FastImage from 'react-native-fast-image';
 import SpinnerImageSource from '../assets/spinner.png';
 import { SpinAnimation } from './animations';
 import { Centered } from './layout';
-import { colors, position } from '@rainbow-me/styles';
+import { colors, position } from '@holyheld-com/styles';
 
 const Spinner = ({ color, duration, size, ...props }) => (
   <Centered {...props}>

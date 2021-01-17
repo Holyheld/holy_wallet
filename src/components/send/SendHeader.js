@@ -9,10 +9,10 @@ import { Icon } from '../icons';
 import { Row } from '../layout';
 import { SheetHandle as SheetHandleAndroid } from '../sheet';
 import { Label } from '../text';
-import { useClipboard, useDimensions } from '@rainbow-me/hooks';
-import Routes from '@rainbow-me/routes';
-import { colors, padding } from '@rainbow-me/styles';
-import { showActionSheetWithOptions } from '@rainbow-me/utils';
+import { useClipboard, useDimensions } from '@holyheld-com/hooks';
+import Routes from '@holyheld-com/routes';
+import { colors, padding } from '@holyheld-com/styles';
+import { showActionSheetWithOptions } from '@holyheld-com/utils';
 
 const AddressInputContainer = styled(Row).attrs({ align: 'center' })`
   ${({ isSmallPhone }) =>

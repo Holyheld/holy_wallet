@@ -4,7 +4,7 @@ import { requireNativeComponent, StyleSheet } from 'react-native';
 import isRainbowTextAvailable from '../../helpers/isRainbowTextAvailable';
 import { formatSavingsAmount, isSymbolStablecoin } from '../../helpers/savings';
 import AndroidText from './AndroidAnimatedNumbers';
-import { colors, fonts } from '@rainbow-me/styles';
+import { colors, fonts } from '@holyheld-com/styles';
 
 const sx = StyleSheet.create({
   animatedNumber: {

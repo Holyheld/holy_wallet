@@ -12,7 +12,7 @@ import {
 import store from '../redux/store';
 import supportedNativeCurrencies from '../references/native-currencies.json';
 import { add, convertAmountToNativeDisplay } from './utilities';
-import { ETH_ICON_URL } from '@rainbow-me/utils';
+import { ETH_ICON_URL } from '@holyheld-com/utils';
 
 export const amountOfShowedCoins = 5;
 

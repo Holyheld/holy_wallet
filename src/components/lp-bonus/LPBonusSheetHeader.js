@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import React, { useMemo } from 'react';
 import { Centered, Row } from '../layout';
 import { Text } from '../text';
-import { colors, padding } from '@rainbow-me/styles';
+import { colors, padding } from '@holyheld-com/styles';
 
 const LPBonusSheetHeader = ({ balance }) => {
   const diplayedBalance = useMemo(() => new BigNumber(balance).toFixed(8), [

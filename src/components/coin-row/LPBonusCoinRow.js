@@ -8,7 +8,7 @@ import { Column, FlexItem, Row, RowWithMargins } from '../layout';
 import { Text } from '../text';
 import BalanceText from './BalanceText';
 import CoinName from './CoinName';
-import { colors, padding } from '@rainbow-me/styles';
+import { colors, padding } from '@holyheld-com/styles';
 
 const CoinIconSize = 50;
 const CoinRowPaddingTop = 9;

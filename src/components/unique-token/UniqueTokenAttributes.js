@@ -4,7 +4,7 @@ import { sortList } from '../../helpers/sortList';
 import { magicMemo } from '../../utils';
 import Tag from '../Tag';
 import { Row } from '../layout';
-import { margin } from '@rainbow-me/styles';
+import { margin } from '@holyheld-com/styles';
 
 const AttributeItem = ({ trait_type: type, value }) =>
   type ? (

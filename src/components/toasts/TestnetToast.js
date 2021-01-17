@@ -6,7 +6,7 @@ import { useAccountSettings, useInternetStatus } from '../../hooks';
 import { Icon } from '../icons';
 import { Nbsp, Text } from '../text';
 import Toast from './Toast';
-import { colors } from '@rainbow-me/styles';
+import { colors } from '@holyheld-com/styles';
 
 const TestnetToast = () => {
   const isConnected = useInternetStatus();

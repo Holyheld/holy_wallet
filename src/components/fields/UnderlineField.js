@@ -16,8 +16,8 @@ import { Button } from '../buttons';
 import { ExchangeInput } from '../exchange';
 import { ColumnWithMargins, Row } from '../layout';
 import { Text } from '../text';
-import { useDimensions } from '@rainbow-me/hooks';
-import { colors, position } from '@rainbow-me/styles';
+import { useDimensions } from '@holyheld-com/hooks';
+import { colors, position } from '@holyheld-com/styles';
 
 const Underline = styled.View`
   ${position.cover};

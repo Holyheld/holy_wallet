@@ -2,9 +2,9 @@ import React, { useCallback, useEffect, useState } from 'react';
 import colors from '../../styles/colors';
 import { Text } from '../text';
 import MiniButton from './MiniButton';
-import { checkIsValidAddressOrENS } from '@rainbow-me/helpers/validators';
-import { useClipboard, useInvalidPaste } from '@rainbow-me/hooks';
-import { deviceUtils } from '@rainbow-me/utils';
+import { checkIsValidAddressOrENS } from '@holyheld-com/helpers/validators';
+import { useClipboard, useInvalidPaste } from '@holyheld-com/hooks';
+import { deviceUtils } from '@holyheld-com/utils';
 
 export default function PasteAddressButton({
   onPress,

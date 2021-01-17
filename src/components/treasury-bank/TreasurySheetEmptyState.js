@@ -5,7 +5,7 @@ import Divider from '../Divider';
 import { CoinIcon } from '../coin-icon';
 import { Centered } from '../layout';
 import { Text } from '../text';
-import { colors } from '@rainbow-me/styles';
+import { colors } from '@holyheld-com/styles';
 
 const BodyText = styled(Text).attrs({
   align: 'center',

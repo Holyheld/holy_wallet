@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { Path } from 'react-native-svg';
 import Svg from '../Svg';
-import { colors } from '@rainbow-me/styles';
+import { colors } from '@holyheld-com/styles';
 
 const PinIcon = ({ color, ...props }) => (
   <Svg height="13" viewBox="0 0 8 13" width="8" {...props}>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Path } from 'react-native-svg';
 import Svg from '../Svg';
-import { colors } from '@rainbow-me/styles';
+import { colors } from '@holyheld-com/styles';
 
 const ArrowCircledIcon = ({ color = colors.black, ...props }, ref) => (
   <Svg height="15" ref={ref} viewBox="0 0 14 15" width="14" {...props}>

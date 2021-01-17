@@ -1,7 +1,7 @@
 import React, { useImperativeHandle, useState } from 'react';
 import styled from 'styled-components/primitives';
 import Text from './Text';
-import { colors } from '@rainbow-me/styles';
+import { colors } from '@holyheld-com/styles';
 
 const Placeholder = styled(Text).attrs(
   ({ color = colors.textColorPlaceholder }) => ({

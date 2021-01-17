@@ -9,10 +9,10 @@ import { SwipeableContactRow } from '../contacts';
 import { SheetHandleFixedToTopHeight } from '../sheet';
 import { InvalidPasteToast, ToastPositionContainer } from '../toasts';
 import SendEmptyState from './SendEmptyState';
-import { useKeyboardHeight } from '@rainbow-me/hooks';
-import { useNavigation } from '@rainbow-me/navigation';
-import Routes from '@rainbow-me/routes';
-import { filterList } from '@rainbow-me/utils';
+import { useKeyboardHeight } from '@holyheld-com/hooks';
+import { useNavigation } from '@holyheld-com/navigation';
+import Routes from '@holyheld-com/routes';
+import { filterList } from '@holyheld-com/utils';
 
 const KeyboardArea = styled.View`
   height: ${({ insets, keyboardHeight }) =>

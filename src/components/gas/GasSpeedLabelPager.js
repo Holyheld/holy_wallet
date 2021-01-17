@@ -4,8 +4,8 @@ import { Row } from '../layout';
 import GasSpeedLabelPagerItem, {
   GasSpeedLabelPagerItemHeight,
 } from './GasSpeedLabelPagerItem';
-import { colors } from '@rainbow-me/styles';
-import { gasUtils, magicMemo } from '@rainbow-me/utils';
+import { colors } from '@holyheld-com/styles';
+import { gasUtils, magicMemo } from '@holyheld-com/utils';
 
 const speedColors = [
   colors.textColor,

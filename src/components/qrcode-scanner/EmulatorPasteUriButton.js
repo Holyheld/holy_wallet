@@ -2,8 +2,8 @@ import React, { useCallback } from 'react';
 import { useIsEmulator } from 'react-native-device-info';
 import { Prompt } from '../alerts';
 import { Button } from '../buttons';
-import { useWalletConnectConnections } from '@rainbow-me/hooks';
-import { colors } from '@rainbow-me/styles';
+import { useWalletConnectConnections } from '@holyheld-com/hooks';
+import { colors } from '@holyheld-com/styles';
 
 export default function EmulatorPasteUriButton() {
   const { result: isEmulator } = useIsEmulator();

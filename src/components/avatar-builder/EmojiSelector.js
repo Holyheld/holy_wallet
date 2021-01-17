@@ -34,7 +34,7 @@ import EmojiTabBarShadow from '../../assets/emojiTabBarShadow.png';
 import { deviceUtils } from '../../utils';
 import { Categories } from './Categories';
 import TabBar from './TabBar';
-import { colors, fonts, position } from '@rainbow-me/styles';
+import { colors, fonts, position } from '@holyheld-com/styles';
 
 // TODO width attribute is temporary solution that will be removed as soon as I figure out why proper scaling does not work
 

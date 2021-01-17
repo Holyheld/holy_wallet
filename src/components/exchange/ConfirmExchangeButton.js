@@ -2,7 +2,7 @@ import React from 'react';
 import ExchangeModalTypes from '../../helpers/exchangeModalTypes';
 import { HoldToAuthorizeButton } from '../buttons';
 import { SlippageWarningThresholdInBips } from './SlippageWarning';
-import { colors } from '@rainbow-me/styles';
+import { colors } from '@holyheld-com/styles';
 
 const ConfirmExchangeButtonShadows = [
   [0, 3, 5, colors.shadowDarker, 0.2],

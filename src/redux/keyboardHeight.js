@@ -2,9 +2,9 @@ import produce from 'immer';
 import {
   getKeyboardHeight as loadKeyboardHeights,
   setKeyboardHeight as saveKeyboardHeight,
-} from '@rainbow-me/handlers/localstorage/globalSettings';
-import KeyboardTypes from '@rainbow-me/helpers/keyboardTypes';
-import { deviceUtils } from '@rainbow-me/utils';
+} from '@holyheld-com/handlers/localstorage/globalSettings';
+import KeyboardTypes from '@holyheld-com/helpers/keyboardTypes';
+import { deviceUtils } from '@holyheld-com/utils';
 
 // -- Constants --------------------------------------- //
 const LOAD = 'keyboardHeight/LOAD';

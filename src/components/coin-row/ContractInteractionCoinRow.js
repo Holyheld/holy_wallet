@@ -8,7 +8,7 @@ import { CoinIconSize, RequestVendorLogoIcon } from '../coin-icon';
 import CoinName from './CoinName';
 import CoinRow from './CoinRow';
 import TransactionStatusBadge from './TransactionStatusBadge';
-import { ethereumUtils, showActionSheetWithOptions } from '@rainbow-me/utils';
+import { ethereumUtils, showActionSheetWithOptions } from '@holyheld-com/utils';
 
 const BottomRow = ({ dappName }) => <CoinName>{dappName}</CoinName>;
 const TopRow = ({ status, title }) => (

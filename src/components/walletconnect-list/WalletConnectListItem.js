@@ -9,9 +9,9 @@ import {
   dappLogoOverride,
   dappNameOverride,
   isDappAuthenticated,
-} from '@rainbow-me/helpers/dappNameHandler';
-import { useWalletConnectConnections } from '@rainbow-me/hooks';
-import { colors, padding } from '@rainbow-me/styles';
+} from '@holyheld-com/helpers/dappNameHandler';
+import { useWalletConnectConnections } from '@holyheld-com/hooks';
+import { colors, padding } from '@holyheld-com/styles';
 
 const ContainerPadding = 15;
 const VendorLogoIconSize = 50;

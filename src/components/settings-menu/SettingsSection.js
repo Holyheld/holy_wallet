@@ -16,22 +16,22 @@ import {
   ListItemDivider,
 } from '../list';
 import { Emoji } from '../text';
-import BackupIcon from '@rainbow-me/assets/settingsBackup.png';
-import CurrencyIcon from '@rainbow-me/assets/settingsCurrency.png';
-import NetworkIcon from '@rainbow-me/assets/settingsNetwork.png';
-import networkInfo from '@rainbow-me/helpers/networkInfo';
-import WalletTypes from '@rainbow-me/helpers/walletTypes';
+import BackupIcon from '@holyheld-com/assets/settingsBackup.png';
+import CurrencyIcon from '@holyheld-com/assets/settingsCurrency.png';
+import NetworkIcon from '@holyheld-com/assets/settingsNetwork.png';
+import networkInfo from '@holyheld-com/helpers/networkInfo';
+import WalletTypes from '@holyheld-com/helpers/walletTypes';
 import {
   useAccountSettings,
   useDimensions,
   useSendFeedback,
   useWallets,
-} from '@rainbow-me/hooks';
-import { colors, position } from '@rainbow-me/styles';
+} from '@holyheld-com/hooks';
+import { colors, position } from '@holyheld-com/styles';
 import {
   AppleReviewAddress,
   REVIEW_DONE_KEY,
-} from '@rainbow-me/utils/reviewAlert';
+} from '@holyheld-com/utils/reviewAlert';
 
 const { RainbowRequestReview, RNReview } = NativeModules;
 

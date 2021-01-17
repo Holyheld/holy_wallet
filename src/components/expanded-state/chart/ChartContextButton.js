@@ -2,9 +2,12 @@ import lang from 'i18n-js';
 import React, { useCallback, useEffect, useMemo } from 'react';
 import { Linking } from 'react-native';
 import { ContextCircleButton } from '../../context-menu';
-import EditOptions from '@rainbow-me/helpers/editOptionTypes';
-import { useAccountSettings, useCoinListEditOptions } from '@rainbow-me/hooks';
-import { ethereumUtils } from '@rainbow-me/utils';
+import EditOptions from '@holyheld-com/helpers/editOptionTypes';
+import {
+  useAccountSettings,
+  useCoinListEditOptions,
+} from '@holyheld-com/hooks';
+import { ethereumUtils } from '@holyheld-com/utils';
 
 export default function ChartContextButton({ asset, color }) {
   const {

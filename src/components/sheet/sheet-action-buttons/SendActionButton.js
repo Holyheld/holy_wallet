@@ -2,8 +2,8 @@ import React, { useCallback } from 'react';
 import isNativeStackAvailable from '../../../helpers/isNativeStackAvailable';
 import { useExpandedStateNavigation } from '../../../hooks';
 import SheetActionButton from './SheetActionButton';
-import Routes from '@rainbow-me/routes';
-import { colors } from '@rainbow-me/styles';
+import Routes from '@holyheld-com/routes';
+import { colors } from '@holyheld-com/styles';
 
 export default function SendActionButton({
   color = colors.paleBlue,

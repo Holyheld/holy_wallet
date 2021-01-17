@@ -4,7 +4,7 @@ import styled from 'styled-components/primitives';
 import { useCoinListEditedValue } from '../../hooks/useCoinListEdited';
 import { Icon } from '../icons';
 import { Centered } from '../layout';
-import { borders, colors, shadow } from '@rainbow-me/styles';
+import { borders, colors, shadow } from '@holyheld-com/styles';
 
 const IndicatorIcon = styled(Icon).attrs(({ isPinned }) => ({
   color: colors.textColor,

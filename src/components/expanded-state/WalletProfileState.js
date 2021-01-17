@@ -11,12 +11,12 @@ import { ProfileAvatarButton, ProfileModal, ProfileNameInput } from './profile';
 import {
   removeFirstEmojiFromString,
   returnStringFirstEmoji,
-} from '@rainbow-me/helpers/emojiHandler';
-import { useAccountProfile } from '@rainbow-me/hooks';
-import { useNavigation } from '@rainbow-me/navigation';
-import Routes from '@rainbow-me/routes';
-import { colors, margin, padding, position } from '@rainbow-me/styles';
-import { abbreviations } from '@rainbow-me/utils';
+} from '@holyheld-com/helpers/emojiHandler';
+import { useAccountProfile } from '@holyheld-com/hooks';
+import { useNavigation } from '@holyheld-com/navigation';
+import Routes from '@holyheld-com/routes';
+import { colors, margin, padding, position } from '@holyheld-com/styles';
+import { abbreviations } from '@holyheld-com/utils';
 
 const WalletProfileAddressText = styled(TruncatedAddress).attrs({
   align: 'center',

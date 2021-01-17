@@ -13,8 +13,11 @@ import {
   fallbackExplorerClearState,
   fallbackExplorerInit,
 } from './fallbackExplorer';
-import { disableCharts, forceFallbackProvider } from '@rainbow-me/config/debug';
-import NetworkTypes from '@rainbow-me/helpers/networkTypes';
+import {
+  disableCharts,
+  forceFallbackProvider,
+} from '@holyheld-com/config/debug';
+import NetworkTypes from '@holyheld-com/helpers/networkTypes';
 import logger from 'logger';
 
 // -- Constants --------------------------------------- //

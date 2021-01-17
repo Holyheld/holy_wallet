@@ -5,8 +5,8 @@ import { useNavigation } from '../../navigation/Navigation';
 import { Row, RowWithMargins } from '../layout';
 import { Emoji, Text } from '../text';
 import HeaderButton from './HeaderButton';
-import Routes from '@rainbow-me/routes';
-import { colors, padding, position } from '@rainbow-me/styles';
+import Routes from '@holyheld-com/routes';
+import { colors, padding, position } from '@holyheld-com/styles';
 import ShadowStack from 'react-native-shadow-stack';
 
 const DiscoverButtonShadows = [

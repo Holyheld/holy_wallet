@@ -55,7 +55,7 @@ import { addCashUpdatePurchases } from './addCash';
 /* eslint-disable-next-line import/no-cycle */
 import { uniqueTokensRefreshState } from './uniqueTokens';
 import { uniswapUpdateLiquidityTokens } from './uniswapLiquidity';
-import Routes from '@rainbow-me/routes';
+import Routes from '@holyheld-com/routes';
 import logger from 'logger';
 
 const BACKUP_SHEET_DELAY_MS = 3000;

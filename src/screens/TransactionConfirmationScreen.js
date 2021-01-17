@@ -80,9 +80,9 @@ import {
   useTransactionConfirmation,
   useWalletBalances,
   useWallets,
-} from '@rainbow-me/hooks';
-import { useNavigation } from '@rainbow-me/navigation';
-import { colors, padding } from '@rainbow-me/styles';
+} from '@holyheld-com/hooks';
+import { useNavigation } from '@holyheld-com/navigation';
+import { colors, padding } from '@holyheld-com/styles';
 import logger from 'logger';
 
 const isReanimatedAvailable = !(

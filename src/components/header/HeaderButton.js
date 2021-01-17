@@ -1,6 +1,6 @@
 import styled from 'styled-components/primitives';
 import { ButtonPressAnimation } from '../animations';
-import { padding } from '@rainbow-me/styles';
+import { padding } from '@holyheld-com/styles';
 
 const HeaderButton = styled(ButtonPressAnimation).attrs(
   ({ scaleTo = 0.8, opacityTouchable = true }) => ({

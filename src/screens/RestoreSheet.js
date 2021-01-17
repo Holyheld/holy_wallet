@@ -13,11 +13,11 @@ import {
 } from '../handlers/cloudBackup';
 import colors from '../styles/colors';
 import { cloudPlatform } from '../utils/platform';
-import WalletBackupStepTypes from '@rainbow-me/helpers/walletBackupStepTypes';
-import WalletBackupTypes from '@rainbow-me/helpers/walletBackupTypes';
-import { useDimensions } from '@rainbow-me/hooks';
-import { useNavigation } from '@rainbow-me/navigation';
-import Routes from '@rainbow-me/routes';
+import WalletBackupStepTypes from '@holyheld-com/helpers/walletBackupStepTypes';
+import WalletBackupTypes from '@holyheld-com/helpers/walletBackupTypes';
+import { useDimensions } from '@holyheld-com/hooks';
+import { useNavigation } from '@holyheld-com/navigation';
+import Routes from '@holyheld-com/routes';
 import logger from 'logger';
 
 export default function RestoreSheet() {

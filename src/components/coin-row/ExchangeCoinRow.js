@@ -9,9 +9,9 @@ import BottomRowText from './BottomRowText';
 import CoinName from './CoinName';
 import CoinRow from './CoinRow';
 import CoinRowFavoriteButton from './CoinRowFavoriteButton';
-import { useDimensions } from '@rainbow-me/hooks';
-import { padding } from '@rainbow-me/styles';
-import { haptics, neverRerender } from '@rainbow-me/utils';
+import { useDimensions } from '@holyheld-com/hooks';
+import { padding } from '@holyheld-com/styles';
+import { haptics, neverRerender } from '@holyheld-com/utils';
 
 const CoinRowPaddingTop = 9.5;
 const CoinRowPaddingBottom = 9.5;

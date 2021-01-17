@@ -49,7 +49,7 @@ import {
   selectedWalletKey,
 } from '../utils/keychainConstants';
 import * as keychain from './keychain';
-import { colors } from '@rainbow-me/styles';
+import { colors } from '@holyheld-com/styles';
 import logger from 'logger';
 const encryptor = new AesEncryptor();
 

@@ -55,7 +55,7 @@ import RoutesComponent from './navigation/Routes';
 import { requestsForTopic } from './redux/requests';
 import store from './redux/store';
 import { walletConnectLoadState } from './redux/walletconnect';
-import Routes from '@rainbow-me/routes';
+import Routes from '@holyheld-com/routes';
 import logger from 'logger';
 import { Portal } from 'react-native-cool-modals/Portal';
 

@@ -20,14 +20,14 @@ import { useAccountProfile, useWallets } from '../../hooks';
 import { removeRequest } from '../../redux/requests';
 import { walletsSetSelected, walletsUpdate } from '../../redux/wallets';
 import { FloatingEmojis } from '../floating-emojis';
-import { useNavigation } from '@rainbow-me/navigation';
-import Routes from '@rainbow-me/routes';
-import { colors } from '@rainbow-me/styles';
+import { useNavigation } from '@holyheld-com/navigation';
+import Routes from '@holyheld-com/routes';
+import { colors } from '@holyheld-com/styles';
 import {
   abbreviations,
   ethereumUtils,
   showActionSheetWithOptions,
-} from '@rainbow-me/utils';
+} from '@holyheld-com/utils';
 
 const NativeTransactionListView = requireNativeComponent('TransactionListView');
 

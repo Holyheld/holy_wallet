@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components/primitives';
 import { Row } from '../layout';
 import ExchangeField from './ExchangeField';
-import { colors } from '@rainbow-me/styles';
+import { colors } from '@holyheld-com/styles';
 import ShadowStack from 'react-native-shadow-stack';
 
 const notchPaddingValue = 11;
