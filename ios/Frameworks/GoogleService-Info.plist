@@ -3,9 +3,11 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>569970342476-ppuuh8o8on5f8iueba424qdijrvj9i4c.apps.googleusercontent.com</string>
+	<string>569970342476-69vt7lhkijnbco7uohrotp9h28p0f7ie.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.569970342476-ppuuh8o8on5f8iueba424qdijrvj9i4c</string>
+	<string>com.googleusercontent.apps.569970342476-69vt7lhkijnbco7uohrotp9h28p0f7ie</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>569970342476-bf4jjk1mn9jmrvfhge5o1b187fgekrpb.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
 	<string>AIzaSyDD_F0mkbTSPM6Dx_Z4NhsWcaYC0YnN1P0</string>
 	<key>GCM_SENDER_ID</key>
@@ -13,7 +15,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.holyheld</string>
+	<string>com.holyheld.wallet</string>
 	<key>PROJECT_ID</key>
 	<string>mcmannaman-208313</string>
 	<key>STORAGE_BUCKET</key>
@@ -29,7 +31,7 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:569970342476:ios:9c17be59c5eaddd33c12e9</string>
+	<string>1:569970342476:ios:a64b89ccfb48b18e3c12e9</string>
 	<key>DATABASE_URL</key>
 	<string>https://mcmannaman-208313.firebaseio.com</string>
 </dict>

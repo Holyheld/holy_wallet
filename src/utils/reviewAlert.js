@@ -3,7 +3,7 @@ import { Alert, Linking, NativeModules } from 'react-native';
 const { RainbowRequestReview } = NativeModules;
 
 export const AppleReviewAddress =
-  'itms-apps://itunes.apple.com/us/app/appName/id1457119021?mt=8&action=write-review';
+  'itms-apps://itunes.apple.com/us/app/appName/id1549218002?mt=8&action=write-review';
 
 export const REVIEW_DONE_KEY = 'AppStoreReviewDone';
 const REVIEW_ASKED_KEY = 'AppStoreReviewAsked';

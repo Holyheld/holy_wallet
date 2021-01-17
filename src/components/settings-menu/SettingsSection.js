@@ -38,7 +38,7 @@ const { RainbowRequestReview, RNReview } = NativeModules;
 export const SettingsExternalURLs = {
   rainbowHomepage: 'https://holyheld.com',
   review:
-    'itms-apps://itunes.apple.com/us/app/appName/id1457119021?mt=8&action=write-review',
+    'itms-apps://itunes.apple.com/us/app/appName/id1549218002?mt=8&action=write-review',
   twitterDeepLink: 'twitter://user?screen_name=holyheld',
   twitterWebUrl: 'https://twitter.com/holyheld',
 };
