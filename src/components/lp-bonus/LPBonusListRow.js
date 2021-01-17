@@ -64,8 +64,10 @@ const LPBonusListRow = ({ balance, underlying }) => {
   }, [navigate, balance]);
 
   const { displayedBalance, isEmpty } = useMemo(() => {
-    const isEmpty = !greaterThan(balance, '');
-    const displayedBalance = new BigNumber(balance).toFixed(isEmpty ? 2 : 8);
+    const isEmpty = !greaterThan(balance, '0');
+    const displayedBalance = new BigNumber(balance)
+      .decimalPlaces(isEmpty ? 2 : 8)
+      .toString();
     return {
       displayedBalance,
       isEmpty,
@@ -106,21 +108,23 @@ const LPBonusListRow = ({ balance, underlying }) => {
               >
                 {displayedBalance} HH
               </Text>
-              <ButtonPressAnimation
-                onPress={NOOP}
-                scaleTo={0.9}
-                style={sx.button}
-              >
-                <Text
-                  color={colors.textColor}
-                  letterSpacing="roundedTight"
-                  size="lmedium"
-                  weight="semibold"
+              {isEmpty && (
+                <ButtonPressAnimation
+                  onPress={NOOP}
+                  scaleTo={0.9}
+                  style={sx.button}
                 >
-                  Pending
-                </Text>
-                <InnerBorder radius={ButtonBorderRadius} />
-              </ButtonPressAnimation>
+                  <Text
+                    color={colors.textColor}
+                    letterSpacing="roundedTight"
+                    size="lmedium"
+                    weight="semibold"
+                  >
+                    Pending
+                  </Text>
+                  <InnerBorder radius={ButtonBorderRadius} />
+                </ButtonPressAnimation>
+              )}
             </RowWithMargins>
             <APYPill postfix="x" value={bonusRate} />
           </Row>

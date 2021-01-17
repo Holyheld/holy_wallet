@@ -6,9 +6,10 @@ import { Text } from '../text';
 import { colors, padding } from '@holyheld-com/styles';
 
 const LPBonusSheetHeader = ({ balance }) => {
-  const diplayedBalance = useMemo(() => new BigNumber(balance).toFixed(8), [
-    balance,
-  ]);
+  const diplayedBalance = useMemo(
+    () => new BigNumber(balance).decimalPlaces(8).toString(),
+    [balance]
+  );
 
   return (
     <Centered css={padding(17, 0, 8)} direction="column">

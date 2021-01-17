@@ -65,9 +65,10 @@ const TopRow = ({ balance, symbol }) => (
 );
 
 const LPBonusCoinRow = ({ balance, symbol, share }) => {
-  const diplayedBalance = useMemo(() => new BigNumber(balance).toFixed(8), [
-    balance,
-  ]);
+  const diplayedBalance = useMemo(
+    () => new BigNumber(balance).decimalPlaces(8).toString(),
+    [balance]
+  );
 
   return (
     <ButtonPressAnimation disabled onPress={() => {}} scaleTo={1.02}>
