@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "Rainbow.app"
-               BlueprintName = "Rainbow"
-               ReferencedContainer = "container:Rainbow.xcodeproj">
+               BuildableName = "Holyheld.app"
+               BlueprintName = "Holyheld"
+               ReferencedContainer = "container:Holyheld.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -31,9 +31,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "Rainbow.app"
-            BlueprintName = "Rainbow"
-            ReferencedContainer = "container:Rainbow.xcodeproj">
+            BuildableName = "Holyheld.app"
+            BlueprintName = "Holyheld"
+            ReferencedContainer = "container:Holyheld.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <Testables>
@@ -54,9 +54,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "Rainbow.app"
-            BlueprintName = "Rainbow"
-            ReferencedContainer = "container:Rainbow.xcodeproj">
+            BuildableName = "Holyheld.app"
+            BlueprintName = "Holyheld"
+            ReferencedContainer = "container:Holyheld.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -71,9 +71,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "Rainbow.app"
-            BlueprintName = "Rainbow"
-            ReferencedContainer = "container:Rainbow.xcodeproj">
+            BuildableName = "Holyheld.app"
+            BlueprintName = "Holyheld"
+            ReferencedContainer = "container:Holyheld.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

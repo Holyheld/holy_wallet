@@ -240,7 +240,7 @@
   // for QR scanner Bottom Sheet!
   UIViewController *presentedRootViewController = changeRootController.presentedViewController;
 
-  if (presentedRootViewController != nil && ![presentedRootViewController isKindOfClass:RNCMScreen.class] && ![NSStringFromClass(presentedRootViewController.class) isEqualToString:@"Rainbow.PanModalViewController"]) {
+  if (presentedRootViewController != nil && ![presentedRootViewController isKindOfClass:RNCMScreen.class] && ![NSStringFromClass(presentedRootViewController.class) isEqualToString:@"Holyheld.PanModalViewController"]) {
     // lib
 
     changeRootController = presentedRootViewController;
