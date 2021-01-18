@@ -4,10 +4,11 @@ import React, { useCallback, useMemo } from 'react';
 import { StyleSheet } from 'react-native';
 
 import styled from 'styled-components/primitives';
+import { HOLY_LP_BONUS_CLAIM } from '../../config/experimental';
+import useExperimentalFlag from '../../config/experimentalHooks';
 
 import { greaterThan } from '../../helpers/utilities';
 import { useHolyBonusRate } from '../../hooks/useHolySavings';
-import { useNavigation } from '../../navigation/Navigation';
 import Routes from '../../navigation/routesNames';
 import { SheetHeight } from '../../screens/LPBonusSheet';
 import APYPill from '../APYPill';
@@ -16,6 +17,7 @@ import { CoinIcon } from '../coin-icon';
 import { Centered, InnerBorder, Row, RowWithMargins } from '../layout';
 import { Text } from '../text';
 import { useDimensions } from '@holyheld-com/hooks';
+import { useNavigation } from '@holyheld-com/navigation';
 import { colors, padding, position } from '@holyheld-com/styles';
 import ShadowStack from 'react-native-shadow-stack';
 
@@ -55,24 +57,31 @@ const LPBonusListRow = ({ balance, underlying }) => {
 
   const { bonusRate } = useHolyBonusRate();
 
-  const onButtonPress = useCallback(() => {
-    navigate(Routes.LP_BONUS_SHEET, {
-      balance: balance,
-      lifetimeSupplyInterestAccrued: '0',
-      longFormHeight: SheetHeight,
-    });
-  }, [navigate, balance]);
+  const disabled = !useExperimentalFlag(HOLY_LP_BONUS_CLAIM);
 
   const { displayedBalance, isEmpty } = useMemo(() => {
     const isEmpty = !greaterThan(balance, '0');
-    const displayedBalance = new BigNumber(balance)
-      .decimalPlaces(isEmpty ? 2 : 8)
-      .toString();
+    let displayedBalance = '0.00';
+    if (isEmpty) {
+      displayedBalance = new BigNumber(balance).toFixed(2);
+    } else {
+      displayedBalance = new BigNumber(balance).decimalPlaces(8).toString();
+    }
     return {
       displayedBalance,
       isEmpty,
     };
   }, [balance]);
+
+  const onButtonPress = useCallback(() => {
+    if (!disabled && !isEmpty) {
+      navigate(Routes.LP_BONUS_SHEET, {
+        balance: balance,
+        lifetimeSupplyInterestAccrued: '0',
+        longFormHeight: SheetHeight,
+      });
+    }
+  }, [navigate, isEmpty, disabled, balance]);
 
   return (
     <ButtonPressAnimation
@@ -85,7 +94,7 @@ const LPBonusListRow = ({ balance, underlying }) => {
           <Row
             align="center"
             css={padding(9, 10, 10, 20)}
-            justify="space-between"
+            justify="space-around"
             onPress={() => {}}
             scaleTo={0.96}
           >
@@ -99,10 +108,15 @@ const LPBonusListRow = ({ balance, underlying }) => {
               </Centered>
             )}
 
-            <RowWithMargins align="center" margin={8} paddingLeft={4}>
+            <RowWithMargins
+              align="center"
+              flexGrow={1}
+              margin={8}
+              paddingLeft={4}
+            >
               <Text
+                color={isEmpty ? colors.textColorMuted : colors.textColor}
                 letterSpacing="roundedTightest"
-                opacity={0.5}
                 size="lmedium"
                 weight="bold"
               >
@@ -126,7 +140,7 @@ const LPBonusListRow = ({ balance, underlying }) => {
                 </ButtonPressAnimation>
               )}
             </RowWithMargins>
-            <APYPill postfix="x" value={bonusRate} />
+            <APYPill postfix="% DPY" value={bonusRate} />
           </Row>
         </LPBonusListRowShadowStack>
       </Centered>

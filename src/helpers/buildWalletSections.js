@@ -387,7 +387,7 @@ const withBalanceSection = (
   //}
 
   //if (networkTypes.mainnet === network) {
-  //balanceSectionData.push(holyTreasury);
+  balanceSectionData.push(holyTreasury);
   //}
 
   //if (networkTypes.mainnet === network) {
