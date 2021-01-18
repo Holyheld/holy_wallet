@@ -7,9 +7,10 @@ import {
   useAccountSettings,
   useCoinListEditOptions,
 } from '@holyheld-com/hooks';
+import { colors } from '@holyheld-com/styles';
 import { ethereumUtils } from '@holyheld-com/utils';
 
-export default function ChartContextButton({ asset, color }) {
+export default function ChartContextButton({ asset }) {
   const {
     clearSelectedCoins,
     currentAction,
@@ -61,7 +62,7 @@ export default function ChartContextButton({ asset, color }) {
       flex={0}
       onPressActionSheet={handleActionSheetPress}
       options={options}
-      tintColor={color}
+      tintColor={colors.textColorPrimaryButton}
     />
   );
 }
