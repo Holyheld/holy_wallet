@@ -1,6 +1,9 @@
 import React, { useCallback } from 'react';
 import { Alert } from 'react-native';
 import styled from 'styled-components/primitives';
+import useExperimentalFlag, {
+  HOLY_SAVINGS,
+} from '../../config/experimentalHooks';
 import { useNavigation } from '../../navigation/Navigation';
 import { magicMemo } from '../../utils';
 import Divider from '../Divider';
@@ -38,7 +41,12 @@ const GradientAPYHeadingText = styled(GradientText).attrs({
 const SavingsSheetEmptyState = ({ isReadOnlyWallet, apy, underlying }) => {
   const { navigate } = useNavigation();
 
+  const disableDeposit = !useExperimentalFlag(HOLY_SAVINGS);
+
   const onDeposit = useCallback(() => {
+    if (disableDeposit) {
+      return;
+    }
     if (!isReadOnlyWallet) {
       navigate(Routes.SAVINGS_DEPOSIT_MODAL, {
         params: {
@@ -52,7 +60,7 @@ const SavingsSheetEmptyState = ({ isReadOnlyWallet, apy, underlying }) => {
     } else {
       Alert.alert(`You need to import the wallet in order to do this`);
     }
-  }, [isReadOnlyWallet, navigate, underlying]);
+  }, [isReadOnlyWallet, navigate, underlying, disableDeposit]);
 
   return (
     <Centered direction="column" paddingTop={9}>
@@ -74,7 +82,8 @@ const SavingsSheetEmptyState = ({ isReadOnlyWallet, apy, underlying }) => {
       />
       <ColumnWithMargins css={padding(19, 15)} margin={19} width="100%">
         <SheetActionButton
-          color={colors.buttonPrimary}
+          color={disableDeposit ? colors.buttonDisabled : colors.buttonPrimary}
+          disabled={disableDeposit}
           fullWidth
           label="􀁍 Deposit from Wallet"
           onPress={onDeposit}

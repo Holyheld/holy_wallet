@@ -35,7 +35,7 @@ export const INITIAL_HOLY_STATE = {
   earlyLPBonus: '0',
   savingsTokens: [
     {
-      apy: '1.5',
+      apy: '29.4',
       balance: '0',
       native: {
         price: {

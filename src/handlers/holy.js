@@ -20,7 +20,7 @@ const holySavingsRefreshState = () => async dispatch => {
   logger.sentry('refreshing HOLY savings');
   const savings = [
     {
-      apy: '1.5',
+      apy: '29.4',
       balance: '0',
       native: {
         price: {
