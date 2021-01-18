@@ -22,7 +22,7 @@ const Container = styled(Row).attrs({
 })`
   ${padding(5, 19, 6)};
   background-color: ${({ isSticky }) =>
-    isSticky ? colors.white : colors.transparent};
+    isSticky ? colors.pageBackground : colors.transparent};
   height: ${CoinDividerHeight + 11};
   width: ${({ deviceWidth }) => deviceWidth};
 `;
