@@ -16,7 +16,7 @@ import {
 } from './chart-data-labels';
 import { convertAmountToNativeDisplay } from '@holyheld-com/helpers/utilities';
 import { useAccountSettings, useBooleanState } from '@holyheld-com/hooks';
-import { colors, padding } from '@holyheld-com/styles';
+import { padding } from '@holyheld-com/styles';
 
 const { call, cond, onChange, useCode } = Animated;
 
@@ -49,7 +49,6 @@ export default function ChartExpandedStateHeader({
   asset,
   changeDirection,
   changeRef,
-  color = colors.textColor,
   dateRef,
   isPool,
   isScrubbing,
@@ -119,7 +118,7 @@ export default function ChartExpandedStateHeader({
             );
           })}
         </Row>
-        <ChartContextButton asset={asset} color={color} />
+        <ChartContextButton asset={asset} />
       </Row>
       <RowWithMargins
         align={ios ? 'center' : 'flex-start'}
