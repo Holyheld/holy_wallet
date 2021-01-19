@@ -38,7 +38,7 @@ const SavingsListRowEmptyState = ({ onPress }) => (
         size="lmedium"
         weight="semibold"
       >
-        􀁍 Deposit
+        Deposit
       </Text>
       <InnerBorder radius={ButtonBorderRadius} />
     </ButtonPressAnimation>

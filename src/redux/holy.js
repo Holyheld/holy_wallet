@@ -3,7 +3,9 @@ import produce from 'immer';
 // -- Constants ------------------------------------------------------------- //
 const HOLY_CLEAR_STATE = 'holy/HOLY_CLEAR_STATE';
 const HOLY_UPDATE_SAVINGS = 'holy/HOLY_UPDATE_SAVINGS';
-const HOLY_UPDATE_EARLY_LP_BONUSES = 'holy/HOLY_UPDATE_EARLY_LP_BONUSES';
+const HOLY_UPDATE_EARLY_LP_BONUS_AMOUNT =
+  'holy/HOLY_UPDATE_EARLY_LP_BONUS_AMOUNT';
+const HOLY_UPDATE_EARLY_LP_BONUS_SHOW = 'holy/HOLY_UPDATE_EARLY_LP_BONUS_SHOW';
 const HOLY_UPDATE_BONUS_RATE = 'holy/HOLY_UPDATE_BONUS_RATE';
 
 // -- Actions --------------------------------------------------------------- //
@@ -15,10 +17,17 @@ export const holyUpdateSavings = savings => dispatch => {
   });
 };
 
-export const holyUpdateEarlyLPBonus = earlyLPBonus => dispatch => {
+export const holyUpdateEarlyLPBonusAmount = amount => dispatch => {
   dispatch({
-    payload: earlyLPBonus,
-    type: HOLY_UPDATE_EARLY_LP_BONUSES,
+    payload: amount,
+    type: HOLY_UPDATE_EARLY_LP_BONUS_AMOUNT,
+  });
+};
+
+export const holyUpdateEarlyLPBonusShow = isShow => dispatch => {
+  dispatch({
+    payload: isShow,
+    type: HOLY_UPDATE_EARLY_LP_BONUS_SHOW,
   });
 };
 
@@ -32,11 +41,14 @@ export const holyUpdateBonusRate = bonusRate => dispatch => {
 // -- Reducer --------------------------------------------------------------- //
 export const INITIAL_HOLY_STATE = {
   bonusRate: '1.00',
-  earlyLPBonus: '0',
+  earlyLPBonus: {
+    amount: '0',
+    showPanel: false,
+  },
   savingsTokens: [
     {
       apy: '29.4',
-      balance: '0',
+      balance: '100033.235',
       native: {
         price: {
           amount: '1',
@@ -48,6 +60,10 @@ export const INITIAL_HOLY_STATE = {
       },
     },
   ],
+  treasury: {
+    balance: '1069.61275411',
+    rate: '1.37',
+  },
 };
 
 export default (state = INITIAL_HOLY_STATE, action) =>
@@ -58,8 +74,11 @@ export default (state = INITIAL_HOLY_STATE, action) =>
       case HOLY_UPDATE_SAVINGS:
         draft.savingsTokens = action.payload;
         break;
-      case HOLY_UPDATE_EARLY_LP_BONUSES:
-        draft.earlyLPBonus = action.payload;
+      case HOLY_UPDATE_EARLY_LP_BONUS_AMOUNT:
+        draft.earlyLPBonus.amount = action.payload;
+        break;
+      case HOLY_UPDATE_EARLY_LP_BONUS_SHOW:
+        draft.earlyLPBonus.showPanel = action.payload;
         break;
       case HOLY_UPDATE_BONUS_RATE:
         draft.bonusRate = action.payload;

@@ -5,7 +5,11 @@ import { readableUniswapSelector } from '../hoc/uniswapLiquidityTokenInfoSelecto
 import useAccountAssets from './useAccountAssets';
 import useAccountSettings from './useAccountSettings';
 import useCoinListEditOptions from './useCoinListEditOptions';
-import { useHolyEarlyLPBonus, useHolySavings } from './useHolySavings';
+import {
+  useHolyEarlyLPBonus,
+  useHolySavings,
+  useHolyTreasury,
+} from './useHolySavings';
 import useIsWalletEthZero from './useIsWalletEthZero';
 import useSavingsAccount from './useSavingsAccount';
 import useSendableUniqueTokens from './useSendableUniqueTokens';
@@ -21,6 +25,7 @@ export default function useWalletSectionsData() {
   const { showcaseTokens } = useShowcaseTokens();
   const holySavings = useHolySavings();
   const holyEarlyBonus = useHolyEarlyLPBonus();
+  const holyTreasury = useHolyTreasury();
 
   const {
     currentAction,
@@ -32,7 +37,6 @@ export default function useWalletSectionsData() {
   const { refetchSavings, shouldRefetchSavings } = useSavingsAccount(true);
 
   const walletSections = useMemo(() => {
-    let holyTreasury = [{}];
     const accountInfo = {
       currentAction,
       hiddenCoins,
@@ -64,6 +68,7 @@ export default function useWalletSectionsData() {
     currentAction,
     holyEarlyBonus,
     holySavings,
+    holyTreasury,
     hiddenCoins,
     isCoinListEdited,
     isWalletEthZero,

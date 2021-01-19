@@ -3,7 +3,8 @@ import styled from 'styled-components/primitives';
 import { ButtonPressAnimation } from '../animations';
 import { Column, FlexItem, Row, RowWithMargins } from '../layout';
 import { APYPill } from '../savings';
-import { Emoji, Text } from '../text';
+import SavingsIcon from '../savings/SavingsIcon';
+import { Text } from '../text';
 import BalanceText from './BalanceText';
 import CoinName from './CoinName';
 import { colors, padding } from '@holyheld-com/styles';
@@ -30,7 +31,7 @@ const Content = styled(Column).attrs({ justify: 'space-between' })`
   opacity: ${({ isHidden }) => (isHidden ? 0.4 : 1)};
 `;
 
-const BottomRow = ({ apy, additionalShare }) => {
+const BottomRow = ({ apy, additionalShare, symbol }) => {
   return (
     <Fragment>
       <APYPill small value={apy} />
@@ -44,7 +45,7 @@ const BottomRow = ({ apy, additionalShare }) => {
             weight="semibold"
           >
             {' '}
-            {'$' + additionalShare}
+            {additionalShare + ' ' + symbol}
           </Text>
         </Column>
       </RowWithMargins>
@@ -56,17 +57,20 @@ const TopRow = ({ balance, symbol }) => (
   <Row align="center" justify="space-between" marginBottom={2}>
     <FlexItem flex={1}>
       <CoinName letterSpacing="roundedMedium" weight="semibold">
-        {symbol}
+        Savings
       </CoinName>
     </FlexItem>
-    <BalanceText>{'$' + balance}</BalanceText>
+    <BalanceText>{balance + ' ' + symbol}</BalanceText>
   </Row>
 );
 
 const HolySavingsCoinRow = ({ balance, symbol, apy, additionalShare }) => (
   <ButtonPressAnimation disabled onPress={() => {}} scaleTo={1.02}>
     <Container>
-      <Emoji name="flag_united_states" size={25} />
+      <RowWithMargins width={35}>
+        <SavingsIcon size={35} />
+      </RowWithMargins>
+
       <Content justify="center">
         <Row align="center" {...(android && { styles: { height: 50 } })}>
           <TopRow balance={balance} symbol={symbol} />

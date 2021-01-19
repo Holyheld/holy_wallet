@@ -21,6 +21,7 @@ import {
 import { FloatingPanel, FloatingPanels } from '../components/floating-panels';
 import { GasSpeedButton } from '../components/gas';
 import { Centered, KeyboardFixedOpenLayout } from '../components/layout';
+import DepositSwapInfo from '../components/savings/DepositSwapInfo';
 import exchangeModalTypes from '../helpers/exchangeModalTypes';
 import useHolyDepositCurrencies from '../hooks/useHolyDepositCurrencies';
 import useHolyDepositInputs from '../hooks/useHolyDepositInputs';
@@ -33,6 +34,7 @@ import createHolySavingsWithdrawCompoundRap, {
   estimateHolySavingsWithdrawCompound,
 } from '../raps/holySavingsWithdrawCompound';
 import { multicallClearState } from '../redux/multicall';
+import { USDC_TOKEN_ADDRESS } from '../references/holy';
 import {
   useAccountAssets,
   useAccountSettings,
@@ -88,11 +90,23 @@ const HolySavingsDepositModal = ({ defaultInputCurrency, testID }) => {
     params: { tabTransitionPosition },
   } = useRoute();
 
+  const { nativeCurrency, network } = useAccountSettings();
+
   const defaultGasLimit = 10000;
 
   const createRap = createHolySavingsWithdrawCompoundRap;
   const estimateRap = estimateHolySavingsWithdrawCompound;
   const type = exchangeModalTypes.holyDeposit;
+
+  const USDc = {
+    address: USDC_TOKEN_ADDRESS(network),
+    native: {
+      price: {
+        amount: '1',
+      },
+    },
+    symbol: 'USDC',
+  };
 
   const {
     inputCurrency,
@@ -115,7 +129,6 @@ const HolySavingsDepositModal = ({ defaultInputCurrency, testID }) => {
     updateTxFee,
   } = useGas();
   const { initWeb3Listener, stopWeb3Listener } = useBlockPolling();
-  const { nativeCurrency } = useAccountSettings();
 
   const [isAuthorizing, setIsAuthorizing] = useState(false);
   const { maxInputBalance, updateMaxInputBalance } = useMaxInputBalance();
@@ -372,6 +385,12 @@ const HolySavingsDepositModal = ({ defaultInputCurrency, testID }) => {
               testID={testID + '-input'}
             />
           </FloatingPanel>
+
+          <DepositSwapInfo
+            amount={nativeAmount}
+            asset={USDc}
+            testID="migrate-info-button"
+          />
 
           <Fragment>
             <Centered

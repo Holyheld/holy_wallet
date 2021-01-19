@@ -4,7 +4,7 @@ import { Centered, RowWithMargins } from '../layout';
 import { DollarFigure, Text } from '../text';
 import { colors, padding } from '@holyheld-com/styles';
 
-const SavingsSheetHeader = ({ balance, lifetimeAccruedInterest }) => (
+const SavingsSheetHeader = ({ balance, ildBalance }) => (
   <Centered css={padding(17, 0, 8)} direction="column">
     <Text
       color={colors.textColorMuted}
@@ -25,7 +25,7 @@ const SavingsSheetHeader = ({ balance, lifetimeAccruedInterest }) => (
         size="large"
         weight="semibold"
       >
-        ${lifetimeAccruedInterest}
+        ${ildBalance}
       </Text>
     </RowWithMargins>
   </Centered>
@@ -33,7 +33,7 @@ const SavingsSheetHeader = ({ balance, lifetimeAccruedInterest }) => (
 
 SavingsSheetHeader.propTypes = {
   balance: PropTypes.string,
-  lifetimeAccruedInterest: PropTypes.string,
+  ildBalance: PropTypes.string,
 };
 
 export default SavingsSheetHeader;

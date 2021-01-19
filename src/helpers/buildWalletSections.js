@@ -207,21 +207,22 @@ const withBalanceHolyEarlyBonusSection = (
   let holyBonusAssets = [];
 
   if (priceOfEther) {
-    holyBonusAssets = map(earlyBonus, () => {
-      return {
-        balance: earlyBonus.bonus,
+    holyBonusAssets = [
+      {
+        balance: earlyBonus.amount,
         underlying: {
           address: HH_V2_ADDRESS(network),
           symbol: 'HH',
         },
-      };
-    });
+      },
+    ];
   }
 
   const section = {
     assets: holyBonusAssets,
     holyEarlyBonusContainer: true,
-    totalValue: 0,
+    show: earlyBonus.showPanel,
+    totalValue: earlyBonus.amount,
   };
   return section;
 };
@@ -230,19 +231,19 @@ const withBalanceHolyTreasurySection = (holyTreasury, priceOfEther) => {
   let holyTreasuryAssets = [];
 
   if (priceOfEther) {
-    holyTreasuryAssets = map(holyTreasury, () => {
-      return {
-        balance: '10',
+    holyTreasuryAssets = [
+      {
+        treasury: holyTreasury,
         underlying: {
           symbol: 'USD',
         },
-      };
-    });
+      },
+    ];
   }
   const section = {
     assets: holyTreasuryAssets,
     holyTreasuryContainer: true,
-    totalValue: 0,
+    totalValue: holyTreasury.balance,
   };
   return section;
 };
@@ -390,9 +391,9 @@ const withBalanceSection = (
   balanceSectionData.push(holyTreasury);
   //}
 
-  //if (networkTypes.mainnet === network) {
-  balanceSectionData.push(holyBonus);
-  //}
+  if (holyBonus.show) {
+    balanceSectionData.push(holyBonus);
+  }
 
   balanceSectionData.push(...assets);
 
@@ -400,12 +401,18 @@ const withBalanceSection = (
   //   balanceSectionData.push(holySavings);
   // }
 
-  const totalBalanceWithSavingsValue = add(
+  let totalBalanceWithSavingsTreasuryAndLP = add(
     totalBalancesValue,
-    0 //get(savingsSection, 'totalValue', 0)
+    get(holySavings, 'totalValue', 0)
   );
+
+  totalBalanceWithSavingsTreasuryAndLP = add(
+    totalBalanceWithSavingsTreasuryAndLP,
+    get(holyTreasury, 'totalValue', 0)
+  );
+
   const totalBalanceWithAllSectionValues = add(
-    totalBalanceWithSavingsValue,
+    totalBalanceWithSavingsTreasuryAndLP,
     uniswapTotal
   );
 

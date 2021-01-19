@@ -1,14 +1,8 @@
 import PropTypes from 'prop-types';
 import React, { useCallback, useState } from 'react';
 import styled from 'styled-components/primitives';
-import {
-  calculateEarningsInDays,
-  isSymbolStablecoin,
-} from '../../helpers/savings';
-import {
-  convertAmountToNativeDisplay,
-  handleSignificantDecimals,
-} from '../../helpers/utilities';
+import { calculateEarningsInDays } from '../../helpers/savings';
+import { convertAmountToNativeDisplay } from '../../helpers/utilities';
 import { magicMemo } from '../../utils';
 import { ButtonPressAnimation } from '../animations';
 import { Row, RowWithMargins } from '../layout';
@@ -64,10 +58,9 @@ function useStepper(max, initial = 0) {
   return [step, nextStep];
 }
 
-const SavingsPredictionStepper = ({ asset, balance, interestRate }) => {
+const SavingsPredictionStepper = ({ balance, interestRate }) => {
   const { nativeCurrency } = useAccountSettings();
   const [step, nextStep] = useStepper(Object.keys(steps).length, 1);
-  const { decimals, symbol } = asset;
 
   const estimatedEarnings = calculateEarningsInDays(
     balance,
@@ -77,11 +70,9 @@ const SavingsPredictionStepper = ({ asset, balance, interestRate }) => {
 
   const formatter = useCallback(
     value => {
-      return isSymbolStablecoin(symbol)
-        ? convertAmountToNativeDisplay(value, nativeCurrency)
-        : `${handleSignificantDecimals(value, decimals, 1)} ${symbol}`;
+      return convertAmountToNativeDisplay(value, nativeCurrency);
     },
-    [decimals, symbol, nativeCurrency]
+    [nativeCurrency]
   );
 
   return (
@@ -113,10 +104,6 @@ const SavingsPredictionStepper = ({ asset, balance, interestRate }) => {
 };
 
 SavingsPredictionStepper.propTypes = {
-  asset: PropTypes.shape({
-    decimals: PropTypes.number,
-    symbol: PropTypes.string,
-  }),
   balance: PropTypes.string,
   interestRate: PropTypes.string,
 };

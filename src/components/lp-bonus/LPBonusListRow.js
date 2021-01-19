@@ -4,8 +4,6 @@ import React, { useCallback, useMemo } from 'react';
 import { StyleSheet } from 'react-native';
 
 import styled from 'styled-components/primitives';
-import { HOLY_LP_BONUS_CLAIM } from '../../config/experimental';
-import useExperimentalFlag from '../../config/experimentalHooks';
 
 import { greaterThan } from '../../helpers/utilities';
 import { useHolyBonusRate } from '../../hooks/useHolySavings';
@@ -57,7 +55,7 @@ const LPBonusListRow = ({ balance, underlying }) => {
 
   const { bonusRate } = useHolyBonusRate();
 
-  const disabled = !useExperimentalFlag(HOLY_LP_BONUS_CLAIM);
+  const disabled = true;
 
   const { displayedBalance, isEmpty } = useMemo(() => {
     const isEmpty = !greaterThan(balance, '0');

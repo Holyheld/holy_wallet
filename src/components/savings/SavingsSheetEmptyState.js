@@ -1,9 +1,6 @@
 import React, { useCallback } from 'react';
 import { Alert } from 'react-native';
 import styled from 'styled-components/primitives';
-import useExperimentalFlag, {
-  HOLY_SAVINGS,
-} from '../../config/experimentalHooks';
 import { useNavigation } from '../../navigation/Navigation';
 import { magicMemo } from '../../utils';
 import Divider from '../Divider';
@@ -41,7 +38,7 @@ const GradientAPYHeadingText = styled(GradientText).attrs({
 const SavingsSheetEmptyState = ({ isReadOnlyWallet, apy, underlying }) => {
   const { navigate } = useNavigation();
 
-  const disableDeposit = !useExperimentalFlag(HOLY_SAVINGS);
+  const disableDeposit = true;
 
   const onDeposit = useCallback(() => {
     if (disableDeposit) {

@@ -1,9 +1,11 @@
 import analytics from '@segment/analytics-react-native';
+import BigNumber from 'bignumber.js';
 import PropTypes from 'prop-types';
+import React, { useCallback, useEffect, useMemo } from 'react';
+import { InteractionManager, StyleSheet } from 'react-native';
 
-import React, { useCallback, useEffect } from 'react';
-import { InteractionManager } from 'react-native';
 import styled from 'styled-components/primitives';
+import { greaterThan } from '../../helpers/utilities';
 import { useNavigation } from '../../navigation/Navigation';
 import Routes from '../../navigation/routesNames';
 import {
@@ -13,20 +15,39 @@ import {
 
 import APYPill from '../APYPill';
 import { ButtonPressAnimation } from '../animations';
-import { Centered, Row, RowWithMargins } from '../layout';
-import { Text } from '../text';
+import { Centered, InnerBorder, Row, RowWithMargins } from '../layout';
+import { GradientText, Text } from '../text';
 import SavingsIcon from './SavingsIcon';
-import SavingsListRowEmptyState from './SavingsListRowEmptyState';
 import { useDimensions } from '@holyheld-com/hooks';
-import { colors, padding } from '@holyheld-com/styles';
+import { colors, padding, position } from '@holyheld-com/styles';
 import ShadowStack from 'react-native-shadow-stack';
+
+const ButtonBorderRadius = 15;
 
 const SavingsListRowShadows = [
   [0, 10, 30, colors.dark, 0.2],
   [0, 5, 15, colors.dark, 0.4],
 ];
 
+const sx = StyleSheet.create({
+  button: {
+    ...position.centeredAsObject,
+    backgroundColor: colors.buttonPrimary,
+    borderRadius: ButtonBorderRadius,
+    height: 30,
+    paddingBottom: 1,
+    paddingRight: 2,
+    width: 97,
+  },
+});
+
 const NOOP = () => undefined;
+
+const centGradientProps = {
+  end: { x: 1, y: 1 },
+  start: { x: 0, y: 0 },
+  steps: [0, 1],
+};
 
 const SavingsListRowShadowStack = styled(ShadowStack).attrs(
   ({ deviceWidth }) => ({
@@ -42,17 +63,6 @@ const SavingsListRow = ({ totalBalance, currentSaving, savings }) => {
   const { width: deviceWidth } = useDimensions();
   const { navigate } = useNavigation();
 
-  const onButtonPress = useCallback(() => {
-    navigate(Routes.SAVINGS_SHEET, {
-      currentSaving: currentSaving,
-      lifetimeAccruedInterest: 0.1,
-      longFormHeight:
-        totalBalance === '0' ? SavingsSheetEmptyHeight : SavingsSheetHeight,
-      savings: savings,
-      totalBalance: totalBalance,
-    });
-  }, [currentSaving, navigate, savings, totalBalance]);
-
   useEffect(() => {
     if (
       currentSaving.underlying &&
@@ -67,7 +77,32 @@ const SavingsListRow = ({ totalBalance, currentSaving, savings }) => {
       });
   }, [currentSaving]);
 
-  const displayValue = parseFloat(totalBalance).toFixed(2);
+  const { displayedDollars, displayedCents, isEmpty } = useMemo(() => {
+    const isEmpty = !greaterThan(totalBalance, '0');
+    let displayValue = '0.00';
+    if (isEmpty) {
+      displayValue = new BigNumber(totalBalance).toFixed(2);
+    } else {
+      displayValue = new BigNumber(totalBalance).toFormat(8);
+    }
+    const [displayedDollars, displayedCents] = displayValue.split('.');
+
+    return {
+      displayedCents,
+      displayedDollars,
+      isEmpty,
+    };
+  }, [totalBalance]);
+
+  const onButtonPress = useCallback(() => {
+    navigate(Routes.SAVINGS_SHEET, {
+      currentSaving: currentSaving,
+      lifetimeAccruedInterest: 0.1,
+      longFormHeight: isEmpty ? SavingsSheetEmptyHeight : SavingsSheetHeight,
+      savings: savings,
+      totalBalance: totalBalance,
+    });
+  }, [currentSaving, navigate, savings, totalBalance, isEmpty]);
 
   return (
     <ButtonPressAnimation
@@ -80,28 +115,53 @@ const SavingsListRow = ({ totalBalance, currentSaving, savings }) => {
           <Row
             align="center"
             css={padding(9, 10, 10, 20)}
-            justify="space-between"
+            justify="space-around"
             onPress={() => {}}
             scaleTo={0.96}
           >
-            {!isNaN(displayValue) && totalBalance !== '0' ? (
-              <>
+            {!isEmpty && (
+              <RowWithMargins width={31}>
                 <SavingsIcon size={23} />
-                <RowWithMargins align="center" margin={8} paddingLeft={4}>
-                  <Text
-                    color={colors.textColor}
-                    letterSpacing="roundedTightest"
-                    opacity={0.5}
-                    size="lmedium"
-                    weight="bold"
-                  >
-                    {`$${displayValue}`}
-                  </Text>
-                </RowWithMargins>
-              </>
-            ) : (
-              <SavingsListRowEmptyState onPress={NOOP} />
+              </RowWithMargins>
             )}
+            <Row align="center" flexGrow={3} paddingLeft={4}>
+              <Text
+                color={isEmpty ? colors.textColorMuted : colors.textColor}
+                letterSpacing="roundedTightest"
+                size="lmedium"
+                weight="bold"
+              >
+                {`$${displayedDollars}`}
+              </Text>
+              <GradientText
+                color={isEmpty ? colors.textColorMuted : colors.green}
+                letterSpacing="roundedTightest"
+                {...centGradientProps}
+                size="lmedium"
+                weight="bold"
+                width="auto"
+              >
+                {`.${displayedCents}`}
+              </GradientText>
+              {isEmpty && (
+                <ButtonPressAnimation
+                  onPress={NOOP}
+                  scaleTo={0.9}
+                  style={sx.button}
+                >
+                  <Text
+                    color={colors.textColorPrimaryButton}
+                    letterSpacing="roundedTight"
+                    size="lmedium"
+                    weight="semibold"
+                  >
+                    Deposit
+                  </Text>
+                  <InnerBorder radius={ButtonBorderRadius} />
+                </ButtonPressAnimation>
+              )}
+            </Row>
+
             <APYPill value={currentSaving.apy} />
           </Row>
         </SavingsListRowShadowStack>

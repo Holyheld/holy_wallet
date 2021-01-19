@@ -31,7 +31,7 @@ const SavingPairIcon = styled(FastImage).attrs(() => ({
 
 const Container = styled(Row)`
   flex: 1;
-  flex-shrink: 1;
+  flex-shrink: 0;
   flex-grow: 0;
   align-items: flex-end;
 `;

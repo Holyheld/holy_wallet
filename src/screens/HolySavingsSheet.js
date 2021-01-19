@@ -1,6 +1,7 @@
 import { useRoute } from '@react-navigation/native';
 import analytics from '@segment/analytics-react-native';
-import React, { Fragment, useCallback } from 'react';
+import BigNumber from 'bignumber.js';
+import React, { Fragment, useCallback, useMemo } from 'react';
 import { Alert, StatusBar } from 'react-native';
 import { useSafeArea } from 'react-native-safe-area-context';
 import styled from 'styled-components/native';
@@ -9,6 +10,7 @@ import HolySavingsCoinRow from '../components/coin-row/HolySavingsCoinRow';
 
 import { Centered, Column } from '../components/layout';
 import {
+  SavingsPredictionStepper,
   SavingsSheetEmptyState,
   SavingsSheetHeader,
 } from '../components/savings';
@@ -40,7 +42,12 @@ const HolySavingsSheet = () => {
   //const { nativeCurrency, nativeCurrencySymbol } = useAccountSettings();
   const totalBalance = params['totalBalance'];
   const isEmpty = totalBalance === '0';
-  const lifetimeAccruedInterest = params['lifetimeAccruedInterest'];
+  const ildBalance = '24.7451';
+
+  const totalBalanceDispay = useMemo(
+    () => new BigNumber(totalBalance).toFormat(2),
+    [totalBalance]
+  );
 
   const savingsDataArr = params['savings'];
   const defaultSaving = params['currentSaving'];
@@ -109,8 +116,8 @@ const HolySavingsSheet = () => {
         ) : (
           <Fragment>
             <SavingsSheetHeader
-              balance={totalBalance}
-              lifetimeAccruedInterest={lifetimeAccruedInterest}
+              balance={totalBalanceDispay}
+              ildBalance={ildBalance}
             />
             <SheetActionButtonRow>
               <SheetActionButton
@@ -143,10 +150,10 @@ const HolySavingsSheet = () => {
                 paddingTop={1}
               >
                 <HolySavingsCoinRow
-                  additionalShare="0.111"
+                  additionalShare={ildBalance}
                   apy={savingsItem.apy}
                   balance={savingsItem.balance}
-                  symbol={savingsItem.underlying.symbol}
+                  symbol="USDC"
                 />
               </Column>
             ))}
@@ -156,15 +163,10 @@ const HolySavingsSheet = () => {
               color={colors.divider}
               zIndex={0}
             />
-            {/* <SavingsPredictionStepper
-              asset={underlying}
-              balance={
-                isSymbolStablecoin(underlying.symbol)
-                  ? underlyingBalanceNativeValue
-                  : supplyBalanceUnderlying
-              }
-              interestRate={supplyRate}
-            /> */}
+            <SavingsPredictionStepper
+              balance={totalBalance}
+              interestRate="0.23"
+            />
           </Fragment>
         )}
       </SlackSheet>

@@ -1,9 +1,8 @@
 import BigNumber from 'bignumber.js';
+import PropTypes from 'prop-types';
 import React, { useCallback, useMemo } from 'react';
 import { StyleSheet } from 'react-native';
 import styled from 'styled-components/primitives';
-import { HOLY_TREASURY } from '../../config/experimental';
-import useExperimentalFlag from '../../config/experimentalHooks';
 import { greaterThan } from '../../helpers/utilities';
 import { useNavigation } from '../../navigation/Navigation';
 
@@ -11,8 +10,8 @@ import Routes from '../../navigation/routesNames';
 import APYPill from '../APYPill';
 import { ButtonPressAnimation } from '../animations';
 import { Centered, InnerBorder, Row, RowWithMargins } from '../layout';
-import SavingsIcon from '../savings/SavingsIcon';
-import { Text } from '../text';
+import { GradientText, Text } from '../text';
+import TreasuryIcon from './TreasuryIcon';
 import { useDimensions } from '@holyheld-com/hooks';
 import { colors, padding, position } from '@holyheld-com/styles';
 import ShadowStack from 'react-native-shadow-stack';
@@ -25,10 +24,16 @@ const TreasuryBankListRowShadows = [
   [0, 5, 15, colors.dark, 0.4],
 ];
 
+const centGradientProps = {
+  end: { x: 1, y: 1 },
+  start: { x: 0, y: 0 },
+  steps: [0, 1],
+};
+
 const sx = StyleSheet.create({
   button: {
     ...position.centeredAsObject,
-    backgroundColor: colors.apyPillBackground,
+    backgroundColor: colors.buttonPrimary,
     borderRadius: ButtonBorderRadius,
     height: 30,
     paddingBottom: 1,
@@ -47,37 +52,36 @@ const TreasuryBankListRowShadowStack = styled(ShadowStack).attrs(
   })
 )``;
 
-const TreasuryBankListRow = () => {
+const TreasuryBankListRow = ({ treasury }) => {
   const { width: deviceWidth } = useDimensions();
   const { navigate } = useNavigation();
 
-  const balance = '0.00';
+  const balance = treasury.balance;
 
-  const { displayedBalance, isEmpty } = useMemo(() => {
+  const { displayedDollars, displayedCents, isEmpty } = useMemo(() => {
     const isEmpty = !greaterThan(balance, '0');
     let displayedBalance = '0.00';
     if (isEmpty) {
       displayedBalance = new BigNumber(balance).toFixed(2);
     } else {
-      displayedBalance = new BigNumber(balance).decimalPlaces(8).toString();
+      displayedBalance = new BigNumber(balance).toFormat(8);
     }
+    const [displayedDollars, displayedCents] = displayedBalance.split('.');
     return {
-      displayedBalance,
+      displayedCents,
+      displayedDollars,
       isEmpty,
     };
   }, [balance]);
 
-  const disabled = !useExperimentalFlag(HOLY_TREASURY);
-
   const onButtonPress = useCallback(() => {
-    //console.log('GO TO TREASURY');
-    if (!disabled && !isEmpty) {
+    if (!isEmpty) {
       navigate(Routes.TREASURY_SHEET, {
         balance: balance,
         lifetimeSupplyInterestAccrued: '10',
       });
     }
-  }, [navigate, disabled, isEmpty]);
+  }, [navigate, isEmpty, balance]);
 
   return (
     <ButtonPressAnimation
@@ -90,21 +94,36 @@ const TreasuryBankListRow = () => {
           <Row
             align="center"
             css={padding(9, 10, 10, 20)}
-            justify="space-between"
-            onPress={() => {}}
+            justify="space-around"
+            onPress={NOOP}
             scaleTo={0.96}
           >
-            {!isEmpty && <SavingsIcon size={23} />}
-            <RowWithMargins align="center" margin={8} paddingLeft={4}>
+            {!isEmpty && (
+              <RowWithMargins width={31}>
+                <TreasuryIcon size={23} />
+              </RowWithMargins>
+            )}
+            <Row flexGrow={3} justify="start" paddingLeft={4}>
               <Text
-                color={colors.textColor}
+                color={isEmpty ? colors.textColorMuted : colors.textColor}
                 letterSpacing="roundedTightest"
-                opacity={0.5}
                 size="lmedium"
                 weight="bold"
+                width="auto"
               >
-                {`$${displayedBalance}`}
+                {`$${displayedDollars}`}
               </Text>
+
+              <GradientText
+                {...centGradientProps}
+                color={isEmpty ? colors.textColorMuted : colors.green}
+                letterSpacing="roundedTightest"
+                size="lmedium"
+                weight="bold"
+                width="auto"
+              >
+                {`.${displayedCents}`}
+              </GradientText>
               {isEmpty && (
                 <ButtonPressAnimation
                   onPress={NOOP}
@@ -112,18 +131,18 @@ const TreasuryBankListRow = () => {
                   style={sx.button}
                 >
                   <Text
-                    color={colors.textColor}
+                    color={colors.textColorPrimaryButton}
                     letterSpacing="roundedTight"
                     size="lmedium"
                     weight="semibold"
                   >
-                    Pending
+                    Deposit
                   </Text>
                   <InnerBorder radius={ButtonBorderRadius} />
                 </ButtonPressAnimation>
               )}
-            </RowWithMargins>
-            <APYPill postfix="x" value="0.00" />
+            </Row>
+            <APYPill postfix="x" value={treasury.rate} />
           </Row>
         </TreasuryBankListRowShadowStack>
       </Centered>
@@ -131,9 +150,8 @@ const TreasuryBankListRow = () => {
   );
 };
 
-// TreasuryBankListRow.propTypes = {
-//   underlying: PropTypes.object,
-//   userBalance: PropTypes.string,
-// };
+TreasuryBankListRow.propTypes = {
+  treasury: PropTypes.object,
+};
 
 export default React.memo(TreasuryBankListRow);

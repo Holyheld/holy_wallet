@@ -3,7 +3,8 @@ import { captureException } from '@sentry/react-native';
 import BigNumber from 'bignumber.js';
 import {
   holyUpdateBonusRate,
-  holyUpdateEarlyLPBonus,
+  holyUpdateEarlyLPBonusAmount,
+  holyUpdateEarlyLPBonusShow,
   holyUpdateSavings,
 } from '../redux/holy';
 import {
@@ -21,7 +22,7 @@ const holySavingsRefreshState = () => async dispatch => {
   const savings = [
     {
       apy: '29.4',
-      balance: '0',
+      balance: '4420.04259063',
       native: {
         price: {
           amount: '1',
@@ -56,12 +57,16 @@ const holyEarlyLPBonusesRefresh = () => async (dispatch, getState) => {
       .toFixed();
     logger.sentry('HOLY claimable bonuses: ', claimableBonus);
 
-    dispatch(holyUpdateEarlyLPBonus(claimableBonus.toString()));
+    dispatch(holyUpdateEarlyLPBonusAmount(claimableBonus.toString()));
+    dispatch(holyUpdateEarlyLPBonusShow(false));
+    //dispatch(holyUpdateEarlyLPBonusAmount('23'));
+    //dispatch(holyUpdateEarlyLPBonusShow(true));
   } catch (error) {
     logger.sentry('error refreshing HOLY early LP bonuses');
     logger.sentry(error);
     captureException(error);
-    dispatch(holyUpdateEarlyLPBonus('0'));
+    dispatch(holyUpdateEarlyLPBonusAmount('0'));
+    dispatch(holyUpdateEarlyLPBonusShow(false));
   }
 
   const visorAddress = HOLY_VISOR_ADDRESS(network);
