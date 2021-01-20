@@ -12,7 +12,7 @@ import {
 import { Column, KeyboardFixedOpenLayout } from '../components/layout';
 import { Modal } from '../components/modal';
 import CurrencySelectionTypes from '../helpers/currencySelectionTypes';
-import { useHolySavingsWithBalance } from '../hooks/useHolySavings';
+import { useHolySavingsWithBalance } from '../hooks/useHolyData';
 import { delayNext } from '../hooks/useMagicAutofocus';
 import { useNavigation } from '../navigation/Navigation';
 import { useInteraction, usePrevious } from '@holyheld-com/hooks';

@@ -32,10 +32,10 @@ const Content = styled(Column).attrs({ justify: 'space-between' })`
   opacity: ${({ isHidden }) => (isHidden ? 0.4 : 1)};
 `;
 
-const BottomRow = ({ share }) => {
+const BottomRow = ({ dpy, dpyAmount, symbol }) => {
   return (
     <Fragment>
-      <APYPill postfix="x" small value={share} />
+      <APYPill postfix="% DPY" small value={dpy} />
       <RowWithMargins flex={1} margin={4}>
         <Column flex={1}>
           <Text
@@ -45,7 +45,7 @@ const BottomRow = ({ share }) => {
             size="smedium"
             weight="semibold"
           >
-            {' '}
+            {dpyAmount + ' ' + symbol}
           </Text>
         </Column>
       </RowWithMargins>
@@ -64,7 +64,7 @@ const TopRow = ({ balance, symbol }) => (
   </Row>
 );
 
-const LPBonusCoinRow = ({ balance, symbol, share }) => {
+const LPBonusCoinRow = ({ address, balance, symbol, dpy, dpyAmount }) => {
   const diplayedBalance = useMemo(
     () => new BigNumber(balance).decimalPlaces(8).toString(),
     [balance]
@@ -73,13 +73,13 @@ const LPBonusCoinRow = ({ balance, symbol, share }) => {
   return (
     <ButtonPressAnimation disabled onPress={() => {}} scaleTo={1.02}>
       <Container>
-        <CoinIcon size={45} symbol={symbol} />
+        <CoinIcon address={address} size={45} symbol={symbol} />
         <Content justify="center">
           <Row align="center" {...(android && { styles: { height: 50 } })}>
             <TopRow balance={diplayedBalance} symbol={symbol} />
           </Row>
           <Row align="center" marginBottom={0.5}>
-            <BottomRow share={share} symbol={symbol} />
+            <BottomRow dpy={dpy} dpyAmount={dpyAmount} symbol={symbol} />
           </Row>
         </Content>
       </Container>

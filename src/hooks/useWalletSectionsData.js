@@ -9,7 +9,7 @@ import {
   useHolyEarlyLPBonus,
   useHolySavings,
   useHolyTreasury,
-} from './useHolySavings';
+} from './useHolyData';
 import useIsWalletEthZero from './useIsWalletEthZero';
 import useSavingsAccount from './useSavingsAccount';
 import useSendableUniqueTokens from './useSendableUniqueTokens';

@@ -1,4 +1,3 @@
-import { useRoute } from '@react-navigation/native';
 import React, { Fragment, useCallback } from 'react';
 import { Alert, StatusBar } from 'react-native';
 import { useSafeArea } from 'react-native-safe-area-context';
@@ -12,8 +11,14 @@ import {
   SheetActionButtonRow,
   SlackSheet,
 } from '../components/sheet';
-import { useHolyBonusRate } from '../hooks/useHolySavings';
-import { useDimensions, useWallets } from '@holyheld-com/hooks';
+import { greaterThan } from '../helpers/utilities';
+import { useHolyEarlyLPBonus } from '../hooks/useHolyData';
+import { getHHAsset } from '../references/holy';
+import {
+  useAccountSettings,
+  useDimensions,
+  useWallets,
+} from '@holyheld-com/hooks';
 import { useNavigation } from '@holyheld-com/navigation';
 import Routes from '@holyheld-com/routes';
 import { colors, position } from '@holyheld-com/styles';
@@ -30,22 +35,30 @@ const Container = styled(Centered).attrs({ direction: 'column' })`
 const LPBonusSheet = () => {
   const { height: deviceHeight } = useDimensions();
   const { navigate } = useNavigation();
-  const { params } = useRoute();
   const insets = useSafeArea();
   const { isReadOnlyWallet } = useWallets();
-  const { bonusRate } = useHolyBonusRate();
-  const balance = params['balance'];
-  const isEmpty = balance === 0;
+  const { network } = useAccountSettings();
+  const HHAsset = getHHAsset(network);
+
+  const {
+    amountToClaim,
+    dpy,
+    nativeAmountToclaim,
+    dpyNativeAmount,
+    dpyAmount,
+  } = useHolyEarlyLPBonus();
+
+  const isEmpty = !greaterThan(amountToClaim, '0');
   const onClaim = useCallback(() => {
     if (!isReadOnlyWallet) {
       // TODO: Claim LP bonus
       navigate(Routes.HOLY_CLAIM_LP_BONUS, {
-        bonusToClaimBalance: balance,
+        bonusToClaimBalance: amountToClaim,
       });
     } else {
       Alert.alert(`You need to import the wallet in order to do this`);
     }
-  }, [isReadOnlyWallet, navigate, balance]);
+  }, [isReadOnlyWallet, navigate, amountToClaim]);
 
   return (
     <Container
@@ -59,7 +72,10 @@ const LPBonusSheet = () => {
         contentHeight={isEmpty ? SheetEmptyHeight : SheetHeight}
       >
         <Fragment>
-          <LPBonusSheetHeader balance={balance} lifetimeAccruedInterest={0} />
+          <LPBonusSheetHeader
+            nativeBalance={nativeAmountToclaim}
+            nativeDPYBalance={dpyNativeAmount}
+          />
           <SheetActionButtonRow>
             <SheetActionButton
               color={colors.buttonClaimAndBurn}
@@ -77,7 +93,13 @@ const LPBonusSheet = () => {
             zIndex={0}
           />
           <Column paddingBottom={9} paddingTop={4}>
-            <LPBonusCoinRow balance={balance} share={bonusRate} symbol="HH" />
+            <LPBonusCoinRow
+              address={HHAsset.address}
+              balance={amountToClaim}
+              dpy={dpy}
+              dpyAmount={dpyAmount}
+              symbol={HHAsset.symbol}
+            />
           </Column>
           <Divider
             backgroundColor={colors.modalBackground}

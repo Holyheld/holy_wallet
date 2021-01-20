@@ -1,17 +1,10 @@
-import { map } from 'lodash';
 import React, { Fragment } from 'react';
 import useOpenLPBonus from '../../hooks/useOpenLPBonus';
 import { OpacityToggler } from '../animations';
 import LPBonusListHeader from './LPBonusListHeader';
 import LPBonusListRow from './LPBonusListRow';
 
-const renderLPBonusListRow = item => {
-  return item?.underlying ? (
-    <LPBonusListRow key={item?.underlying.symbol} {...item} />
-  ) : null;
-};
-
-export default function LPBonusListWrapper({ assets, totalValue = '0' }) {
+export default function LPBonusListWrapper({ totalValue = '0' }) {
   const { isLPBonusOpen, toggleOpenLPBonus } = useOpenLPBonus();
 
   return (
@@ -26,7 +19,7 @@ export default function LPBonusListWrapper({ assets, totalValue = '0' }) {
         isVisible={!isLPBonusOpen}
         pointerEvents={isLPBonusOpen ? 'auto' : 'none'}
       >
-        {map(assets, renderLPBonusListRow)}
+        <LPBonusListRow />
       </OpacityToggler>
     </Fragment>
   );

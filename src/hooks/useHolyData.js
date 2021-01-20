@@ -1,5 +1,7 @@
+import BigNumber from 'bignumber.js';
 import { useSelector } from 'react-redux';
 import { createSelector } from 'reselect';
+import { multiply } from '../helpers/utilities';
 
 const holySavingsTokens = state => state.holy.savingsTokens;
 const holyBonusRate = state => state.holy.bonusRate;
@@ -52,7 +54,30 @@ export function useHolySavings() {
 
 export function useHolyEarlyLPBonus() {
   const earlyLPBonus = useSelector(state => state.holy.earlyLPBonus);
-  return earlyLPBonus;
+  const hhNativePrice = useSelector(state => state.holy.prices.HH.inNative);
+
+  const nativeAmountToclaim = multiply(
+    hhNativePrice,
+    earlyLPBonus.amountToClaim
+  );
+
+  const nativeFullCap = multiply(hhNativePrice, earlyLPBonus.fullCap);
+
+  const dpyAmount = multiply(
+    earlyLPBonus.fullCap,
+    new BigNumber(earlyLPBonus.dpy).shiftedBy(-2)
+  );
+
+  const dpyNativeAmount = multiply(hhNativePrice, dpyAmount);
+
+  return {
+    ...earlyLPBonus,
+    dpyAmount,
+    dpyNativeAmount,
+    hhNativePrice,
+    nativeAmountToclaim,
+    nativeFullCap,
+  };
 }
 
 export function useHolyTreasury() {

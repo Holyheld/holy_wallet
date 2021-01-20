@@ -1,14 +1,19 @@
 import BigNumber from 'bignumber.js';
 import PropTypes from 'prop-types';
 import React, { useMemo } from 'react';
-import { Centered, Row } from '../layout';
+import { Centered, Row, RowWithMargins } from '../layout';
 import { Text } from '../text';
 import { colors, padding } from '@holyheld-com/styles';
 
-const LPBonusSheetHeader = ({ balance }) => {
-  const diplayedBalance = useMemo(
-    () => new BigNumber(balance).decimalPlaces(8).toString(),
-    [balance]
+const LPBonusSheetHeader = ({ nativeBalance, nativeDPYBalance }) => {
+  const diplayedNativeBalance = useMemo(
+    () => new BigNumber(nativeBalance).toFormat(2),
+    [nativeBalance]
+  );
+
+  const dispalyedNativeDPYBalance = useMemo(
+    () => new BigNumber(nativeDPYBalance).toFormat(2),
+    [nativeDPYBalance]
   );
 
   return (
@@ -24,15 +29,27 @@ const LPBonusSheetHeader = ({ balance }) => {
       </Text>
       <Row>
         <Text letterSpacing="zero" size="h1" weight="heavy">
-          {diplayedBalance}
+          ${diplayedNativeBalance}
         </Text>
       </Row>
+      <RowWithMargins align="center" margin={4} marginTop={1}>
+        <Text
+          align="center"
+          color={colors.green}
+          letterSpacing="roundedTight"
+          lineHeight="loose"
+          size="large"
+          weight="semibold"
+        >
+          ${dispalyedNativeDPYBalance}
+        </Text>
+      </RowWithMargins>
     </Centered>
   );
 };
 
 LPBonusSheetHeader.propTypes = {
-  balance: PropTypes.string,
+  nativeBalance: PropTypes.string,
 };
 
 export default LPBonusSheetHeader;

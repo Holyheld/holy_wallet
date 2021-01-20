@@ -1,20 +1,20 @@
 import BigNumber from 'bignumber.js';
-import PropTypes from 'prop-types';
 import React, { useCallback, useMemo } from 'react';
 import { StyleSheet } from 'react-native';
 
 import styled from 'styled-components/primitives';
 
 import { greaterThan } from '../../helpers/utilities';
-import { useHolyBonusRate } from '../../hooks/useHolySavings';
+import { useHolyEarlyLPBonus } from '../../hooks/useHolyData';
 import Routes from '../../navigation/routesNames';
+import { getHHAsset } from '../../references/holy';
 import { SheetHeight } from '../../screens/LPBonusSheet';
 import APYPill from '../APYPill';
 import { ButtonPressAnimation } from '../animations';
 import { CoinIcon } from '../coin-icon';
 import { Centered, InnerBorder, Row, RowWithMargins } from '../layout';
 import { Text } from '../text';
-import { useDimensions } from '@holyheld-com/hooks';
+import { useAccountSettings, useDimensions } from '@holyheld-com/hooks';
 import { useNavigation } from '@holyheld-com/navigation';
 import { colors, padding, position } from '@holyheld-com/styles';
 import ShadowStack from 'react-native-shadow-stack';
@@ -49,37 +49,39 @@ const LPBonusListRowShadowStack = styled(ShadowStack).attrs(
   })
 )``;
 
-const LPBonusListRow = ({ balance, underlying }) => {
+const LPBonusListRow = () => {
   const { width: deviceWidth } = useDimensions();
   const { navigate } = useNavigation();
+  const { network } = useAccountSettings();
+  const HHAsset = getHHAsset(network);
 
-  const { bonusRate } = useHolyBonusRate();
+  const { amountToClaim, dpy } = useHolyEarlyLPBonus();
 
-  const disabled = true;
+  const disabled = false;
 
   const { displayedBalance, isEmpty } = useMemo(() => {
-    const isEmpty = !greaterThan(balance, '0');
+    const isEmpty = !greaterThan(amountToClaim, '0');
     let displayedBalance = '0.00';
     if (isEmpty) {
-      displayedBalance = new BigNumber(balance).toFixed(2);
+      displayedBalance = new BigNumber(amountToClaim).toFixed(2);
     } else {
-      displayedBalance = new BigNumber(balance).decimalPlaces(8).toString();
+      displayedBalance = new BigNumber(amountToClaim)
+        .decimalPlaces(8)
+        .toString();
     }
     return {
       displayedBalance,
       isEmpty,
     };
-  }, [balance]);
+  }, [amountToClaim]);
 
   const onButtonPress = useCallback(() => {
     if (!disabled && !isEmpty) {
       navigate(Routes.LP_BONUS_SHEET, {
-        balance: balance,
-        lifetimeSupplyInterestAccrued: '0',
         longFormHeight: SheetHeight,
       });
     }
-  }, [navigate, isEmpty, disabled, balance]);
+  }, [navigate, isEmpty, disabled]);
 
   return (
     <ButtonPressAnimation
@@ -99,9 +101,9 @@ const LPBonusListRow = ({ balance, underlying }) => {
             {!isEmpty && (
               <Centered>
                 <CoinIcon
-                  address={underlying.address}
+                  address={HHAsset.address}
                   size={26}
-                  symbol={underlying.symbol}
+                  symbol={HHAsset.symbol}
                 />
               </Centered>
             )}
@@ -138,17 +140,12 @@ const LPBonusListRow = ({ balance, underlying }) => {
                 </ButtonPressAnimation>
               )}
             </RowWithMargins>
-            <APYPill postfix="% DPY" value={bonusRate} />
+            <APYPill postfix="% DPY" value={dpy} />
           </Row>
         </LPBonusListRowShadowStack>
       </Centered>
     </ButtonPressAnimation>
   );
-};
-
-LPBonusListRow.propTypes = {
-  balance: PropTypes.string,
-  underlying: PropTypes.object,
 };
 
 export default React.memo(LPBonusListRow);

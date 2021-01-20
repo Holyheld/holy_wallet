@@ -254,9 +254,7 @@ export const ViewTypes = {
     index: 9,
     renderComponent: ({ data }) => {
       const { item = {} } = data;
-      return (
-        <LPBonusListWrapper assets={item.assets} totalValue={item.totalValue} />
-      );
+      return <LPBonusListWrapper totalValue={item.totalValue} />;
     },
   },
 

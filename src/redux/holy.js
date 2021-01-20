@@ -7,6 +7,9 @@ const HOLY_UPDATE_EARLY_LP_BONUS_AMOUNT =
   'holy/HOLY_UPDATE_EARLY_LP_BONUS_AMOUNT';
 const HOLY_UPDATE_EARLY_LP_BONUS_SHOW = 'holy/HOLY_UPDATE_EARLY_LP_BONUS_SHOW';
 const HOLY_UPDATE_BONUS_RATE = 'holy/HOLY_UPDATE_BONUS_RATE';
+const HOLY_UPDATE_BONUS_FULL_CAP = 'holy/HOLY_UPDATE_BONUS_FULL_CAP';
+const PRICE_HOLY_UPDATE = 'holy/PIRCE_HOLY_UPDATE';
+const PRICE_HH_UPDATE = 'holy/PRICE_HH_UPDATE';
 
 // -- Actions --------------------------------------------------------------- //
 
@@ -38,12 +41,56 @@ export const holyUpdateBonusRate = bonusRate => dispatch => {
   });
 };
 
+export const holyUpdateFullCap = fullCap => dispatch => {
+  dispatch({
+    payload: fullCap,
+    type: HOLY_UPDATE_BONUS_FULL_CAP,
+  });
+};
+
+export const updateHolyPrice = (nativePrice, priceInEth) => dispatch => {
+  dispatch({
+    payload: {
+      inEth: priceInEth,
+      inNative: nativePrice,
+    },
+    type: PRICE_HOLY_UPDATE,
+  });
+};
+
+export const updateHHPrice = (nativePrice, priceInEth) => dispatch => {
+  dispatch({
+    payload: {
+      inEth: priceInEth,
+      inNative: nativePrice,
+    },
+    type: PRICE_HH_UPDATE,
+  });
+};
+
 // -- Reducer --------------------------------------------------------------- //
 export const INITIAL_HOLY_STATE = {
   bonusRate: '1.00',
   earlyLPBonus: {
-    amount: '0',
+    amountToClaim: '101.222225',
+    dpy: '15',
+    fullCap: '500',
     showPanel: false,
+    todayBonus: '0',
+  },
+  prices: {
+    HH: {
+      inEth: '1',
+      inNative: '1',
+    },
+    HOLY: {
+      inEth: '1',
+      inNative: '1',
+    },
+    USDC: {
+      inEth: '1',
+      inNative: '1',
+    },
   },
   savingsTokens: [
     {
@@ -75,13 +122,22 @@ export default (state = INITIAL_HOLY_STATE, action) =>
         draft.savingsTokens = action.payload;
         break;
       case HOLY_UPDATE_EARLY_LP_BONUS_AMOUNT:
-        draft.earlyLPBonus.amount = action.payload;
+        draft.earlyLPBonus.amountToClaim = action.payload;
         break;
       case HOLY_UPDATE_EARLY_LP_BONUS_SHOW:
         draft.earlyLPBonus.showPanel = action.payload;
         break;
       case HOLY_UPDATE_BONUS_RATE:
         draft.bonusRate = action.payload;
+        break;
+      case HOLY_UPDATE_BONUS_FULL_CAP:
+        draft.earlyLPBonus.fullCap = action.payload;
+        break;
+      case PRICE_HOLY_UPDATE:
+        draft.prices.HOLY = action.payload;
+        break;
+      case PRICE_HH_UPDATE:
+        draft.prices.HH = action.payload;
         break;
       default:
         break;
