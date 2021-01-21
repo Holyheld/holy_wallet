@@ -8,6 +8,7 @@ const HOLY_UPDATE_EARLY_LP_BONUS_AMOUNT =
 const HOLY_UPDATE_EARLY_LP_BONUS_SHOW = 'holy/HOLY_UPDATE_EARLY_LP_BONUS_SHOW';
 const HOLY_UPDATE_BONUS_RATE = 'holy/HOLY_UPDATE_BONUS_RATE';
 const HOLY_UPDATE_BONUS_FULL_CAP = 'holy/HOLY_UPDATE_BONUS_FULL_CAP';
+const HOLY_UPDATE_BONUS_DPY = 'holy/HOLY_UPDATE_BONUS_DPY';
 const PRICE_HOLY_UPDATE = 'holy/PIRCE_HOLY_UPDATE';
 const PRICE_HH_UPDATE = 'holy/PRICE_HH_UPDATE';
 
@@ -45,6 +46,13 @@ export const holyUpdateFullCap = fullCap => dispatch => {
   dispatch({
     payload: fullCap,
     type: HOLY_UPDATE_BONUS_FULL_CAP,
+  });
+};
+
+export const holyUpdateBonusDPY = dpy => dispatch => {
+  dispatch({
+    payload: dpy,
+    type: HOLY_UPDATE_BONUS_DPY,
   });
 };
 
@@ -138,6 +146,9 @@ export default (state = INITIAL_HOLY_STATE, action) =>
         break;
       case PRICE_HH_UPDATE:
         draft.prices.HH = action.payload;
+        break;
+      case HOLY_UPDATE_BONUS_DPY:
+        draft.earlyLPBonus.dpy = action.payload;
         break;
       default:
         break;

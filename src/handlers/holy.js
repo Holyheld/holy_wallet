@@ -4,6 +4,7 @@ import BigNumber from 'bignumber.js';
 import { get } from 'lodash';
 import { divide, multiply } from '../helpers/utilities';
 import {
+  holyUpdateBonusDPY,
   holyUpdateBonusRate,
   holyUpdateEarlyLPBonusAmount,
   holyUpdateEarlyLPBonusShow,
@@ -41,7 +42,7 @@ const ERC20SimpleABI = [
 
 const RefershHolySavings = () => async dispatch => {
   // request to smart contract here
-  logger.sentry('refreshing HOLY savings');
+  logger.log('refreshing HOLY savings');
   const savings = [
     {
       apy: '29.4',
@@ -69,24 +70,24 @@ const RefreshHolyEarlyLPBonus = () => async (dispatch, getState) => {
   const holyPassage = new Contract(contractAddress, contractABI, web3Provider);
 
   try {
-    logger.sentry('refreshing HOLY early LP bonuses');
+    logger.log('refreshing HOLY early LP bonuses');
     let claimableBonus = await holyPassage.getClaimableBonus({
       from: accountAddress,
     });
-    logger.sentry('HOLY bonus rate in WEI: ', claimableBonus);
+    logger.log('HOLY bonus rate in WEI: ', claimableBonus);
     claimableBonus = new BigNumber(claimableBonus.toString());
     claimableBonus = claimableBonus
       .dividedBy(new BigNumber(10).pow(new BigNumber(18)))
       .toFixed();
-    logger.sentry('HOLY claimable bonuses: ', claimableBonus);
+    logger.log('HOLY claimable bonuses: ', claimableBonus);
 
     //dispatch(holyUpdateEarlyLPBonusAmount(claimableBonus.toString()));
     //dispatch(holyUpdateEarlyLPBonusShow(false));
     dispatch(holyUpdateEarlyLPBonusAmount('101.222225'));
     dispatch(holyUpdateEarlyLPBonusShow(true));
   } catch (error) {
-    logger.sentry('error refreshing HOLY early LP bonuses');
-    logger.sentry(error);
+    logger.log('error refreshing HOLY early LP bonuses');
+    logger.log(error);
     captureException(error);
     dispatch(holyUpdateEarlyLPBonusAmount('0'));
     dispatch(holyUpdateEarlyLPBonusShow(false));
@@ -98,42 +99,60 @@ const RefreshHolyEarlyLPBonus = () => async (dispatch, getState) => {
   const holyVisor = new Contract(visorAddress, visorABI, web3Provider);
 
   try {
-    logger.sentry('refreshing HOLY bonus rate');
+    logger.log('refreshing HOLY bonus rate');
     let bonusRate = await holyVisor.bonusMultipliers(accountAddress, {
       from: accountAddress,
     });
-    logger.sentry('HOLY bonus rate in WEI: ', bonusRate);
+    logger.log('HOLY bonus rate in WEI: ', bonusRate);
     bonusRate = new BigNumber(bonusRate.toString());
     bonusRate = bonusRate.dividedBy(new BigNumber(10).pow(new BigNumber(18)));
-    logger.sentry('HOLY bonus rate: ', bonusRate);
+    logger.log('HOLY bonus rate: ', bonusRate);
     dispatch(holyUpdateBonusRate(bonusRate.toString()));
   } catch (error) {
-    logger.sentry('error refreshing HOLY bonus rate');
-    logger.sentry(error);
+    logger.log('error refreshing HOLY bonus rate');
+    logger.log(error);
     captureException(error);
     dispatch(holyUpdateBonusRate('1'));
   }
 
   try {
-    logger.sentry('refreshing HOLY amount caps');
+    logger.log('refreshing HOLY amount caps');
     let amountCap = await holyVisor.bonusAmountCaps(accountAddress, {
       from: accountAddress,
     });
-    logger.sentry('HOLY amount caps: ', amountCap);
+    logger.log('HOLY amount caps: ', amountCap);
     amountCap = new BigNumber(amountCap.toString());
     amountCap = amountCap.dividedBy(new BigNumber(10).pow(new BigNumber(18)));
-    logger.sentry('HOLY amount caps: ', amountCap);
+    logger.log('HOLY amount caps: ', amountCap);
     dispatch(holyUpdateFullCap('500'));
     //dispatch(holyUpdateFullCap(amountCap.toString()));
     // dispatch(
     //   holyUpdateEarlyLPBonusShow(greaterThan(amountCap.toString(), '0'))
     // );
   } catch (error) {
-    logger.sentry('error refreshing HOLY bonus amount caps');
-    logger.sentry(error);
+    logger.log('error refreshing HOLY bonus amount caps');
+    logger.log(error);
     captureException(error);
     dispatch(holyUpdateFullCap('0'));
     dispatch(holyUpdateEarlyLPBonusShow(false));
+  }
+
+  try {
+    logger.log('refreshing HOLY bonus DPY');
+    let dpy = await holyVisor.getDPY({
+      from: accountAddress,
+    });
+    logger.log('HOLY bonus DPY: ', dpy);
+    dpy = new BigNumber(dpy.toString());
+    dpy = dpy.dividedBy(new BigNumber(10).pow(new BigNumber(18)));
+    logger.log('HOLY bonus DPY: ', dpy);
+    //dispatch(holyUpdateBonusDPY('16'));
+    dispatch(holyUpdateBonusDPY(dpy.toString()));
+  } catch (error) {
+    logger.log('error refreshing HOLY bonus dpy');
+    logger.log(error);
+    captureException(error);
+    dispatch(holyUpdateBonusDPY('0'));
   }
 };
 
