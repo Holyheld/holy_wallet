@@ -52,6 +52,13 @@ export function useHolySavings() {
   return useSelector(withHolySavingsSelector);
 }
 
+export function useHHToken() {
+  const HHTokenPrice = useSelector(state => state.holy.prices.HH);
+  return {
+    HHTokenPrice,
+  };
+}
+
 export function useHolyEarlyLPBonus() {
   const earlyLPBonus = useSelector(state => state.holy.earlyLPBonus);
   const hhNativePrice = useSelector(state => state.holy.prices.HH.inNative);

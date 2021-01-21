@@ -33,6 +33,7 @@ import {
 import LPBonusInfo from '../components/lp-bonus/LPBonusInfo';
 import exchangeModalTypes from '../helpers/exchangeModalTypes';
 import { convertAmountToNativeAmount, greaterThan } from '../helpers/utilities';
+import { useHHToken } from '../hooks/useHolyData';
 import { loadWallet } from '../model/wallet';
 import { useNavigation } from '../navigation/Navigation';
 import useStatusBarManaging from '../navigation/useStatusBarManaging';
@@ -143,7 +144,14 @@ const HolyClaimModal = ({ bonusToClaimBalance, testID }) => {
   const symbol = get(hhV2Asset, 'symbol');
   const address = get(hhV2Asset, 'address');
 
-  const newNativePrice = get(hhV2Asset, 'native.price.amount', '0');
+  let newNativePrice = get(hhV2Asset, 'native.price.amount', '0');
+
+  const { HHTokenPrice } = useHHToken();
+
+  if (newNativePrice === '0') {
+    newNativePrice = HHTokenPrice.inNative;
+  }
+
   const nativeAmount = convertAmountToNativeAmount(
     amountToClaim,
     newNativePrice

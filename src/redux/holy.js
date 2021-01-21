@@ -75,7 +75,7 @@ export const INITIAL_HOLY_STATE = {
     amountToClaim: '101.222225',
     dpy: '15',
     fullCap: '500',
-    showPanel: false,
+    showPanel: true,
     todayBonus: '0',
   },
   prices: {

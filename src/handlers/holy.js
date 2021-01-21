@@ -257,8 +257,10 @@ export const refreshHolyPrice = () => async (dispatch, getState) => {
 };
 
 export const refreshHoly = () => async dispatch => {
-  dispatch(RefershHolySavings());
-  dispatch(RefreshHolyEarlyLPBonus());
-  dispatch(refreshHolyPrice());
-  dispatch(refreshHHPrice());
+  //dispatch(RefershHolySavings());
+  //dispatch(RefreshHolyEarlyLPBonus());
+  //dispatch(refreshHolyPrice());
+  //dispatch(refreshHHPrice());
+  dispatch(RefreshHolyEarlyLPBonus);
+  dispatch(RefershHolySavings);
 };

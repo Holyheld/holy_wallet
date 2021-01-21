@@ -5,6 +5,7 @@ import styled from 'styled-components/native';
 import Divider from '../components/Divider';
 import LPBonusCoinRow from '../components/coin-row/LPBonusCoinRow';
 import { Centered, Column } from '../components/layout';
+import LPBonusPredictionStepper from '../components/lp-bonus/LPBonusPredictionStepper';
 import LPBonusSheetHeader from '../components/lp-bonus/LPBonusSheetHeader';
 import {
   SheetActionButton,
@@ -24,7 +25,7 @@ import Routes from '@holyheld-com/routes';
 import { colors, position } from '@holyheld-com/styles';
 
 export const SheetEmptyHeight = 313;
-export const SheetHeight = android ? 360 : 312;
+export const SheetHeight = android ? 410 : 362;
 
 const Container = styled(Centered).attrs({ direction: 'column' })`
   ${position.cover};
@@ -106,15 +107,7 @@ const LPBonusSheet = () => {
             color={colors.divider}
             zIndex={0}
           />
-          {/* <SavingsPredictionStepper
-              asset={underlying}
-              balance={
-                isSymbolStablecoin(underlying.symbol)
-                  ? underlyingBalanceNativeValue
-                  : supplyBalanceUnderlying
-              }
-              interestRate={supplyRate}
-            /> */}
+          <LPBonusPredictionStepper dpyNativeAmount={dpyNativeAmount} />
         </Fragment>
       </SlackSheet>
     </Container>
