@@ -39,6 +39,8 @@
 	<string>$(CODEPUSH_KEY)</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
+	<key>LSApplicationCategoryType</key>
+	<string>public.app-category.finance</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>itms</string>
@@ -59,41 +61,41 @@
 		</dict>
 	</dict>
 	<key>NSAppleMusicUsageDescription</key>
-	<string>Rainbow</string>
+	<string>Holyheld</string>
 	<key>NSBluetoothAlwaysUsageDescription</key>
-	<string>Rainbow</string>
+	<string>Holyheld</string>
 	<key>NSBluetoothPeripheralUsageDescription</key>
-	<string>Rainbow</string>
+	<string>Holyheld</string>
 	<key>NSCalendarsUsageDescription</key>
-	<string>Rainbow</string>
+	<string>Holyheld</string>
 	<key>NSCameraUsageDescription</key>
 	<string>Used to scan QR codes</string>
 	<key>NSContactsUsageDescription</key>
-	<string>Rainbow</string>
+	<string>Holyheld</string>
 	<key>NSFaceIDUsageDescription</key>
 	<string>Used to sign transactions and access wallet keys</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Rainbow</string>
+	<string>Holyheld</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Rainbow</string>
+	<string>Holyheld</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>Rainbow</string>
+	<string>Holyheld</string>
 	<key>NSMotionUsageDescription</key>
-	<string>Rainbow</string>
+	<string>Holyheld</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>Rainbow</string>
+	<string>Holyheld</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Rainbow</string>
+	<string>Holyheld</string>
 	<key>NSSpeechRecognitionUsageDescription</key>
-	<string>Rainbow</string>
+	<string>Holyheld</string>
 	<key>NSUbiquitousContainers</key>
 	<dict>
-		<key>iCloud.me.rainbow</key>
+		<key>iCloud.me.holyheld</key>
 		<dict>
 			<key>NSUbiquitousContainerIsDocumentScopePublic</key>
 			<true/>
 			<key>NSUbiquitousContainerName</key>
-			<string>me.rainbow</string>
+			<string>me.holyheld</string>
 			<key>NSUbiquitousContainerSupportedFolderLevels</key>
 			<string>One</string>
 		</dict>
@@ -127,7 +129,7 @@
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
 	<key>UIUserInterfaceStyle</key>
-	<string>Light</string>
+	<string>Dark</string>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 	<key>branch_app_domain</key>

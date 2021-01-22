@@ -30,15 +30,12 @@
           <action android:name="android.intent.action.VIEW" />
           <category android:name="android.intent.category.DEFAULT" />
           <category android:name="android.intent.category.BROWSABLE" />
-          <data android:scheme="https" android:host="rnbwapp.com" />
-          <data android:scheme="https" android:host="rnbw.app" />
-          <data android:scheme="https" android:host="rainbowdotme.app.link" />
-          <data android:scheme="https" android:host="rnbwappdotcom.app.link" />
-          <data android:scheme="https" android:host="rainbowdotme-alternate.app.link" />
-          <data android:scheme="https" android:host="rnbwappdotcom-alternate.app.link" />
+          <data android:scheme="https" android:host="holyheld.com" />
+          <data android:scheme="https" android:host="holyheld.app.link" />
+          <data android:scheme="https" android:host="holyheld-alternate.app.link" />
         </intent-filter>
         <intent-filter>
-          <data android:scheme="rainbow" />
+          <data android:scheme="holyheld" />
           <action android:name="android.intent.action.VIEW" />
           <category android:name="android.intent.category.DEFAULT" />
           <category android:name="android.intent.category.BROWSABLE" />
@@ -54,7 +51,9 @@
           <action android:name="android.intent.action.VIEW" />
           <category android:name="android.intent.category.DEFAULT" />
           <category android:name="android.intent.category.BROWSABLE" />
-          <data android:scheme="https" android:host="rnbwapp.com" />
+          <data android:scheme="https" android:host="holyheld.com" />
+          <data android:scheme="https" android:host="holyheld.app.link" />
+          <data android:scheme="https" android:host="holyheld-alternate.app.link" />
         </intent-filter>
       </activity>
       <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />

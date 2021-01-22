@@ -18,6 +18,9 @@
 		15E531D5242B28EF00797B89 /* UIImageViewWithPersistentAnimations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E531D4242B28EF00797B89 /* UIImageViewWithPersistentAnimations.swift */; };
 		15E531DA242DAB7100797B89 /* NotificationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 15E531D9242DAB7100797B89 /* NotificationManager.m */; };
 		24979E8920F84250007EB0DA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 24979E7720F84004007EB0DA /* GoogleService-Info.plist */; };
+		25A65A6A25BAE7EF0037AC59 /* HolyheldDebug.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 157155042418734C009B698B /* HolyheldDebug.entitlements */; };
+		25A65A6C25BAE7F50037AC59 /* HolyheldRelease.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 157155032418733F009B698B /* HolyheldRelease.entitlements */; };
+		25A65A6D25BAE7F70037AC59 /* Holyheld.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 3C379D5D20FD1F92009AF81F /* Holyheld.entitlements */; };
 		3CBE29CD2381E43900BE05AC /* Dummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBE29CC2381E43900BE05AC /* Dummy.swift */; };
 		6630540924A38A1900E5B030 /* RainbowText.m in Sources */ = {isa = PBXBuildFile; fileRef = 6630540824A38A1900E5B030 /* RainbowText.m */; };
 		6635730624939991006ACFA6 /* SafeStoreReview.m in Sources */ = {isa = PBXBuildFile; fileRef = 6635730524939991006ACFA6 /* SafeStoreReview.m */; };
@@ -507,6 +510,9 @@
 				AA6228F124272F510078BDAA /* SF-Pro-Rounded-Medium.otf in Resources */,
 				AA6228F224272F510078BDAA /* SF-Pro-Rounded-Regular.otf in Resources */,
 				AA6228F324272F510078BDAA /* SF-Pro-Rounded-Semibold.otf in Resources */,
+				25A65A6A25BAE7EF0037AC59 /* HolyheldDebug.entitlements in Resources */,
+				25A65A6C25BAE7F50037AC59 /* HolyheldRelease.entitlements in Resources */,
+				25A65A6D25BAE7F70037AC59 /* Holyheld.entitlements in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -666,7 +672,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 7;
 				DEAD_CODE_STRIPPING = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 8B4LT9GVCS;
@@ -739,7 +745,7 @@
 				CODE_SIGN_ENTITLEMENTS = Holyheld/HolyheldRelease.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 8B4LT9GVCS;
 				ENABLE_BITCODE = NO;
@@ -836,7 +842,7 @@
 				CODE_SIGN_ENTITLEMENTS = Holyheld/Holyheld.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 8B4LT9GVCS;
 				ENABLE_BITCODE = NO;
@@ -933,7 +939,7 @@
 				CODE_SIGN_ENTITLEMENTS = Holyheld/Holyheld.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 8B4LT9GVCS;
 				ENABLE_BITCODE = NO;
