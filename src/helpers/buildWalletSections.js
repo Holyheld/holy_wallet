@@ -1,5 +1,5 @@
 import lang from 'i18n-js';
-import { compact, flattenDeep, get, groupBy, map, property } from 'lodash';
+import { compact, flattenDeep, get, groupBy, property } from 'lodash';
 import React from 'react';
 import { LayoutAnimation } from 'react-native';
 import FastImage from 'react-native-fast-image';
@@ -177,16 +177,7 @@ const withBalanceHolySavingsSection = (holySavings, priceOfEther) => {
   let holySavingsAssets = [];
 
   if (priceOfEther) {
-    holySavingsAssets = map(holySavings, saving => {
-      return {
-        apy: saving.apy,
-        balance: saving.balance,
-        underlying: {
-          address: saving.underlying.address,
-          symbol: saving.underlying.symbol,
-        },
-      };
-    });
+    holySavingsAssets = [holySavings];
   }
 
   const section = {

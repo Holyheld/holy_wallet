@@ -13,7 +13,7 @@ const HOLY_ADDRESSES = {
       '0x87b918e76c92818DB0c76a4E174447aeE6E6D23f',
     UNISWAP_HOLY_WETH_POOL_ADDRESS:
       '0xb6c8e5f00117136571d260bfb1baff62ddfd9960',
-    USDC_TOKEN_ADDRESS: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48',
+    USDC_TOKEN_ADDRESS: '0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48',
     WETH_TOKEN_ADDRESS: '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2',
   },
   [networkTypes.ropsten]: {
@@ -25,7 +25,7 @@ const HOLY_ADDRESSES = {
       '0x87b918e76c92818DB0c76a4E174447aeE6E6D23f',
     UNISWAP_HOLY_WETH_POOL_ADDRESS:
       '0xb6c8e5f00117136571d260bfb1baff62ddfd9960',
-    USDC_TOKEN_ADDRESS: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48',
+    USDC_TOKEN_ADDRESS: '0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48',
     WETH_TOKEN_ADDRESS: '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2',
   },
 };
@@ -77,12 +77,25 @@ const SUSHISWAP_HH_WETH_POOL_ADDRESS = (network: Network): string => {
 type asset = {
   address: string;
   symbol: string;
+  decimals: number;
+  name: string;
 };
 
 const getHHAsset = (network: Network): asset => {
   return {
     address: HH_V2_ADDRESS(network),
+    decimals: 18,
+    name: 'Holyheld',
     symbol: 'HH',
+  };
+};
+
+const getUSDCAsset = (network: Network): asset => {
+  return {
+    address: USDC_TOKEN_ADDRESS(network),
+    decimals: 18,
+    name: 'USDC',
+    symbol: 'USDC',
   };
 };
 
@@ -98,4 +111,5 @@ export {
   HH_V2_ADDRESS,
   WETH_TOKEN_ADDRESS,
   getHHAsset,
+  getUSDCAsset,
 };

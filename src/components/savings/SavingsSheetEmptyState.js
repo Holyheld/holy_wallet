@@ -35,7 +35,7 @@ const GradientAPYHeadingText = styled(GradientText).attrs({
   steps: [0, 1],
 })``;
 
-const SavingsSheetEmptyState = ({ isReadOnlyWallet, apy, underlying }) => {
+const SavingsSheetEmptyState = ({ isReadOnlyWallet, apy }) => {
   const { navigate } = useNavigation();
 
   const disableDeposit = true;
@@ -45,11 +45,8 @@ const SavingsSheetEmptyState = ({ isReadOnlyWallet, apy, underlying }) => {
       return;
     }
     if (!isReadOnlyWallet) {
-      navigate(Routes.SAVINGS_DEPOSIT_MODAL, {
+      navigate(Routes.HOLY_SAVINGS_DEPOSIT_MODAL, {
         params: {
-          params: {
-            defaultInputAsset: underlying,
-          },
           screen: Routes.MAIN_EXCHANGE_SCREEN,
         },
         screen: Routes.MAIN_EXCHANGE_NAVIGATOR,
@@ -57,7 +54,7 @@ const SavingsSheetEmptyState = ({ isReadOnlyWallet, apy, underlying }) => {
     } else {
       Alert.alert(`You need to import the wallet in order to do this`);
     }
-  }, [isReadOnlyWallet, navigate, underlying, disableDeposit]);
+  }, [isReadOnlyWallet, navigate, disableDeposit]);
 
   return (
     <Centered direction="column" paddingTop={9}>
@@ -87,15 +84,6 @@ const SavingsSheetEmptyState = ({ isReadOnlyWallet, apy, underlying }) => {
           size="big"
           textColor={colors.textColorPrimaryButton}
         />
-        {/*
-          <SheetActionButton
-            color={colors.white}
-            label="Deposit with Pay"
-            onPress={() => navigate(Routes.SAVINGS_DEPOSIT_MODAL)}
-            size="big"
-            textColor={colors.dark}
-          />
-        */}
       </ColumnWithMargins>
     </Centered>
   );

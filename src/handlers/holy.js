@@ -2,14 +2,13 @@ import { Contract } from '@ethersproject/contracts';
 import { captureException } from '@sentry/react-native';
 import BigNumber from 'bignumber.js';
 import { get } from 'lodash';
-import { divide, multiply } from '../helpers/utilities';
+import { divide, greaterThan, multiply } from '../helpers/utilities';
 import {
   holyUpdateBonusDPY,
   holyUpdateBonusRate,
   holyUpdateEarlyLPBonusAmount,
   holyUpdateEarlyLPBonusShow,
   holyUpdateFullCap,
-  holyUpdateSavings,
   updateHHPrice,
   updateHolyPrice,
 } from '../redux/holy';
@@ -40,26 +39,26 @@ const ERC20SimpleABI = [
   'event Transfer(address indexed from, address indexed to, uint amount)',
 ];
 
-const RefershHolySavings = () => async dispatch => {
+const RefershHolySavings = () => async () => {
   // request to smart contract here
   logger.log('refreshing HOLY savings');
-  const savings = [
-    {
-      apy: '29.4',
-      balance: '4420.04259063',
-      native: {
-        price: {
-          amount: '1',
-        },
-      },
-      underlying: {
-        address: '0x6b175474e89094c44da98b954eedeac495271d1f', // TODO: real address
-        symbol: 'USDC',
-      },
-    },
-  ];
+  // const savings = [
+  //   {
+  //     apy: '29.4',
+  //     balance: '4420.04259063',
+  //     native: {
+  //       price: {
+  //         amount: '1',
+  //       },
+  //     },
+  //     underlying: {
+  //       address: '0x6b175474e89094c44da98b954eedeac495271d1f', // TODO: real address
+  //       symbol: 'USDC',
+  //     },
+  //   },
+  // ];
 
-  dispatch(holyUpdateSavings(savings));
+  // dispatch(holyUpdateSavings(savings));
 };
 
 const RefreshHolyEarlyLPBonus = () => async (dispatch, getState) => {
@@ -81,16 +80,12 @@ const RefreshHolyEarlyLPBonus = () => async (dispatch, getState) => {
       .toFixed();
     logger.log('HOLY claimable bonuses: ', claimableBonus);
 
-    //dispatch(holyUpdateEarlyLPBonusAmount(claimableBonus.toString()));
-    //dispatch(holyUpdateEarlyLPBonusShow(false));
-    dispatch(holyUpdateEarlyLPBonusAmount('101.222225'));
-    dispatch(holyUpdateEarlyLPBonusShow(true));
+    dispatch(holyUpdateEarlyLPBonusAmount(claimableBonus.toString()));
   } catch (error) {
     logger.log('error refreshing HOLY early LP bonuses');
     logger.log(error);
     captureException(error);
     dispatch(holyUpdateEarlyLPBonusAmount('0'));
-    dispatch(holyUpdateEarlyLPBonusShow(false));
   }
 
   const visorAddress = HOLY_VISOR_ADDRESS(network);
@@ -124,11 +119,11 @@ const RefreshHolyEarlyLPBonus = () => async (dispatch, getState) => {
     amountCap = new BigNumber(amountCap.toString());
     amountCap = amountCap.dividedBy(new BigNumber(10).pow(new BigNumber(18)));
     logger.log('HOLY amount caps: ', amountCap);
-    dispatch(holyUpdateFullCap('500'));
-    //dispatch(holyUpdateFullCap(amountCap.toString()));
-    // dispatch(
-    //   holyUpdateEarlyLPBonusShow(greaterThan(amountCap.toString(), '0'))
-    // );
+    //dispatch(holyUpdateFullCap('500'));
+    dispatch(holyUpdateFullCap(amountCap.toString()));
+    dispatch(
+      holyUpdateEarlyLPBonusShow(greaterThan(amountCap.toString(), '0'))
+    );
   } catch (error) {
     logger.log('error refreshing HOLY bonus amount caps');
     logger.log(error);
@@ -276,10 +271,10 @@ export const refreshHolyPrice = () => async (dispatch, getState) => {
 };
 
 export const refreshHoly = () => async dispatch => {
-  //dispatch(RefershHolySavings());
-  //dispatch(RefreshHolyEarlyLPBonus());
-  //dispatch(refreshHolyPrice());
-  //dispatch(refreshHHPrice());
-  dispatch(RefreshHolyEarlyLPBonus);
-  dispatch(RefershHolySavings);
+  dispatch(RefershHolySavings());
+  dispatch(RefreshHolyEarlyLPBonus());
+  dispatch(refreshHolyPrice());
+  dispatch(refreshHHPrice());
+  //dispatch(RefreshHolyEarlyLPBonus);
+  //dispatch(RefershHolySavings);
 };

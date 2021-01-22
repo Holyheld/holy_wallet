@@ -1,24 +1,16 @@
 import React, { Fragment } from 'react';
 import { useOpenSavings } from '../../hooks';
 import { OpacityToggler } from '../animations';
+import HolySavingsListRow from './HolySavingsListRow';
 import SavingsListHeader from './SavingsListHeader';
-import SavingsListRow from './SavingsListRow';
 
-const renderSavingsListRow = (savingItem, totalBalance, allSavings) => {
-  return savingItem?.underlying ? (
-    <SavingsListRow
-      currentSaving={savingItem}
-      key={savingItem.underlying.symbol}
-      savings={allSavings}
-      totalBalance={totalBalance}
-    />
-  ) : null;
-};
-
-export default function SavingsListWrapper({ savings, totalBalance = '0' }) {
+export default function HolySavingsListWrapper({
+  savings,
+  totalBalance = '0',
+}) {
   const { isSavingsOpen, toggleOpenSavings } = useOpenSavings();
 
-  const deafultSavingAsset = savings[0];
+  const singleSavings = savings.length > 0 ? savings[0] : {};
 
   return (
     <Fragment>
@@ -32,7 +24,10 @@ export default function SavingsListWrapper({ savings, totalBalance = '0' }) {
         isVisible={!isSavingsOpen}
         pointerEvents={isSavingsOpen ? 'auto' : 'none'}
       >
-        {renderSavingsListRow(deafultSavingAsset, totalBalance, savings)}
+        <HolySavingsListRow
+          savings={singleSavings}
+          totalBalance={totalBalance}
+        />
       </OpacityToggler>
     </Fragment>
   );

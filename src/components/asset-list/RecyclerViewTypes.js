@@ -13,7 +13,7 @@ import { FloatingActionButtonSize } from '../fab';
 import { ListFooter } from '../list';
 import LPBonusListWrapper from '../lp-bonus/LPBonusListWrapper';
 import PoolsListWrapper from '../pools/PoolsListWrapper';
-import SavingsListWrapper from '../savings/SavingsListWrapper';
+import HolySavingsListWrapper from '../savings/HolySavingsListWrapper';
 import { TokenFamilyHeaderHeight } from '../token-family';
 import TreasuryBankListWrapper from '../treasury-bank/TreasuryBankListWrapper';
 
@@ -154,7 +154,7 @@ export const ViewTypes = {
     renderComponent: ({ data }) => {
       const { item = {} } = data;
       return (
-        <SavingsListWrapper
+        <HolySavingsListWrapper
           savings={item.assets}
           totalBalance={item.totalValue}
         />

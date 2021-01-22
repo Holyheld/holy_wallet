@@ -1,27 +1,47 @@
 import { useRoute } from '@react-navigation/native';
-import { useCallback, useState } from 'react';
+import { isEmpty } from 'lodash';
+import { useCallback, useEffect, useState } from 'react';
 import { InteractionManager } from 'react-native';
+import { useDispatch } from 'react-redux';
 import currencySelectionTypes from '../helpers/currencySelectionTypes';
 import { useNavigation } from '../navigation/Navigation';
+import {
+  multicallAddListeners,
+  multicallUpdateOutdatedListeners,
+} from '../redux/multicall';
 import { delayNext } from './useMagicAutofocus';
 import usePrevious from './usePrevious';
+import { useAccountSettings, useUniswapCalls } from '.';
 import Routes from '@holyheld-com/routes';
-import { logger } from '@holyheld-com/utils';
+import { isNewValueForPath, logger } from '@holyheld-com/utils';
+
+const isSameAsset = (currOne, currTwo) =>
+  !isNewValueForPath(currOne, currTwo, 'address');
 
 export default function useHolyDepositCurrencies({
   defaultInputCurrency,
+  outputCurrency,
   inputHeaderTitle,
 }) {
   const { navigate, setParams, dangerouslyGetParent } = useNavigation();
   const {
     params: { blockInteractions },
   } = useRoute();
+  const dispatch = useDispatch();
+  const { chainId } = useAccountSettings();
 
   const [inputCurrency, setInputCurrency] = useState(defaultInputCurrency);
-  const [outputSaving, setOutputSaving] = useState(null);
+  const { calls } = useUniswapCalls(inputCurrency, outputCurrency);
 
-  const previousOutputSaving = usePrevious(outputSaving);
   const previousInputCurrency = usePrevious(inputCurrency);
+
+  useEffect(() => {
+    if (!inputCurrency || isEmpty(calls)) return;
+    if (isSameAsset(inputCurrency, previousInputCurrency)) return;
+
+    dispatch(multicallAddListeners({ calls, chainId }));
+    dispatch(multicallUpdateOutdatedListeners());
+  }, [calls, chainId, dispatch, inputCurrency, previousInputCurrency]);
 
   const updateInputCurrency = useCallback(
     async (newInputCurrency, userSelected = true) => {
@@ -38,28 +58,6 @@ export default function useHolyDepositCurrencies({
     [previousInputCurrency]
   );
 
-  const updateOutputSaving = useCallback(
-    (newOutputSaving, userSelected = true) => {
-      logger.log(
-        '[update output saving] new output saving, user selected?',
-        newOutputSaving,
-        userSelected
-      );
-      logger.log(
-        '[update output saving] input curr at the moment',
-        inputCurrency
-      );
-
-      setOutputSaving(newOutputSaving);
-
-      logger.log(
-        '[update output saving] prev output saving',
-        previousOutputSaving
-      );
-    },
-    [inputCurrency, previousOutputSaving]
-  );
-
   const navigateToSelectInputCurrency = useCallback(() => {
     InteractionManager.runAfterInteractions(() => {
       dangerouslyGetParent().dangerouslyGetState().index = 0;
@@ -67,7 +65,7 @@ export default function useHolyDepositCurrencies({
       delayNext();
       navigate(Routes.CURRENCY_SELECT_SCREEN, {
         headerTitle: inputHeaderTitle,
-        onSelectSaving: updateInputCurrency,
+        onSelectCurrency: updateInputCurrency,
         restoreFocusOnSwapModal: () => setParams({ focused: true }),
         type: currencySelectionTypes.output,
       });
@@ -82,34 +80,9 @@ export default function useHolyDepositCurrencies({
     updateInputCurrency,
   ]);
 
-  const navigateToSelectOutputSaving = useCallback(() => {
-    InteractionManager.runAfterInteractions(() => {
-      setParams({ focused: false });
-      dangerouslyGetParent().dangerouslyGetState().index = 0;
-      delayNext();
-      navigate(Routes.CURRENCY_SELECT_SCREEN, {
-        category: 'holy savings',
-        headerTitle: 'Deposite',
-        onSelectSaving: updateOutputSaving,
-        restoreFocusOnSwapModal: () => setParams({ focused: true }),
-        type: currencySelectionTypes.output,
-        useHolySavingsSelect: true,
-      });
-      blockInteractions();
-    });
-  }, [
-    blockInteractions,
-    dangerouslyGetParent,
-    navigate,
-    setParams,
-    updateOutputSaving,
-  ]);
-
   return {
     inputCurrency,
     navigateToSelectInputCurrency,
-    navigateToSelectOutputSaving,
-    outputSaving,
     previousInputCurrency,
   };
 }

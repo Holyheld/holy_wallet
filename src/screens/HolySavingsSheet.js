@@ -1,4 +1,3 @@
-import { useRoute } from '@react-navigation/native';
 import analytics from '@segment/analytics-react-native';
 import BigNumber from 'bignumber.js';
 import React, { Fragment, useCallback, useMemo } from 'react';
@@ -19,12 +18,18 @@ import {
   SheetActionButtonRow,
   SlackSheet,
 } from '../components/sheet';
+import { useHolySavings } from '../hooks/useHolyData';
 import { useNavigation } from '../navigation/Navigation';
-import { useDimensions, useWallets } from '@holyheld-com/hooks';
+import { getUSDCAsset } from '../references/holy';
+import {
+  useAccountSettings,
+  useDimensions,
+  useWallets,
+} from '@holyheld-com/hooks';
 import Routes from '@holyheld-com/routes';
 import { colors, position } from '@holyheld-com/styles';
 
-export const SavingsSheetEmptyHeight = 313;
+export const SavingsSheetEmptyHeight = 343;
 export const SavingsSheetHeight = android ? 410 : 352;
 
 const Container = styled(Centered).attrs({ direction: 'column' })`
@@ -36,21 +41,20 @@ const Container = styled(Centered).attrs({ direction: 'column' })`
 const HolySavingsSheet = () => {
   const { height: deviceHeight } = useDimensions();
   const { navigate } = useNavigation();
-  const { params } = useRoute();
   const insets = useSafeArea();
   const { isReadOnlyWallet } = useWallets();
-  //const { nativeCurrency, nativeCurrencySymbol } = useAccountSettings();
-  const totalBalance = params['totalBalance'];
+  const { network } = useAccountSettings();
+  const totalBalance = '0';
   const isEmpty = totalBalance === '0';
-  const ildBalance = '24.7451';
+  const ildBalance = '0';
 
-  const totalBalanceDispay = useMemo(
+  const totalBalanceDisplay = useMemo(
     () => new BigNumber(totalBalance).toFormat(2),
     [totalBalance]
   );
 
-  const savingsDataArr = params['savings'];
-  const defaultSaving = params['currentSaving'];
+  const usdcAsset = getUSDCAsset(network);
+  const savings = useHolySavings();
 
   const onWithdraw = useCallback(() => {
     if (!isReadOnlyWallet) {
@@ -77,24 +81,14 @@ const HolySavingsSheet = () => {
     if (!isReadOnlyWallet) {
       navigate(Routes.HOLY_SAVINGS_DEPOSIT_MODAL, {
         params: {
-          params: {
-            currentSaving: defaultSaving,
-            defaultInputCurrency: null,
-          },
           screen: Routes.MAIN_EXCHANGE_SCREEN,
         },
         screen: Routes.MAIN_EXCHANGE_NAVIGATOR,
       });
-
-      analytics.track('Navigated to SavingsDepositModal', {
-        category: 'savings',
-        empty: isEmpty,
-        label: defaultSaving.underlying.symbol,
-      });
     } else {
       Alert.alert(`You need to import the wallet in order to do this`);
     }
-  }, [isEmpty, isReadOnlyWallet, navigate, defaultSaving]);
+  }, [isReadOnlyWallet, navigate]);
 
   return (
     <Container
@@ -109,14 +103,13 @@ const HolySavingsSheet = () => {
       >
         {isEmpty ? (
           <SavingsSheetEmptyState
-            apy={defaultSaving.apy}
+            apy={savings.apy}
             isReadOnlyWallet={isReadOnlyWallet}
-            savings={savingsDataArr}
           />
         ) : (
           <Fragment>
             <SavingsSheetHeader
-              balance={totalBalanceDispay}
+              balance={totalBalanceDisplay}
               ildBalance={ildBalance}
             />
             <SheetActionButtonRow>
@@ -143,20 +136,14 @@ const HolySavingsSheet = () => {
               zIndex={0}
             />
 
-            {savingsDataArr.map(savingsItem => (
-              <Column
-                key={savingsItem.underlying.address}
-                paddingBottom={2}
-                paddingTop={1}
-              >
-                <HolySavingsCoinRow
-                  additionalShare={ildBalance}
-                  apy={savingsItem.apy}
-                  balance={savingsItem.balance}
-                  symbol="USDC"
-                />
-              </Column>
-            ))}
+            <Column paddingBottom={2} paddingTop={1}>
+              <HolySavingsCoinRow
+                additionalShare={ildBalance}
+                apy={savings.apy}
+                balance={savings.balance}
+                symbol={usdcAsset.symbol}
+              />
+            </Column>
 
             <Divider
               backgroundColor={colors.modalBackground}

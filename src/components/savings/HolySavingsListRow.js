@@ -1,8 +1,7 @@
-import analytics from '@segment/analytics-react-native';
 import BigNumber from 'bignumber.js';
 import PropTypes from 'prop-types';
-import React, { useCallback, useEffect, useMemo } from 'react';
-import { InteractionManager, StyleSheet } from 'react-native';
+import React, { useCallback, useMemo } from 'react';
+import { StyleSheet } from 'react-native';
 
 import styled from 'styled-components/primitives';
 import { greaterThan } from '../../helpers/utilities';
@@ -35,6 +34,7 @@ const sx = StyleSheet.create({
     backgroundColor: colors.buttonPrimary,
     borderRadius: ButtonBorderRadius,
     height: 30,
+    marginLeft: 10,
     paddingBottom: 1,
     paddingRight: 2,
     width: 97,
@@ -59,23 +59,9 @@ const SavingsListRowShadowStack = styled(ShadowStack).attrs(
   })
 )``;
 
-const SavingsListRow = ({ totalBalance, currentSaving, savings }) => {
+const HolySavingsListRow = ({ totalBalance, savings }) => {
   const { width: deviceWidth } = useDimensions();
   const { navigate } = useNavigation();
-
-  useEffect(() => {
-    if (
-      currentSaving.underlying &&
-      currentSaving.underlying.symbol &&
-      currentSaving.balance
-    )
-      InteractionManager.runAfterInteractions(() => {
-        analytics.track('User has savings', {
-          category: 'savings',
-          label: currentSaving.underlying.symbol,
-        });
-      });
-  }, [currentSaving]);
 
   const { displayedDollars, displayedCents, isEmpty } = useMemo(() => {
     const isEmpty = !greaterThan(totalBalance, '0');
@@ -96,13 +82,9 @@ const SavingsListRow = ({ totalBalance, currentSaving, savings }) => {
 
   const onButtonPress = useCallback(() => {
     navigate(Routes.SAVINGS_SHEET, {
-      currentSaving: currentSaving,
-      lifetimeAccruedInterest: 0.1,
       longFormHeight: isEmpty ? SavingsSheetEmptyHeight : SavingsSheetHeight,
-      savings: savings,
-      totalBalance: totalBalance,
     });
-  }, [currentSaving, navigate, savings, totalBalance, isEmpty]);
+  }, [navigate, isEmpty]);
 
   return (
     <ButtonPressAnimation
@@ -133,16 +115,27 @@ const SavingsListRow = ({ totalBalance, currentSaving, savings }) => {
               >
                 {`$${displayedDollars}`}
               </Text>
-              <GradientText
-                color={isEmpty ? colors.textColorMuted : colors.green}
-                letterSpacing="roundedTightest"
-                {...centGradientProps}
-                size="lmedium"
-                weight="bold"
-                width="auto"
-              >
-                {`.${displayedCents}`}
-              </GradientText>
+              {isEmpty ? (
+                <Text
+                  color={colors.textColorMuted}
+                  letterSpacing="roundedTightest"
+                  size="lmedium"
+                  weight="bold"
+                >
+                  {`.${displayedCents}`}
+                </Text>
+              ) : (
+                <GradientText
+                  letterSpacing="roundedTightest"
+                  {...centGradientProps}
+                  size="lmedium"
+                  weight="bold"
+                  width="auto"
+                >
+                  {`.${displayedCents}`}
+                </GradientText>
+              )}
+
               {isEmpty && (
                 <ButtonPressAnimation
                   onPress={NOOP}
@@ -162,7 +155,7 @@ const SavingsListRow = ({ totalBalance, currentSaving, savings }) => {
               )}
             </Row>
 
-            <APYPill value={currentSaving.apy} />
+            <APYPill value={savings.apy} />
           </Row>
         </SavingsListRowShadowStack>
       </Centered>
@@ -170,10 +163,9 @@ const SavingsListRow = ({ totalBalance, currentSaving, savings }) => {
   );
 };
 
-SavingsListRow.propTypes = {
-  currentSaving: PropTypes.object,
-  savings: PropTypes.array,
+HolySavingsListRow.propTypes = {
+  savings: PropTypes.object,
   totalBalance: PropTypes.string,
 };
 
-export default React.memo(SavingsListRow);
+export default React.memo(HolySavingsListRow);

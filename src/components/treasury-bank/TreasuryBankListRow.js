@@ -36,6 +36,7 @@ const sx = StyleSheet.create({
     backgroundColor: colors.buttonPrimary,
     borderRadius: ButtonBorderRadius,
     height: 30,
+    marginLeft: 10,
     paddingBottom: 1,
     paddingRight: 2,
     width: 97,
@@ -78,7 +79,6 @@ const TreasuryBankListRow = ({ treasury }) => {
     if (!isEmpty) {
       navigate(Routes.TREASURY_SHEET, {
         balance: balance,
-        lifetimeSupplyInterestAccrued: '10',
       });
     }
   }, [navigate, isEmpty, balance]);
@@ -114,16 +114,26 @@ const TreasuryBankListRow = ({ treasury }) => {
                 {`$${displayedDollars}`}
               </Text>
 
-              <GradientText
-                {...centGradientProps}
-                color={isEmpty ? colors.textColorMuted : colors.green}
-                letterSpacing="roundedTightest"
-                size="lmedium"
-                weight="bold"
-                width="auto"
-              >
-                {`.${displayedCents}`}
-              </GradientText>
+              {isEmpty ? (
+                <Text
+                  color={colors.textColorMuted}
+                  letterSpacing="roundedTightest"
+                  size="lmedium"
+                  weight="bold"
+                >
+                  {`.${displayedCents}`}
+                </Text>
+              ) : (
+                <GradientText
+                  letterSpacing="roundedTightest"
+                  {...centGradientProps}
+                  size="lmedium"
+                  weight="bold"
+                  width="auto"
+                >
+                  {`.${displayedCents}`}
+                </GradientText>
+              )}
               {isEmpty && (
                 <ButtonPressAnimation
                   onPress={NOOP}

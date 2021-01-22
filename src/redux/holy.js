@@ -80,11 +80,10 @@ export const updateHHPrice = (nativePrice, priceInEth) => dispatch => {
 export const INITIAL_HOLY_STATE = {
   bonusRate: '1.00',
   earlyLPBonus: {
-    amountToClaim: '101.222225',
-    dpy: '15',
-    fullCap: '500',
-    showPanel: true,
-    todayBonus: '0',
+    amountToClaim: '0',
+    dpy: '0',
+    fullCap: '0',
+    showPanel: false,
   },
   prices: {
     HH: {
@@ -100,24 +99,13 @@ export const INITIAL_HOLY_STATE = {
       inNative: '1',
     },
   },
-  savingsTokens: [
-    {
-      apy: '29.4',
-      balance: '100033.235',
-      native: {
-        price: {
-          amount: '1',
-        },
-      },
-      underlying: {
-        address: '0x6b175474e89094c44da98b954eedeac495271d1f', // TODO: real address
-        symbol: 'USDC',
-      },
-    },
-  ],
+  savings: {
+    apy: '29.4',
+    balance: '0',
+  },
   treasury: {
-    balance: '1069.61275411',
-    rate: '1.37',
+    balance: '0',
+    rate: '1',
   },
 };
 

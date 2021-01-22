@@ -12,7 +12,6 @@ import {
 import { Column, KeyboardFixedOpenLayout } from '../components/layout';
 import { Modal } from '../components/modal';
 import CurrencySelectionTypes from '../helpers/currencySelectionTypes';
-import { useHolySavingsWithBalance } from '../hooks/useHolyData';
 import { delayNext } from '../hooks/useMagicAutofocus';
 import { useNavigation } from '../navigation/Navigation';
 import { useInteraction, usePrevious } from '@holyheld-com/hooks';
@@ -46,14 +45,12 @@ export default function HolySavingsSelectModal() {
     },
   } = useRoute();
 
-  const savings = useHolySavingsWithBalance();
-
   const holySavingsList = useMemo(() => {
     let filteredList = [];
 
-    filteredList = headerlessSection(savings);
+    filteredList = headerlessSection([]);
     return filteredList;
-  }, [savings]);
+  }, []);
 
   const handleSelectAsset = useCallback(
     item => {

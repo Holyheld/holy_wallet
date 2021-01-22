@@ -43,33 +43,15 @@ export default function useHolyDepositInputs({
             newNativePrice
           );
 
+          // TODO: use request to get the proper value
           const newOutputAmount = newNativeAmount; // Because HOLY savings use USDc
 
           setNativeAmount(newNativeAmount);
           setOutputAmount(newOutputAmount);
+        } else {
+          setNativeAmount(0);
+          setOutputAmount(0);
         }
-      }
-    },
-    [inputCurrency, maxInputBalance]
-  );
-
-  const updateOutputAmount = useCallback(
-    newOutputAmount => {
-      setOutputAmount(newOutputAmount);
-      if (newOutputAmount && !isZero(newOutputAmount) && inputCurrency) {
-        const nativePrice = get(inputCurrency, 'native.price.amount', null);
-        const newInputAmount = convertAmountFromNativeValue(
-          newOutputAmount,
-          nativePrice,
-          inputCurrency.decimals
-        );
-
-        const newIsSufficientBalance =
-          !newInputAmount ||
-          greaterThanOrEqualTo(maxInputBalance, newInputAmount);
-
-        setIsSufficientBalance(newIsSufficientBalance);
-        setInputAmount(newInputAmount);
       }
     },
     [inputCurrency, maxInputBalance]
@@ -78,6 +60,7 @@ export default function useHolyDepositInputs({
   const updateNativeAmount = useCallback(
     nativeAmount => {
       logger.log('update native amount', nativeAmount);
+      logger.log('inputCurrency', inputCurrency);
 
       if (!inputCurrency) return;
 
@@ -95,6 +78,7 @@ export default function useHolyDepositInputs({
         );
       }
 
+      // TODO: use request to get the proper value
       const newOutputAmount = nativeAmount;
 
       setInputAmount(inputAmount);
@@ -112,6 +96,5 @@ export default function useHolyDepositInputs({
     setIsSufficientBalance,
     updateInputAmount,
     updateNativeAmount,
-    updateOutputAmount,
   };
 }

@@ -34,7 +34,7 @@ import createHolySavingsWithdrawCompoundRap, {
   estimateHolySavingsWithdrawCompound,
 } from '../raps/holySavingsWithdrawCompound';
 import { multicallClearState } from '../redux/multicall';
-import { USDC_TOKEN_ADDRESS } from '../references/holy';
+import { getUSDCAsset } from '../references/holy';
 import {
   useAccountAssets,
   useAccountSettings,
@@ -98,23 +98,16 @@ const HolySavingsDepositModal = ({ defaultInputCurrency, testID }) => {
   const estimateRap = estimateHolySavingsWithdrawCompound;
   const type = exchangeModalTypes.holyDeposit;
 
-  const USDc = {
-    address: USDC_TOKEN_ADDRESS(network),
-    native: {
-      price: {
-        amount: '1',
-      },
-    },
-    symbol: 'USDC',
-  };
+  const USDcAsset = getUSDCAsset(network);
 
   const {
     inputCurrency,
-    outputSaving,
     previousInputCurrency,
+    navigateToSelectInputCurrency,
   } = useHolyDepositCurrencies({
     defaultInputCurrency: defaultInputCurrency,
     inputHeaderTitle: 'Choose currency',
+    outputCurrency: USDcAsset,
   });
 
   //console.log(inputCurrency);
@@ -146,26 +139,22 @@ const HolySavingsDepositModal = ({ defaultInputCurrency, testID }) => {
     outputFieldRef,
   } = useSwapInputRefs({
     inputCurrency: inputCurrency,
-    outputCurrency: outputSaving,
+    outputCurrency: USDcAsset,
   });
 
   const {
     inputAmount,
-    // inputAmountDisplay,
-    // inputAsExactAmount,
     isMax,
     isSufficientBalance,
     nativeAmount,
-    // outputAmount,
-    // outputAmount,
-    // setIsSufficientBalance,
+    outputAmount,
     updateInputAmount,
     updateNativeAmount,
   } = useHolyDepositInputs({
     inputCurrency,
     maxInputBalance: maxInputBalance,
+    outputCurrency: USDcAsset,
     outputFieldRef,
-    outputSaving,
   });
 
   const isDismissing = useRef(false);
@@ -197,9 +186,10 @@ const HolySavingsDepositModal = ({ defaultInputCurrency, testID }) => {
 
   const updateGasLimit = useCallback(async () => {
     try {
-      const gasLimit = await estimateRap({
-        inputAmount,
-      });
+      // const gasLimit = await estimateRap({
+      //   inputAmount,
+      // });
+      const gasLimit = 100000;
 
       updateTxFee(gasLimit);
     } catch (error) {
@@ -290,7 +280,6 @@ const HolySavingsDepositModal = ({ defaultInputCurrency, testID }) => {
           inputAmount,
           inputCurrency,
           isMax,
-          outputSaving,
           selectedGasPrice,
         });
         logger.log('[holy savings deposit] rap', rap);
@@ -312,7 +301,6 @@ const HolySavingsDepositModal = ({ defaultInputCurrency, testID }) => {
     navigate,
     isMax,
     inputCurrency,
-    outputSaving,
   ]);
 
   return (
@@ -379,6 +367,7 @@ const HolySavingsDepositModal = ({ defaultInputCurrency, testID }) => {
               nativeFieldRef={nativeFieldRef}
               onFocus={handleFocus}
               onPressMaxBalance={handlePressMaxBalance}
+              onPressSelectInputCurrency={navigateToSelectInputCurrency}
               setInputAmount={updateInputAmount}
               setNativeAmount={updateNativeAmount}
               showNative
@@ -387,8 +376,8 @@ const HolySavingsDepositModal = ({ defaultInputCurrency, testID }) => {
           </FloatingPanel>
 
           <DepositSwapInfo
-            amount={nativeAmount}
-            asset={USDc}
+            amount={outputAmount}
+            asset={USDcAsset}
             testID="migrate-info-button"
           />
 
