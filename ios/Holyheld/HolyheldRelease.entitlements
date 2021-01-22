@@ -6,8 +6,10 @@
 	<string>development</string>
 	<key>com.apple.developer.associated-domains</key>
 	<array>
-		<string>applinks:hohlyheld.com</string>
+		<string>applinks:holyheld.com</string>
 		<string>webcredentials:holyheld.com</string>
+		<string>applinks:holyheld.app.link</string>
+		<string>applinks:holyheld-alternate.app.link</string>
 	</array>
 	<key>com.apple.developer.icloud-container-identifiers</key>
 	<array>
