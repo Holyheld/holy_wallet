@@ -1,4 +1,4 @@
-![](https://pbs.twimg.com/profile_banners/1103191459409420288/1573207178/1500x500)
+![](https://miro.medium.com/max/4800/1*s5C0LQ4InO2UoFIMkPoLyA.png)
 ## Holyheld — DeFi neobanking service.
 
 Holyheld makes the internet economy easy and available to everyone. The app abstracts blockchain complexity so that you can finally get great financial service with all DeFi benefits. You can earn highest and safest yield on your digital assets with our automatic portfolio management system. You can also send, receive and swap 3000+ digital assets on Ethereum.  
