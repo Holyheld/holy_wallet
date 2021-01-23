@@ -13,7 +13,7 @@ import { Centered, InnerBorder, Row, RowWithMargins } from '../layout';
 import { GradientText, Text } from '../text';
 import TreasuryIcon from './TreasuryIcon';
 import { useDimensions } from '@holyheld-com/hooks';
-import { colors, padding, position } from '@holyheld-com/styles';
+import { colors, padding, position, shadow } from '@holyheld-com/styles';
 import ShadowStack from 'react-native-shadow-stack';
 
 const NOOP = () => undefined;
@@ -33,6 +33,7 @@ const centGradientProps = {
 const sx = StyleSheet.create({
   button: {
     ...position.centeredAsObject,
+    ...shadow.buildAsObject(0, 4, 6, colors.buttonPrimary, 0.4),
     backgroundColor: colors.buttonPrimary,
     borderRadius: ButtonBorderRadius,
     height: 30,
@@ -146,7 +147,7 @@ const TreasuryBankListRow = ({ treasury }) => {
                     size="lmedium"
                     weight="semibold"
                   >
-                    Deposit
+                    􀁍 Boost
                   </Text>
                   <InnerBorder radius={ButtonBorderRadius} />
                 </ButtonPressAnimation>

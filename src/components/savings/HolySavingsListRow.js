@@ -18,7 +18,7 @@ import { Centered, InnerBorder, Row, RowWithMargins } from '../layout';
 import { GradientText, Text } from '../text';
 import SavingsIcon from './SavingsIcon';
 import { useDimensions } from '@holyheld-com/hooks';
-import { colors, padding, position } from '@holyheld-com/styles';
+import { colors, padding, position, shadow } from '@holyheld-com/styles';
 import ShadowStack from 'react-native-shadow-stack';
 
 const ButtonBorderRadius = 15;
@@ -31,6 +31,7 @@ const SavingsListRowShadows = [
 const sx = StyleSheet.create({
   button: {
     ...position.centeredAsObject,
+    ...shadow.buildAsObject(0, 4, 6, colors.buttonPrimary, 0.6),
     backgroundColor: colors.buttonPrimary,
     borderRadius: ButtonBorderRadius,
     height: 30,
@@ -148,7 +149,7 @@ const HolySavingsListRow = ({ totalBalance, savings }) => {
                     size="lmedium"
                     weight="semibold"
                   >
-                    Deposit
+                    􀁍 Deposit
                   </Text>
                   <InnerBorder radius={ButtonBorderRadius} />
                 </ButtonPressAnimation>

@@ -5,7 +5,7 @@ const addUnitToNumberValues = value => (isNumber(value) ? `${value}px` : value);
 
 const shadow = {};
 
-shadow.color = colors.transparent;
+shadow.color = colors.shadow;
 shadow.opacity = 0.4;
 
 shadow.build = (
