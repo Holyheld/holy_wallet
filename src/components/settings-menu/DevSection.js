@@ -1,8 +1,7 @@
 import AsyncStorage from '@react-native-community/async-storage';
-import Clipboard from '@react-native-community/clipboard';
 import React, { useCallback, useContext } from 'react';
 import { Alert, ScrollView } from 'react-native';
-import { DEV_SEEDS, GANACHE_URL } from 'react-native-dotenv';
+import { GANACHE_URL } from 'react-native-dotenv';
 import { Restart } from 'react-native-restart';
 import { deleteAllBackups } from '../../handlers/cloudBackup';
 import { web3SetHttpProvider } from '../../handlers/web3';
@@ -78,10 +77,6 @@ const DevSection = () => {
       <ListItem
         label="🤷 Restore default experimental config"
         onPress={() => AsyncStorage.removeItem('experimentalConfig')}
-      />
-      <ListItem
-        label="‍💻 Copy dev seeds"
-        onPress={() => Clipboard.setString(DEV_SEEDS)}
       />
       <ListItem
         label="‍👾 Connect to ganache"

@@ -14,7 +14,7 @@ const DEBUG_TAP_COUNT = 15;
 
 const StampText = styled(Text).attrs({
   align: 'center',
-  color: colors.alpha(colors.textColor, 0.2),
+  color: colors.textColorMuted,
   lineHeight: 'normal',
   size: 'smedium',
   weight: 'bold',
@@ -27,6 +27,10 @@ export default function AppVersionStamp() {
   const debug = useWalletsDebug();
 
   const handleVersionPress = useCallback(async () => {
+    if (!IS_DEV) {
+      return;
+    }
+
     stopTimeout();
 
     const tapCount = numberOfTaps + 1;
