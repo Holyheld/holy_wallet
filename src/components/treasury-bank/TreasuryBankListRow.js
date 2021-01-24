@@ -104,17 +104,15 @@ const TreasuryBankListRow = ({ treasury }) => {
                 <TreasuryIcon size={23} />
               </RowWithMargins>
             )}
-            <Row flexGrow={3} justify="start" paddingLeft={4}>
+            <Row align="center" flexGrow={3} paddingLeft={4}>
               <Text
                 color={isEmpty ? colors.textColorMuted : colors.textColor}
                 letterSpacing="roundedTightest"
                 size="lmedium"
                 weight="bold"
-                width="auto"
               >
                 {`$${displayedDollars}`}
               </Text>
-
               {isEmpty ? (
                 <Text
                   color={colors.textColorMuted}
