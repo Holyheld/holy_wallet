@@ -117,7 +117,7 @@ export default function WalletConnectApprovalSheet() {
   }, [handleCancel, scam]);
 
   return (
-    <Sheet hideHandle>
+    <Sheet>
       <Centered
         direction="column"
         paddingBottom={5}
@@ -129,11 +129,15 @@ export default function WalletConnectApprovalSheet() {
           <Row>
             <Text
               align="center"
-              color={colors.alpha(colors.blueGreyDark, 0.6)}
+              color={colors.textColorPrimary}
               lineHeight={29}
               size="big"
             >
-              <Text color="dark" size="big" weight="bold">
+              <Text
+                color={colors.textColorDescription}
+                size="big"
+                weight="bold"
+              >
                 {dappName}
               </Text>{' '}
               wants to connect to your wallet
@@ -141,26 +145,36 @@ export default function WalletConnectApprovalSheet() {
           </Row>
         </Centered>
         <Row marginBottom={30} marginTop={15}>
-          <Text color="appleBlue" lineHeight={29} size="large" weight="bold">
+          <Text
+            color={colors.textColorPrimary}
+            lineHeight={29}
+            size="large"
+            weight="bold"
+          >
             {isAuthenticated ? `􀇻 ${formattedDappUrl}` : formattedDappUrl}
           </Text>
         </Row>
-        <Divider color={colors.rowDividerLight} inset={[0, 84]} />
+        <Divider
+          backgroundColor={colors.modalBackground}
+          color={colors.divider}
+          inset={[0, 84]}
+        />
       </Centered>
       <SheetActionButtonRow>
         <SheetActionButton
-          color={colors.white}
+          color={colors.buttonSecondary}
           label="Cancel"
           onPress={handleCancel}
           size="big"
-          textColor={colors.alpha(colors.blueGreyDark, 0.8)}
+          textColor={colors.textColorSecondaryButton}
           weight="bold"
         />
         <SheetActionButton
-          color={colors.appleBlue}
+          color={colors.buttonPrimary}
           label="Connect"
           onPress={handleConnect}
           size="big"
+          textColor={colors.textColorPrimaryButton}
           weight="bold"
         />
       </SheetActionButtonRow>

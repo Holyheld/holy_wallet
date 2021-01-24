@@ -58,13 +58,14 @@ const getNativeOptions = async () => {
     );
   }
 
+  // TODO revisit and change url
   const nativeOptions = {
     clientMeta: {
-      description: 'Rainbow makes exploring Ethereum fun and accessible 🌈',
-      icons: ['https://avatars2.githubusercontent.com/u/48327834?s=200&v=4'],
-      name: '🌈 Rainbow',
+      description: 'Holyheld makes exploring Ethereum fun and accessible',
+      icons: ['https://avatars.githubusercontent.com/u/70515884?s=200&v=4'],
+      name: 'Holyheld',
       ssl: true,
-      url: 'https://rainbow.me',
+      url: 'https://holyheld.com',
     },
     push: token
       ? {

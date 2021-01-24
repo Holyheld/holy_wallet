@@ -1,5 +1,6 @@
 import URL from 'url-parse';
 
+// todo some kind of cdn as this repo is still closed?
 const buildAssetUrl = hostname =>
   `https://raw.githubusercontent.com/rainbow-me/rainbow/develop/src/assets/dappLogos/${hostname}.jpg`;
 
