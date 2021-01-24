@@ -129,15 +129,11 @@ export default function WalletConnectApprovalSheet() {
           <Row>
             <Text
               align="center"
-              color={colors.textColorPrimary}
+              color={colors.textColor}
               lineHeight={29}
               size="big"
             >
-              <Text
-                color={colors.textColorDescription}
-                size="big"
-                weight="bold"
-              >
+              <Text color={colors.textColorPrimary} size="big" weight="bold">
                 {dappName}
               </Text>{' '}
               wants to connect to your wallet
