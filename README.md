@@ -3,6 +3,9 @@
 
 Holyheld makes the internet economy easy and available to everyone. The app abstracts blockchain complexity so that you can finally get great financial service with all DeFi benefits. You can earn highest and safest yield on your digital assets with our automatic portfolio management system. You can also send, receive and swap 3000+ digital assets on Ethereum.  
 
+## Credits
+This version of a wallet is based on the best open-source Ethereum wallet that has ever existed - [Rainbow](https://rainbow.me). We are deep fans of the Rainbow and $SOCKS, so we decided to continue the great work done by the open-source community. 
+
 ## What can you do?
 
 * **Create, import and export non-custodial wallets.**
@@ -34,6 +37,3 @@ We are still at Alpha stage and a lot of features are hidden, but we’re planni
 * Multichain support
 * Portfolio concierge
 * Smart suggestions
-
-## Credits
-This version of a wallet is based on the best open-source Ethereum wallet that has ever existed - [Rainbow](https://rainbow.me). We are deep fans of the Rainbow and $SOCKS, so we decided to continue the great work done by the open-source community. 
