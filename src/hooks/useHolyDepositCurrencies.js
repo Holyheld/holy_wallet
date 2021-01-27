@@ -67,7 +67,7 @@ export default function useHolyDepositCurrencies({
         headerTitle: inputHeaderTitle,
         onSelectCurrency: updateInputCurrency,
         restoreFocusOnSwapModal: () => setParams({ focused: true }),
-        type: currencySelectionTypes.output,
+        type: currencySelectionTypes.input,
       });
       blockInteractions();
     });

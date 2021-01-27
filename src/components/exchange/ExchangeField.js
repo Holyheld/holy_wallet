@@ -1,6 +1,7 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { TouchableWithoutFeedback } from 'react-native';
 import styled from 'styled-components/primitives';
+import useDebounce from '../../hooks/useDebounce';
 import { TokenSelectionButton } from '../buttons';
 import { CoinIcon } from '../coin-icon';
 import { Row, RowWithMargins } from '../layout';
@@ -42,6 +43,7 @@ const ExchangeField = (
   {
     address,
     amount,
+    debounce = 100,
     disableCurrencySelection,
     onBlur,
     onFocus,
@@ -56,6 +58,27 @@ const ExchangeField = (
   ref
 ) => {
   const handleFocusField = useCallback(() => ref?.current?.focus(), [ref]);
+  const [rawAmount, setRawAmount] = useState(null);
+  const debouncedAmount = useDebounce(rawAmount, debounce);
+
+  // Here's where the API call happens
+  // We use useEffect since this is an asynchronous action
+  useEffect(
+    () => {
+      // Make sure we have a value (user has entered something in input)
+      if (debouncedAmount) {
+        setAmount(debouncedAmount);
+      } else {
+        setAmount();
+      }
+    },
+    // This is the useEffect input array
+    // Our useEffect function will only execute if this value changes ...
+    // ... and thanks to our hook it will only change if the original ...
+    // value (searchTerm) hasn't changed for more than 500ms.
+    [debouncedAmount]
+  );
+
   useEffect(() => {
     autoFocus && handleFocusField();
   }, [autoFocus, handleFocusField]);
@@ -71,7 +94,7 @@ const ExchangeField = (
           <Input
             editable={!!symbol}
             onBlur={onBlur}
-            onChangeText={setAmount}
+            onChangeText={setRawAmount}
             onFocus={onFocus}
             placeholder={symbol ? '0' : EnDash.unicode}
             placeholderTextColor={symbol ? undefined : skeletonColor}

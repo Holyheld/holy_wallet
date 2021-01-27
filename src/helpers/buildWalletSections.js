@@ -177,15 +177,18 @@ const withBalanceHolySavingsSection = (holySavings, priceOfEther) => {
   let holySavingsAssets = [];
 
   if (priceOfEther) {
-    holySavingsAssets = [holySavings];
+    holySavingsAssets = [
+      {
+        apy: holySavings.apy,
+        balance: holySavings.balanceNative,
+      },
+    ];
   }
 
   const section = {
     assets: holySavingsAssets,
     holySavingsContainer: true,
-    totalValue: holySavingsAssets
-      .reduce((total, asset) => total + +asset.balance, 0)
-      .toString(),
+    totalValue: holySavings.balanceNative,
   };
   return section;
 };
@@ -224,17 +227,15 @@ const withBalanceHolyTreasurySection = (holyTreasury, priceOfEther) => {
   if (priceOfEther) {
     holyTreasuryAssets = [
       {
-        treasury: holyTreasury,
-        underlying: {
-          symbol: 'USD',
-        },
+        balance: holyTreasury.allBalanceNative,
+        rate: holyTreasury.rate,
       },
     ];
   }
   const section = {
     assets: holyTreasuryAssets,
     holyTreasuryContainer: true,
-    totalValue: holyTreasury.balance,
+    totalValue: holyTreasury.allBalanceNative,
   };
   return section;
 };

@@ -22,6 +22,7 @@ import { FloatingPanel, FloatingPanels } from '../components/floating-panels';
 import { GasSpeedButton } from '../components/gas';
 import { Centered, KeyboardFixedOpenLayout } from '../components/layout';
 import exchangeModalTypes from '../helpers/exchangeModalTypes';
+import { useHolySavings } from '../hooks/useHolyData';
 import useHolyWithdrawInputs from '../hooks/useHolyWithdrawInputs';
 import { loadWallet } from '../model/wallet';
 import { ExchangeNavigatorFactory } from '../navigation/ExchangeModalNavigator';
@@ -32,14 +33,14 @@ import createHolySavingsWithdrawCompoundRap, {
   estimateHolySavingsWithdrawCompound,
 } from '../raps/holySavingsWithdrawCompound';
 import { multicallClearState } from '../redux/multicall';
-import { USDC_TOKEN_ADDRESS } from '../references/holy';
+import { getUSDCAsset } from '../references/holy';
 import {
   useAccountSettings,
-  useAsset,
   useBlockPolling,
   useGas,
   useSwapInputRefs,
 } from '@holyheld-com/hooks';
+import { ethUnits } from '@holyheld-com/references';
 import Routes from '@holyheld-com/routes';
 import { colors, position } from '@holyheld-com/styles';
 import { backgroundTask } from '@holyheld-com/utils';
@@ -55,18 +56,16 @@ const HolySavingsWithdrawModalWrapper = ({ navigation, ...props }) => {
   const { params } = useRoute();
 
   const testID = params?.testID;
-  const savingBalance = params?.savingBalance;
   return (
     <HolySavingsWithdrawModal
       navigation={navigation}
-      savingBalance={savingBalance}
       testID={testID}
       {...props}
     />
   );
 };
 
-const HolySavingsWithdrawModal = ({ testID, savingBalance }) => {
+const HolySavingsWithdrawModal = ({ testID }) => {
   const {
     navigate,
     setParams,
@@ -78,36 +77,14 @@ const HolySavingsWithdrawModal = ({ testID, savingBalance }) => {
   } = useRoute();
   const { network, nativeCurrency } = useAccountSettings();
 
-  const defaultGasLimit = 10000;
+  const defaultGasLimit = ethUnits.basic_holy_savings_withdraw;
 
   const type = exchangeModalTypes.holyWithdraw;
-  // useAsset - to get data from uniswap about this asset
-  const USDc = {
-    address: USDC_TOKEN_ADDRESS(network),
-    native: {
-      price: {
-        amount: '1',
-      },
-    },
-    symbol: 'USDC',
-  };
+  const USDcAsset = getUSDCAsset(network);
 
-  const USDcCurrency = useAsset(USDc);
+  const outputCurrency = USDcAsset;
 
-  // const { uniswapAssetsInWallet } = useUniswapAssetsInWallet();
-
-  logger.log(USDcCurrency);
-
-  // const { curatedAssets } = useUniswapAssets();
-
-  // logger.log(curatedAssets);
-
-  // useUniswapCurrencies({
-  //   defaultInputSaving: currentSaving,
-  //   inputHeaderTitle: 'choose saving',
-  // });
-
-  //console.log(inputCurrency);
+  const { balanceUSDC } = useHolySavings();
 
   const dispatch = useDispatch();
   const {
@@ -133,8 +110,8 @@ const HolySavingsWithdrawModal = ({ testID, savingBalance }) => {
     lastFocusedInputHandle,
     nativeFieldRef,
   } = useSwapInputRefs({
-    inputCurrency: USDcCurrency,
-    outputCurrency: USDcCurrency,
+    inputCurrency: USDcAsset,
+    outputCurrency: outputCurrency,
   });
 
   const {
@@ -145,8 +122,8 @@ const HolySavingsWithdrawModal = ({ testID, savingBalance }) => {
     updateInputAmount,
     updateNativeAmount,
   } = useHolyWithdrawInputs({
-    inputCurrency: USDcCurrency,
-    maxInputBalance: savingBalance,
+    inputCurrency: USDcAsset,
+    maxInputBalance: balanceUSDC,
   });
 
   const isDismissing = useRef(false);
@@ -186,7 +163,7 @@ const HolySavingsWithdrawModal = ({ testID, savingBalance }) => {
     } catch (error) {
       updateTxFee(defaultGasLimit);
     }
-  }, [inputAmount, updateTxFee]);
+  }, [inputAmount, updateTxFee, defaultGasLimit]);
 
   // Update gas limit
   useEffect(() => {
@@ -225,8 +202,8 @@ const HolySavingsWithdrawModal = ({ testID, savingBalance }) => {
   ]);
 
   const handlePressMaxBalance = useCallback(async () => {
-    updateInputAmount(savingBalance);
-  }, [updateInputAmount, savingBalance]);
+    updateInputAmount(balanceUSDC, true);
+  }, [updateInputAmount, balanceUSDC]);
 
   const handleSubmit = useCallback(() => {
     backgroundTask.execute(async () => {
@@ -246,7 +223,7 @@ const HolySavingsWithdrawModal = ({ testID, savingBalance }) => {
         const rap = await createHolySavingsWithdrawCompoundRap({
           callback,
           inputAmount,
-          inputCurrency: USDcCurrency,
+          inputCurrency: USDcAsset,
           isMax,
           selectedGasPrice,
         });
@@ -261,7 +238,7 @@ const HolySavingsWithdrawModal = ({ testID, savingBalance }) => {
         navigate(Routes.WALLET_SCREEN);
       }
     });
-  }, [inputAmount, USDcCurrency, isMax, selectedGasPrice, setParams, navigate]);
+  }, [inputAmount, USDcAsset, isMax, selectedGasPrice, setParams, navigate]);
 
   return (
     <Wrapper>
@@ -320,8 +297,8 @@ const HolySavingsWithdrawModal = ({ testID, savingBalance }) => {
             <ExchangeInputField
               disableInputCurrencySelection
               inputAmount={inputAmount}
-              inputCurrencyAddress={get(USDcCurrency, 'address', null)}
-              inputCurrencySymbol={get(USDcCurrency, 'symbol', null)}
+              inputCurrencyAddress={get(USDcAsset, 'address', null)}
+              inputCurrencySymbol={get(USDcAsset, 'symbol', null)}
               inputFieldRef={inputFieldRef}
               nativeAmount={nativeAmount}
               nativeCurrency={nativeCurrency}

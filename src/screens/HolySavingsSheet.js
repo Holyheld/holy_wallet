@@ -9,15 +9,16 @@ import HolySavingsCoinRow from '../components/coin-row/HolySavingsCoinRow';
 
 import { Centered, Column } from '../components/layout';
 import {
-  SavingsPredictionStepper,
   SavingsSheetEmptyState,
   SavingsSheetHeader,
 } from '../components/savings';
+import HolySavingsPredictionStepper from '../components/savings/HolySavingsPredictionStepper';
 import {
   SheetActionButton,
   SheetActionButtonRow,
   SlackSheet,
 } from '../components/sheet';
+import { divide, greaterThan, multiply } from '../helpers/utilities';
 import { useHolySavings } from '../hooks/useHolyData';
 import { useNavigation } from '../navigation/Navigation';
 import { getUSDCAsset } from '../references/holy';
@@ -44,25 +45,53 @@ const HolySavingsSheet = () => {
   const insets = useSafeArea();
   const { isReadOnlyWallet } = useWallets();
   const { network } = useAccountSettings();
-  const totalBalance = '0';
-  const isEmpty = totalBalance === '0';
-  const ildBalance = '0';
 
-  const totalBalanceDisplay = useMemo(
-    () => new BigNumber(totalBalance).toFormat(2),
-    [totalBalance]
-  );
+  const savings = useHolySavings();
+
+  const { dpyNative } = useMemo(() => {
+    const dpyNative = divide(
+      multiply(savings.balanceNative, divide(savings.apy, '100')),
+      '365'
+    );
+    return {
+      dpyNative,
+    };
+  }, [savings]);
+
+  const {
+    balanceNativeDisplay,
+    balanceUSDCDisplay,
+    ildBalanceNativeDisplay,
+    ildBalanceUSDCDisplay,
+    isEmpty,
+  } = useMemo(() => {
+    const isEmpty = !greaterThan(new BigNumber(savings.balanceNative), '0');
+    const balanceNativeDisplay = new BigNumber(savings.balanceNative).toFormat(
+      2
+    );
+    const ildBalanceNativeDisplay = new BigNumber(
+      savings.ildBalanceNative
+    ).toFormat(2);
+
+    const balanceUSDCDisplay = new BigNumber(savings.balanceUSDC).toFormat(6);
+    const ildBalanceUSDCDisplay = new BigNumber(
+      savings.ildBalanceUSDC
+    ).toFormat(6);
+    return {
+      balanceNativeDisplay,
+      balanceUSDCDisplay,
+      ildBalanceNativeDisplay,
+      ildBalanceUSDCDisplay,
+      isEmpty,
+    };
+  }, [savings]);
 
   const usdcAsset = getUSDCAsset(network);
-  const savings = useHolySavings();
 
   const onWithdraw = useCallback(() => {
     if (!isReadOnlyWallet) {
       navigate(Routes.HOLY_SAVINGS_WITHDRAW_MODAL, {
         params: {
-          params: {
-            savingBalance: totalBalance,
-          },
           screen: Routes.MAIN_EXCHANGE_SCREEN,
         },
         screen: Routes.MAIN_EXCHANGE_NAVIGATOR,
@@ -75,7 +104,7 @@ const HolySavingsSheet = () => {
     } else {
       Alert.alert(`You need to import the wallet in order to do this`);
     }
-  }, [isReadOnlyWallet, navigate, totalBalance]);
+  }, [isReadOnlyWallet, navigate]);
 
   const onDeposit = useCallback(() => {
     if (!isReadOnlyWallet) {
@@ -109,8 +138,8 @@ const HolySavingsSheet = () => {
         ) : (
           <Fragment>
             <SavingsSheetHeader
-              balance={totalBalanceDisplay}
-              ildBalance={ildBalance}
+              balance={balanceNativeDisplay}
+              ildBalance={ildBalanceNativeDisplay}
             />
             <SheetActionButtonRow>
               <SheetActionButton
@@ -138,9 +167,9 @@ const HolySavingsSheet = () => {
 
             <Column paddingBottom={2} paddingTop={1}>
               <HolySavingsCoinRow
-                additionalShare={ildBalance}
+                additionalShare={ildBalanceUSDCDisplay}
                 apy={savings.apy}
-                balance={savings.balance}
+                balance={balanceUSDCDisplay}
                 symbol={usdcAsset.symbol}
               />
             </Column>
@@ -150,10 +179,7 @@ const HolySavingsSheet = () => {
               color={colors.divider}
               zIndex={0}
             />
-            <SavingsPredictionStepper
-              balance={totalBalance}
-              interestRate="0.23"
-            />
+            <HolySavingsPredictionStepper dpyNativeAmount={dpyNative} />
           </Fragment>
         )}
       </SlackSheet>

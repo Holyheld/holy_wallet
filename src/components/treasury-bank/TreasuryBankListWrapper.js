@@ -1,17 +1,13 @@
-import { map } from 'lodash';
 import React, { Fragment } from 'react';
 import useOpenTreasuryBank from '../../hooks/useOpenTreasuryBank';
 import { OpacityToggler } from '../animations';
 import TreasuryBankListHeader from './TreasuryBankListHeader';
 import TreasuryBankListRow from './TreasuryBankListRow';
 
-const renderTreasuryBankListRow = item =>
-  item?.underlying ? (
-    <TreasuryBankListRow key={item?.underlying.symbol} {...item} />
-  ) : null;
-
 export default function TreasuryBankListWrapper({ assets, totalValue = '0' }) {
   const { isTreasuryBankOpen, toggleOpenTreasuryBank } = useOpenTreasuryBank();
+
+  const singleTreasury = assets.length > 0 ? assets[0] : {};
 
   return (
     <Fragment>
@@ -25,7 +21,7 @@ export default function TreasuryBankListWrapper({ assets, totalValue = '0' }) {
         isVisible={!isTreasuryBankOpen}
         pointerEvents={isTreasuryBankOpen ? 'auto' : 'none'}
       >
-        {map(assets, renderTreasuryBankListRow)}
+        <TreasuryBankListRow treasury={singleTreasury} />
       </OpacityToggler>
     </Fragment>
   );

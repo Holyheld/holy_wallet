@@ -57,7 +57,7 @@ function useStepper(max, initial = 0) {
   return [step, nextStep];
 }
 
-const HolyBonusPredictionStepper = ({ dpyNativeAmount }) => {
+const TreasuryPredictionStepper = ({ dpyNativeAmount }) => {
   const { nativeCurrency } = useAccountSettings();
   const [step, nextStep] = useStepper(Object.keys(steps).length, 1);
 
@@ -101,8 +101,8 @@ const HolyBonusPredictionStepper = ({ dpyNativeAmount }) => {
   );
 };
 
-HolyBonusPredictionStepper.propTypes = {
+TreasuryPredictionStepper.propTypes = {
   dpyNativeAmount: PropTypes.string,
 };
 
-export default magicMemo(HolyBonusPredictionStepper, ['dpyNativeAmount']);
+export default magicMemo(TreasuryPredictionStepper, ['dpyNativeAmount']);

@@ -33,7 +33,7 @@ const Content = styled(Column).attrs({ justify: 'space-between' })`
 const BottomRow = ({ share, additionalShare, symbol }) => {
   return (
     <Fragment>
-      <APYPill postfix="x share" small value={share} />
+      <APYPill postfix="% APY" small value={share} />
       <RowWithMargins flex={1} margin={4}>
         <Column flex={1}>
           <Text

@@ -101,10 +101,19 @@ export const INITIAL_HOLY_STATE = {
   },
   savings: {
     apy: '29.4',
-    balance: '0',
+    balanceNative: '100',
+    balanceUSDC: '0.1',
+    ildBalanceNative: '5',
+    ildBalanceUSDC: '0.5',
   },
   treasury: {
-    balance: '0',
+    allBalanceNative: '0',
+    allBalanceUSDC: '0',
+    apy: '20.1',
+    bonusBalanceNative: '0',
+    bonusBalanceUSDC: '0',
+    hh: '0',
+    hhEthLP: '0',
     rate: '1',
   },
 };

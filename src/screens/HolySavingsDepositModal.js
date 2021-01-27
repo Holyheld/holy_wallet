@@ -7,7 +7,8 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import { Keyboard } from 'react-native';
+import { ActivityIndicator, Keyboard, View } from 'react-native';
+
 import Animated, { Extrapolate } from 'react-native-reanimated';
 import { useAndroidBackHandler } from 'react-navigation-backhandler';
 import { useDispatch } from 'react-redux';
@@ -30,11 +31,12 @@ import { ExchangeNavigatorFactory } from '../navigation/ExchangeModalNavigator';
 import { useNavigation } from '../navigation/Navigation';
 import useStatusBarManaging from '../navigation/useStatusBarManaging';
 import { executeRap } from '../raps/common';
-import createHolySavingsWithdrawCompoundRap, {
-  estimateHolySavingsWithdrawCompound,
-} from '../raps/holySavingsWithdrawCompound';
+import createHolySavingsDepositCompoundRap, {
+  estimateHolySavingsDepositCompound,
+} from '../raps/holySavingsDepositCompound';
 import { multicallClearState } from '../redux/multicall';
-import { getUSDCAsset } from '../references/holy';
+import store from '../redux/store';
+import { getUSDCAsset, USDC_TOKEN_ADDRESS } from '../references/holy';
 import {
   useAccountAssets,
   useAccountSettings,
@@ -43,6 +45,7 @@ import {
   useMaxInputBalance,
   useSwapInputRefs,
 } from '@holyheld-com/hooks';
+import { ethUnits } from '@holyheld-com/references';
 import Routes from '@holyheld-com/routes';
 import { colors, position } from '@holyheld-com/styles';
 import {
@@ -92,13 +95,21 @@ const HolySavingsDepositModal = ({ defaultInputCurrency, testID }) => {
 
   const { nativeCurrency, network } = useAccountSettings();
 
-  const defaultGasLimit = 10000;
+  const defaultGasLimit = ethUnits.basic_holy_savings_deposit;
 
-  const createRap = createHolySavingsWithdrawCompoundRap;
-  const estimateRap = estimateHolySavingsWithdrawCompound;
   const type = exchangeModalTypes.holyDeposit;
 
-  const USDcAsset = getUSDCAsset(network);
+  let USDcAsset = getUSDCAsset(network);
+
+  const genericAssets = store.getState().data.genericAssets;
+  const usdcAddress = USDC_TOKEN_ADDRESS(network);
+  if (genericAssets[usdcAddress]) {
+    USDcAsset.native = {
+      price: { amount: genericAssets[usdcAddress].price.value },
+    };
+  }
+
+  // console.log(USDcAsset);
 
   const {
     inputCurrency,
@@ -146,8 +157,12 @@ const HolySavingsDepositModal = ({ defaultInputCurrency, testID }) => {
     inputAmount,
     isMax,
     isSufficientBalance,
+    isSufficientLiquidity,
+    isLoading,
     nativeAmount,
     outputAmount,
+    transferError,
+    transferData,
     updateInputAmount,
     updateNativeAmount,
   } = useHolyDepositInputs({
@@ -186,16 +201,15 @@ const HolySavingsDepositModal = ({ defaultInputCurrency, testID }) => {
 
   const updateGasLimit = useCallback(async () => {
     try {
-      // const gasLimit = await estimateRap({
-      //   inputAmount,
-      // });
-      const gasLimit = 100000;
+      const gasLimit = await estimateHolySavingsDepositCompound({
+        inputAmount,
+      });
 
       updateTxFee(gasLimit);
     } catch (error) {
       updateTxFee(defaultGasLimit);
     }
-  }, [defaultGasLimit, estimateRap, inputAmount, updateTxFee]);
+  }, [defaultGasLimit, inputAmount, updateTxFee]);
 
   // Update gas limit
   useEffect(() => {
@@ -230,13 +244,6 @@ const HolySavingsDepositModal = ({ defaultInputCurrency, testID }) => {
       dispatch(multicallClearState());
     };
   }, [dispatch]);
-
-  // Set default gas limit
-  useEffect(() => {
-    setTimeout(() => {
-      updateTxFee(defaultGasLimit);
-    }, 1000);
-  }, [defaultGasLimit, updateTxFee]);
 
   // Liten to gas prices, Uniswap reserves updates
   useEffect(() => {
@@ -275,17 +282,19 @@ const HolySavingsDepositModal = ({ defaultInputCurrency, testID }) => {
           setParams({ focused: false });
           navigate(Routes.PROFILE_SCREEN);
         };
-        const rap = await createRap({
+        const rap = await createHolySavingsDepositCompoundRap({
           callback,
           inputAmount,
           inputCurrency,
           isMax,
+          outputCurrency: USDcAsset,
           selectedGasPrice,
+          transferData,
         });
         logger.log('[holy savings deposit] rap', rap);
+        setIsAuthorizing(false);
         await executeRap(wallet, rap);
         logger.log('[holy savings deposit] executed rap!');
-        setIsAuthorizing(false);
       } catch (error) {
         setIsAuthorizing(false);
         logger.log('[holy savings deposit] error submitting', error);
@@ -294,13 +303,14 @@ const HolySavingsDepositModal = ({ defaultInputCurrency, testID }) => {
       }
     });
   }, [
-    createRap,
     inputAmount,
+    inputCurrency,
+    isMax,
+    USDcAsset,
     selectedGasPrice,
+    transferData,
     setParams,
     navigate,
-    isMax,
-    inputCurrency,
   ]);
 
   return (
@@ -312,6 +322,26 @@ const HolySavingsDepositModal = ({ defaultInputCurrency, testID }) => {
         backgroundColor={colors.transparent}
         direction="column"
       >
+        {isLoading && (
+          <View
+            style={{
+              alignItems: 'center',
+              backgroundColor: colors.pageBackground,
+              flex: 1,
+              height: '100%',
+              justifyContent: 'center',
+              left: 0,
+              opacity: 0.5,
+              position: 'absolute',
+              top: 0,
+              width: '100%',
+              zIndex: 9999,
+            }}
+          >
+            <ActivityIndicator color="#FFFFFF" size="large" />
+          </View>
+        )}
+
         <AnimatedFloatingPanels
           margin={0}
           paddingTop={24}
@@ -358,6 +388,7 @@ const HolySavingsDepositModal = ({ defaultInputCurrency, testID }) => {
               title="Deposit"
             />
             <ExchangeInputField
+              debounce={700}
               inputAmount={inputAmount}
               inputCurrencyAddress={get(inputCurrency, 'address', null)}
               inputCurrencySymbol={get(inputCurrency, 'symbol', null)}
@@ -394,9 +425,10 @@ const HolySavingsDepositModal = ({ defaultInputCurrency, testID }) => {
                 isDeposit={false}
                 isSufficientBalance={isSufficientBalance}
                 isSufficientGas={isSufficientGas}
-                isSufficientLiquidity
+                isSufficientLiquidity={isSufficientLiquidity}
                 onSubmit={handleSubmit}
                 testID={testID + '-confirm'}
+                transferError={transferError}
                 type={type}
               />
             </Centered>

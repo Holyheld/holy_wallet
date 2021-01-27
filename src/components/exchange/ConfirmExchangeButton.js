@@ -20,6 +20,7 @@ const ConfirmExchangeButton = ({
   slippage,
   testID,
   type,
+  transferError,
   ...props
 }) => {
   let label = '';
@@ -59,13 +60,16 @@ const ConfirmExchangeButton = ({
     label = 'Swap Anyway';
   } else if (disabled) {
     label = 'Enter an Amount';
+  } else if (transferError) {
+    label = `${transferError}`;
   }
 
   const isDisabled =
     disabled ||
     !isSufficientBalance ||
     !isSufficientGas ||
-    !isSufficientLiquidity;
+    !isSufficientLiquidity ||
+    transferError;
 
   return (
     <HoldToAuthorizeButton

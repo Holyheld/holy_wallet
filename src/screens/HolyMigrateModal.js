@@ -66,6 +66,7 @@ import {
   useBlockPolling,
   useGas,
 } from '@holyheld-com/hooks';
+import { ethUnits } from '@holyheld-com/references';
 import Routes from '@holyheld-com/routes';
 import { colors, position } from '@holyheld-com/styles';
 import { backgroundTask } from '@holyheld-com/utils';
@@ -256,7 +257,7 @@ const HolyMigrateModal = ({ holyV1Asset, testID }) => {
     newNativePrice
   );
 
-  const defaultGasLimit = 160000;
+  const defaultGasLimit = ethUnits.basic_holy_migration;
   const type = exchangeModalTypes.holyMigrate;
 
   const dispatch = useDispatch();

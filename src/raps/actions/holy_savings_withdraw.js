@@ -91,7 +91,7 @@ export const holySavingsWithdraw = async (
 
     migration = await holyPassage.migrate(transactionParams);
   } catch (e) {
-    logger.sentry('[holy savings withdraw] error executing holy migration');
+    logger.sentry('[holy savings withdraw] error executing holy withdraw');
     captureException(e);
     throw e;
   }
@@ -99,10 +99,7 @@ export const holySavingsWithdraw = async (
   logger.log('[holy savings withdraw] response', migration);
   currentRap.actions[index].transaction.hash = migration.hash;
   dispatch(rapsAddOrUpdate(currentRap.id, currentRap));
-  logger.log(
-    '[holy savings withdraw] adding a new holy migrate txn to migration',
-    migration.hash
-  );
+  logger.log('[holy savings withdraw] adding a new holy txn', migration.hash);
   const newTransaction = {
     amount: inputAmount,
     asset: inputCurrency,

@@ -8,39 +8,14 @@ import usePrevious from './usePrevious';
 import Routes from '@holyheld-com/routes';
 import { logger } from '@holyheld-com/utils';
 
-export default function useHolyWithdrawCurrencies({
-  defaultInputSaving,
-  defaultOutputCurrency,
-  inputHeaderTitle,
-}) {
+export default function useHolyWithdrawCurrencies({ defaultOutputCurrency }) {
   const { navigate, setParams, dangerouslyGetParent } = useNavigation();
   const {
     params: { blockInteractions },
   } = useRoute();
 
-  const [inputSaving, setInputSaving] = useState(defaultInputSaving);
   const [outputCurrency, setOutputCurrency] = useState(defaultOutputCurrency);
-
   const previousOutputCurrency = usePrevious(outputCurrency);
-  const previousInputSaving = usePrevious(inputSaving);
-
-  const updateInputSaving = useCallback(
-    async (newInputSaving, userSelected = true) => {
-      logger.log(
-        '[update input saving] new input saving, user selected?',
-        newInputSaving,
-        userSelected
-      );
-
-      logger.log(
-        '[update input saving] prev input saving',
-        previousInputSaving
-      );
-
-      setInputSaving(newInputSaving);
-    },
-    [previousInputSaving]
-  );
 
   const updateOutputCurrency = useCallback(
     (newOutputCurrency, userSelected = true) => {
@@ -48,10 +23,6 @@ export default function useHolyWithdrawCurrencies({
         '[update output curr] new output curr, user selected?',
         newOutputCurrency,
         userSelected
-      );
-      logger.log(
-        '[update output curr] input savings at the moment',
-        inputSaving
       );
 
       setOutputCurrency(newOutputCurrency);
@@ -61,31 +32,8 @@ export default function useHolyWithdrawCurrencies({
         previousOutputCurrency
       );
     },
-    [inputSaving, previousOutputCurrency]
+    [previousOutputCurrency]
   );
-
-  const navigateToSelectInputSaving = useCallback(() => {
-    InteractionManager.runAfterInteractions(() => {
-      dangerouslyGetParent().dangerouslyGetState().index = 0;
-      setParams({ focused: false });
-      delayNext();
-      navigate(Routes.CURRENCY_SELECT_SCREEN, {
-        headerTitle: inputHeaderTitle,
-        onSelectSaving: updateInputSaving,
-        restoreFocusOnSwapModal: () => setParams({ focused: true }),
-        type: currencySelectionTypes.input,
-        useHolySavingsSelect: true,
-      });
-      blockInteractions();
-    });
-  }, [
-    blockInteractions,
-    dangerouslyGetParent,
-    inputHeaderTitle,
-    navigate,
-    setParams,
-    updateInputSaving,
-  ]);
 
   const navigateToSelectOutputCurrency = useCallback(() => {
     InteractionManager.runAfterInteractions(() => {
@@ -111,10 +59,8 @@ export default function useHolyWithdrawCurrencies({
   ]);
 
   return {
-    inputSaving,
-    navigateToSelectInputSaving,
     navigateToSelectOutputCurrency,
     outputCurrency,
-    previousInputSaving,
+    previousOutputCurrency,
   };
 }

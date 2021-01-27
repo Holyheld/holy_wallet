@@ -270,6 +270,62 @@ export const refreshHolyPrice = () => async (dispatch, getState) => {
   }
 };
 
+export const getTransferData = async (
+  buyTokenSymbol,
+  sellTokenSymbol,
+  amount
+) => {
+  let error = '';
+  let data = '';
+  let buyTokenAddress = '';
+  let buyAmount = '';
+  let allowanceTarget = '';
+  let sellTokenAddress = '';
+  let to = '';
+  let value = '';
+  try {
+    const res = await fetch(
+      `https://kovan.api.0x.org/swap/v1/quote?buyToken=${buyTokenSymbol}&sellToken=${sellTokenSymbol}&sellAmount=${amount}`,
+      {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        method: 'GET',
+      }
+    );
+    logger.log(res);
+    let json = await res.json();
+    logger.log(json);
+
+    if (json.validationErrors && json.validationErrors.length > 0) {
+      error = json.validationErrors[0].reason;
+    } else {
+      data = json.data;
+      allowanceTarget = json.allowanceTarget;
+      to = json.to;
+      value = json.value;
+      buyTokenAddress = json.buyTokenAddress;
+      sellTokenAddress = json.sellTokenAddress;
+      buyAmount = json.buyAmount;
+    }
+  } catch (err) {
+    logger.warn(`Error during 0x api call: ${err}`);
+    error = 'Error';
+  }
+
+  return {
+    allowanceTarget,
+    buyAmount,
+    buyTokenAddress,
+    data,
+    error,
+    sellTokenAddress,
+    to,
+    value,
+  };
+};
+
 export const refreshHoly = () => async dispatch => {
   dispatch(RefershHolySavings());
   dispatch(RefreshHolyEarlyLPBonus());

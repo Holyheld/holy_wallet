@@ -6,6 +6,7 @@ import store from '../redux/store';
 import depositCompound from './actions/depositCompound';
 import holyClaim from './actions/holy_claim';
 import holyMigrate from './actions/holy_migrate';
+import { holySavingsDeposit } from './actions/holy_savings_deposit';
 import { holySavingsWithdraw } from './actions/holy_savings_withdraw';
 import swap from './actions/swap';
 import unlock from './actions/unlock';
@@ -40,14 +41,12 @@ const findActionByType = type => {
       // TODO: do treasury claim
       return NOOP;
     case RapActionTypes.holyMigrate:
-      // TODO: do holy migrate
       return holyMigrate;
     case RapActionTypes.holySavingsWithdraw:
       // TODO: do holy migrate
       return holySavingsWithdraw;
     case RapActionTypes.holySavingsDeposit:
-      // TODO: do holy migrate
-      return NOOP;
+      return holySavingsDeposit;
     case RapActionTypes.holyBonusClaim:
       return holyClaim;
     default:
