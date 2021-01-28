@@ -14,7 +14,7 @@ import { interpolate } from '../animations';
 import { CoinIcon } from '../coin-icon';
 import { Centered } from '../layout';
 import { Text } from '../text';
-import { padding } from '@holyheld-com/styles';
+import { colors, padding } from '@holyheld-com/styles';
 
 const Container = styled(Centered)`
   ${padding(19, 19, 2)};
@@ -98,19 +98,19 @@ const MigrateInfo = ({ asset, amount, bonusAmount }) => {
           symbol={symbol}
           testID="swap-info-container"
         />
-        <Text color="grey" size="smedium" weight="medium">
+        <Text color={colors.textColorMuted} size="smedium" weight="medium">
           You will get{' '}
         </Text>
-        <Text color="white" size="smedium" weight="semibold">
+        <Text color={colors.textColor} size="smedium" weight="semibold">
           {`${amountToDisplayRounded}  ${symbol}`}
         </Text>
         {greaterThan(bonusAmount, '0') ? (
           <>
-            <Text color="grey" size="smedium" weight="medium">
+            <Text color={colors.textColorMuted} size="smedium" weight="medium">
               {' '}
               and{' '}
             </Text>
-            <Text color="white" size="smedium" weight="semibold">
+            <Text color={colors.textColor} size="smedium" weight="semibold">
               {`${bonusToDisplayRounded}  ${symbol}`}
             </Text>
           </>

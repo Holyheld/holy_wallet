@@ -22,6 +22,7 @@ import {
 import { FloatingPanel, FloatingPanels } from '../components/floating-panels';
 import { GasSpeedButton } from '../components/gas';
 import { Centered, KeyboardFixedOpenLayout } from '../components/layout';
+import DepositMaxAmountInfo from '../components/savings/DepositMaxAmountInfo';
 import DepositSwapInfo from '../components/savings/DepositSwapInfo';
 import exchangeModalTypes from '../helpers/exchangeModalTypes';
 import useHolyDepositCurrencies from '../hooks/useHolyDepositCurrencies';
@@ -415,6 +416,8 @@ const HolySavingsDepositModal = ({ defaultInputCurrency, testID }) => {
             asset={USDcAsset}
             testID="migrate-info-button"
           />
+
+          <DepositMaxAmountInfo amount={outputAmount} />
 
           <Fragment>
             <Centered

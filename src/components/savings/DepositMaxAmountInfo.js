@@ -1,6 +1,5 @@
-import { get } from 'lodash';
 import PropTypes from 'prop-types';
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import Animated from 'react-native-reanimated';
 import {
   bin,
@@ -9,35 +8,28 @@ import {
 } from 'react-native-redash';
 import styled from 'styled-components/primitives';
 import { interpolate } from '../animations';
-import { CoinIcon } from '../coin-icon';
+import { Icon } from '../icons';
 import { Centered } from '../layout';
 import { Text } from '../text';
 import { colors, padding } from '@holyheld-com/styles';
 
 const Container = styled(Centered)`
-  ${padding(19, 19, 2)};
+  ${padding(0, 30, 0, 30)};
   width: 100%;
 `;
 
-const DepositSwapInfo = ({ asset, amount }) => {
-  const isVisible = !!(asset && amount);
-  const symbol = get(asset, 'symbol');
-  const address = get(asset, 'address');
+const WarningIcon = styled(Icon).attrs({
+  color: colors.orangeLight,
+  name: 'warning',
+})`
+  box-shadow: 0px 4px 6px ${colors.alpha(colors.orangeLight, 0.4)};
+  margin-top: 1;
+  margin-right: 10px;
+`;
 
-  const prevAmountRef = useRef();
-  useEffect(() => {
-    // Need to remember the amount so
-    // it doesn't show NULL while fading out!
-    if (amount !== null) {
-      prevAmountRef.current = amount;
-    }
-  });
-
-  const prevAmount = prevAmountRef.current;
-  let amountToDisplay = amount;
-  if (amount === null) {
-    amountToDisplay = prevAmount;
-  }
+const DepositMaxAmoutInfo = ({ amount }) => {
+  // TODO change
+  const isVisible = !!amount;
 
   const animation = useSpringTransition(bin(isVisible), {
     damping: 14,
@@ -58,6 +50,8 @@ const DepositSwapInfo = ({ asset, amount }) => {
           inputRange: [0, 1],
           outputRange: [0, 35],
         }),
+        marginBottom: 5,
+        marginTop: 19,
         opacity: interpolate(animation, {
           inputRange: [0, 1],
           outputRange: [0, 1],
@@ -78,28 +72,23 @@ const DepositSwapInfo = ({ asset, amount }) => {
       testID="claim-info"
     >
       <Container>
-        <CoinIcon
-          address={address}
-          flex={0}
-          marginRight={5}
-          size={20}
-          symbol={symbol}
-          testID="claim-info-container"
-        />
-        <Text color={colors.textColorMuted} size="smedium" weight="medium">
-          Swapping for{' '}
-        </Text>
-        <Text color={colors.textColor} size="smedium" weight="semibold">
-          {`${amountToDisplay}  ${symbol}`}
+        <WarningIcon />
+        <Text
+          align="center"
+          color={colors.textColorMuted}
+          size="smedium"
+          weight="medium"
+        >
+          We are currently limiting the maximum deposit size to optimize
+          performance.
         </Text>
       </Container>
     </Animated.View>
   );
 };
 
-DepositSwapInfo.propTypes = {
+DepositMaxAmoutInfo.propTypes = {
   amount: PropTypes.number,
-  asset: PropTypes.object,
 };
 
-export default DepositSwapInfo;
+export default DepositMaxAmoutInfo;

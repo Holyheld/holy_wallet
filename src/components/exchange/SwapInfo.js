@@ -12,7 +12,7 @@ import { interpolate } from '../animations';
 import { CoinIcon } from '../coin-icon';
 import { Centered } from '../layout';
 import { Text } from '../text';
-import { padding } from '@holyheld-com/styles';
+import { colors, padding } from '@holyheld-com/styles';
 
 const Container = styled(Centered)`
   ${padding(19, 19, 2)};
@@ -85,10 +85,10 @@ const SwapInfo = ({ asset, amount }) => {
           symbol={get(asset, 'symbol')}
           testID="swap-info-container"
         />
-        <Text color="grey" size="smedium" weight="medium">
+        <Text color={colors.textColorMuted} size="smedium" weight="medium">
           Swapping for{' '}
         </Text>
-        <Text color="white" size="smedium" weight="semibold">
+        <Text color={colors.textColor} size="smedium" weight="semibold">
           {`${amountToDisplay}  ${symbol}`}
         </Text>
       </Container>
