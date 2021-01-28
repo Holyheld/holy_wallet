@@ -51,8 +51,8 @@ const DepositMaxAmoutInfo = ({ isDepositMax }) => {
           inputRange: [0, 1],
           outputRange: [0, 35],
         }),
-        marginBottom: 5,
-        marginTop: 19,
+        marginBottom: isVisible ? 5 : 0,
+        marginTop: isVisible ? 19 : 0,
         opacity: interpolate(animation, {
           inputRange: [0, 1],
           outputRange: [0, 1],
