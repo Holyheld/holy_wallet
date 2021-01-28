@@ -94,33 +94,63 @@ export default function useHolyDepositInputs({
   );
 
   const updateNativeAmount = useCallback(
-    nativeAmount => {
-      logger.log('update native amount', nativeAmount);
-      logger.log('inputCurrency', inputCurrency);
+    async newNativeAmount => {
+      setIsLoading(true);
 
-      if (!inputCurrency) return;
-
-      let inputAmount = null;
-
-      setNativeAmount(nativeAmount);
+      setNativeAmount(newNativeAmount);
       setIsMax(false);
 
-      if (nativeAmount && !isZero(nativeAmount)) {
-        const nativePrice = get(inputCurrency, 'native.price.amount', null);
-        inputAmount = convertAmountFromNativeValue(
-          nativeAmount,
-          nativePrice,
-          inputCurrency.decimals
-        );
+      if (inputCurrency && outputCurrency) {
+        logger.log('inputCurrency:', inputCurrency);
+        logger.log('outputCurrency:', outputCurrency);
+        logger.log('newNativeAmount:', newNativeAmount);
+
+        if (newNativeAmount && !isZero(newNativeAmount)) {
+          const nativePrice = get(inputCurrency, 'native.price.amount', null);
+          const newInputAmount = convertAmountFromNativeValue(
+            newNativeAmount,
+            nativePrice,
+            inputCurrency.decimals
+          );
+
+          const newIsSufficientBalance =
+            !newInputAmount ||
+            greaterThanOrEqualTo(maxInputBalance, newInputAmount);
+          setIsSufficientBalance(newIsSufficientBalance);
+
+          const amountInWEI = convertAmountToRawAmount(
+            newInputAmount,
+            inputCurrency.decimals
+          );
+          logger.log('amountInWEI:', amountInWEI);
+
+          const transferData = await getTransferData(
+            outputCurrency.symbol,
+            inputCurrency.symbol,
+            amountInWEI
+          );
+
+          if (transferData.data && !transferData.error) {
+            const newOutputAmount = convertRawAmountToDecimalFormat(
+              transferData.buyAmount,
+              outputCurrency.decimals
+            );
+            setTransferData(transferData);
+            setOutputAmount(newOutputAmount);
+          } else {
+            setTransferError(transferData.error);
+            //todo: parse
+            setIsSufficientLiquidity(true);
+          }
+        } else {
+          setInputAmount(0);
+          setOutputAmount(0);
+        }
       }
 
-      // TODO: use request to get the proper value
-      const newOutputAmount = nativeAmount;
-
-      setInputAmount(inputAmount);
-      setOutputAmount(newOutputAmount);
+      setIsLoading(false);
     },
-    [inputCurrency]
+    [inputCurrency, maxInputBalance, outputCurrency]
   );
 
   return {

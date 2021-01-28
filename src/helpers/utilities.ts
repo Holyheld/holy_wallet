@@ -142,6 +142,9 @@ export const convertHexToString = (hex: BigNumberish): string =>
 export const convertStringToHex = (stringToConvert: string): string =>
   new BigNumber(stringToConvert).toString(16);
 
+export const convertStringToHexWithPrefix = (stringToConvert: string): string =>
+  `0x${new BigNumber(stringToConvert).toString(16)}`;
+
 export const add = (numberOne: BigNumberish, numberTwo: BigNumberish): string =>
   new BigNumber(numberOne).plus(numberTwo).toFixed();
 

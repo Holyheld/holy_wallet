@@ -3,17 +3,17 @@ import { add } from '../helpers/utilities';
 import { rapsAddOrUpdate } from '../redux/raps';
 import store from '../redux/store';
 import { HOLY_HAND_ADDRESS } from '../references/holy';
+import { holySavingsDepositEstimation } from './actions/holy_savings_deposit';
 import { assetNeedsUnlocking } from './actions/unlock';
 import { createNewAction, createNewRap, RapActionTypes } from './common';
-import { ethUnits } from '@holyheld-com/references';
 import { contractUtils } from '@holyheld-com/utils';
 import logger from 'logger';
 
 export const estimateHolySavingsDepositCompound = async ({
-  amount,
-  currency,
+  inputAmount,
+  inputCurrency,
+  transferData,
 }) => {
-  // create unlock rap
   const { accountAddress, network } = store.getState().settings;
 
   let gasLimits = [];
@@ -22,20 +22,18 @@ export const estimateHolySavingsDepositCompound = async ({
 
   const swapAssetNeedsUnlocking = await assetNeedsUnlocking(
     accountAddress,
-    amount,
-    currency,
+    inputAmount,
+    inputCurrency,
     contractAddress
   );
 
-  let depositGasEstimation = ethUnits.basic_approval;
-
-  if (swapAssetNeedsUnlocking) {
+  if (swapAssetNeedsUnlocking && inputAmount) {
     logger.log(
       '[holy savings deposit estimation] we need unlock tokens ',
-      amount
+      inputAmount
     );
     const unlockGasLimit = await contractUtils.estimateApprove(
-      currency.address,
+      inputCurrency.address,
       contractAddress
     );
     logger.log(
@@ -43,13 +41,16 @@ export const estimateHolySavingsDepositCompound = async ({
       unlockGasLimit
     );
     gasLimits = concat(gasLimits, unlockGasLimit);
+  } else {
+    const depositGasEstimation = await holySavingsDepositEstimation({
+      accountAddress,
+      inputAmount,
+      inputCurrency,
+      network,
+      transferData,
+    });
+    gasLimits = concat(gasLimits, depositGasEstimation);
   }
-
-  gasLimits = concat(gasLimits, depositGasEstimation);
-  logger.log(
-    '[holy savings deposit estimation] gas for deposit ',
-    depositGasEstimation
-  );
 
   return reduce(gasLimits, (acc, limit) => add(acc, limit), '0');
 };

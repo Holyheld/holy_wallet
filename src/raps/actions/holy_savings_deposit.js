@@ -15,6 +15,7 @@ import TransactionStatusTypes from '../../helpers/transactionStatusTypes';
 import TransactionTypes from '../../helpers/transactionTypes';
 import {
   convertAmountToRawAmount,
+  convertStringToHexWithPrefix,
   isZero,
   multiply,
 } from '../../helpers/utilities';
@@ -26,34 +27,97 @@ import { ethUnits } from '../../references';
 import {
   HOLY_HAND_ABI,
   HOLY_HAND_ADDRESS,
-  HOLY_PASSAGE_ABI,
-  HOLY_PASSAGE_ADDRESS,
   HOLY_SAVINGS_POOL_ADDRESS,
 } from '../../references/holy';
 import logger from 'logger';
 
 const NOOP = () => undefined;
 
-export const holySavingsDepositEstimation = async inputAmount => {
+export const holySavingsDepositEstimation = async ({
+  accountAddress,
+  inputAmount,
+  inputCurrency,
+  network,
+  transferData,
+}) => {
   logger.log('[holy savings deposit estimation] estimation');
 
-  const { accountAddress, network } = store.getState().settings;
+  if (!inputAmount || !transferData) {
+    logger.log(
+      '[holy savings deposit estimation] input amount or transfer data is null - return basic value'
+    );
 
-  const contractAddress = HOLY_PASSAGE_ADDRESS(network);
-  const contractABI = HOLY_PASSAGE_ABI;
+    return ethUnits.basic_holy_savings_deposit;
+  }
 
-  logger.log('[holy savings deposit estimation] for address:', accountAddress);
-
-  // TODO: change to deposit function
-  const holyPassage = new Contract(contractAddress, contractABI, web3Provider);
+  const contractAddress = HOLY_HAND_ADDRESS(network);
+  const contractABI = HOLY_HAND_ABI;
 
   try {
-    logger.log('holy savings deposit estimation');
-    const gasLimit = await holyPassage.estimateGas.migrate(inputAmount, {
+    const holyHand = new Contract(contractAddress, contractABI, web3Provider);
+
+    const transactionParams = {
       from: accountAddress,
-    });
-    logger.log('holy_savings_deposit estimate: ' + gasLimit.toString());
-    return gasLimit ? gasLimit.toString() : ethUnits.basic_holy_savings_deposit;
+    };
+
+    const poolAddress = HOLY_SAVINGS_POOL_ADDRESS(network);
+
+    logger.log('[holy savings deposit estimation] pool address', poolAddress);
+
+    const inputAmountInWEI = convertAmountToRawAmount(
+      inputAmount,
+      inputCurrency.decimals
+    );
+
+    logger.log(
+      '[holy savings deposit estimation] input amount in WEI:',
+      inputAmountInWEI
+    );
+
+    const expectedMinimumReceived = new BigNumber(
+      multiply(transferData.buyAmount, '0.85')
+    ).toFixed(0);
+
+    logger.log(
+      '[holy savings deposit estimation] expected minimum received:',
+      expectedMinimumReceived
+    );
+
+    const valueBytes = arrayify(
+      hexZeroPad(convertStringToHexWithPrefix(transferData.value), 32)
+    );
+    logger.log(
+      '[holy savings deposit estimation] valueBytes:',
+      hexlify(valueBytes)
+    );
+
+    const bytesData = concat([
+      arrayify(transferData.to),
+      arrayify(transferData.allowanceTarget),
+      valueBytes,
+      arrayify(transferData.data),
+    ]);
+
+    logger.log(
+      '[holy savings deposit estimation] bytesData:',
+      hexlify(bytesData)
+    );
+
+    const gasLimit = await holyHand.estimateGas.depositToPool(
+      poolAddress,
+      inputCurrency.address,
+      inputAmountInWEI,
+      expectedMinimumReceived,
+      bytesData,
+      transactionParams
+    );
+
+    const gasLimitString = gasLimit.toString();
+    logger.log(
+      '[holy savings deposit estimation] gas estimation by ether.js: ' +
+        gasLimitString
+    );
+    return gasLimit ? gasLimitString : ethUnits.basic_holy_savings_deposit;
   } catch (error) {
     logger.log('error holy_savings_deposit estimate');
     logger.log(error);
@@ -80,7 +144,13 @@ export const holySavingsDeposit = async (
   const { dispatch } = store;
 
   let gasPrice = get(selectedGasPrice, 'value.amount');
-  const gasLimit = '450000'; //await holySavingsDepositEstimation(transferData);
+  const gasLimit = await holySavingsDepositEstimation({
+    accountAddress,
+    inputAmount,
+    inputCurrency,
+    network,
+    transferData,
+  });
 
   const contractAddress = HOLY_HAND_ADDRESS(network);
   const contractABI = HOLY_HAND_ABI;
@@ -99,6 +169,7 @@ export const holySavingsDeposit = async (
     const holyHand = new Contract(contractAddress, contractABI, walletToUse);
 
     const transactionParams = {
+      from: accountAddress,
       gasLimit: toHex(gasLimit) || undefined,
       gasPrice: toHex(gasPrice) || undefined,
     };
@@ -124,7 +195,7 @@ export const holySavingsDeposit = async (
     );
 
     const valueBytes = arrayify(hexZeroPad(hexValue(+transferData.value), 32));
-    logger.log('[holy savings deposit] valueBytes:', valueBytes);
+    logger.log('[holy savings deposit] valueBytes:', hexlify(valueBytes));
 
     const bytesData = concat([
       arrayify(transferData.to),

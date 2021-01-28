@@ -203,13 +203,17 @@ const HolySavingsDepositModal = ({ defaultInputCurrency, testID }) => {
     try {
       const gasLimit = await estimateHolySavingsDepositCompound({
         inputAmount,
+        inputCurrency,
+        transferData,
       });
+
+      logger.log('new gas limit:', gasLimit);
 
       updateTxFee(gasLimit);
     } catch (error) {
       updateTxFee(defaultGasLimit);
     }
-  }, [defaultGasLimit, inputAmount, updateTxFee]);
+  }, [defaultGasLimit, inputAmount, inputCurrency, transferData, updateTxFee]);
 
   // Update gas limit
   useEffect(() => {
