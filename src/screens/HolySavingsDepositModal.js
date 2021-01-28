@@ -156,6 +156,7 @@ const HolySavingsDepositModal = ({ defaultInputCurrency, testID }) => {
 
   const {
     inputAmount,
+    isDepositMax,
     isMax,
     isSufficientBalance,
     isSufficientLiquidity,
@@ -417,7 +418,7 @@ const HolySavingsDepositModal = ({ defaultInputCurrency, testID }) => {
             testID="migrate-info-button"
           />
 
-          <DepositMaxAmountInfo amount={outputAmount} />
+          <DepositMaxAmountInfo isDepositMax={isDepositMax} />
 
           <Fragment>
             <Centered

@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useMemo } from 'react';
 import Animated from 'react-native-reanimated';
 import {
   bin,
@@ -27,9 +27,10 @@ const WarningIcon = styled(Icon).attrs({
   margin-right: 10px;
 `;
 
-const DepositMaxAmoutInfo = ({ amount }) => {
-  // TODO change
-  const isVisible = !!amount;
+const DepositMaxAmoutInfo = ({ isDepositMax }) => {
+  const isVisible = useMemo(() => {
+    return isDepositMax;
+  }, [isDepositMax]);
 
   const animation = useSpringTransition(bin(isVisible), {
     damping: 14,
@@ -88,7 +89,7 @@ const DepositMaxAmoutInfo = ({ amount }) => {
 };
 
 DepositMaxAmoutInfo.propTypes = {
-  amount: PropTypes.number,
+  isDepositMax: PropTypes.bool,
 };
 
 export default DepositMaxAmoutInfo;

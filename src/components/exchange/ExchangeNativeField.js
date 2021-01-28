@@ -1,6 +1,7 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { TouchableWithoutFeedback } from 'react-native';
 import styled from 'styled-components/primitives';
+import useDebounce from '../../hooks/useDebounce';
 import supportedNativeCurrencies from '../../references/native-currencies.json';
 import { Row } from '../layout';
 import { Text } from '../text';
@@ -26,6 +27,7 @@ const NativeInput = styled(ExchangeInput).attrs({
 
 const ExchangeNativeField = (
   {
+    debounce,
     editable,
     height,
     nativeAmount,
@@ -54,6 +56,27 @@ const ExchangeNativeField = (
     [onFocus]
   );
 
+  const [rawAmount, setRawAmount] = useState(null);
+  const debouncedAmount = useDebounce(rawAmount, debounce);
+
+  // Here's where the API call happens
+  // We use useEffect since this is an asynchronous action
+  useEffect(
+    () => {
+      // Make sure we have a value (user has entered something in input)
+      if (debouncedAmount) {
+        setNativeAmount(debouncedAmount);
+      } else {
+        setNativeAmount();
+      }
+    },
+    // This is the useEffect input array
+    // Our useEffect function will only execute if this value changes ...
+    // ... and thanks to our hook it will only change if the original ...
+    // value (searchTerm) hasn't changed for more than 500ms.
+    [debouncedAmount]
+  );
+
   const nativeAmountColor = isFocused
     ? colors.textColor
     : colors.textColorPlaceholder;
@@ -70,7 +93,7 @@ const ExchangeNativeField = (
           height={height}
           mask={mask}
           onBlur={handleBlur}
-          onChangeText={setNativeAmount}
+          onChangeText={setRawAmount}
           onFocus={handleFocus}
           placeholder={placeholder}
           ref={ref}

@@ -22,6 +22,7 @@ const NativeFieldRow = styled(Row).attrs({
 `;
 
 export default function ExchangeInputField({
+  debounce,
   disableInputCurrencySelection,
   inputAmount,
   inputCurrencyAddress,
@@ -44,6 +45,7 @@ export default function ExchangeInputField({
         address={inputCurrencyAddress}
         amount={inputAmount}
         autoFocus={android}
+        debounce={debounce}
         disableCurrencySelection={disableInputCurrencySelection}
         onFocus={onFocus}
         onPressSelectCurrency={onPressSelectInputCurrency}
@@ -56,6 +58,7 @@ export default function ExchangeInputField({
       {showNative ? (
         <NativeFieldRow>
           <ExchangeNativeField
+            debounce={debounce}
             editable
             height={BottomRowHeight}
             nativeAmount={nativeAmount}

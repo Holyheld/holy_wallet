@@ -6,9 +6,11 @@ import {
   convertAmountToNativeAmount,
   convertAmountToRawAmount,
   convertRawAmountToDecimalFormat,
+  greaterThan,
   greaterThanOrEqualTo,
   isZero,
 } from '../helpers/utilities';
+import { MAX_HOLY_DEPOSIT_AMOUNT_USDC } from '../references/holy';
 import logger from 'logger';
 
 export default function useHolyDepositInputs({
@@ -26,6 +28,8 @@ export default function useHolyDepositInputs({
 
   const [nativeAmount, setNativeAmount] = useState(null);
   const [outputAmount, setOutputAmount] = useState(null);
+
+  const [isDepositMax, setIsDepositMax] = useState(false);
 
   const updateInputAmount = useCallback(
     async (newInputAmount, newIsMax = false) => {
@@ -78,6 +82,9 @@ export default function useHolyDepositInputs({
             );
             setTransferData(transferData);
             setOutputAmount(newOutputAmount);
+            setIsDepositMax(
+              greaterThan(newOutputAmount, MAX_HOLY_DEPOSIT_AMOUNT_USDC)
+            );
           } else {
             setTransferError(transferData.error);
             //todo: parse
@@ -86,6 +93,7 @@ export default function useHolyDepositInputs({
         } else {
           setNativeAmount(0);
           setOutputAmount(0);
+          setIsDepositMax(false);
         }
       }
       setIsLoading(false);
@@ -113,6 +121,8 @@ export default function useHolyDepositInputs({
             inputCurrency.decimals
           );
 
+          setInputAmount(newInputAmount);
+
           const newIsSufficientBalance =
             !newInputAmount ||
             greaterThanOrEqualTo(maxInputBalance, newInputAmount);
@@ -137,6 +147,9 @@ export default function useHolyDepositInputs({
             );
             setTransferData(transferData);
             setOutputAmount(newOutputAmount);
+            setIsDepositMax(
+              greaterThan(newOutputAmount, MAX_HOLY_DEPOSIT_AMOUNT_USDC)
+            );
           } else {
             setTransferError(transferData.error);
             //todo: parse
@@ -145,6 +158,7 @@ export default function useHolyDepositInputs({
         } else {
           setInputAmount(0);
           setOutputAmount(0);
+          setIsDepositMax(false);
         }
       }
 
@@ -155,6 +169,7 @@ export default function useHolyDepositInputs({
 
   return {
     inputAmount,
+    isDepositMax,
     isLoading,
     isMax,
     isSufficientBalance,
