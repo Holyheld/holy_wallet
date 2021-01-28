@@ -298,9 +298,9 @@ const HolySavingsDepositModal = ({ defaultInputCurrency, testID }) => {
           transferData,
         });
         logger.log('[holy savings deposit] rap', rap);
-        setIsAuthorizing(false);
         await executeRap(wallet, rap);
         logger.log('[holy savings deposit] executed rap!');
+        setIsAuthorizing(false);
       } catch (error) {
         setIsAuthorizing(false);
         logger.log('[holy savings deposit] error submitting', error);

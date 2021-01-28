@@ -74,34 +74,39 @@ export const holySavingsDepositEstimation = async ({
       inputAmountInWEI
     );
 
-    const expectedMinimumReceived = new BigNumber(
-      multiply(transferData.buyAmount, '0.85')
-    ).toFixed(0);
+    let bytesData = [];
+    let expectedMinimumReceived = '0';
 
-    logger.log(
-      '[holy savings deposit estimation] expected minimum received:',
-      expectedMinimumReceived
-    );
+    if (transferData) {
+      expectedMinimumReceived = new BigNumber(
+        multiply(transferData.buyAmount, '0.85')
+      ).toFixed(0);
 
-    const valueBytes = arrayify(
-      hexZeroPad(convertStringToHexWithPrefix(transferData.value), 32)
-    );
-    logger.log(
-      '[holy savings deposit estimation] valueBytes:',
-      hexlify(valueBytes)
-    );
+      logger.log(
+        '[holy savings deposit estimation] expected minimum received:',
+        expectedMinimumReceived
+      );
 
-    const bytesData = concat([
-      arrayify(transferData.to),
-      arrayify(transferData.allowanceTarget),
-      valueBytes,
-      arrayify(transferData.data),
-    ]);
+      const valueBytes = arrayify(
+        hexZeroPad(convertStringToHexWithPrefix(transferData.value), 32)
+      );
+      logger.log(
+        '[holy savings deposit estimation] valueBytes:',
+        hexlify(valueBytes)
+      );
 
-    logger.log(
-      '[holy savings deposit estimation] bytesData:',
-      hexlify(bytesData)
-    );
+      bytesData = concat([
+        arrayify(transferData.to),
+        arrayify(transferData.allowanceTarget),
+        valueBytes,
+        arrayify(transferData.data),
+      ]);
+
+      logger.log(
+        '[holy savings deposit estimation] bytesData:',
+        hexlify(bytesData)
+      );
+    }
 
     const gasLimit = await holyHand.estimateGas.depositToPool(
       poolAddress,
@@ -185,26 +190,33 @@ export const holySavingsDeposit = async (
 
     logger.log('[holy savings deposit] input amount in WEI:', inputAmountInWEI);
 
-    const expectedMinimumReceived = new BigNumber(
-      multiply(transferData.buyAmount, '0.85')
-    ).toFixed(0);
+    let bytesData = [];
+    let expectedMinimumReceived = '0';
 
-    logger.log(
-      '[holy savings deposit] expected minimum received:',
-      expectedMinimumReceived
-    );
+    if (transferData) {
+      expectedMinimumReceived = new BigNumber(
+        multiply(transferData.buyAmount, '0.85')
+      ).toFixed(0);
 
-    const valueBytes = arrayify(hexZeroPad(hexValue(+transferData.value), 32));
-    logger.log('[holy savings deposit] valueBytes:', hexlify(valueBytes));
+      logger.log(
+        '[holy savings deposit] expected minimum received:',
+        expectedMinimumReceived
+      );
 
-    const bytesData = concat([
-      arrayify(transferData.to),
-      arrayify(transferData.allowanceTarget),
-      valueBytes,
-      arrayify(transferData.data),
-    ]);
+      const valueBytes = arrayify(
+        hexZeroPad(hexValue(+transferData.value), 32)
+      );
+      logger.log('[holy savings deposit] valueBytes:', hexlify(valueBytes));
 
-    logger.log('[holy savings deposit] bytesData:', hexlify(bytesData));
+      bytesData = concat([
+        arrayify(transferData.to),
+        arrayify(transferData.allowanceTarget),
+        valueBytes,
+        arrayify(transferData.data),
+      ]);
+
+      logger.log('[holy savings deposit] bytesData:', hexlify(bytesData));
+    }
 
     deposit = await holyHand.depositToPool(
       poolAddress,
