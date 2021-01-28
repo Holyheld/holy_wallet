@@ -5,6 +5,7 @@ import { readableUniswapSelector } from '../hoc/uniswapLiquidityTokenInfoSelecto
 import useAccountAssets from './useAccountAssets';
 import useAccountSettings from './useAccountSettings';
 import useCoinListEditOptions from './useCoinListEditOptions';
+import { useUSDcTokenPrice } from './useGenericAssets';
 import {
   useHolyEarlyLPBonus,
   useHolySavings,
@@ -26,6 +27,7 @@ export default function useWalletSectionsData() {
   const holySavings = useHolySavings();
   const holyEarlyBonus = useHolyEarlyLPBonus();
   const holyTreasury = useHolyTreasury();
+  const usdcPrice = useUSDcTokenPrice();
 
   const {
     currentAction,
@@ -53,6 +55,7 @@ export default function useWalletSectionsData() {
       ...uniswap,
       ...isWalletEthZero,
       showcaseTokens,
+      usdcPrice,
     };
 
     const sectionsData = buildWalletSectionsSelector(accountInfo);
@@ -64,23 +67,24 @@ export default function useWalletSectionsData() {
       ...sectionsData,
     };
   }, [
-    accountData,
     currentAction,
+    hiddenCoins,
     holyEarlyBonus,
     holySavings,
     holyTreasury,
-    hiddenCoins,
     isCoinListEdited,
-    isWalletEthZero,
     language,
     nativeCurrency,
     network,
     pinnedCoins,
-    refetchSavings,
-    shouldRefetchSavings,
-    showcaseTokens,
+    accountData,
     uniqueTokens,
     uniswap,
+    isWalletEthZero,
+    showcaseTokens,
+    usdcPrice,
+    refetchSavings,
+    shouldRefetchSavings,
   ]);
   return walletSections;
 }

@@ -227,9 +227,6 @@ const fetchAssetBalances = async (tokens, address, network) => {
   // console.log(tokens);
   try {
     const values = await balanceCheckerContract.balances([address], tokens);
-
-    // console.log('values');
-    // console.log(values);
     const balances = {};
     [address].forEach((addr, addrIdx) => {
       balances[addr] = {};

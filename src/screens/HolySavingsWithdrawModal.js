@@ -22,6 +22,7 @@ import { FloatingPanel, FloatingPanels } from '../components/floating-panels';
 import { GasSpeedButton } from '../components/gas';
 import { Centered, KeyboardFixedOpenLayout } from '../components/layout';
 import exchangeModalTypes from '../helpers/exchangeModalTypes';
+import { useUSDcTokenPrice } from '../hooks/useGenericAssets';
 import { useHolySavings } from '../hooks/useHolyData';
 import useHolyWithdrawInputs from '../hooks/useHolyWithdrawInputs';
 import { loadWallet } from '../model/wallet';
@@ -82,9 +83,12 @@ const HolySavingsWithdrawModal = ({ testID }) => {
   const type = exchangeModalTypes.holyWithdraw;
   const USDcAsset = getUSDCAsset(network);
 
-  const outputCurrency = USDcAsset;
-
   const { balanceUSDC } = useHolySavings();
+
+  const usdcPrice = useUSDcTokenPrice();
+  USDcAsset.native = {
+    price: { amount: usdcPrice },
+  };
 
   const dispatch = useDispatch();
   const {
@@ -111,12 +115,11 @@ const HolySavingsWithdrawModal = ({ testID }) => {
     nativeFieldRef,
   } = useSwapInputRefs({
     inputCurrency: USDcAsset,
-    outputCurrency: outputCurrency,
+    outputCurrency: USDcAsset,
   });
 
   const {
     inputAmount,
-    isMax,
     isSufficientBalance,
     nativeAmount,
     updateInputAmount,
@@ -157,13 +160,14 @@ const HolySavingsWithdrawModal = ({ testID }) => {
     try {
       const gasLimit = await estimateHolySavingsWithdrawCompound({
         inputAmount,
+        inputCurrency: USDcAsset,
       });
 
       updateTxFee(gasLimit);
     } catch (error) {
       updateTxFee(defaultGasLimit);
     }
-  }, [inputAmount, updateTxFee, defaultGasLimit]);
+  }, [inputAmount, USDcAsset, updateTxFee, defaultGasLimit]);
 
   // Update gas limit
   useEffect(() => {
@@ -224,7 +228,7 @@ const HolySavingsWithdrawModal = ({ testID }) => {
           callback,
           inputAmount,
           inputCurrency: USDcAsset,
-          isMax,
+          outputCurrency: USDcAsset,
           selectedGasPrice,
         });
         logger.log('[holy savings withdraw] rap', rap);
@@ -238,7 +242,7 @@ const HolySavingsWithdrawModal = ({ testID }) => {
         navigate(Routes.WALLET_SCREEN);
       }
     });
-  }, [inputAmount, USDcAsset, isMax, selectedGasPrice, setParams, navigate]);
+  }, [inputAmount, USDcAsset, selectedGasPrice, setParams, navigate]);
 
   return (
     <Wrapper>

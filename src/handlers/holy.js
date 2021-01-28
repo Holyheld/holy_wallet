@@ -2,20 +2,29 @@ import { Contract } from '@ethersproject/contracts';
 import { captureException } from '@sentry/react-native';
 import BigNumber from 'bignumber.js';
 import { get } from 'lodash';
-import { divide, greaterThan, multiply } from '../helpers/utilities';
+import {
+  convertRawAmountToDecimalFormat,
+  divide,
+  greaterThan,
+  multiply,
+} from '../helpers/utilities';
 import {
   holyUpdateBonusDPY,
   holyUpdateBonusRate,
   holyUpdateEarlyLPBonusAmount,
   holyUpdateEarlyLPBonusShow,
   holyUpdateFullCap,
+  holyUpdateSavingsBalanceUCDS,
   updateHHPrice,
   updateHolyPrice,
 } from '../redux/holy';
 import {
+  getUSDCAsset,
   HH_V2_ADDRESS,
   HOLY_PASSAGE_ABI,
   HOLY_PASSAGE_ADDRESS,
+  HOLY_POOL_ABI,
+  HOLY_SAVINGS_POOL_ADDRESS,
   HOLY_V1_ADDRESS,
   HOLY_VISOR_ABI,
   HOLY_VISOR_ADDRESS,
@@ -39,29 +48,7 @@ const ERC20SimpleABI = [
   'event Transfer(address indexed from, address indexed to, uint amount)',
 ];
 
-const RefershHolySavings = () => async () => {
-  // request to smart contract here
-  logger.log('refreshing HOLY savings');
-  // const savings = [
-  //   {
-  //     apy: '29.4',
-  //     balance: '4420.04259063',
-  //     native: {
-  //       price: {
-  //         amount: '1',
-  //       },
-  //     },
-  //     underlying: {
-  //       address: '0x6b175474e89094c44da98b954eedeac495271d1f', // TODO: real address
-  //       symbol: 'USDC',
-  //     },
-  //   },
-  // ];
-
-  // dispatch(holyUpdateSavings(savings));
-};
-
-const RefreshHolyEarlyLPBonus = () => async (dispatch, getState) => {
+const refreshHolyEarlyLPBonus = () => async (dispatch, getState) => {
   const { network, accountAddress } = getState().settings;
   const contractAddress = HOLY_PASSAGE_ADDRESS(network);
   const contractABI = HOLY_PASSAGE_ABI;
@@ -270,6 +257,46 @@ export const refreshHolyPrice = () => async (dispatch, getState) => {
   }
 };
 
+export const refreshHolySavings = () => async (dispatch, getState) => {
+  logger.log('refreshing Holy Savings');
+
+  const { network, accountAddress } = getState().settings;
+
+  const poolCurrency = getUSDCAsset(network);
+
+  const poolAdress = HOLY_SAVINGS_POOL_ADDRESS(network);
+
+  const contractHolyPool = new Contract(
+    poolAdress,
+    HOLY_POOL_ABI,
+    web3Provider
+  );
+
+  try {
+    logger.log('refreshing Holy Savings balance');
+    let holySavingsAmountInWEI = await contractHolyPool.getDepositBalance(
+      accountAddress,
+      {
+        from: accountAddress,
+      }
+    );
+
+    holySavingsAmountInWEI = holySavingsAmountInWEI.toString();
+    logger.log('holySavingsAmountInWEI: ', holySavingsAmountInWEI);
+    const holySavingsAmount = convertRawAmountToDecimalFormat(
+      holySavingsAmountInWEI,
+      poolCurrency.decimals
+    );
+    logger.log('holySavingsAmount: ', holySavingsAmount);
+    dispatch(holyUpdateSavingsBalanceUCDS(holySavingsAmount));
+    //dispatch(updateHolyPrice(HolyNativePrice, HolyinWETHPrice));
+  } catch (error) {
+    logger.log('error refreshing Holy Savings');
+    logger.log(error);
+    //dispatch(updateHolyPrice('0', '0'));
+  }
+};
+
 export const getTransferData = async (
   buyTokenSymbol,
   sellTokenSymbol,
@@ -327,10 +354,8 @@ export const getTransferData = async (
 };
 
 export const refreshHoly = () => async dispatch => {
-  dispatch(RefershHolySavings());
-  dispatch(RefreshHolyEarlyLPBonus());
+  dispatch(refreshHolyEarlyLPBonus());
   dispatch(refreshHolyPrice());
   dispatch(refreshHHPrice());
-  //dispatch(RefreshHolyEarlyLPBonus);
-  //dispatch(RefershHolySavings);
+  dispatch(refreshHolySavings());
 };

@@ -18,7 +18,13 @@ import {
   SheetActionButtonRow,
   SlackSheet,
 } from '../components/sheet';
-import { divide, greaterThan, multiply } from '../helpers/utilities';
+import {
+  convertAmountToNativeAmount,
+  divide,
+  greaterThan,
+  multiply,
+} from '../helpers/utilities';
+import { useUSDcTokenPrice } from '../hooks/useGenericAssets';
 import { useHolySavings } from '../hooks/useHolyData';
 import { useNavigation } from '../navigation/Navigation';
 import { getUSDCAsset } from '../references/holy';
@@ -46,17 +52,28 @@ const HolySavingsSheet = () => {
   const { isReadOnlyWallet } = useWallets();
   const { network } = useAccountSettings();
 
-  const savings = useHolySavings();
+  const { balanceUSDC, apy, ildBalanceUSDC } = useHolySavings();
+  const usdcPrice = useUSDcTokenPrice();
+
+  const balanceNative = useMemo(
+    () => convertAmountToNativeAmount(balanceUSDC, usdcPrice),
+    [balanceUSDC, usdcPrice]
+  );
+
+  const ildBalanceNative = useMemo(
+    () => convertAmountToNativeAmount(ildBalanceUSDC, usdcPrice),
+    [ildBalanceUSDC, usdcPrice]
+  );
 
   const { dpyNative } = useMemo(() => {
     const dpyNative = divide(
-      multiply(savings.balanceNative, divide(savings.apy, '100')),
+      multiply(balanceNative, divide(apy, '100')),
       '365'
     );
     return {
       dpyNative,
     };
-  }, [savings]);
+  }, [apy, balanceNative]);
 
   const {
     balanceNativeDisplay,
@@ -65,18 +82,12 @@ const HolySavingsSheet = () => {
     ildBalanceUSDCDisplay,
     isEmpty,
   } = useMemo(() => {
-    const isEmpty = !greaterThan(new BigNumber(savings.balanceNative), '0');
-    const balanceNativeDisplay = new BigNumber(savings.balanceNative).toFormat(
-      2
-    );
-    const ildBalanceNativeDisplay = new BigNumber(
-      savings.ildBalanceNative
-    ).toFormat(2);
+    const isEmpty = !greaterThan(new BigNumber(balanceNative), '0');
+    const balanceNativeDisplay = new BigNumber(balanceNative).toFormat(2);
+    const ildBalanceNativeDisplay = new BigNumber(ildBalanceNative).toFormat(2);
 
-    const balanceUSDCDisplay = new BigNumber(savings.balanceUSDC).toFormat(6);
-    const ildBalanceUSDCDisplay = new BigNumber(
-      savings.ildBalanceUSDC
-    ).toFormat(6);
+    const balanceUSDCDisplay = new BigNumber(balanceUSDC).toFormat(6);
+    const ildBalanceUSDCDisplay = new BigNumber(ildBalanceUSDC).toFormat(6);
     return {
       balanceNativeDisplay,
       balanceUSDCDisplay,
@@ -84,7 +95,7 @@ const HolySavingsSheet = () => {
       ildBalanceUSDCDisplay,
       isEmpty,
     };
-  }, [savings]);
+  }, [balanceNative, balanceUSDC, ildBalanceNative, ildBalanceUSDC]);
 
   const usdcAsset = getUSDCAsset(network);
 
@@ -132,7 +143,7 @@ const HolySavingsSheet = () => {
       >
         {isEmpty ? (
           <SavingsSheetEmptyState
-            apy={savings.apy}
+            apy={apy}
             isReadOnlyWallet={isReadOnlyWallet}
           />
         ) : (
@@ -168,7 +179,7 @@ const HolySavingsSheet = () => {
             <Column paddingBottom={2} paddingTop={1}>
               <HolySavingsCoinRow
                 additionalShare={ildBalanceUSDCDisplay}
-                apy={savings.apy}
+                apy={apy}
                 balance={balanceUSDCDisplay}
                 symbol={usdcAsset.symbol}
               />

@@ -428,7 +428,7 @@ const HolySavingsDepositModal = ({ defaultInputCurrency, testID }) => {
               width="100%"
             >
               <ConfirmExchangeButton
-                disabled={!Number(inputAmount)}
+                disabled={!Number(inputAmount) || isDepositMax}
                 isAuthorizing={isAuthorizing}
                 isDeposit={false}
                 isSufficientBalance={isSufficientBalance}

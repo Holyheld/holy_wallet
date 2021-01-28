@@ -32,8 +32,8 @@ export default {
     name: 'fulcrum',
   },
   holy: {
-    displayName: 'Holy',
-    name: 'holy',
+    displayName: 'Holyheld',
+    name: 'holyheld',
   },
   iearn: {
     displayName: 'iEarn Finance',

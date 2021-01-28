@@ -38,7 +38,7 @@ const GradientAPYHeadingText = styled(GradientText).attrs({
 const SavingsSheetEmptyState = ({ isReadOnlyWallet, apy }) => {
   const { navigate } = useNavigation();
 
-  const disableDeposit = true;
+  const disableDeposit = false;
 
   const onDeposit = useCallback(() => {
     if (disableDeposit) {

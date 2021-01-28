@@ -231,9 +231,9 @@ export const holySavingsDeposit = async (
     hash: deposit.hash,
     nonce: get(deposit, 'nonce'),
     protocol: ProtocolTypes.holy.name,
-    status: TransactionStatusTypes.migrating,
+    status: TransactionStatusTypes.depositing,
     to: get(deposit, 'to'),
-    type: TransactionTypes.migration,
+    type: TransactionTypes.trade,
   };
   logger.log('[holy savings deposit] adding new txn', newTransaction);
   await dispatch(dataAddNewTransaction(newTransaction, accountAddress, true));
@@ -242,7 +242,7 @@ export const holySavingsDeposit = async (
   currentRap.callback = NOOP;
   try {
     logger.log(
-      '[holy savings deposit] waiting for the holy migration to go thru'
+      '[holy savings deposit] waiting for the holy deposit to go thru'
     );
     const receipt = await walletToUse.provider.waitForTransaction(deposit.hash);
     logger.log('[holy savings deposit] receipt:', receipt);

@@ -86,9 +86,11 @@ export default function useHolyDepositInputs({
               greaterThan(newOutputAmount, MAX_HOLY_DEPOSIT_AMOUNT_USDC)
             );
           } else {
-            setTransferError(transferData.error);
-            //todo: parse
-            setIsSufficientLiquidity(true);
+            if ('INSUFFICIENT_ASSET_LIQUIDITY' === transferData.error) {
+              setIsSufficientLiquidity(true);
+            } else {
+              setTransferError(transferData.error);
+            }
           }
         } else {
           setNativeAmount(0);
@@ -151,9 +153,11 @@ export default function useHolyDepositInputs({
               greaterThan(newOutputAmount, MAX_HOLY_DEPOSIT_AMOUNT_USDC)
             );
           } else {
-            setTransferError(transferData.error);
-            //todo: parse
-            setIsSufficientLiquidity(true);
+            if ('INSUFFICIENT_ASSET_LIQUIDITY' === transferData.error) {
+              setIsSufficientLiquidity(true);
+            } else {
+              setTransferError(transferData.error);
+            }
           }
         } else {
           setInputAmount(0);

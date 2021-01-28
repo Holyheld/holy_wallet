@@ -4,8 +4,14 @@ import { holySavingsWithdrawEstimation } from './actions/holy_savings_withdraw';
 import { createNewAction, createNewRap, RapActionTypes } from './common';
 import logger from 'logger';
 
-export const estimateHolySavingsWithdrawCompound = async ({ inputAmount }) => {
-  const estimationGas = holySavingsWithdrawEstimation(inputAmount);
+export const estimateHolySavingsWithdrawCompound = async ({
+  inputAmount,
+  inputCurrency,
+}) => {
+  const estimationGas = holySavingsWithdrawEstimation({
+    inputAmount,
+    inputCurrency,
+  });
   logger.log(
     '[holy savings withdraw estimation] gas for withdraw ',
     estimationGas

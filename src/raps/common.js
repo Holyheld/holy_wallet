@@ -43,7 +43,6 @@ const findActionByType = type => {
     case RapActionTypes.holyMigrate:
       return holyMigrate;
     case RapActionTypes.holySavingsWithdraw:
-      // TODO: do holy migrate
       return holySavingsWithdraw;
     case RapActionTypes.holySavingsDeposit:
       return holySavingsDeposit;

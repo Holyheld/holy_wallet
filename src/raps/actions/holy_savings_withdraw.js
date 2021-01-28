@@ -5,45 +5,62 @@ import { toHex, web3Provider } from '../../handlers/web3';
 import ProtocolTypes from '../../helpers/protocolTypes';
 import TransactionStatusTypes from '../../helpers/transactionStatusTypes';
 import TransactionTypes from '../../helpers/transactionTypes';
-import { isZero } from '../../helpers/utilities';
+import { convertAmountToRawAmount, isZero } from '../../helpers/utilities';
 import { loadWallet } from '../../model/wallet';
 import { dataAddNewTransaction } from '../../redux/data';
 import { rapsAddOrUpdate } from '../../redux/raps';
 import store from '../../redux/store';
 import { ethUnits } from '../../references';
-import { HOLY_PASSAGE_ABI, HOLY_PASSAGE_ADDRESS } from '../../references/holy';
+import {
+  HOLY_HAND_ABI,
+  HOLY_HAND_ADDRESS,
+  HOLY_SAVINGS_POOL_ADDRESS,
+} from '../../references/holy';
 import logger from 'logger';
 
 const NOOP = () => undefined;
 
-export const holySavingsWithdrawEstimation = async inputAmount => {
-  logger.sentry('[holy savings withdraw estimation] estimation');
+export const holySavingsWithdrawEstimation = async ({
+  inputAmount,
+  inputCurrency,
+}) => {
+  logger.log('[holy savings withdraw estimation] estimation for');
+  logger.log('input amount: ', inputAmount);
+  logger.log('input currency: ', inputCurrency);
 
   const { accountAddress, network } = store.getState().settings;
 
-  const contractAddress = HOLY_PASSAGE_ADDRESS(network);
-  const contractABI = HOLY_PASSAGE_ABI;
+  const poolAddress = HOLY_SAVINGS_POOL_ADDRESS(network);
 
-  logger.sentry(
-    '[holy savings withdraw estimation] for address:',
-    accountAddress
-  );
+  const contractAddress = HOLY_HAND_ADDRESS(network);
+  const contractABI = HOLY_HAND_ABI;
 
-  // TODO: change to withdraw function
-  const holyPassage = new Contract(contractAddress, contractABI, web3Provider);
+  logger.log('[holy savings withdraw estimation] for address:', accountAddress);
+
+  const holyHand = new Contract(contractAddress, contractABI, web3Provider);
 
   try {
-    logger.sentry('holy savings withdraw estimation');
-    const gasLimit = await holyPassage.estimateGas.migrate(inputAmount, {
-      from: accountAddress,
-    });
-    logger.sentry('holy_savings_withdraw estimate: ' + gasLimit.toString());
+    logger.log('holy savings withdraw estimation');
+
+    const inputAmountInWEI = convertAmountToRawAmount(
+      inputAmount,
+      inputCurrency.decimals
+    );
+
+    const gasLimit = await holyHand.estimateGas.withdrawFromPool(
+      poolAddress,
+      inputAmountInWEI,
+      {
+        from: accountAddress,
+      }
+    );
+    logger.log('holy_savings_withdraw estimate: ' + gasLimit.toString());
     return gasLimit
       ? gasLimit.toString()
       : ethUnits.basic_holy_savings_withdraw;
   } catch (error) {
-    logger.sentry('error holy_savings_withdraw estimate');
-    logger.sentry(error);
+    logger.log('error holy_savings_withdraw estimate');
+    logger.log(error);
     captureException(error);
     return ethUnits.basic_holy_savings_withdraw;
   }
@@ -66,49 +83,65 @@ export const holySavingsWithdraw = async (
   const { dispatch } = store;
 
   let gasPrice = get(selectedGasPrice, 'value.amount');
-  const gasLimit = await holySavingsWithdrawEstimation();
+  const gasLimit = await holySavingsWithdrawEstimation({
+    inputAmount,
+    inputCurrency,
+  });
 
-  const contractAddress = HOLY_PASSAGE_ADDRESS(network);
-  const contractABI = HOLY_PASSAGE_ABI;
+  const poolAddress = HOLY_SAVINGS_POOL_ADDRESS(network);
 
-  let migration;
+  const contractAddress = HOLY_HAND_ADDRESS(network);
+  const contractABI = HOLY_HAND_ABI;
+
+  let withdraw;
 
   const walletToUse = wallet || (await loadWallet());
   if (!walletToUse) return null;
 
   try {
-    logger.sentry('[holy savings withdraw] executing holy migration', {
+    logger.log('[holy savings withdraw] executing holy withdraw', {
       gasLimit,
       gasPrice,
     });
 
-    const holyPassage = new Contract(contractAddress, contractABI, walletToUse);
+    const holyHand = new Contract(contractAddress, contractABI, walletToUse);
 
     const transactionParams = {
+      from: accountAddress,
       gasLimit: toHex(gasLimit) || undefined,
       gasPrice: toHex(gasPrice) || undefined,
     };
 
-    migration = await holyPassage.migrate(transactionParams);
+    const inputAmountInWEI = convertAmountToRawAmount(
+      inputAmount,
+      inputCurrency.decimals
+    );
+
+    withdraw = await holyHand.withdrawFromPool(
+      poolAddress,
+      inputAmountInWEI,
+      transactionParams
+    );
   } catch (e) {
-    logger.sentry('[holy savings withdraw] error executing holy withdraw');
+    logger.log('[holy savings withdraw] error executing holy withdraw');
+    logger.log('error:', e);
     captureException(e);
     throw e;
   }
 
-  logger.log('[holy savings withdraw] response', migration);
-  currentRap.actions[index].transaction.hash = migration.hash;
+  logger.log('[holy savings withdraw] response', withdraw);
+  currentRap.actions[index].transaction.hash = withdraw.hash;
   dispatch(rapsAddOrUpdate(currentRap.id, currentRap));
-  logger.log('[holy savings withdraw] adding a new holy txn', migration.hash);
+  logger.log('[holy savings withdraw] adding a new holy txn', withdraw.hash);
   const newTransaction = {
     amount: inputAmount,
     asset: inputCurrency,
     from: accountAddress,
-    hash: migration.hash,
-    nonce: get(migration, 'nonce'),
+    hash: withdraw.hash,
+    nonce: get(withdraw, 'nonce'),
     protocol: ProtocolTypes.holy.name,
     status: TransactionStatusTypes.withdrawing,
-    to: get(migration, 'to'),
+    to: get(withdraw, 'to'),
     type: TransactionTypes.trade,
   };
   logger.log('[holy savings withdraw] adding new txn', newTransaction);
@@ -118,10 +151,10 @@ export const holySavingsWithdraw = async (
   currentRap.callback = NOOP;
   try {
     logger.log(
-      '[holy savings withdraw] waiting for the holy migration to go thru'
+      '[holy savings withdraw] waiting for the holy withdraw to go thru'
     );
     const receipt = await walletToUse.provider.waitForTransaction(
-      migration.hash
+      withdraw.hash
     );
     logger.log('[holy savings withdraw] receipt:', receipt);
     if (!isZero(receipt.status)) {
@@ -136,7 +169,10 @@ export const holySavingsWithdraw = async (
       return null;
     }
   } catch (error) {
-    logger.log('[holy savings withdraw] error waiting for holy migrate', error);
+    logger.log(
+      '[holy savings withdraw] error waiting for holy withdraw',
+      error
+    );
     currentRap.actions[index].transaction.confirmed = false;
     dispatch(rapsAddOrUpdate(currentRap.id, currentRap));
     return null;

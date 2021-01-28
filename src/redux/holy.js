@@ -2,7 +2,8 @@ import produce from 'immer';
 
 // -- Constants ------------------------------------------------------------- //
 const HOLY_CLEAR_STATE = 'holy/HOLY_CLEAR_STATE';
-const HOLY_UPDATE_SAVINGS = 'holy/HOLY_UPDATE_SAVINGS';
+const HOLY_UPDATE_SAVINGS_BALANCE_USDC =
+  'holy/HOLY_UPDATE_SAVINGS_BALANCE_USDC';
 const HOLY_UPDATE_EARLY_LP_BONUS_AMOUNT =
   'holy/HOLY_UPDATE_EARLY_LP_BONUS_AMOUNT';
 const HOLY_UPDATE_EARLY_LP_BONUS_SHOW = 'holy/HOLY_UPDATE_EARLY_LP_BONUS_SHOW';
@@ -14,10 +15,10 @@ const PRICE_HH_UPDATE = 'holy/PRICE_HH_UPDATE';
 
 // -- Actions --------------------------------------------------------------- //
 
-export const holyUpdateSavings = savings => dispatch => {
+export const holyUpdateSavingsBalanceUCDS = balanceInUSDc => dispatch => {
   dispatch({
-    payload: savings,
-    type: HOLY_UPDATE_SAVINGS,
+    payload: balanceInUSDc,
+    type: HOLY_UPDATE_SAVINGS_BALANCE_USDC,
   });
 };
 
@@ -101,10 +102,10 @@ export const INITIAL_HOLY_STATE = {
   },
   savings: {
     apy: '29.4',
-    balanceNative: '100',
-    balanceUSDC: '0.1',
-    ildBalanceNative: '5',
-    ildBalanceUSDC: '0.5',
+    balanceNative: '0',
+    balanceUSDC: '0',
+    ildBalanceNative: '0',
+    ildBalanceUSDC: '0',
   },
   treasury: {
     allBalanceNative: '0',
@@ -123,8 +124,8 @@ export default (state = INITIAL_HOLY_STATE, action) =>
     switch (action.type) {
       case HOLY_CLEAR_STATE:
         return INITIAL_HOLY_STATE;
-      case HOLY_UPDATE_SAVINGS:
-        draft.savingsTokens = action.payload;
+      case HOLY_UPDATE_SAVINGS_BALANCE_USDC:
+        draft.savings.balanceUSDC = action.payload;
         break;
       case HOLY_UPDATE_EARLY_LP_BONUS_AMOUNT:
         draft.earlyLPBonus.amountToClaim = action.payload;
