@@ -394,7 +394,10 @@ const withBalanceSection = (
   //}
 
   //if (networkTypes.mainnet === network) {
-  balanceSectionData.push(holyTreasury);
+  const showTreasury = false;
+  if (showTreasury) {
+    balanceSectionData.push(holyTreasury);
+  }
   //}
 
   if (holyBonus.show) {
