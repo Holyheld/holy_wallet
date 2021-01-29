@@ -153,7 +153,7 @@ const getUSDCAsset = (network: Network): asset => {
   };
 };
 
-const MAX_HOLY_DEPOSIT_AMOUNT_USDC = '1';
+const MAX_HOLY_DEPOSIT_AMOUNT_USDC = '10000';
 
 export {
   HOLY_PASSAGE_ADDRESS,

@@ -64,7 +64,14 @@ const HolySavingsListRow = ({ totalBalance, savings }) => {
   const { width: deviceWidth } = useDimensions();
   const { navigate } = useNavigation();
 
-  const { displayedDollars, displayedCents, isEmpty } = useMemo(() => {
+  const { apy } = savings;
+
+  const {
+    displayedDollars,
+    displayedCents,
+    isEmpty,
+    displayedApy,
+  } = useMemo(() => {
     const isEmpty = !greaterThan(totalBalance, '0');
     let displayValue = '0.00';
     if (isEmpty) {
@@ -74,12 +81,15 @@ const HolySavingsListRow = ({ totalBalance, savings }) => {
     }
     const [displayedDollars, displayedCents] = displayValue.split('.');
 
+    const displayedApy = new BigNumber(apy).decimalPlaces(2).toString();
+
     return {
+      displayedApy,
       displayedCents,
       displayedDollars,
       isEmpty,
     };
-  }, [totalBalance]);
+  }, [totalBalance, apy]);
 
   const onButtonPress = useCallback(() => {
     navigate(Routes.SAVINGS_SHEET, {
@@ -156,7 +166,7 @@ const HolySavingsListRow = ({ totalBalance, savings }) => {
               )}
             </Row>
 
-            <APYPill value={savings.apy} />
+            <APYPill value={displayedApy} />
           </Row>
         </SavingsListRowShadowStack>
       </Centered>

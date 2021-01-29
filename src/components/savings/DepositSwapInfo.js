@@ -1,6 +1,7 @@
+import BigNumber from 'bignumber.js';
 import { get } from 'lodash';
 import PropTypes from 'prop-types';
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useMemo, useRef } from 'react';
 import Animated from 'react-native-reanimated';
 import {
   bin,
@@ -19,23 +20,30 @@ const Container = styled(Centered)`
   width: 100%;
 `;
 
-const DepositSwapInfo = ({ asset, amount }) => {
-  const isVisible = !!(asset && amount);
+const DepositSwapInfo = ({ asset, amount, hide }) => {
+  const isVisible = !!(asset && amount && !hide);
   const symbol = get(asset, 'symbol');
   const address = get(asset, 'address');
+
+  const { displayedAmount } = useMemo(() => {
+    const displayedAmount = new BigNumber(amount).decimalPlaces(2).toString();
+    return {
+      displayedAmount,
+    };
+  }, [amount]);
 
   const prevAmountRef = useRef();
   useEffect(() => {
     // Need to remember the amount so
     // it doesn't show NULL while fading out!
-    if (amount !== null) {
-      prevAmountRef.current = amount;
+    if (displayedAmount !== null) {
+      prevAmountRef.current = displayedAmount;
     }
   });
 
   const prevAmount = prevAmountRef.current;
-  let amountToDisplay = amount;
-  if (amount === null) {
+  let amountToDisplay = displayedAmount;
+  if (displayedAmount === null) {
     amountToDisplay = prevAmount;
   }
 

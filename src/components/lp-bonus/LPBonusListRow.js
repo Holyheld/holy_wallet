@@ -59,7 +59,7 @@ const LPBonusListRow = () => {
 
   const disabled = false;
 
-  const { displayedBalance, isEmpty } = useMemo(() => {
+  const { displayedBalance, isEmpty, displayedDpy } = useMemo(() => {
     const isEmpty = !greaterThan(amountToClaim, '0');
     let displayedBalance = '0.00';
     if (isEmpty) {
@@ -69,11 +69,13 @@ const LPBonusListRow = () => {
         .decimalPlaces(8)
         .toString();
     }
+    const displayedDpy = new BigNumber(dpy).decimalPlaces(2).toString();
     return {
       displayedBalance,
+      displayedDpy,
       isEmpty,
     };
-  }, [amountToClaim]);
+  }, [amountToClaim, dpy]);
 
   const onButtonPress = useCallback(() => {
     if (!disabled && !isEmpty) {
@@ -140,7 +142,7 @@ const LPBonusListRow = () => {
                 </ButtonPressAnimation>
               )}
             </RowWithMargins>
-            <APYPill postfix="% DPY" value={dpy} />
+            <APYPill postfix="% DPY" value={displayedDpy} />
           </Row>
         </LPBonusListRowShadowStack>
       </Centered>

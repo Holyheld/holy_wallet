@@ -78,6 +78,7 @@ const HolySavingsSheet = () => {
   const {
     balanceNativeDisplay,
     balanceUSDCDisplay,
+    displayedApy,
     ildBalanceNativeDisplay,
     ildBalanceUSDCDisplay,
     isEmpty,
@@ -86,11 +87,14 @@ const HolySavingsSheet = () => {
     const balanceNativeDisplay = new BigNumber(balanceNative).toFormat(2);
     const ildBalanceNativeDisplay = new BigNumber(ildBalanceNative).toFormat(2);
 
-    const balanceUSDCDisplay = new BigNumber(balanceUSDC).toFormat(6);
-    const ildBalanceUSDCDisplay = new BigNumber(ildBalanceUSDC).toFormat(6);
+    const balanceUSDCDisplay = new BigNumber(balanceUSDC).toFormat(2);
+    const ildBalanceUSDCDisplay = new BigNumber(ildBalanceUSDC).toFormat(2);
+    const displayedApy = new BigNumber(apy).decimalPlaces(2).toString();
+
     return {
       balanceNativeDisplay,
       balanceUSDCDisplay,
+      displayedApy,
       ildBalanceNativeDisplay,
       ildBalanceUSDCDisplay,
       isEmpty,
@@ -179,7 +183,7 @@ const HolySavingsSheet = () => {
             <Column paddingBottom={2} paddingTop={1}>
               <HolySavingsCoinRow
                 additionalShare={ildBalanceUSDCDisplay}
-                apy={apy}
+                apy={displayedApy}
                 balance={balanceUSDCDisplay}
                 symbol={usdcAsset.symbol}
               />
