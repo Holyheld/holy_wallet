@@ -99,7 +99,7 @@ const HolySavingsSheet = () => {
       ildBalanceUSDCDisplay,
       isEmpty,
     };
-  }, [balanceNative, balanceUSDC, ildBalanceNative, ildBalanceUSDC]);
+  }, [apy, balanceNative, balanceUSDC, ildBalanceNative, ildBalanceUSDC]);
 
   const usdcAsset = getUSDCAsset(network);
 

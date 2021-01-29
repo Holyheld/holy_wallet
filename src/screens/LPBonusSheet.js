@@ -1,4 +1,5 @@
-import React, { Fragment, useCallback } from 'react';
+import BigNumber from 'bignumber.js';
+import React, { Fragment, useCallback, useMemo } from 'react';
 import { Alert, StatusBar } from 'react-native';
 import { useSafeArea } from 'react-native-safe-area-context';
 import styled from 'styled-components/native';
@@ -49,7 +50,36 @@ const LPBonusSheet = () => {
     dpyAmount,
   } = useHolyEarlyLPBonus();
 
-  const isEmpty = !greaterThan(amountToClaim, '0');
+  const {
+    amountToClaimDisplay,
+    nativeAmountToclaimDisplay,
+    dpyDisplay,
+    dpyNativeAmountDisplay,
+    dpyAmountDisplay,
+    isEmpty,
+  } = useMemo(() => {
+    const isEmpty = !greaterThan(amountToClaim, '0');
+    const amountToClaimDisplay = new BigNumber(amountToClaim).toFormat(6);
+    const nativeAmountToclaimDisplay = new BigNumber(
+      nativeAmountToclaim
+    ).toFormat(2);
+
+    const dpyDisplay = new BigNumber(dpy).toFormat(2);
+    const dpyNativeAmountDisplay = new BigNumber(dpyNativeAmount).toFormat(2);
+    const dpyAmountDisplay = new BigNumber(dpyAmount)
+      .decimalPlaces(2)
+      .toString();
+
+    return {
+      amountToClaimDisplay,
+      dpyAmountDisplay,
+      dpyDisplay,
+      dpyNativeAmountDisplay,
+      isEmpty,
+      nativeAmountToclaimDisplay,
+    };
+  }, [amountToClaim, dpy, dpyAmount, dpyNativeAmount, nativeAmountToclaim]);
+
   const onClaim = useCallback(() => {
     if (!isReadOnlyWallet) {
       // TODO: Claim LP bonus
@@ -74,8 +104,8 @@ const LPBonusSheet = () => {
       >
         <Fragment>
           <LPBonusSheetHeader
-            nativeBalance={nativeAmountToclaim}
-            nativeDPYBalance={dpyNativeAmount}
+            nativeBalance={nativeAmountToclaimDisplay}
+            nativeDPYBalance={dpyNativeAmountDisplay}
           />
           <SheetActionButtonRow>
             <SheetActionButton
@@ -96,9 +126,9 @@ const LPBonusSheet = () => {
           <Column paddingBottom={9} paddingTop={4}>
             <LPBonusCoinRow
               address={HHAsset.address}
-              balance={amountToClaim}
-              dpy={dpy}
-              dpyAmount={dpyAmount}
+              balance={amountToClaimDisplay}
+              dpy={dpyDisplay}
+              dpyAmount={dpyAmountDisplay}
               symbol={HHAsset.symbol}
             />
           </Column>
@@ -107,7 +137,7 @@ const LPBonusSheet = () => {
             color={colors.divider}
             zIndex={0}
           />
-          <LPBonusPredictionStepper dpyNativeAmount={dpyNativeAmount} />
+          <LPBonusPredictionStepper dpyNativeAmount={dpyNativeAmountDisplay} />
         </Fragment>
       </SlackSheet>
     </Container>

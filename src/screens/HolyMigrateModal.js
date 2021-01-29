@@ -443,10 +443,13 @@ const HolyMigrateModal = ({ holyV1Asset, testID }) => {
                 </InnerContainer>
                 <NativeFieldRow>
                   <ExchangeNativeField
+                    debounce={0}
                     editable={false}
                     height={BottomRowHeight}
                     nativeAmount={nativeAmount}
                     nativeCurrency={nativeCurrency}
+                    onFocus={() => {}}
+                    setNativeAmount={() => {}}
                     testID={testID + '-native'}
                   />
                 </NativeFieldRow>
