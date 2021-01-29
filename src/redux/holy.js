@@ -112,6 +112,7 @@ export const INITIAL_HOLY_STATE = {
     apy: '0',
     balanceNative: '0',
     balanceUSDC: '0',
+    dpy: '0',
     ildBalanceNative: '0',
     ildBalanceUSDC: '0',
   },

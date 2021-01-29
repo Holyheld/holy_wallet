@@ -195,6 +195,7 @@ const withBalanceHolySavingsSection = (
       {
         apy: holySavings.apy,
         balance: savingsNativeBalance,
+        dpy: holySavings.dpy,
       },
     ];
   }

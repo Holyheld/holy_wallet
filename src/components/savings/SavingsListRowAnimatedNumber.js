@@ -16,7 +16,8 @@ const sx = StyleSheet.create({
     top: 4,
   },
   text: {
-    color: colors.dark,
+    backgroundColor: colors.red,
+    color: colors.textColor,
     flex: 1,
     fontFamily: fonts.family.SFProRounded,
     fontSize: parseFloat(fonts.size.lmedium),

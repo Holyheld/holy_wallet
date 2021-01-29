@@ -4,9 +4,9 @@ import React, { useCallback, useMemo } from 'react';
 import { StyleSheet } from 'react-native';
 
 import styled from 'styled-components/primitives';
-import { greaterThan } from '../../helpers/utilities';
-import { useNavigation } from '../../navigation/Navigation';
+import { add, greaterThan, multiply } from '../../helpers/utilities';
 import Routes from '../../navigation/routesNames';
+import { getUSDCAsset } from '../../references/holy';
 import {
   SavingsSheetEmptyHeight,
   SavingsSheetHeight,
@@ -15,9 +15,11 @@ import {
 import APYPill from '../APYPill';
 import { ButtonPressAnimation } from '../animations';
 import { Centered, InnerBorder, Row, RowWithMargins } from '../layout';
-import { GradientText, Text } from '../text';
+import { Text } from '../text';
 import SavingsIcon from './SavingsIcon';
-import { useDimensions } from '@holyheld-com/hooks';
+import SavingsListRowAnimatedNumber from './SavingsListRowAnimatedNumber';
+import { useAccountSettings, useDimensions } from '@holyheld-com/hooks';
+import { useNavigation } from '@holyheld-com/navigation';
 import { colors, padding, position, shadow } from '@holyheld-com/styles';
 import ShadowStack from 'react-native-shadow-stack';
 
@@ -44,11 +46,7 @@ const sx = StyleSheet.create({
 
 const NOOP = () => undefined;
 
-const centGradientProps = {
-  end: { x: 1, y: 1 },
-  start: { x: 0, y: 0 },
-  steps: [0, 1],
-};
+const ANIMATE_NUMBER_INTERVAL = 60;
 
 const SavingsListRowShadowStack = styled(ShadowStack).attrs(
   ({ deviceWidth }) => ({
@@ -64,14 +62,13 @@ const HolySavingsListRow = ({ totalBalance, savings }) => {
   const { width: deviceWidth } = useDimensions();
   const { navigate } = useNavigation();
 
-  const { apy } = savings;
+  const { network } = useAccountSettings();
 
-  const {
-    displayedDollars,
-    displayedCents,
-    isEmpty,
-    displayedApy,
-  } = useMemo(() => {
+  const { apy, dpy } = savings;
+
+  const usdcAsset = getUSDCAsset(network);
+
+  const { isEmpty, displayedApy } = useMemo(() => {
     const isEmpty = !greaterThan(totalBalance, '0');
     let displayValue = '0.00';
     if (isEmpty) {
@@ -96,6 +93,11 @@ const HolySavingsListRow = ({ totalBalance, savings }) => {
       longFormHeight: isEmpty ? SavingsSheetEmptyHeight : SavingsSheetHeight,
     });
   }, [navigate, isEmpty]);
+
+  const valueFactor = useMemo(() => multiply(totalBalance, add(1, dpy)), [
+    dpy,
+    totalBalance,
+  ]);
 
   return (
     <ButtonPressAnimation
@@ -124,45 +126,50 @@ const HolySavingsListRow = ({ totalBalance, savings }) => {
                 size="lmedium"
                 weight="bold"
               >
-                {`$${displayedDollars}`}
+                {/*{`$${displayedDollars}`}*/}
               </Text>
               {isEmpty ? (
-                <Text
-                  color={colors.textColorMuted}
-                  letterSpacing="roundedTightest"
-                  size="lmedium"
-                  weight="bold"
-                >
-                  {`.${displayedCents}`}
-                </Text>
-              ) : (
-                <GradientText
-                  letterSpacing="roundedTightest"
-                  {...centGradientProps}
-                  size="lmedium"
-                  weight="bold"
-                  width="auto"
-                >
-                  {`.${displayedCents}`}
-                </GradientText>
-              )}
-
-              {isEmpty && (
-                <ButtonPressAnimation
-                  onPress={NOOP}
-                  scaleTo={0.9}
-                  style={sx.button}
-                >
+                <>
                   <Text
-                    color={colors.textColorPrimaryButton}
-                    letterSpacing="roundedTight"
+                    color={colors.textColorMuted}
+                    letterSpacing="roundedTightest"
                     size="lmedium"
-                    weight="semibold"
+                    weight="bold"
                   >
-                    􀁍 Deposit
+                    $0.00
                   </Text>
-                  <InnerBorder radius={ButtonBorderRadius} />
-                </ButtonPressAnimation>
+                  <ButtonPressAnimation
+                    onPress={NOOP}
+                    scaleTo={0.9}
+                    style={sx.button}
+                  >
+                    <Text
+                      color={colors.textColorPrimaryButton}
+                      letterSpacing="roundedTight"
+                      size="lmedium"
+                      weight="semibold"
+                    >
+                      􀁍 Deposit
+                    </Text>
+                    <InnerBorder radius={ButtonBorderRadius} />
+                  </ButtonPressAnimation>
+                </>
+              ) : (
+                // <GradientText
+                //   letterSpacing="roundedTightest"
+                //   {...centGradientProps}
+                //   size="lmedium"
+                //   weight="bold"
+                //   width="auto"
+                // >
+                //   {`.${displayedCents}`}
+                // </GradientText>
+                <SavingsListRowAnimatedNumber
+                  initialValue={totalBalance}
+                  interval={ANIMATE_NUMBER_INTERVAL}
+                  symbol={usdcAsset.symbol}
+                  value={valueFactor}
+                />
               )}
             </Row>
 
