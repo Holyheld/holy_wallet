@@ -10,15 +10,15 @@ const TextChunk = styled(TextInput).attrs({
   ${fontWithWidth(fonts.weight.bold)};
   color: ${colors.dark};
   font-variant: tabular-nums;
-  font-size: ${parseFloat(fonts.size.lmedium)};
+  font-size: ${parseFloat(fonts.size.larger)};
   text-align: left;
-  height: 46;
+  height: 44;
 `;
 
 const Row = styled.View`
   flex-direction: row;
   height: 35;
-  left: 45;
+  left: 0;
   position: absolute;
 `;
 

@@ -10,19 +10,13 @@ const sx = StyleSheet.create({
   animatedNumber: {
     height: 30,
   },
-  animatedNumberAndroid: {
-    left: 35,
-    position: 'absolute',
-    top: 4,
-  },
   text: {
-    backgroundColor: colors.red,
     color: colors.textColor,
     flex: 1,
     fontFamily: fonts.family.SFProRounded,
     fontSize: parseFloat(fonts.size.lmedium),
     fontWeight: fonts.weight.bold,
-    letterSpacing: fonts.letterSpacing.roundedTightest,
+    letterSpacing: fonts.letterSpacing.rundedTightest,
     marginBottom: 0.5,
     marginLeft: 6,
     marginRight: 4,

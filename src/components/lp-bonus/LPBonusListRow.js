@@ -114,7 +114,7 @@ const LPBonusListRow = () => {
               align="center"
               flexGrow={1}
               margin={8}
-              paddingLeft={4}
+              paddingLeft={12}
             >
               <Text
                 color={isEmpty ? colors.textColorMuted : colors.textColor}
