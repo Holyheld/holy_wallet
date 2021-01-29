@@ -4,6 +4,7 @@ import { Alert, View } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import styled from 'styled-components/primitives';
 import networkInfo from '../../helpers/networkInfo';
+import networkTypes from '../../helpers/networkTypes';
 import { greaterThan } from '../../helpers/utilities';
 import { useHolyEarlyLPBonus, useHolySavings } from '../../hooks/useHolyData';
 import useOpenLPBonus from '../../hooks/useOpenLPBonus';
@@ -85,7 +86,7 @@ export default function NavigationList({
         disabled: false,
         height: rowHeight,
         id: 'savingsItem',
-        isVisible: !isSavingsSectionEmpty,
+        isVisible: network === networkTypes.mainnet,
         name: 'Savings',
         onPress: () => {
           navigate(Routes.WALLET_SCREEN);
