@@ -89,6 +89,7 @@ public class RNTextAnimatorPackage implements ReactPackage {
                 double stepPerDay = config.getDouble("stepPerDay");
                 boolean isStable = config.getBoolean("isStable");
                 String color = config.getString("color");
+                String baseColor = config.getString("baseColor");
                 String symbol = config.getString("symbol");
                 final long date = System.currentTimeMillis();
                 final Map<Integer, Character> prevVals = new HashMap<>();
@@ -106,7 +107,7 @@ public class RNTextAnimatorPackage implements ReactPackage {
                         ReactEditText view = idsToViews.get(viewId);
                         long diff = System.currentTimeMillis() - date;
                         String text = String.valueOf((float) initialValue + (diff * stepPerDay) / 24 / 60 / 60 / 1000).substring(0, 12);
-                        String parsedText = (isStable ? ('$' + text) : (text + ' ' + symbol)) + "    ";
+                        String parsedText = (isStable ? ('$' + text) : (text + ' ' + symbol)) + "      ";
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                             view.setFontFeatureSettings("'tnum'");
                         }
@@ -134,13 +135,13 @@ public class RNTextAnimatorPackage implements ReactPackage {
 
                             if (lastUpdate.get(i) > 0) {
                                 int colors = Color.parseColor(color);
-
+                                int baseColors = Color.parseColor(baseColor);
 
                                 int reds = colors & 0x00ff0000;
                                 int greens = colors & 0x0000ff00;
                                 int blues = colors & 0x000000ff;
 
-                                int colort = 0xFF000000;
+                                int colort = 0xFF000000 | baseColors;
 
                                 int redt = colort & 0x00ff0000;
                                 int greent = colort & 0x0000ff00;
@@ -148,9 +149,9 @@ public class RNTextAnimatorPackage implements ReactPackage {
 
                                 float lastUpdateValue = lastUpdate.get(i);
 
-                                int red = (int) (lastUpdateValue / 300 * reds + redt * (1 - lastUpdateValue / DECREASING));
-                                int blue = (int) (lastUpdateValue / 300 * blues + bluet * (1 - lastUpdateValue / DECREASING));
-                                int green = (int) (lastUpdateValue / 300 * greens + greent * (1 - lastUpdateValue / DECREASING));
+                                int red = (int) (lastUpdateValue / 255 * reds + redt * (1 - lastUpdateValue / DECREASING));
+                                int blue = (int) (lastUpdateValue / 255 * blues + bluet * (1 - lastUpdateValue / DECREASING));
+                                int green = (int) (lastUpdateValue / 255 * greens + greent * (1 - lastUpdateValue / DECREASING));
 
                                 int newColor = 0xff000000 | blue & 0x000000ff | green & 0x0000ff00 | red & 0x00ff0000;
 
@@ -163,6 +164,7 @@ public class RNTextAnimatorPackage implements ReactPackage {
                         }
 
                         view.setText(builder);
+                        view.setTextColor(Color.parseColor(baseColor));
                     }
                 }, 30);
 
