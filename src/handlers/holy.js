@@ -14,6 +14,7 @@ import {
   holyUpdateEarlyLPBonusAmount,
   holyUpdateEarlyLPBonusShow,
   holyUpdateFullCap,
+  holyUpdateSavingsAPY,
   holyUpdateSavingsBalanceUCDS,
   updateHHPrice,
   updateHolyPrice,
@@ -289,11 +290,23 @@ export const refreshHolySavings = () => async (dispatch, getState) => {
     );
     logger.log('holySavingsAmount: ', holySavingsAmount);
     dispatch(holyUpdateSavingsBalanceUCDS(holySavingsAmount));
-    //dispatch(updateHolyPrice(HolyNativePrice, HolyinWETHPrice));
+
+    // let holyDPYinWEI = await contractHolyPool.getAPYDaily(accountAddress, {
+    //   from: accountAddress,
+    // });
+
+    // holyDPYinWEI = holyDPYinWEI.toString();
+    const holyDPYinWEI = '80100000000000000';
+
+    logger.log('holyDPYinWEI: ', holyDPYinWEI);
+    const holyDPY = convertRawAmountToDecimalFormat(holyDPYinWEI, 18);
+    logger.log('holyDPY: ', holyDPY);
+    const holyAPY = multiply(holyDPY, 31 * 12);
+    logger.log('holyAPY: ', holyAPY);
+    dispatch(holyUpdateSavingsAPY({ apy: holyAPY, dpy: holyDPY }));
   } catch (error) {
     logger.log('error refreshing Holy Savings');
     logger.log(error);
-    //dispatch(updateHolyPrice('0', '0'));
   }
 };
 
