@@ -64,10 +64,12 @@ const ExchangeNativeField = (
   useEffect(
     () => {
       // Make sure we have a value (user has entered something in input)
-      if (debouncedAmount) {
-        setNativeAmount(debouncedAmount);
-      } else {
-        setNativeAmount();
+      if (setNativeAmount) {
+        if (debouncedAmount) {
+          setNativeAmount(debouncedAmount);
+        } else {
+          setNativeAmount();
+        }
       }
     },
     // This is the useEffect input array

@@ -1,4 +1,5 @@
 import { useRoute } from '@react-navigation/native';
+import BigNumber from 'bignumber.js';
 import { get } from 'lodash';
 import React, {
   Fragment,
@@ -130,6 +131,15 @@ const HolyClaimModal = ({ bonusToClaimBalance, testID }) => {
   }, []);
 
   const amountToClaim = bonusToClaimBalance;
+
+  const { amountToClaimDisplay } = useMemo(() => {
+    const amountToClaimDisplay = new BigNumber(amountToClaim)
+      .decimalPlaces(6)
+      .toString();
+    return {
+      amountToClaimDisplay,
+    };
+  }, [amountToClaim]);
 
   const hhCoinV2 = useMemo(() => {
     return {
@@ -330,7 +340,7 @@ const HolyClaimModal = ({ bonusToClaimBalance, testID }) => {
                       symbol={symbol}
                     />
 
-                    <Input editable={false} value={amountToClaim} />
+                    <Input editable={false} value={amountToClaimDisplay} />
                   </FieldRow>
                 </InnerContainer>
                 <NativeFieldRow>
@@ -345,7 +355,7 @@ const HolyClaimModal = ({ bonusToClaimBalance, testID }) => {
               </Container>
             </FloatingPanel>
             <LPBonusInfo
-              amount={amountToClaim}
+              amount={amountToClaimDisplay}
               asset={hhCoinV2}
               testID="migrate-info-button"
             />
