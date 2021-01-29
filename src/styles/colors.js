@@ -8,6 +8,7 @@ const buildRgba = (color, alpha = 1) => `rgba(${chroma(color).rgb()},${alpha})`;
 let base = {
   appleBlue: '#0E76FD', // '14, 118, 253'
   apyPillBackground: '#333333',
+  apyPillBackgroundLighter: '#444444',
   black: '#000000', // '0, 0, 0'
   blueGreyDark: '#3C4252', // '60, 66, 82'
   blueGreyDark50: '#9DA0A8', // this color is blueGreyDark at 50% over white

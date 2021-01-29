@@ -180,7 +180,7 @@ const SavingsSheet = () => {
                 weight="bold"
               />
             </SheetActionButtonRow>
-            <Divider color={colors.rowDividerLight} zIndex={0} />
+            <Divider backgroundColor={colors.modalBackground} zIndex={0} />
             <FloatingEmojis
               disableHorizontalMovement
               distance={600}
@@ -202,7 +202,11 @@ const SavingsSheet = () => {
                 </FloatingEmojisTapHandler>
               )}
             </FloatingEmojis>
-            <Divider color={colors.rowDividerLight} zIndex={0} />
+            <Divider
+              backgroundColor={colors.modalBackground}
+              color={colors.divider}
+              zIndex={0}
+            />
             <SavingsPredictionStepper
               asset={underlying}
               balance={

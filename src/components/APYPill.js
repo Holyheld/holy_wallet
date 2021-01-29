@@ -26,21 +26,27 @@ const textProps = {
   steps: [0, 1],
 };
 
-const TextContainer = styled(View).attrs(({ borderRadius }) => ({
-  ...position.coverAsObject,
-  backgroundColor: colors.apyPillBackground,
-  borderRadius,
-  overflow: 'hidden',
-}))``;
+const TextContainer = styled(View).attrs(
+  ({ borderRadius, backgroundColor }) => ({
+    ...position.coverAsObject,
+    backgroundColor,
+    borderRadius,
+    overflow: 'hidden',
+  })
+)``;
 
-function APYPill({ small, value, postfix = '% APY' }) {
+function APYPill({
+  small,
+  value,
+  postfix = '% APY',
+  backgroundColor = colors.apyPillBackground,
+}) {
   return (
     <Centered style={small ? sx.containerSmall : sx.container}>
-      {small ? (
-        <TextContainer borderRadius={21} />
-      ) : (
-        <TextContainer borderRadius={17} />
-      )}
+      <TextContainer
+        backgroundColor={backgroundColor}
+        borderRadius={small ? 21 : 17}
+      />
       <GradientText
         {...textProps}
         align="center"
@@ -57,6 +63,7 @@ function APYPill({ small, value, postfix = '% APY' }) {
 }
 
 APYPill.propTypes = {
+  backgroundColor: PropTypes.string,
   postfix: PropTypes.string,
   small: PropTypes.bool,
   value: PropTypes.node,

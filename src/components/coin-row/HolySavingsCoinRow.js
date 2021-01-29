@@ -34,7 +34,11 @@ const Content = styled(Column).attrs({ justify: 'space-between' })`
 const BottomRow = ({ apy, additionalShare, symbol }) => {
   return (
     <Fragment>
-      <APYPill small value={apy} />
+      <APYPill
+        backgroundColor={colors.apyPillBackgroundLighter}
+        small
+        value={apy}
+      />
       <RowWithMargins flex={1} margin={4}>
         <Column flex={1}>
           <Text

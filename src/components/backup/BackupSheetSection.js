@@ -73,11 +73,7 @@ export default function BackupSheetSection({
         </Text>
         <MastheadDescription>{descriptionText}</MastheadDescription>
       </Masthead>
-      <Divider
-        backgroundColor={colors.modalBackground}
-        color={colors.rowDividerLight}
-        inset={[0, 42]}
-      />
+      <Divider backgroundColor={colors.modalBackground} />
       <Footer>
         <RainbowButton
           label={primaryLabel}

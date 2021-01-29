@@ -71,7 +71,7 @@ const SavingsSheetEmptyState = ({ isReadOnlyWallet, apy }) => {
       </BodyText>
       <Divider
         backgroundColor={colors.modalBackground}
-        color={colors.rowDividerLight}
+        color={colors.divider}
         inset={[0, 42]}
       />
       <ColumnWithMargins css={padding(19, 15)} margin={19} width="100%">
