@@ -1,4 +1,5 @@
-import React, { useCallback } from 'react';
+import BigNumber from 'bignumber.js';
+import React, { useCallback, useMemo } from 'react';
 import { Alert } from 'react-native';
 import styled from 'styled-components/primitives';
 import { useNavigation } from '../../navigation/Navigation';
@@ -40,6 +41,13 @@ const SavingsSheetEmptyState = ({ isReadOnlyWallet, apy }) => {
 
   const disableDeposit = false;
 
+  const { displayedApy } = useMemo(() => {
+    const displayedApy = new BigNumber(apy).decimalPlaces(2).toString();
+    return {
+      displayedApy,
+    };
+  }, [apy]);
+
   const onDeposit = useCallback(() => {
     if (disableDeposit) {
       return;
@@ -61,7 +69,7 @@ const SavingsSheetEmptyState = ({ isReadOnlyWallet, apy }) => {
       <SavingsIcon size={51} withPair />
       <Centered marginBottom={12} marginTop={15}>
         <APYHeadingText>Get </APYHeadingText>
-        <GradientAPYHeadingText>{apy}%</GradientAPYHeadingText>
+        <GradientAPYHeadingText>{displayedApy}%</GradientAPYHeadingText>
         <APYHeadingText> on your assets</APYHeadingText>
       </Centered>
       <BodyText>

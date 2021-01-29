@@ -101,7 +101,7 @@ export const INITIAL_HOLY_STATE = {
     },
   },
   savings: {
-    apy: '29.4',
+    apy: '29.42342343242524436546',
     balanceNative: '0',
     balanceUSDC: '0',
     ildBalanceNative: '0',

@@ -415,6 +415,7 @@ const HolySavingsDepositModal = ({ defaultInputCurrency, testID }) => {
           <DepositSwapInfo
             amount={outputAmount}
             asset={USDcAsset}
+            hide={inputCurrency.address === USDcAsset.address}
             testID="migrate-info-button"
           />
 
