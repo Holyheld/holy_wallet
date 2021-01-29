@@ -43,6 +43,7 @@
   _stepPerDay = ((NSNumber*) config[@"stepPerDay"]).floatValue;
   _duration = ((NSNumber*) config[@"duration"]).intValue;
   NSString* color = ((NSString*) config[@"color"]);
+  NSString* baseColor = ((NSString*) config[@"baseColor"]);
   _isSymbolStablecoin = ((NSNumber*) config[@"isSymbolStablecoin"]).boolValue;
   _symbol = config[@"symbol"];
   _timer = [NSTimer scheduledTimerWithTimeInterval:_interval / 1000  target:self selector:@selector(animate) userInfo:nil repeats:YES];
@@ -60,11 +61,22 @@
   float r = ((rgbValue & 0xFF0000) >> 16)/255.0;
   float g = ((rgbValue & 0xFF00) >> 8)/255.0;
   float b = (rgbValue & 0xFF)/255.0;
-
+  
+  unsigned rgbValueBase = 0;
+  NSScanner *scannerBase = [NSScanner scannerWithString:baseColor];
+  [scannerBase setScanLocation:1];
+  [scannerBase scanHexInt:&rgbValueBase];
+  float rB = ((rgbValueBase & 0xFF0000) >> 16) / 255.0;
+  float gB = ((rgbValueBase & 0x00FF00) >> 8) / 255.0;
+  float bB = (rgbValueBase & 0x0000FF) / 255.0;
+  
+  float deltaR = (rB - r) / _duration;
+  float deltaG = (gB - g) / _duration;
+  float deltaB = (bB - b) / _duration;
+  
   _colorsMap = [NSMutableArray new];
-  for (int i = _duration; i > 0; i--) {
-    float factor = i / (float)_duration;
-    [_colorsMap addObject:[UIColor colorWithRed: r * factor green:g * factor blue:b * factor alpha:1]];
+  for (int i = 0; i < _duration; i++) {
+    [_colorsMap addObject:[UIColor colorWithRed: r + deltaR * i green:g + deltaG * i blue:b + deltaB * i alpha:1]];
   }
 
   UIFont* font = [UIFont fontWithName:@"SFRounded-Bold" size:16];
@@ -83,6 +95,7 @@
   UIFontDescriptor *const monospacedDescriptor = [existingDescriptor  fontDescriptorByAddingAttributes: fontAttributes];
 
   self.font = [UIFont fontWithDescriptor: monospacedDescriptor size: [font pointSize]];
+  self.textColor = [UIColor colorWithRed:rB green:gB blue:bB alpha:1];
 }
 
 - (void) animate {

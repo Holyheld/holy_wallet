@@ -48,7 +48,7 @@ const SavingsListRowAnimatedNumber = ({
         baseColor: colors.textColor,
         color: ios ? '#2CCC00' : '#2CFF00', // HEX
         decimals: 10,
-        duration: 800, // in intervals
+        duration: 80, // in intervals
         initialValue: Number(initialValue),
         interval,
         isSymbolStablecoin: isSymbolStablecoin(symbol),
@@ -58,11 +58,7 @@ const SavingsListRowAnimatedNumber = ({
       formatter={formatter}
       initialValue={Number(initialValue)}
       steps={steps}
-      style={[
-        sx.text,
-        isRainbowTextAvailable ? sx.animatedNumber : null,
-        android ? sx.animatedNumberAndroid : null,
-      ]}
+      style={[sx.text, isRainbowTextAvailable ? sx.animatedNumber : null]}
       time={interval}
       value={Number(value)}
     >
