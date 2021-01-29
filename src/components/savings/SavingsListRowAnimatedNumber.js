@@ -9,6 +9,8 @@ import { colors, fonts } from '@holyheld-com/styles';
 const sx = StyleSheet.create({
   animatedNumber: {
     height: 30,
+    left: 0,
+    maxWidth: 150,
   },
   text: {
     color: colors.textColor,
@@ -50,7 +52,7 @@ const SavingsListRowAnimatedNumber = ({
         interval,
         isSymbolStablecoin: isSymbolStablecoin(symbol),
         stepPerDay: Number(value) - Number(initialValue),
-        symbol,
+        symbol: ios ? '' : symbol,
       }}
       formatter={formatter}
       initialValue={Number(initialValue)}
