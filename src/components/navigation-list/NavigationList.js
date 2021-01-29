@@ -4,8 +4,14 @@ import { Alert, View } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import styled from 'styled-components/primitives';
 import networkInfo from '../../helpers/networkInfo';
+import { greaterThan } from '../../helpers/utilities';
+import { useHolyEarlyLPBonus, useHolySavings } from '../../hooks/useHolyData';
 import useOpenLPBonus from '../../hooks/useOpenLPBonus';
 import useOpenTreasuryBank from '../../hooks/useOpenTreasuryBank';
+import {
+  SavingsSheetEmptyHeight,
+  SavingsSheetHeight,
+} from '../../screens/HolySavingsSheet';
 import { Column } from '../layout';
 import { ListItemDivider } from '../list';
 import NavigationRow from './NavigationRow';
@@ -70,7 +76,13 @@ export default function NavigationList({
   const { isTreasuryBankOpen, toggleOpenTreasuryBank } = useOpenTreasuryBank();
   const { isLPBonusOpen, toggleOpenLPBonus } = useOpenLPBonus();
 
-  // TODO replace with selectors
+  const { showPanel: showHolyEarlyLPBonusPanel } = useHolyEarlyLPBonus();
+  const { balanceUSDC: savingsBalance } = useHolySavings();
+
+  const isSavingsSectionEmpty = useMemo(() => {
+    return !greaterThan(savingsBalance, 0);
+  }, [savingsBalance]);
+
   const accountTransactions = useAccountTransactions(true, true);
   const { sections } = accountTransactions;
 
@@ -85,10 +97,15 @@ export default function NavigationList({
         isVisible: !isSectionsListEmpty,
         name: 'Savings',
         onPress: () => {
+          navigate(Routes.WALLET_SCREEN);
           if (!isSavingsOpen) {
             toggleOpenSavings();
           }
-          navigate(Routes.WALLET_SCREEN);
+          navigate(Routes.SAVINGS_SHEET, {
+            longFormHeight: isSavingsSectionEmpty
+              ? SavingsSheetEmptyHeight
+              : SavingsSheetHeight,
+          });
         },
       },
       {
@@ -108,9 +125,10 @@ export default function NavigationList({
         disabled: false,
         height: rowHeight,
         id: 'earlyLPBonusItem',
-        isVisible: !isSectionsListEmpty,
+        isVisible: showHolyEarlyLPBonusPanel,
         name: 'Early LP Bonus',
         onPress: () => {
+          navigate(Routes.WALLET_SCREEN);
           if (!isLPBonusOpen) {
             toggleOpenLPBonus();
           }
@@ -135,9 +153,7 @@ export default function NavigationList({
         onPress: () => {
           if (!isReadOnlyWallet) {
             goBack();
-            setTimeout(() => {
-              navigate(Routes.EXCHANGE_MODAL);
-            }, 50);
+            navigate(Routes.EXCHANGE_MODAL);
           } else {
             Alert.alert(`You need to import the wallet in order to do this`);
           }
@@ -152,9 +168,7 @@ export default function NavigationList({
         onPress: () => {
           if (!isReadOnlyWallet) {
             goBack();
-            setTimeout(() => {
-              navigate(Routes.SEND_FLOW);
-            }, 50);
+            navigate(Routes.SEND_FLOW);
           } else {
             Alert.alert(`You need to import the wallet in order to do this`);
           }
@@ -166,10 +180,12 @@ export default function NavigationList({
       isLPBonusOpen,
       isReadOnlyWallet,
       isSavingsOpen,
+      isSavingsSectionEmpty,
       isSectionsListEmpty,
       isTreasuryBankOpen,
       navigate,
       network,
+      showHolyEarlyLPBonusPanel,
       toggleOpenLPBonus,
       toggleOpenSavings,
       toggleOpenTreasuryBank,
