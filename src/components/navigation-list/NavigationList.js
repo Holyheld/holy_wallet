@@ -15,11 +15,7 @@ import {
 import { Column } from '../layout';
 import { ListItemDivider } from '../list';
 import NavigationRow from './NavigationRow';
-import {
-  useAccountSettings,
-  useAccountTransactions,
-  useOpenSavings,
-} from '@holyheld-com/hooks';
+import { useAccountSettings, useOpenSavings } from '@holyheld-com/hooks';
 import { useNavigation } from '@holyheld-com/navigation';
 import Routes from '@holyheld-com/routes';
 import { colors } from '@holyheld-com/styles';
@@ -83,18 +79,13 @@ export default function NavigationList({
     return !greaterThan(savingsBalance, 0);
   }, [savingsBalance]);
 
-  const accountTransactions = useAccountTransactions(true, true);
-  const { sections } = accountTransactions;
-
-  const isSectionsListEmpty = !sections || sections.length === 0;
-
   const rows = useMemo(
     () => [
       {
         disabled: false,
         height: rowHeight,
         id: 'savingsItem',
-        isVisible: !isSectionsListEmpty,
+        isVisible: !isSavingsSectionEmpty,
         name: 'Savings',
         onPress: () => {
           navigate(Routes.WALLET_SCREEN);
@@ -147,8 +138,7 @@ export default function NavigationList({
         disabled: isReadOnlyWallet,
         height: rowHeight,
         id: 'swapItem',
-        isVisible:
-          get(networkInfo[network], 'exchange_enabled') && !isSectionsListEmpty,
+        isVisible: get(networkInfo[network], 'exchange_enabled'),
         name: 'Swap',
         onPress: () => {
           if (!isReadOnlyWallet) {
@@ -163,7 +153,7 @@ export default function NavigationList({
         disabled: isReadOnlyWallet,
         height: rowHeight,
         id: 'sendItem',
-        isVisible: !isSectionsListEmpty,
+        isVisible: true,
         name: 'Send',
         onPress: () => {
           if (!isReadOnlyWallet) {
@@ -181,7 +171,6 @@ export default function NavigationList({
       isReadOnlyWallet,
       isSavingsOpen,
       isSavingsSectionEmpty,
-      isSectionsListEmpty,
       isTreasuryBankOpen,
       navigate,
       network,
