@@ -10,7 +10,7 @@ const TextChunk = styled(TextInput).attrs({
   ${fontWithWidth(fonts.weight.bold)};
   color: ${colors.dark};
   font-variant: tabular-nums;
-  font-size: ${parseFloat(fonts.size.larger)};
+  font-size: ${parseFloat(fonts.size.lmedium)};
   text-align: left;
   height: 44;
 `;

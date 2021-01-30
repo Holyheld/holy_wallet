@@ -52,18 +52,22 @@ const HolySavingsSheet = () => {
   const { isReadOnlyWallet } = useWallets();
   const { network } = useAccountSettings();
 
-  const { balanceUSDC, apy, ildBalanceUSDC } = useHolySavings();
+  const { balanceUSDC, apy, dpy } = useHolySavings();
   const usdcPrice = useUSDcTokenPrice();
 
-  const balanceNative = useMemo(
-    () => convertAmountToNativeAmount(balanceUSDC, usdcPrice),
-    [balanceUSDC, usdcPrice]
-  );
-
-  const ildBalanceNative = useMemo(
-    () => convertAmountToNativeAmount(ildBalanceUSDC, usdcPrice),
-    [ildBalanceUSDC, usdcPrice]
-  );
+  const { balanceNative, ildBalanceNative, ildBalanceUSDC } = useMemo(() => {
+    const balanceNative = convertAmountToNativeAmount(balanceUSDC, usdcPrice);
+    const ildBalanceUSDC = multiply(balanceUSDC, divide(dpy, '100'));
+    const ildBalanceNative = convertAmountToNativeAmount(
+      ildBalanceUSDC,
+      usdcPrice
+    );
+    return {
+      balanceNative,
+      ildBalanceNative,
+      ildBalanceUSDC,
+    };
+  }, [balanceUSDC, dpy, usdcPrice]);
 
   const { dpyNative } = useMemo(() => {
     const dpyNative = divide(
