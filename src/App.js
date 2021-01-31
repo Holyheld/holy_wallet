@@ -19,9 +19,9 @@ import branch from 'react-native-branch';
 import CodePush from 'react-native-code-push';
 
 import {
-  REACT_APP_SEGMENT_API_WRITE_KEY,
+  REACT_APP_SEGMENT_API_WRITE_KEY_ANDROID,
+  REACT_APP_SEGMENT_API_WRITE_KEY_IOS,
   SENTRY_ENDPOINT,
-  SENTRY_ENVIRONMENT,
 } from 'react-native-dotenv';
 // eslint-disable-next-line import/default
 import RNIOS11DeviceCheck from 'react-native-ios11-devicecheck';
@@ -71,8 +71,7 @@ if (__DEV__) {
   let sentryOptions = {
     dsn: SENTRY_ENDPOINT,
     enableAutoSessionTracking: true,
-    environment: SENTRY_ENVIRONMENT,
-    release: `me.holy-${VersionNumber.appVersion}`,
+    release: `com.holyheld-${VersionNumber.appVersion}`,
   };
 
   if (android) {
@@ -228,13 +227,18 @@ class App extends Component {
       analytics.identify(identifier);
     }
 
-    await analytics.setup(REACT_APP_SEGMENT_API_WRITE_KEY, {
-      ios: {
-        trackDeepLinks: true,
-      },
-      trackAppLifecycleEvents: true,
-      trackAttributionData: true,
-    });
+    await analytics.setup(
+      ios
+        ? REACT_APP_SEGMENT_API_WRITE_KEY_IOS
+        : REACT_APP_SEGMENT_API_WRITE_KEY_ANDROID,
+      {
+        ios: {
+          trackDeepLinks: true,
+        },
+        trackAppLifecycleEvents: true,
+        trackAttributionData: true,
+      }
+    );
   };
 
   handleAppStateChange = async nextAppState => {
