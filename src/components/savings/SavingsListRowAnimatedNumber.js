@@ -12,17 +12,18 @@ const sx = StyleSheet.create({
     left: 0,
     maxWidth: 150,
   },
+  animatedNumberAndroid: {},
   text: {
-    color: colors.textColor,
-    flex: 1,
+    alignItems: 'center',
+    display: 'flex',
     fontFamily: fonts.family.SFProRounded,
     fontSize: parseFloat(fonts.size.lmedium),
     fontWeight: fonts.weight.bold,
-    letterSpacing: fonts.letterSpacing.rundedTightest,
-    marginBottom: 0.5,
+    justifyContent: 'center',
+    letterSpacing: fonts.letterSpacing.roundedTightest,
     marginLeft: 6,
     marginRight: 4,
-    textAlign: 'left',
+    textAlign: 'center',
   },
 });
 
@@ -58,7 +59,11 @@ const SavingsListRowAnimatedNumber = ({
       formatter={formatter}
       initialValue={Number(initialValue)}
       steps={steps}
-      style={[sx.text, isRainbowTextAvailable ? sx.animatedNumber : null]}
+      style={[
+        sx.text,
+        isRainbowTextAvailable ? sx.animatedNumber : null,
+        android ? sx.animatedNumberAndroid : null,
+      ]}
       time={interval}
       value={Number(value)}
     >
