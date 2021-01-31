@@ -16,11 +16,13 @@ const sx = StyleSheet.create({
   text: {
     alignItems: 'center',
     display: 'flex',
+    flex: 1,
     fontFamily: fonts.family.SFProRounded,
     fontSize: parseFloat(fonts.size.lmedium),
     fontWeight: fonts.weight.bold,
     justifyContent: 'center',
     letterSpacing: fonts.letterSpacing.roundedTightest,
+    marginBottom: 0.5,
     marginLeft: 6,
     marginRight: 4,
     textAlign: 'center',
