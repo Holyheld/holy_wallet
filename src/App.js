@@ -15,8 +15,7 @@ import {
   StatusBar,
 } from 'react-native';
 import branch from 'react-native-branch';
-// eslint-disable-next-line import/default
-import CodePush from 'react-native-code-push';
+// import CodePush from 'react-native-code-push';
 
 import {
   REACT_APP_SEGMENT_API_WRITE_KEY_ANDROID,
@@ -87,14 +86,14 @@ if (__DEV__) {
   Sentry.init(sentryOptions);
 }
 
-CodePush.getUpdateMetadata(CodePush.UpdateState.RUNNING).then(update => {
-  if (update) {
-    // eslint-disable-next-line import/no-deprecated
-    Sentry.setRelease(
-      `com.holyheld-${VersionNumber.appVersion}-codepush:${update.label}`
-    );
-  }
-});
+// CodePush.getUpdateMetadata(CodePush.UpdateState.RUNNING).then(update => {
+//   if (update) {
+//     // eslint-disable-next-line import/no-deprecated
+//     Sentry.setRelease(
+//       `com.holyheld-${VersionNumber.appVersion}-codepush:${update.label}`
+//     );
+//   }
+// });
 
 enableScreens();
 
@@ -292,9 +291,9 @@ const AppWithRedux = compose(
   })
 )(App);
 
-const AppWithCodePush = CodePush({
-  checkFrequency: CodePush.CheckFrequency.ON_APP_RESUME,
-  installMode: CodePush.InstallMode.ON_NEXT_RESUME,
-})(AppWithRedux);
+// const AppWithCodePush = CodePush({
+//   checkFrequency: CodePush.CheckFrequency.ON_APP_RESUME,
+//   installMode: CodePush.InstallMode.ON_NEXT_RESUME,
+// })(AppWithRedux);
 
-AppRegistry.registerComponent('Holyheld', () => AppWithCodePush);
+AppRegistry.registerComponent('Holyheld', () => AppWithRedux);

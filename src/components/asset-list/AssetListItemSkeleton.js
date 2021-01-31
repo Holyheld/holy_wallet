@@ -9,7 +9,6 @@ import Animated, {
   timing,
   Value,
 } from 'react-native-reanimated';
-import { withProps } from 'recompact';
 import styled from 'styled-components/primitives';
 import { deviceUtils } from '../../utils';
 import { interpolate } from '../animations';
@@ -34,14 +33,14 @@ const FakeAvatar = styled.View`
   border-radius: 20;
 `;
 
-const FakeRow = withProps({
+const FakeRow = styled(Row).attrs({
   align: 'flex-end',
   flex: 0,
   height: 10,
   justify: 'space-between',
   paddingBottom: 5,
   paddingTop: 5,
-})(Row);
+})``;
 
 const FakeText = styled.View`
   background-color: ${colors.skeletonColor};
