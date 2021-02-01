@@ -103,7 +103,7 @@
   double diff = NSDate.date.timeIntervalSince1970 - _time;
   double value = _initialValue + _stepPerDay * diff / 24 / 60 / 60;
 
-  NSString *newValue = [NSString stringWithFormat:@"%@ %@", [_fmt stringFromNumber:@(value)], _symbol];
+  NSString *newValue = _isSymbolStablecoin ? [NSString stringWithFormat:@"$%@", [_fmt stringFromNumber:@(value)]] : [NSString stringWithFormat:@"%@ %@", [_fmt stringFromNumber:@(value)], _symbol];
 
 
   NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc] initWithString:newValue attributes: @{
@@ -128,11 +128,12 @@
     [_annealingColor addObject:whatHasChanged];
 
     NSUInteger queueLen = _annealingColor.count;
+    NSUInteger rightBound = len - (_isSymbolStablecoin ? 0 : _symbol.length);
 
     for (int colorIdx = 0; colorIdx < queueLen; colorIdx++) {
       NSArray *changedIdxs = _annealingColor[colorIdx];
       for (NSNumber *inx in changedIdxs) {
-        [attributedText  setAttributes:@{NSForegroundColorAttributeName:_colorsMap[_annealingColor.count - colorIdx - 1], NSKernAttributeName:@(0.2f)} range:NSMakeRange(inx.intValue, len - inx.intValue - _symbol.length)];
+        [attributedText  setAttributes:@{NSForegroundColorAttributeName:_colorsMap[_annealingColor.count - colorIdx - 1], NSKernAttributeName:@(0.2f)} range:NSMakeRange(inx.intValue, rightBound - inx.intValue)];
       }
     }
   }

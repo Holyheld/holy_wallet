@@ -56,7 +56,7 @@ const SavingsListRowAnimatedNumber = ({
         interval,
         isSymbolStablecoin: isSymbolStablecoin(symbol),
         stepPerDay: Number(value) - Number(initialValue),
-        symbol: ios ? '' : symbol,
+        symbol: symbol,
       }}
       formatter={formatter}
       initialValue={Number(initialValue)}
