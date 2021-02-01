@@ -12,7 +12,7 @@ const TextChunk = styled(TextInput).attrs({
   font-variant: tabular-nums;
   font-size: ${parseFloat(fonts.size.lmedium)};
   text-align: left;
-  height: 44;
+  height: 50;
 `;
 
 const Row = styled.View`
