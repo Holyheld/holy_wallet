@@ -6,15 +6,13 @@ import {
   convertAmountToNativeAmount,
   convertAmountToRawAmount,
   convertRawAmountToDecimalFormat,
-  greaterThan,
   greaterThanOrEqualTo,
   isZero,
 } from '../helpers/utilities';
-import { MAX_HOLY_DEPOSIT_AMOUNT_USDC } from '../references/holy';
 import { useAccountSettings } from '.';
 import logger from 'logger';
 
-export default function useHolyDepositInputs({
+export default function useHolySwapInputs({
   inputCurrency,
   outputCurrency,
   maxInputBalance,
@@ -29,8 +27,6 @@ export default function useHolyDepositInputs({
 
   const [nativeAmount, setNativeAmount] = useState(null);
   const [outputAmount, setOutputAmount] = useState(null);
-
-  const [isDepositMax, setIsDepositMax] = useState(false);
 
   const { network } = useAccountSettings();
 
@@ -66,54 +62,39 @@ export default function useHolyDepositInputs({
           );
           setNativeAmount(newNativeAmount);
 
-          // input currency is the same as pool currecny (USDc for now)
-          if (inputCurrency.address === outputCurrency.address) {
-            const newOutputAmount = newInputAmount;
-            setTransferData(null);
-            setOutputAmount(newOutputAmount);
-            setIsDepositMax(
-              greaterThan(newOutputAmount, MAX_HOLY_DEPOSIT_AMOUNT_USDC)
+          const amountInWEI = convertAmountToRawAmount(
+            newInputAmount,
+            inputCurrency.decimals
+          );
+          logger.log('amountInWEI:', amountInWEI);
+
+          setTransferError(null);
+          const transferData = await getTransferData(
+            outputCurrency.symbol,
+            inputCurrency.symbol,
+            amountInWEI,
+            true,
+            network
+          );
+
+          if (transferData.data && !transferData.error) {
+            const newOutputAmount = convertRawAmountToDecimalFormat(
+              transferData.buyAmount,
+              outputCurrency.decimals
             );
+            setTransferData(transferData);
+            setOutputAmount(newOutputAmount);
             setIsSufficientLiquidity(true);
           } else {
-            const amountInWEI = convertAmountToRawAmount(
-              newInputAmount,
-              inputCurrency.decimals
-            );
-            logger.log('amountInWEI:', amountInWEI);
-
-            setTransferError(null);
-            const transferData = await getTransferData(
-              outputCurrency.symbol,
-              inputCurrency.symbol,
-              amountInWEI,
-              true,
-              network
-            );
-
-            if (transferData.data && !transferData.error) {
-              const newOutputAmount = convertRawAmountToDecimalFormat(
-                transferData.buyAmount,
-                outputCurrency.decimals
-              );
-              setTransferData(transferData);
-              setOutputAmount(newOutputAmount);
-              setIsDepositMax(
-                greaterThan(newOutputAmount, MAX_HOLY_DEPOSIT_AMOUNT_USDC)
-              );
-              setIsSufficientLiquidity(true);
+            if ('INSUFFICIENT_ASSET_LIQUIDITY' === transferData.error) {
+              setIsSufficientLiquidity(false);
             } else {
-              if ('INSUFFICIENT_ASSET_LIQUIDITY' === transferData.error) {
-                setIsSufficientLiquidity(false);
-              } else {
-                setTransferError(transferData.error);
-              }
+              setTransferError(transferData.error);
             }
           }
         } else {
           setNativeAmount(0);
           setOutputAmount(0);
-          setIsDepositMax(false);
           setIsSufficientLiquidity(true);
         }
       }
@@ -149,54 +130,109 @@ export default function useHolyDepositInputs({
             greaterThanOrEqualTo(maxInputBalance, newInputAmount);
           setIsSufficientBalance(newIsSufficientBalance);
 
-          // input currency is the same as pool currecny (USDc for now)
-          if (inputCurrency.address === outputCurrency.address) {
-            const newOutputAmount = newInputAmount;
-            setTransferData(null);
-            setOutputAmount(newOutputAmount);
-            setIsDepositMax(
-              greaterThan(newOutputAmount, MAX_HOLY_DEPOSIT_AMOUNT_USDC)
+          const amountInWEI = convertAmountToRawAmount(
+            newInputAmount,
+            inputCurrency.decimals
+          );
+          logger.log('amountInWEI:', amountInWEI);
+
+          setTransferError(null);
+          const transferData = await getTransferData(
+            outputCurrency.symbol,
+            inputCurrency.symbol,
+            amountInWEI,
+            true,
+            network
+          );
+
+          if (transferData.data && !transferData.error) {
+            const newOutputAmount = convertRawAmountToDecimalFormat(
+              transferData.buyAmount,
+              outputCurrency.decimals
             );
+            setTransferData(transferData);
+            setOutputAmount(newOutputAmount);
             setIsSufficientLiquidity(true);
           } else {
-            const amountInWEI = convertAmountToRawAmount(
-              newInputAmount,
-              inputCurrency.decimals
-            );
-            logger.log('amountInWEI:', amountInWEI);
-
-            setTransferError(null);
-            const transferData = await getTransferData(
-              outputCurrency.symbol,
-              inputCurrency.symbol,
-              amountInWEI,
-              true,
-              network
-            );
-
-            if (transferData.data && !transferData.error) {
-              const newOutputAmount = convertRawAmountToDecimalFormat(
-                transferData.buyAmount,
-                outputCurrency.decimals
-              );
-              setTransferData(transferData);
-              setOutputAmount(newOutputAmount);
-              setIsDepositMax(
-                greaterThan(newOutputAmount, MAX_HOLY_DEPOSIT_AMOUNT_USDC)
-              );
-              setIsSufficientLiquidity(true);
+            if ('INSUFFICIENT_ASSET_LIQUIDITY' === transferData.error) {
+              setIsSufficientLiquidity(false);
             } else {
-              if ('INSUFFICIENT_ASSET_LIQUIDITY' === transferData.error) {
-                setIsSufficientLiquidity(false);
-              } else {
-                setTransferError(transferData.error);
-              }
+              setTransferError(transferData.error);
             }
           }
         } else {
           setInputAmount(0);
           setOutputAmount(0);
-          setIsDepositMax(false);
+          setIsSufficientLiquidity(true);
+        }
+      }
+
+      setIsLoading(false);
+    },
+    [inputCurrency, maxInputBalance, network, outputCurrency]
+  );
+
+  const updateOutputAmount = useCallback(
+    async newOutputAmount => {
+      setIsLoading(true);
+
+      setOutputAmount(newOutputAmount);
+      setIsMax(false);
+
+      if (inputCurrency && outputCurrency) {
+        logger.log('inputCurrency:', inputCurrency);
+        logger.log('outputCurrency:', outputCurrency);
+        logger.log('newOutputAmount:', newOutputAmount);
+
+        if (newOutputAmount && !isZero(newOutputAmount)) {
+          const outputAmountInWEI = convertAmountToRawAmount(
+            newOutputAmount,
+            outputCurrency.decimals
+          );
+          logger.log('outputAmountInWEI:', outputAmountInWEI);
+
+          setTransferError(null);
+          const transferData = await getTransferData(
+            outputCurrency.symbol,
+            inputCurrency.symbol,
+            outputAmountInWEI,
+            false,
+            network
+          );
+
+          if (transferData.data && !transferData.error) {
+            const newInputAmount = convertRawAmountToDecimalFormat(
+              transferData.sellAmount,
+              inputCurrency.decimals
+            );
+            setTransferData(transferData);
+            setInputAmount(newInputAmount);
+
+            const newNativePrice = get(
+              inputCurrency,
+              'native.price.amount',
+              null
+            );
+            const newNativeAmount = convertAmountToNativeAmount(
+              newInputAmount,
+              newNativePrice
+            );
+            setNativeAmount(newNativeAmount);
+
+            const newIsSufficientBalance =
+              !newInputAmount ||
+              greaterThanOrEqualTo(maxInputBalance, newInputAmount);
+            setIsSufficientBalance(newIsSufficientBalance);
+          } else {
+            if ('INSUFFICIENT_ASSET_LIQUIDITY' === transferData.error) {
+              setIsSufficientLiquidity(false);
+            } else {
+              setTransferError(transferData.error);
+            }
+          }
+        } else {
+          setInputAmount(0);
+          setOutputAmount(0);
           setIsSufficientLiquidity(true);
         }
       }
@@ -208,7 +244,6 @@ export default function useHolyDepositInputs({
 
   return {
     inputAmount,
-    isDepositMax,
     isLoading,
     isMax,
     isSufficientBalance,
@@ -220,5 +255,6 @@ export default function useHolyDepositInputs({
     transferError,
     updateInputAmount,
     updateNativeAmount,
+    updateOutputAmount,
   };
 }

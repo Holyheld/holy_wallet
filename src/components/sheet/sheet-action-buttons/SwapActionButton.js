@@ -13,7 +13,7 @@ export default function SwapActionButton({
   const navigate = useExpandedStateNavigation(inputType);
   const handlePress = useCallback(
     () =>
-      navigate(Routes.EXCHANGE_MODAL, params => ({
+      navigate(Routes.HOLY_SWAP_MODAL, params => ({
         params: {
           params,
           screen: Routes.MAIN_EXCHANGE_SCREEN,

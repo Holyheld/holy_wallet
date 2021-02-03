@@ -14,6 +14,7 @@ import HolyMigrateModalWrapper from '../screens/HolyMigrateModal';
 import HolySavingsDepositModal from '../screens/HolySavingsDepositModal';
 import HolySavingsSheet from '../screens/HolySavingsSheet';
 import HolySavingsWithdrawModal from '../screens/HolySavingsWithdrawModal';
+import HolySwapModal from '../screens/HolySwapModal';
 import ImportSeedPhraseSheet from '../screens/ImportSeedPhraseSheet';
 import LPBonusSheet from '../screens/LPBonusSheet';
 import ModalScreen from '../screens/ModalScreen';
@@ -51,7 +52,6 @@ import {
 } from './effects';
 import { onNavigationStateChange } from './onNavigationStateChange';
 import Routes from './routesNames';
-import { ExchangeModalNavigator } from './index';
 
 const Stack = createStackNavigator();
 const OuterStack = createStackNavigator();
@@ -137,9 +137,14 @@ function MainNavigator() {
         name={Routes.CONFIRM_REQUEST}
         options={exchangePreset}
       />
-      <Stack.Screen
+      {/* <Stack.Screen
         component={ExchangeModalNavigator}
         name={Routes.EXCHANGE_MODAL}
+        options={exchangePreset}
+      /> */}
+      <Stack.Screen
+        component={HolySwapModal}
+        name={Routes.HOLY_SWAP_MODAL}
         options={exchangePreset}
       />
       <Stack.Screen

@@ -17,7 +17,12 @@ const ExchangeFab = ({ disabled, isReadOnlyWallet, ...props }) => {
 
   const handlePress = useCallback(() => {
     if (!isReadOnlyWallet) {
-      navigate(Routes.EXCHANGE_MODAL);
+      navigate(Routes.HOLY_SWAP_MODAL, {
+        params: {
+          screen: Routes.MAIN_EXCHANGE_SCREEN,
+        },
+        screen: Routes.MAIN_EXCHANGE_NAVIGATOR,
+      });
     } else {
       Alert.alert(`You need to import the wallet in order to do this`);
     }

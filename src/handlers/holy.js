@@ -2,6 +2,7 @@ import { Contract } from '@ethersproject/contracts';
 import { captureException } from '@sentry/react-native';
 import BigNumber from 'bignumber.js';
 import { get } from 'lodash';
+import networkTypes from '../helpers/networkTypes';
 import {
   convertRawAmountToDecimalFormat,
   divide,
@@ -313,27 +314,35 @@ export const refreshHolySavings = () => async (dispatch, getState) => {
 export const getTransferData = async (
   buyTokenSymbol,
   sellTokenSymbol,
-  amount
+  amount,
+  isInputAmount = true,
+  network = networkTypes.mainnet
 ) => {
   let error = '';
   let data = '';
   let buyTokenAddress = '';
   let buyAmount = '';
+  let sellAmount = '';
   let allowanceTarget = '';
   let sellTokenAddress = '';
   let to = '';
   let value = '';
   try {
-    const res = await fetch(
-      `https://kovan.api.0x.org/swap/v1/quote?buyToken=${buyTokenSymbol}&sellToken=${sellTokenSymbol}&sellAmount=${amount}`,
-      {
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        },
-        method: 'GET',
-      }
-    );
+    const amountKey = isInputAmount ? 'sellAmount' : 'buyAmount';
+    const prefix =
+      network === networkTypes.mainnet ? '' : `${network.toString()}.`;
+
+    const r = `https://${prefix}api.0x.org/swap/v1/quote?buyToken=${buyTokenSymbol}&sellToken=${sellTokenSymbol}&${amountKey}=${amount}`;
+
+    logger.log(r);
+
+    const res = await fetch(r, {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      method: 'GET',
+    });
     logger.log(res);
     let json = await res.json();
     logger.log(json);
@@ -348,6 +357,7 @@ export const getTransferData = async (
       buyTokenAddress = json.buyTokenAddress;
       sellTokenAddress = json.sellTokenAddress;
       buyAmount = json.buyAmount;
+      sellAmount = json.sellAmount;
     }
   } catch (err) {
     logger.warn(`Error during 0x api call: ${err}`);
@@ -360,6 +370,7 @@ export const getTransferData = async (
     buyTokenAddress,
     data,
     error,
+    sellAmount,
     sellTokenAddress,
     to,
     value,

@@ -144,7 +144,12 @@ export default function NavigationList({
         onPress: () => {
           if (!isReadOnlyWallet) {
             goBack();
-            navigate(Routes.EXCHANGE_MODAL);
+            navigate(Routes.HOLY_SWAP_MODAL, {
+              params: {
+                screen: Routes.MAIN_EXCHANGE_SCREEN,
+              },
+              screen: Routes.MAIN_EXCHANGE_NAVIGATOR,
+            });
           } else {
             Alert.alert(`You need to import the wallet in order to do this`);
           }

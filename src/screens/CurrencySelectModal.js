@@ -165,6 +165,15 @@ function CurrencySelectModal() {
         ];
       }
     }
+
+    if (type === CurrencySelectionTypes.output) {
+      // Removing ETH from output list
+      if (filteredList && filteredList.length > 0) {
+        filteredList[0].data = filteredList[0].data.filter(
+          el => el.address !== 'eth'
+        );
+      }
+    }
     setIsSearching(false);
     return filteredList;
   }, [

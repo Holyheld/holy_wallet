@@ -330,6 +330,39 @@
       "inputs": [
         {
           "internalType": "address",
+          "name": "_tokenFrom",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "_tokenTo",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_amount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_expectedMinimumReceived",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bytes",
+          "name": "convertData",
+          "type": "bytes"
+        }
+      ],
+      "name": "executeSwap",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
           "name": "_poolAddress",
           "type": "address"
         },

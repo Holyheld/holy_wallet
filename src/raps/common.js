@@ -8,6 +8,7 @@ import holyClaim from './actions/holy_claim';
 import holyMigrate from './actions/holy_migrate';
 import { holySavingsDeposit } from './actions/holy_savings_deposit';
 import { holySavingsWithdraw } from './actions/holy_savings_withdraw';
+import { holySwap } from './actions/holy_swap';
 import swap from './actions/swap';
 import unlock from './actions/unlock';
 import withdrawCompound from './actions/withdrawCompound';
@@ -21,6 +22,7 @@ export const RapActionTypes = {
   holyMigrate: 'holyMigrate',
   holySavingsDeposit: 'holySavingsDeposit',
   holySavingsWithdraw: 'holySavingsWithdraw',
+  holySwap: 'holySwap',
   swap: 'swap',
   treasuryClaim: 'treasuryClaim',
   unlock: 'unlock',
@@ -40,6 +42,8 @@ const findActionByType = type => {
     case RapActionTypes.treasuryClaim:
       // TODO: do treasury claim
       return NOOP;
+    case RapActionTypes.holySwap:
+      return holySwap;
     case RapActionTypes.holyMigrate:
       return holyMigrate;
     case RapActionTypes.holySavingsWithdraw:
