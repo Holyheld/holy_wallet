@@ -194,7 +194,7 @@ export const holySwap = async (wallet, currentRap, index, parameters) => {
       logger.log('[holy swap] bytesData:', hexlify(bytesData));
     }
 
-    swap = await holyHand.depositToPool(
+    swap = await holyHand.executeSwap(
       inputCurrency.address,
       outputCurrency.address,
       inputAmountInWEI,
