@@ -1,4 +1,5 @@
 import React, { useCallback } from 'react';
+import { USE_HOLY_SWAP } from '../../../config/experimental';
 import { useExpandedStateNavigation } from '../../../hooks';
 import SheetActionButton from './SheetActionButton';
 import Routes from '@holyheld-com/routes';
@@ -11,17 +12,25 @@ export default function SwapActionButton({
   ...props
 }) {
   const navigate = useExpandedStateNavigation(inputType);
-  const handlePress = useCallback(
-    () =>
-      navigate(Routes.HOLY_SWAP_MODAL, params => ({
+  const handlePress = useCallback(() => {
+    if (!USE_HOLY_SWAP) {
+      return navigate(Routes.EXCHANGE_MODAL, params => ({
         params: {
           params,
           screen: Routes.MAIN_EXCHANGE_SCREEN,
         },
         screen: Routes.MAIN_EXCHANGE_NAVIGATOR,
-      })),
-    [navigate]
-  );
+      }));
+    } else {
+      return navigate(Routes.HOLY_SWAP_MODAL, params => ({
+        params: {
+          params,
+          screen: Routes.MAIN_EXCHANGE_SCREEN,
+        },
+        screen: Routes.MAIN_EXCHANGE_NAVIGATOR,
+      }));
+    }
+  }, [navigate]);
 
   return (
     <SheetActionButton

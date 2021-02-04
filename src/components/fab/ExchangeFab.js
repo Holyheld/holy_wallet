@@ -1,5 +1,6 @@
 import React, { useCallback } from 'react';
 import { Alert } from 'react-native';
+import { USE_HOLY_SWAP } from '../../config/experimental';
 import { useNavigation } from '../../navigation/Navigation';
 import { magicMemo } from '../../utils';
 import { Icon } from '../icons';
@@ -17,12 +18,16 @@ const ExchangeFab = ({ disabled, isReadOnlyWallet, ...props }) => {
 
   const handlePress = useCallback(() => {
     if (!isReadOnlyWallet) {
-      navigate(Routes.HOLY_SWAP_MODAL, {
-        params: {
-          screen: Routes.MAIN_EXCHANGE_SCREEN,
-        },
-        screen: Routes.MAIN_EXCHANGE_NAVIGATOR,
-      });
+      if (!USE_HOLY_SWAP) {
+        navigate(Routes.EXCHANGE_MODAL);
+      } else {
+        navigate(Routes.HOLY_SWAP_MODAL, {
+          params: {
+            screen: Routes.MAIN_EXCHANGE_SCREEN,
+          },
+          screen: Routes.MAIN_EXCHANGE_NAVIGATOR,
+        });
+      }
     } else {
       Alert.alert(`You need to import the wallet in order to do this`);
     }

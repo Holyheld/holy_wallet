@@ -65,6 +65,7 @@ export default function useHolyDepositCurrencies({
       delayNext();
       navigate(Routes.CURRENCY_SELECT_SCREEN, {
         headerTitle: inputHeaderTitle,
+        holyCompatibility: true,
         onSelectCurrency: updateInputCurrency,
         restoreFocusOnSwapModal: () => setParams({ focused: true }),
         type: currencySelectionTypes.input,

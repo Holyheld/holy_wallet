@@ -13,3 +13,5 @@ export const defaultConfig = {
   [DISCOVER_SHEET]: false,
   [REVIEW_ANDROID]: false,
 };
+
+export const USE_HOLY_SWAP = false;

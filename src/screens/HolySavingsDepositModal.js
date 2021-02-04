@@ -39,7 +39,6 @@ import { multicallClearState } from '../redux/multicall';
 import store from '../redux/store';
 import { getUSDCAsset, USDC_TOKEN_ADDRESS } from '../references/holy';
 import {
-  useAccountAssets,
   useAccountSettings,
   useBlockPolling,
   useGas,
@@ -49,11 +48,7 @@ import {
 import { ethUnits } from '@holyheld-com/references';
 import Routes from '@holyheld-com/routes';
 import { colors, position } from '@holyheld-com/styles';
-import {
-  backgroundTask,
-  ethereumUtils,
-  isNewValueForPath,
-} from '@holyheld-com/utils';
+import { backgroundTask, isNewValueForPath } from '@holyheld-com/utils';
 
 import logger from 'logger';
 
@@ -66,11 +61,11 @@ const HolySavingsDepositModalWrapper = ({ navigation, ...props }) => {
   const { params } = useRoute();
   let defaultInputCurrency = params?.defaultInputCurrency;
 
-  const { allAssets } = useAccountAssets();
+  //const { allAssets } = useAccountAssets();
 
-  if (!defaultInputCurrency) {
-    defaultInputCurrency = ethereumUtils.getAsset(allAssets);
-  }
+  //if (!defaultInputCurrency) {
+  //  defaultInputCurrency = ethereumUtils.getAsset(allAssets);
+  //}
 
   const testID = params?.testID;
   return (
@@ -415,7 +410,7 @@ const HolySavingsDepositModal = ({ defaultInputCurrency, testID }) => {
           <DepositSwapInfo
             amount={outputAmount}
             asset={USDcAsset}
-            hide={inputCurrency.address === USDcAsset.address}
+            hide={inputCurrency && inputCurrency.address === USDcAsset.address}
             testID="migrate-info-button"
           />
 

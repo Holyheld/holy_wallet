@@ -3,6 +3,7 @@ import React, { useMemo } from 'react';
 import { Alert, View } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import styled from 'styled-components/primitives';
+import { USE_HOLY_SWAP } from '../../config/experimental';
 import networkInfo from '../../helpers/networkInfo';
 import networkTypes from '../../helpers/networkTypes';
 import { greaterThan } from '../../helpers/utilities';
@@ -144,12 +145,16 @@ export default function NavigationList({
         onPress: () => {
           if (!isReadOnlyWallet) {
             goBack();
-            navigate(Routes.HOLY_SWAP_MODAL, {
-              params: {
-                screen: Routes.MAIN_EXCHANGE_SCREEN,
-              },
-              screen: Routes.MAIN_EXCHANGE_NAVIGATOR,
-            });
+            if (!USE_HOLY_SWAP) {
+              navigate(Routes.EXCHANGE_MODAL);
+            } else {
+              navigate(Routes.HOLY_SWAP_MODAL, {
+                params: {
+                  screen: Routes.MAIN_EXCHANGE_SCREEN,
+                },
+                screen: Routes.MAIN_EXCHANGE_NAVIGATOR,
+              });
+            }
           } else {
             Alert.alert(`You need to import the wallet in order to do this`);
           }

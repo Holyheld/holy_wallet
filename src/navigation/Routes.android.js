@@ -52,6 +52,7 @@ import {
 } from './effects';
 import { onNavigationStateChange } from './onNavigationStateChange';
 import Routes from './routesNames';
+import { ExchangeModalNavigator } from './index';
 
 const Stack = createStackNavigator();
 const OuterStack = createStackNavigator();
@@ -137,11 +138,11 @@ function MainNavigator() {
         name={Routes.CONFIRM_REQUEST}
         options={exchangePreset}
       />
-      {/* <Stack.Screen
+      <Stack.Screen
         component={ExchangeModalNavigator}
         name={Routes.EXCHANGE_MODAL}
         options={exchangePreset}
-      /> */}
+      />
       <Stack.Screen
         component={HolySwapModal}
         name={Routes.HOLY_SWAP_MODAL}

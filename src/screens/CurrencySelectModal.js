@@ -23,6 +23,7 @@ import {
 } from '../components/exchange';
 import { Column, KeyboardFixedOpenLayout } from '../components/layout';
 import { Modal } from '../components/modal';
+import { USE_HOLY_SWAP } from '../config/experimental';
 import { addHexPrefix } from '../handlers/web3';
 import CurrencySelectionTypes from '../helpers/currencySelectionTypes';
 import { delayNext } from '../hooks/useMagicAutofocus';
@@ -81,6 +82,7 @@ function CurrencySelectModal() {
   const { params } = useRoute();
   const {
     category,
+    holyCompatibility,
     onSelectCurrency,
     restoreFocusOnSwapModal,
     setPointerEvents,
@@ -166,12 +168,25 @@ function CurrencySelectModal() {
       }
     }
 
-    if (type === CurrencySelectionTypes.output) {
-      // Removing ETH from output list
+    if (holyCompatibility) {
+      // Removing ETH and USDT from output list
       if (filteredList && filteredList.length > 0) {
         filteredList[0].data = filteredList[0].data.filter(
-          el => el.address !== 'eth'
+          el =>
+            el.address !== 'eth' &&
+            el.address !== '0xdac17f958d2ee523a2206206994597c13d831ec7'
         );
+      }
+    }
+
+    if (USE_HOLY_SWAP) {
+      if (type === CurrencySelectionTypes.output) {
+        // Removing ETH from output list
+        if (filteredList && filteredList.length > 0) {
+          filteredList[0].data = filteredList[0].data.filter(
+            el => el.address !== 'eth'
+          );
+        }
       }
     }
     setIsSearching(false);

@@ -54,6 +54,7 @@ import {
 } from './effects';
 import { onNavigationStateChange } from './onNavigationStateChange';
 import Routes from './routesNames';
+import { ExchangeModalNavigator } from './index';
 import isNativeStackAvailable from '@holyheld-com/helpers/isNativeStackAvailable';
 import createNativeStackNavigator from 'react-native-cool-modals/createNativeStackNavigator';
 
@@ -206,11 +207,11 @@ function NativeStackFallbackNavigator() {
         name={Routes.SUPPORTED_COUNTRIES_MODAL_SCREEN}
         options={overlayExpandedPreset}
       />
-      {/* <Stack.Screen
+      <Stack.Screen
         component={ExchangeModalNavigator}
         name={Routes.EXCHANGE_MODAL}
         options={exchangePreset}
-      /> */}
+      />
       <Stack.Screen
         component={HolySwapModal}
         name={Routes.HOLY_SWAP_MODAL}
@@ -249,11 +250,11 @@ function NativeStackNavigator() {
           topOffset: 0,
         }}
       />
-      {/* <NativeStack.Screen
+      <NativeStack.Screen
         component={ExchangeModalNavigator}
         name={Routes.EXCHANGE_MODAL}
         options={{ ...nativeStackDefaultConfig, interactWithScrollView: false }}
-      /> */}
+      />
       <NativeStack.Screen
         component={HolySwapModal}
         name={Routes.HOLY_SWAP_MODAL}
