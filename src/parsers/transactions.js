@@ -173,7 +173,8 @@ const parseTransaction = (
   // We are overriding to show the user a failure state if the action actually failed
   if (
     isEmpty(changes) &&
-    txn.protocol === ProtocolTypes.compound.name &&
+    (txn.protocol === ProtocolTypes.compound.name ||
+      txn.protocol === ProtocolTypes.holy.name) &&
     (txn.type === TransactionTypes.deposit ||
       txn.type === TransactionTypes.withdraw)
   ) {
@@ -340,7 +341,10 @@ export const getTitle = ({ protocol, status, type }) => {
       status === TransactionStatusTypes.sent ||
       status === TransactionStatusTypes.received
     ) {
-      if (protocol === ProtocolTypes.compound.name) {
+      if (
+        protocol === ProtocolTypes.compound.name ||
+        protocol === ProtocolTypes.holy.name
+      ) {
         return 'Savings';
       } else {
         return get(ProtocolTypes, `${protocol}.displayName`);
@@ -385,7 +389,10 @@ export const getTransactionLabel = ({
     return TransactionStatusTypes.approving;
 
   if (pending && type === TransactionTypes.deposit) {
-    if (protocol === ProtocolTypes.compound.name) {
+    if (
+      protocol === ProtocolTypes.compound.name ||
+      protocol === ProtocolTypes.holy.name
+    ) {
       return TransactionStatusTypes.depositing;
     } else {
       return TransactionStatusTypes.sending;
@@ -393,7 +400,10 @@ export const getTransactionLabel = ({
   }
 
   if (pending && type === TransactionTypes.withdraw) {
-    if (protocol === ProtocolTypes.compound.name) {
+    if (
+      protocol === ProtocolTypes.compound.name ||
+      protocol === ProtocolTypes.holy.name
+    ) {
       return TransactionStatusTypes.withdrawing;
     } else {
       return TransactionStatusTypes.receiving;
@@ -420,7 +430,10 @@ export const getTransactionLabel = ({
     return TransactionStatusTypes.purchased;
 
   if (type === TransactionTypes.deposit) {
-    if (protocol === ProtocolTypes.compound.name) {
+    if (
+      protocol === ProtocolTypes.compound.name ||
+      protocol === ProtocolTypes.holy.name
+    ) {
       return TransactionStatusTypes.deposited;
     } else {
       return TransactionStatusTypes.sent;
@@ -428,7 +441,10 @@ export const getTransactionLabel = ({
   }
 
   if (type === TransactionTypes.withdraw) {
-    if (protocol === ProtocolTypes.compound.name) {
+    if (
+      protocol === ProtocolTypes.compound.name ||
+      protocol === ProtocolTypes.holy.name
+    ) {
       return TransactionStatusTypes.withdrew;
     } else {
       return TransactionStatusTypes.received;

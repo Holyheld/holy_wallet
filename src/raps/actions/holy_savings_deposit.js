@@ -246,7 +246,7 @@ export const holySavingsDeposit = async (
     protocol: ProtocolTypes.holy.name,
     status: TransactionStatusTypes.depositing,
     to: get(deposit, 'to'),
-    type: TransactionTypes.trade,
+    type: TransactionTypes.deposit,
   };
   logger.log('[holy savings deposit] adding new txn', newTransaction);
   await dispatch(dataAddNewTransaction(newTransaction, accountAddress, true));

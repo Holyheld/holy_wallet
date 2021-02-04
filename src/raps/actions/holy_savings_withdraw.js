@@ -142,7 +142,7 @@ export const holySavingsWithdraw = async (
     protocol: ProtocolTypes.holy.name,
     status: TransactionStatusTypes.withdrawing,
     to: get(withdraw, 'to'),
-    type: TransactionTypes.trade,
+    type: TransactionTypes.withdraw,
   };
   logger.log('[holy savings withdraw] adding new txn', newTransaction);
   await dispatch(dataAddNewTransaction(newTransaction, accountAddress, true));
