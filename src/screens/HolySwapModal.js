@@ -22,7 +22,6 @@ import {
   ExchangeModalHeader,
   ExchangeOutputField,
 } from '../components/exchange';
-import SwapInfo from '../components/exchange/SwapInfo';
 import { FloatingPanel, FloatingPanels } from '../components/floating-panels';
 import { GasSpeedButton } from '../components/gas';
 import { Centered, KeyboardFixedOpenLayout } from '../components/layout';
@@ -406,7 +405,7 @@ const HolySwapModal = ({ defaultInputCurrency, testID }) => {
               zIndex: 9999,
             }}
           >
-            <ActivityIndicator color="#FFFFFF" size="large" />
+            <ActivityIndicator color={colors.textColor} size="large" />
           </View>
         )}
 
@@ -483,13 +482,6 @@ const HolySwapModal = ({ defaultInputCurrency, testID }) => {
               testID={testID + '-output'}
             />
           </FloatingPanel>
-
-          <SwapInfo
-            amount={outputAmountDisplay}
-            asset={outputCurrency}
-            testID="holy-swap-info-button"
-          />
-
           <Fragment>
             <Centered
               flexShrink={0}
