@@ -42,7 +42,7 @@ export const holySavingsDepositEstimation = async ({
 }) => {
   logger.log('[holy savings deposit estimation] estimation');
 
-  if (!inputAmount || !transferData) {
+  if (!inputAmount) {
     logger.log(
       '[holy savings deposit estimation] input amount or transfer data is null - return basic value'
     );
@@ -173,11 +173,17 @@ export const holySavingsDeposit = async (
 
     const holyHand = new Contract(contractAddress, contractABI, walletToUse);
 
+    let value = undefined;
+
+    if (transferData) {
+      value = toHex(transferData.value);
+    }
+
     const transactionParams = {
       from: accountAddress,
       gasLimit: toHex(gasLimit) || undefined,
       gasPrice: toHex(gasPrice) || undefined,
-      value: toHex(transferData.value),
+      value: value,
     };
 
     const poolAddress = HOLY_SAVINGS_POOL_ADDRESS(network);

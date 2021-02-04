@@ -33,9 +33,9 @@ import { ExchangeNavigatorFactory } from '../navigation/ExchangeModalNavigator';
 import { useNavigation } from '../navigation/Navigation';
 import useStatusBarManaging from '../navigation/useStatusBarManaging';
 import { executeRap } from '../raps/common';
-import createHolySavingsDepositCompoundRap, {
-  estimateHolySavingsDepositCompound,
-} from '../raps/holySavingsDepositCompound';
+import createHolySwapCompoundRap, {
+  estimateHolySwapCompound,
+} from '../raps/holySwapCompound';
 import { multicallClearState } from '../redux/multicall';
 import store from '../redux/store';
 import { getUSDCAsset, USDC_TOKEN_ADDRESS } from '../references/holy';
@@ -226,9 +226,10 @@ const HolySwapModal = ({ defaultInputCurrency, testID }) => {
 
   const updateGasLimit = useCallback(async () => {
     try {
-      const gasLimit = await estimateHolySavingsDepositCompound({
+      const gasLimit = await estimateHolySwapCompound({
         inputAmount,
         inputCurrency,
+        outputCurrency,
         transferData,
       });
 
@@ -238,7 +239,14 @@ const HolySwapModal = ({ defaultInputCurrency, testID }) => {
     } catch (error) {
       updateTxFee(defaultGasLimit);
     }
-  }, [defaultGasLimit, inputAmount, inputCurrency, transferData, updateTxFee]);
+  }, [
+    defaultGasLimit,
+    inputAmount,
+    inputCurrency,
+    outputCurrency,
+    transferData,
+    updateTxFee,
+  ]);
 
   // Update gas limit
   useEffect(() => {
@@ -349,12 +357,12 @@ const HolySwapModal = ({ defaultInputCurrency, testID }) => {
           setParams({ focused: false });
           navigate(Routes.PROFILE_SCREEN);
         };
-        const rap = await createHolySavingsDepositCompoundRap({
+        const rap = await createHolySwapCompoundRap({
           callback,
           inputAmount,
           inputCurrency,
           isMax,
-          outputCurrency: USDcAsset,
+          outputCurrency,
           selectedGasPrice,
           transferData,
         });
