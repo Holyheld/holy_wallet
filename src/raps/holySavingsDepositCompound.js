@@ -2,6 +2,7 @@ import { concat, reduce } from 'lodash';
 import { add } from '../helpers/utilities';
 import { rapsAddOrUpdate } from '../redux/raps';
 import store from '../redux/store';
+import { ethUnits } from '../references';
 import { HOLY_HAND_ADDRESS } from '../references/holy';
 import { holySavingsDepositEstimation } from './actions/holy_savings_deposit';
 import { assetNeedsUnlocking } from './actions/unlock';
@@ -27,6 +28,8 @@ export const estimateHolySavingsDepositCompound = async ({
     contractAddress
   );
 
+  let depositGasEstimation = ethUnits.basic_holy_savings_deposit;
+
   if (swapAssetNeedsUnlocking && inputAmount) {
     logger.log(
       '[holy savings deposit estimation] we need unlock tokens ',
@@ -42,16 +45,15 @@ export const estimateHolySavingsDepositCompound = async ({
     );
     gasLimits = concat(gasLimits, unlockGasLimit);
   } else {
-    const depositGasEstimation = await holySavingsDepositEstimation({
+    depositGasEstimation = await holySavingsDepositEstimation({
       accountAddress,
       inputAmount,
       inputCurrency,
       network,
       transferData,
     });
-    gasLimits = concat(gasLimits, depositGasEstimation);
   }
-
+  gasLimits = concat(gasLimits, depositGasEstimation);
   return reduce(gasLimits, (acc, limit) => add(acc, limit), '0');
 };
 

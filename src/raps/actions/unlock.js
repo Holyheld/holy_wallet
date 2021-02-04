@@ -1,6 +1,6 @@
 import { MaxUint256 } from '@ethersproject/constants';
 import { captureException } from '@sentry/react-native';
-import { get, isNull, toLower } from 'lodash';
+import { get, toLower } from 'lodash';
 import { alwaysRequireApprove } from '../../config/debug';
 import TransactionStatusTypes from '../../helpers/transactionStatusTypes';
 import TransactionTypes from '../../helpers/transactionTypes';
@@ -153,23 +153,23 @@ export const assetNeedsUnlocking = async (
 
   if (alwaysRequireApprove) return true;
 
-  const cacheKey = toLower(`${accountAddress}|${address}|${contractAddress}`);
+  //const cacheKey = toLower(`${accountAddress}|${address}|${contractAddress}`);
 
   let allowance;
   // Check on cache first
-  if (AllowancesCache.cache[cacheKey]) {
-    allowance = AllowancesCache.cache[cacheKey];
-  } else {
-    allowance = await contractUtils.getRawAllowance(
-      accountAddress,
-      assetToUnlock,
-      contractAddress
-    );
-    // Cache that value
-    if (isNull(allowance)) {
-      AllowancesCache.cache[cacheKey] = allowance;
-    }
-  }
+  // if (AllowancesCache.cache[cacheKey]) {
+  //   allowance = AllowancesCache.cache[cacheKey];
+  // } else {
+  allowance = await contractUtils.getRawAllowance(
+    accountAddress,
+    assetToUnlock,
+    contractAddress
+  );
+  // Cache that value
+  // if (isNull(allowance)) {
+  //   AllowancesCache.cache[cacheKey] = allowance;
+  // }
+  // }
 
   const rawAmount = convertAmountToRawAmount(amount, assetToUnlock.decimals);
   const assetNeedsUnlocking = !greaterThan(allowance, rawAmount);

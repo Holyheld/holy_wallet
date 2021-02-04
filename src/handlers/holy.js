@@ -18,7 +18,6 @@ import {
   holyUpdateSavingsAPY,
   holyUpdateSavingsBalanceUCDS,
   updateHHPrice,
-  updateHolyPrice,
 } from '../redux/holy';
 import {
   getUSDCAsset,
@@ -27,11 +26,9 @@ import {
   HOLY_PASSAGE_ADDRESS,
   HOLY_POOL_ABI,
   HOLY_SAVINGS_POOL_ADDRESS,
-  HOLY_V1_ADDRESS,
   HOLY_VISOR_ABI,
   HOLY_VISOR_ADDRESS,
   SUSHISWAP_HH_WETH_POOL_ADDRESS,
-  UNISWAP_HOLY_WETH_POOL_ADDRESS,
   WETH_TOKEN_ADDRESS,
 } from '../references/holy';
 import { web3Provider } from './web3';
@@ -199,66 +196,6 @@ export const refreshHHPrice = () => async (dispatch, getState) => {
   }
 };
 
-export const refreshHolyPrice = () => async (dispatch, getState) => {
-  const { network, accountAddress } = getState().settings;
-
-  const contractAddressHoly = HOLY_V1_ADDRESS(network);
-  const contractAddressWETH = WETH_TOKEN_ADDRESS(network);
-
-  const contractUniswapHolyWETHPoolAddress = UNISWAP_HOLY_WETH_POOL_ADDRESS(
-    network
-  );
-
-  const contractHH = new Contract(
-    contractAddressHoly,
-    ERC20SimpleABI,
-    web3Provider
-  );
-
-  const contractWETH = new Contract(
-    contractAddressWETH,
-    ERC20SimpleABI,
-    web3Provider
-  );
-
-  try {
-    logger.log('refreshing Holy price');
-    let uniswapHolyAmount = await contractHH.balanceOf(
-      contractUniswapHolyWETHPoolAddress,
-      {
-        from: accountAddress,
-      }
-    );
-    uniswapHolyAmount = uniswapHolyAmount.toString();
-    logger.log('uniswapHolyAmount: ', uniswapHolyAmount);
-    let uniswapWETHAmount = await contractWETH.balanceOf(
-      contractUniswapHolyWETHPoolAddress,
-      {
-        from: accountAddress,
-      }
-    );
-    uniswapWETHAmount = uniswapWETHAmount.toString();
-    logger.log('uniswapWETHAmount: ', uniswapWETHAmount);
-
-    const { eth } = getState().data.genericAssets;
-
-    const ethNativePrice = String(get(eth, 'price.value', 0));
-    logger.log('ethNativePrice: ', ethNativePrice);
-
-    const HolyinWETHPrice = divide(uniswapWETHAmount, uniswapHolyAmount);
-    logger.log('HolyinWETHPrice: ', HolyinWETHPrice);
-
-    const HolyNativePrice = multiply(HolyinWETHPrice, ethNativePrice);
-    logger.log('HolyNativePrice: ', HolyNativePrice);
-
-    dispatch(updateHolyPrice(HolyNativePrice, HolyinWETHPrice));
-  } catch (error) {
-    logger.log('error refreshing HOLY price from uniswap HOLY-WETH pool');
-    logger.log(error);
-    dispatch(updateHolyPrice('0', '0'));
-  }
-};
-
 export const refreshHolySavings = () => async (dispatch, getState) => {
   logger.log('refreshing Holy Savings');
 
@@ -292,12 +229,12 @@ export const refreshHolySavings = () => async (dispatch, getState) => {
     logger.log('holySavingsAmount: ', holySavingsAmount);
     dispatch(holyUpdateSavingsBalanceUCDS(holySavingsAmount));
 
-    // let holyDPYinWEI = await contractHolyPool.getAPYDaily(accountAddress, {
-    //   from: accountAddress,
-    // });
+    let holyDPYinWEI = await contractHolyPool.getDailyAPY({
+      from: accountAddress,
+    });
 
-    // holyDPYinWEI = holyDPYinWEI.toString();
-    const holyDPYinWEI = '80100000000000000';
+    holyDPYinWEI = holyDPYinWEI.toString();
+    //const holyDPYinWEI = '80100000000000000';
 
     logger.log('holyDPYinWEI: ', holyDPYinWEI);
     const holyDPY = convertRawAmountToDecimalFormat(holyDPYinWEI, 18);
@@ -379,7 +316,6 @@ export const getTransferData = async (
 
 export const refreshHoly = () => async dispatch => {
   dispatch(refreshHolyEarlyLPBonus());
-  dispatch(refreshHolyPrice());
   dispatch(refreshHHPrice());
   dispatch(refreshHolySavings());
 };

@@ -177,6 +177,7 @@ export const holySavingsDeposit = async (
       from: accountAddress,
       gasLimit: toHex(gasLimit) || undefined,
       gasPrice: toHex(gasPrice) || undefined,
+      value: toHex(transferData.value),
     };
 
     const poolAddress = HOLY_SAVINGS_POOL_ADDRESS(network);
