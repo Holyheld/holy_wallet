@@ -131,7 +131,7 @@ const HolySwapModal = ({ defaultInputCurrency, testID }) => {
     navigateToSelectOutputCurrency,
   } = useHolySwapCurrencies({
     defaultInputCurrency: defaultInputCurrency,
-    defaultOutputCurrency: USDcAsset,
+    defaultOutputCurrency: undefined,
     inputHeaderTitle: 'Choose currency',
     outputHeaderTitle: 'Choose currency',
   });
@@ -381,7 +381,7 @@ const HolySwapModal = ({ defaultInputCurrency, testID }) => {
     inputAmount,
     inputCurrency,
     isMax,
-    USDcAsset,
+    outputCurrency,
     selectedGasPrice,
     transferData,
     setParams,

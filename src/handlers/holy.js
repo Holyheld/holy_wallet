@@ -249,19 +249,17 @@ export const refreshHolySavings = () => async (dispatch, getState) => {
 };
 
 export const getTransferData = async (
-  buyTokenSymbol,
-  sellTokenSymbol,
+  buyTokenAddress,
+  sellTokenAddress,
   amount,
   isInputAmount = true,
   network = networkTypes.mainnet
 ) => {
   let error = '';
   let data = '';
-  let buyTokenAddress = '';
   let buyAmount = '';
   let sellAmount = '';
   let allowanceTarget = '';
-  let sellTokenAddress = '';
   let to = '';
   let value = '';
   try {
@@ -269,7 +267,7 @@ export const getTransferData = async (
     const prefix =
       network === networkTypes.mainnet ? '' : `${network.toString()}.`;
 
-    const r = `https://${prefix}api.0x.org/swap/v1/quote?buyToken=${buyTokenSymbol}&sellToken=${sellTokenSymbol}&${amountKey}=${amount}`;
+    const r = `https://${prefix}api.0x.org/swap/v1/quote?buyToken=${buyTokenAddress}&sellToken=${sellTokenAddress}&${amountKey}=${amount}`;
 
     logger.log(r);
 
@@ -291,8 +289,6 @@ export const getTransferData = async (
       allowanceTarget = json.allowanceTarget;
       to = json.to;
       value = json.value;
-      buyTokenAddress = json.buyTokenAddress;
-      sellTokenAddress = json.sellTokenAddress;
       buyAmount = json.buyAmount;
       sellAmount = json.sellAmount;
     }

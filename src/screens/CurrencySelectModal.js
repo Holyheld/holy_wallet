@@ -23,7 +23,7 @@ import {
 } from '../components/exchange';
 import { Column, KeyboardFixedOpenLayout } from '../components/layout';
 import { Modal } from '../components/modal';
-import { USE_HOLY_SWAP } from '../config/experimental';
+import { isTokenValidForSwap } from '../config/experimental';
 import { addHexPrefix } from '../handlers/web3';
 import CurrencySelectionTypes from '../helpers/currencySelectionTypes';
 import { delayNext } from '../hooks/useMagicAutofocus';
@@ -171,24 +171,12 @@ function CurrencySelectModal() {
     if (holyCompatibility) {
       // Removing ETH and USDT from output list
       if (filteredList && filteredList.length > 0) {
-        filteredList[0].data = filteredList[0].data.filter(
-          el =>
-            el.address !== 'eth' &&
-            el.address !== '0xdac17f958d2ee523a2206206994597c13d831ec7'
+        filteredList[0].data = filteredList[0].data.filter(el =>
+          isTokenValidForSwap(el.address)
         );
       }
     }
 
-    if (USE_HOLY_SWAP) {
-      if (type === CurrencySelectionTypes.output) {
-        // Removing ETH from output list
-        if (filteredList && filteredList.length > 0) {
-          filteredList[0].data = filteredList[0].data.filter(
-            el => el.address !== 'eth'
-          );
-        }
-      }
-    }
     setIsSearching(false);
     return filteredList;
   }, [
@@ -196,6 +184,7 @@ function CurrencySelectModal() {
     favorites,
     globalHighLiquidityAssets,
     globalLowLiquidityAssets,
+    holyCompatibility,
     searchQueryForSearch,
     type,
     uniswapAssetsInWallet,

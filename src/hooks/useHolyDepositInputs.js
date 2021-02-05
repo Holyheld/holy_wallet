@@ -84,8 +84,8 @@ export default function useHolyDepositInputs({
 
             setTransferError(null);
             const transferData = await getTransferData(
-              outputCurrency.symbol,
-              inputCurrency.symbol,
+              outputCurrency.address,
+              inputCurrency.address,
               amountInWEI,
               true,
               network
@@ -167,8 +167,8 @@ export default function useHolyDepositInputs({
 
             setTransferError(null);
             const transferData = await getTransferData(
-              outputCurrency.symbol,
-              inputCurrency.symbol,
+              outputCurrency.address,
+              inputCurrency.address,
               amountInWEI,
               true,
               network

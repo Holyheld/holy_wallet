@@ -14,4 +14,9 @@ export const defaultConfig = {
   [REVIEW_ANDROID]: false,
 };
 
-export const USE_HOLY_SWAP = false;
+export const USE_HOLY_SWAP = true;
+
+export const isTokenValidForSwap = address =>
+  !USE_HOLY_SWAP ||
+  (address !== 'eth' &&
+    address !== '0xdac17f958d2ee523a2206206994597c13d831ec7');

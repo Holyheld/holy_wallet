@@ -70,8 +70,8 @@ export default function useHolySwapInputs({
 
           setTransferError(null);
           const transferData = await getTransferData(
-            outputCurrency.symbol,
-            inputCurrency.symbol,
+            outputCurrency.address,
+            inputCurrency.address,
             amountInWEI,
             true,
             network
@@ -138,8 +138,8 @@ export default function useHolySwapInputs({
 
           setTransferError(null);
           const transferData = await getTransferData(
-            outputCurrency.symbol,
-            inputCurrency.symbol,
+            outputCurrency.address,
+            inputCurrency.address,
             amountInWEI,
             true,
             network
@@ -193,8 +193,8 @@ export default function useHolySwapInputs({
 
           setTransferError(null);
           const transferData = await getTransferData(
-            outputCurrency.symbol,
-            inputCurrency.symbol,
+            outputCurrency.address,
+            inputCurrency.address,
             outputAmountInWEI,
             false,
             network

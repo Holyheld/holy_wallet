@@ -117,6 +117,7 @@ export default function useHolySwapCurrencies({
       delayNext();
       navigate(Routes.CURRENCY_SELECT_SCREEN, {
         headerTitle: inputHeaderTitle,
+        holyCompatibility: true,
         onSelectCurrency: updateInputCurrency,
         restoreFocusOnSwapModal: () => setParams({ focused: true }),
         type: currencySelectionTypes.input,
@@ -139,6 +140,7 @@ export default function useHolySwapCurrencies({
       delayNext();
       navigate(Routes.CURRENCY_SELECT_SCREEN, {
         headerTitle: outputHeaderTitle,
+        holyCompatibility: true,
         onSelectCurrency: updateOutputCurrency,
         restoreFocusOnSwapModal: () => setParams({ focused: true }),
         type: currencySelectionTypes.output,

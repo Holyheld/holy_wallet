@@ -1,5 +1,6 @@
 import { find } from 'lodash';
 import React, { useRef } from 'react';
+import { isTokenValidForSwap } from '../../config/experimental';
 import { useChartThrottledPoints, useUniswapAssetsInWallet } from '../../hooks';
 import {
   BuyActionButton,
@@ -44,10 +45,9 @@ export default function ChartExpandedState({ asset }) {
   });
 
   const { uniswapAssetsInWallet } = useUniswapAssetsInWallet();
-  const showSwapButton = find(uniswapAssetsInWallet, [
-    'uniqueId',
-    asset.uniqueId,
-  ]);
+  const showSwapButton =
+    find(uniswapAssetsInWallet, ['uniqueId', asset.uniqueId]) &&
+    isTokenValidForSwap(asset.address);
 
   const needsEth = asset.address === 'eth' && asset.balance.amount === '0';
 
