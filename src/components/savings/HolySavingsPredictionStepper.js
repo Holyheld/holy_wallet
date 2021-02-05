@@ -27,6 +27,9 @@ const PredictionNumber = styled(AnimatedNumber).attrs({
 
 /* eslint-disable sort-keys */
 const steps = {
+  'Daily': {
+    days: 1,
+  },
   'Monthly': {
     days: 30,
   },
@@ -59,7 +62,7 @@ function useStepper(max, initial = 0) {
 
 const HolySavingsPredictionStepper = ({ dpyNativeAmount }) => {
   const { nativeCurrency } = useAccountSettings();
-  const [step, nextStep] = useStepper(Object.keys(steps).length, 1);
+  const [step, nextStep] = useStepper(Object.keys(steps).length, 2);
 
   const predict = useMemo(
     () => Object.values(steps)[step].days * dpyNativeAmount,

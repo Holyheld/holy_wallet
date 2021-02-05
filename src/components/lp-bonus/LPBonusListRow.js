@@ -33,6 +33,7 @@ const sx = StyleSheet.create({
     backgroundColor: colors.apyPillBackground,
     borderRadius: ButtonBorderRadius,
     height: 30,
+    marginLeft: 10,
     paddingBottom: 1,
     paddingRight: 2,
     width: 97,
@@ -66,7 +67,7 @@ const LPBonusListRow = () => {
       displayedBalance = new BigNumber(amountToClaim).toFixed(2);
     } else {
       displayedBalance = new BigNumber(amountToClaim)
-        .decimalPlaces(8)
+        .decimalPlaces(2)
         .toString();
     }
     const displayedDpy = new BigNumber(dpy).decimalPlaces(2).toString();
@@ -101,47 +102,55 @@ const LPBonusListRow = () => {
             scaleTo={0.96}
           >
             {!isEmpty && (
-              <Centered>
+              <RowWithMargins width={31}>
                 <CoinIcon
                   address={HHAsset.address}
                   size={26}
                   symbol={HHAsset.symbol}
                 />
-              </Centered>
+              </RowWithMargins>
             )}
 
-            <RowWithMargins
-              align="center"
-              flexGrow={1}
-              margin={8}
-              paddingLeft={12}
-            >
-              <Text
-                color={isEmpty ? colors.textColorMuted : colors.textColor}
-                letterSpacing="roundedTightest"
-                size="lmedium"
-                weight="bold"
-              >
-                {displayedBalance} HH
-              </Text>
-              {isEmpty && (
-                <ButtonPressAnimation
-                  onPress={NOOP}
-                  scaleTo={0.9}
-                  style={sx.button}
-                >
+            <Row align="center" flexGrow={3} paddingLeft={4}>
+              {isEmpty ? (
+                <>
                   <Text
-                    color={colors.textColor}
-                    letterSpacing="roundedTight"
+                    color={isEmpty ? colors.textColorMuted : colors.textColor}
+                    letterSpacing="roundedTightest"
                     size="lmedium"
-                    weight="semibold"
+                    weight="bold"
                   >
-                    Pending
+                    0.00 HH
                   </Text>
-                  <InnerBorder radius={ButtonBorderRadius} />
-                </ButtonPressAnimation>
+                  <ButtonPressAnimation
+                    onPress={NOOP}
+                    scaleTo={0.9}
+                    style={sx.button}
+                  >
+                    <Text
+                      color={colors.textColor}
+                      letterSpacing="roundedTight"
+                      size="lmedium"
+                      weight="semibold"
+                    >
+                      Pending
+                    </Text>
+                    <InnerBorder radius={ButtonBorderRadius} />
+                  </ButtonPressAnimation>
+                </>
+              ) : (
+                <Row paddingLeft={10}>
+                  <Text
+                    color={isEmpty ? colors.textColorMuted : colors.textColor}
+                    letterSpacing="roundedTightest"
+                    size="lmedium"
+                    weight="bold"
+                  >
+                    {displayedBalance} HH
+                  </Text>
+                </Row>
               )}
-            </RowWithMargins>
+            </Row>
             <APYPill postfix="% DPY" value={displayedDpy} />
           </Row>
         </LPBonusListRowShadowStack>

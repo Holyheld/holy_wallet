@@ -2,14 +2,14 @@ import { concat, reduce } from 'lodash';
 import { add } from '../helpers/utilities';
 import { rapsAddOrUpdate } from '../redux/raps';
 import store from '../redux/store';
-import { holyMigrateEstimation } from './actions/holy_migrate';
+import { holyClaimEstimation } from './actions/holy_claim';
 import { createNewAction, createNewRap, RapActionTypes } from './common';
 import logger from 'logger';
 
 export const estimateHolyClaimCompound = async () => {
   let gasLimits = [];
 
-  const claimGasLimit = await holyMigrateEstimation();
+  const claimGasLimit = await holyClaimEstimation();
 
   gasLimits = concat(gasLimits, claimGasLimit);
   logger.log('[holy claim estimation] gas for claiming ', claimGasLimit);

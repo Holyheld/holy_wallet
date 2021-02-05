@@ -12,3 +12,9 @@ export function useUSDcTokenPrice() {
 
   return get(usdcAsset, 'price.value', 1);
 }
+
+export function useEthPrice() {
+  const ethAsset = useSelector(state => state.data.genericAssets?.eth);
+
+  return get(ethAsset, 'price.value', 0);
+}

@@ -120,14 +120,6 @@ const HolySavingsListRow = ({ totalBalance, savings }) => {
               </RowWithMargins>
             )}
             <Row align="center" flexGrow={3} paddingLeft={4}>
-              <Text
-                color={isEmpty ? colors.textColorMuted : colors.textColor}
-                letterSpacing="roundedTightest"
-                size="lmedium"
-                weight="bold"
-              >
-                {/*{`$${displayedDollars}`}*/}
-              </Text>
               {isEmpty ? (
                 <>
                   <Text

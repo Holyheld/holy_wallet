@@ -13,7 +13,8 @@ import {
   SheetActionButtonRow,
   SlackSheet,
 } from '../components/sheet';
-import { greaterThan } from '../helpers/utilities';
+import { greaterThan, multiply } from '../helpers/utilities';
+import { useEthPrice } from '../hooks/useGenericAssets';
 import { useHolyEarlyLPBonus } from '../hooks/useHolyData';
 import { getHHAsset } from '../references/holy';
 import {
@@ -48,7 +49,10 @@ const LPBonusSheet = () => {
     nativeAmountToclaim,
     dpyNativeAmount,
     dpyAmount,
+    hhEthPrice,
   } = useHolyEarlyLPBonus();
+
+  const ethNativePrice = useEthPrice();
 
   const {
     amountToClaimDisplay,
@@ -59,13 +63,37 @@ const LPBonusSheet = () => {
     isEmpty,
   } = useMemo(() => {
     const isEmpty = !greaterThan(amountToClaim, '0');
-    const amountToClaimDisplay = new BigNumber(amountToClaim).toFormat(6);
-    const nativeAmountToclaimDisplay = new BigNumber(
-      nativeAmountToclaim
-    ).toFormat(2);
+    const amountToClaimDisplay = new BigNumber(amountToClaim).toFormat(2);
+    let nativeAmountToclaimDisplay = '0';
+    if (greaterThan(nativeAmountToclaim, '0')) {
+      nativeAmountToclaimDisplay = new BigNumber(nativeAmountToclaim).toFormat(
+        2
+      );
+    } else {
+      nativeAmountToclaimDisplay = multiply(
+        amountToClaim,
+        multiply(hhEthPrice, ethNativePrice)
+      );
+      nativeAmountToclaimDisplay = new BigNumber(
+        nativeAmountToclaimDisplay
+      ).toFormat(2);
+    }
 
     const dpyDisplay = new BigNumber(dpy).toFormat(2);
-    const dpyNativeAmountDisplay = new BigNumber(dpyNativeAmount).toFormat(2);
+
+    let dpyNativeAmountDisplay = '0';
+    if (greaterThan(dpyNativeAmount, '0')) {
+      dpyNativeAmountDisplay = new BigNumber(dpyNativeAmount).toFormat(2);
+    } else {
+      dpyNativeAmountDisplay = multiply(
+        dpyAmount,
+        multiply(hhEthPrice, ethNativePrice)
+      );
+      dpyNativeAmountDisplay = new BigNumber(dpyNativeAmountDisplay).toFormat(
+        2
+      );
+    }
+
     const dpyAmountDisplay = new BigNumber(dpyAmount)
       .decimalPlaces(2)
       .toString();
@@ -78,7 +106,15 @@ const LPBonusSheet = () => {
       isEmpty,
       nativeAmountToclaimDisplay,
     };
-  }, [amountToClaim, dpy, dpyAmount, dpyNativeAmount, nativeAmountToclaim]);
+  }, [
+    amountToClaim,
+    dpy,
+    dpyAmount,
+    dpyNativeAmount,
+    ethNativePrice,
+    hhEthPrice,
+    nativeAmountToclaim,
+  ]);
 
   const onClaim = useCallback(() => {
     if (!isReadOnlyWallet) {
@@ -109,13 +145,14 @@ const LPBonusSheet = () => {
           />
           <SheetActionButtonRow>
             <SheetActionButton
+              alignSelf="center"
               color={colors.buttonClaimAndBurn}
               label="Claim"
               onPress={onClaim}
               radiusAndroid={24}
               textColor={colors.textColorClaimAndBurn}
               weight="bold"
-              width="auto"
+              width={160}
             />
           </SheetActionButtonRow>
           <Divider

@@ -17,6 +17,7 @@ export function useHHToken() {
 export function useHolyEarlyLPBonus() {
   const earlyLPBonus = useSelector(state => state.holy.earlyLPBonus);
   const hhNativePrice = useSelector(state => state.holy.prices.HH.inNative);
+  const hhEthPrice = useSelector(state => state.holy.prices.HH.inEth);
 
   const nativeAmountToclaim = multiply(
     hhNativePrice,
@@ -36,6 +37,7 @@ export function useHolyEarlyLPBonus() {
     ...earlyLPBonus,
     dpyAmount,
     dpyNativeAmount,
+    hhEthPrice,
     hhNativePrice,
     nativeAmountToclaim,
     nativeFullCap,
