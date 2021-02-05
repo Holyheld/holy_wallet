@@ -256,7 +256,7 @@ const gestureResponseDistance = gestureResponseDistanceFactory(
 const smallGestureResponseDistance = gestureResponseDistanceFactory(100);
 
 export const backgroundPreset = {
-  cardStyle: { backgroundColor: 'transparent' },
+  cardStyle: { backgroundColor: colors.pageBackground },
   cardStyleInterpolator: backgroundInterpolator,
   gestureResponseDistance,
 };
