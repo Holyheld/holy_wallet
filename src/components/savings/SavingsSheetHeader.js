@@ -25,7 +25,7 @@ const SavingsSheetHeader = ({ balance, ildBalance }) => (
         size="large"
         weight="semibold"
       >
-        ${ildBalance}
+        􀁍 ${ildBalance}
       </Text>
     </RowWithMargins>
   </Centered>

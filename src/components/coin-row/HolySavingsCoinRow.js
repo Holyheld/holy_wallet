@@ -48,8 +48,7 @@ const BottomRow = ({ apy, additionalShare, symbol }) => {
             size="smedium"
             weight="semibold"
           >
-            {' '}
-            {additionalShare + ' ' + symbol}
+            􀁍 {additionalShare + ' ' + symbol}
           </Text>
         </Column>
       </RowWithMargins>

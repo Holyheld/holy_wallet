@@ -50,7 +50,7 @@ const BottomRow = ({ dpy, dpyAmount, symbol }) => {
             size="smedium"
             weight="semibold"
           >
-            {dpyAmount + ' ' + symbol}
+            􀁍 {dpyAmount + ' ' + symbol}
           </Text>
         </Column>
       </RowWithMargins>

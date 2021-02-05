@@ -41,7 +41,7 @@ const LPBonusSheetHeader = ({ nativeBalance, nativeDPYBalance }) => {
           size="large"
           weight="semibold"
         >
-          ${dispalyedNativeDPYBalance}
+          􀁍 ${dispalyedNativeDPYBalance}
         </Text>
       </RowWithMargins>
     </Centered>
