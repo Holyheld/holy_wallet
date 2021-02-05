@@ -3,11 +3,11 @@ import React from 'react';
 import { useChartThrottledPoints } from '../../hooks';
 import { magicMemo } from '../../utils';
 import {
-  DepositActionButton,
-  SheetActionButtonRow,
+  // DepositActionButton,
+  // SheetActionButtonRow,
   SheetDivider,
   SlackSheet,
-  WithdrawActionButton,
+  // WithdrawActionButton,
 } from '../sheet';
 import {
   TokenInfoBalanceValue,
@@ -25,7 +25,8 @@ export const initialLiquidityPoolExpandedStateSheetHeight =
   heightWithChart + (android && 40);
 
 const LiquidityPoolExpandedState = ({ asset }) => {
-  const { symbol, tokenNames, tokens, totalNativeDisplay, uniBalance } = asset;
+  // const { symbol, tokenNames, tokens, totalNativeDisplay, uniBalance } = asset;
+  const { symbol, tokens, totalNativeDisplay, uniBalance } = asset;
   const uniBalanceLabel = `${uniBalance} ${symbol}`;
   const {
     chart,
@@ -87,10 +88,10 @@ const LiquidityPoolExpandedState = ({ asset }) => {
           </TokenInfoItem>
         </TokenInfoRow>
       </TokenInfoSection>
-      <SheetActionButtonRow>
-        <WithdrawActionButton symbol={tokenNames} weight="bold" />
-        <DepositActionButton symbol={tokenNames} weight="bold" />
-      </SheetActionButtonRow>
+      {/*<SheetActionButtonRow>*/}
+      {/*  <WithdrawActionButton symbol={tokenNames} weight="bold" />*/}
+      {/*  <DepositActionButton symbol={tokenNames} weight="bold" />*/}
+      {/*</SheetActionButtonRow>*/}
     </SlackSheet>
   );
 };
