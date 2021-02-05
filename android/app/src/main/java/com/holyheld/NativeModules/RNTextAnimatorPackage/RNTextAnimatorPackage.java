@@ -106,7 +106,7 @@ public class RNTextAnimatorPackage implements ReactPackage {
                     if (idsToViews.containsKey(viewId)) {
                         ReactEditText view = idsToViews.get(viewId);
                         long diff = System.currentTimeMillis() - date;
-                        String text = String.valueOf((float) initialValue + (diff * stepPerDay) / 24 / 60 / 60 / 1000).substring(0, 12);
+                        String text = String.valueOf((float) initialValue + (diff * stepPerDay) / 24 / 60 / 60 / 1000).replace(",", ".").substring(0, 12);
                         String parsedText = (isStable ? ('$' + text) : (text + ' ' + symbol)) + "      ";
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                             view.setFontFeatureSettings("'tnum'");
