@@ -1,5 +1,5 @@
 import BigNumber from 'bignumber.js';
-import React, { Fragment, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import styled from 'styled-components/primitives';
 import APYPill from '../APYPill';
 import { ButtonPressAnimation } from '../animations';
@@ -25,16 +25,15 @@ const Container = styled(Row).attrs({
   width: 100%;
 `;
 
-const Content = styled(Column).attrs({ justify: 'space-between' })`
+const Content = styled(Column).attrs({ justify: 'space-around' })`
   flex: 1;
-  height: ${CoinIconSize};
   margin-left: 10;
   opacity: ${({ isHidden }) => (isHidden ? 0.4 : 1)};
 `;
 
 const BottomRow = ({ dpy, dpyAmount, symbol }) => {
   return (
-    <Fragment>
+    <RowWithMargins marginLeft={1}>
       <APYPill
         backgroundColor={colors.apyPillBackgroundLighter}
         postfix="% DPY"
@@ -54,12 +53,12 @@ const BottomRow = ({ dpy, dpyAmount, symbol }) => {
           </Text>
         </Column>
       </RowWithMargins>
-    </Fragment>
+    </RowWithMargins>
   );
 };
 
 const TopRow = ({ balance, symbol }) => (
-  <Row align="center" justify="space-between" marginBottom={2}>
+  <Row align="center" justify="space-between" marginBottom={5}>
     <FlexItem flex={1}>
       <CoinName letterSpacing="roundedMedium" weight="semibold">
         HH

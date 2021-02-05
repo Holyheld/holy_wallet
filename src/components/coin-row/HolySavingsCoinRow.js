@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import styled from 'styled-components/primitives';
 import { ButtonPressAnimation } from '../animations';
 import { Column, FlexItem, Row, RowWithMargins } from '../layout';
@@ -24,16 +24,15 @@ const Container = styled(Row).attrs({
   width: 100%;
 `;
 
-const Content = styled(Column).attrs({ justify: 'space-between' })`
+const Content = styled(Column).attrs({ justify: 'space-around' })`
   flex: 1;
-  height: ${CoinIconSize};
   margin-left: 10;
   opacity: ${({ isHidden }) => (isHidden ? 0.4 : 1)};
 `;
 
 const BottomRow = ({ apy, additionalShare, symbol }) => {
   return (
-    <Fragment>
+    <RowWithMargins marginLeft={1}>
       <APYPill
         backgroundColor={colors.apyPillBackgroundLighter}
         small
@@ -52,12 +51,12 @@ const BottomRow = ({ apy, additionalShare, symbol }) => {
           </Text>
         </Column>
       </RowWithMargins>
-    </Fragment>
+    </RowWithMargins>
   );
 };
 
 const TopRow = ({ balance, symbol }) => (
-  <Row align="center" justify="space-between" marginBottom={2}>
+  <Row align="center" justify="space-between" marginBottom={5}>
     <FlexItem flex={1}>
       <CoinName letterSpacing="roundedMedium" weight="semibold">
         Savings
@@ -70,8 +69,8 @@ const TopRow = ({ balance, symbol }) => (
 const HolySavingsCoinRow = ({ balance, symbol, apy, additionalShare }) => (
   <ButtonPressAnimation disabled onPress={() => {}} scaleTo={1.02}>
     <Container>
-      <RowWithMargins width={35}>
-        <SavingsIcon size={35} />
+      <RowWithMargins marginRight={5} width={39}>
+        <SavingsIcon size={39} />
       </RowWithMargins>
 
       <Content justify="center">
