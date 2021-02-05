@@ -104,7 +104,8 @@
   double value = _initialValue + _stepPerDay * diff / 24 / 60 / 60;
 
   NSString *newValue = _isSymbolStablecoin ? [NSString stringWithFormat:@"$%@", [_fmt stringFromNumber:@(value)]] : [NSString stringWithFormat:@"%@ %@", [_fmt stringFromNumber:@(value)], _symbol];
-
+  
+  newValue = [newValue stringByReplacingOccurrencesOfString:@"," withString:@"."];
 
   NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc] initWithString:newValue attributes: @{
     NSKernAttributeName:@(0.2f)
