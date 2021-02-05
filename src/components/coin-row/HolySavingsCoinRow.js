@@ -56,7 +56,7 @@ const BottomRow = ({ apy, additionalShare, symbol }) => {
 };
 
 const TopRow = ({ balance, symbol }) => (
-  <Row align="center" justify="space-between" marginBottom={5}>
+  <Row align="center" justify="space-between" marginBottom={android ? 0 : 5}>
     <FlexItem flex={1}>
       <CoinName letterSpacing="roundedMedium" weight="semibold">
         Savings

@@ -18,7 +18,7 @@ const AnimatedNumberWithTextStyles = ({
   ...props
 }) => {
   const formatValue = useCallback(() => {
-    const valueToFormat = value || initialValue;
+    const valueToFormat = value ?? initialValue;
     if (formatter) return formatter(valueToFormat);
     return () => Number(valueToFormat).toString();
   }, [formatter, value, initialValue]);
