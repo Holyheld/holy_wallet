@@ -20,6 +20,7 @@ const Container = styled(Column)`
 `;
 
 const CaretIcon = styled(Icon).attrs({
+  color: colors.textColor,
   name: 'caret',
 })`
   margin-bottom: 5.25;
