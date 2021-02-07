@@ -40,7 +40,6 @@ import { multicallClearState } from '../redux/multicall';
 import store from '../redux/store';
 import { getUSDCAsset, USDC_TOKEN_ADDRESS } from '../references/holy';
 import {
-  useAccountAssets,
   useAccountSettings,
   useBlockPolling,
   useGas,
@@ -51,11 +50,7 @@ import {
 import { ethUnits } from '@holyheld-com/references';
 import Routes from '@holyheld-com/routes';
 import { colors, position } from '@holyheld-com/styles';
-import {
-  backgroundTask,
-  ethereumUtils,
-  isNewValueForPath,
-} from '@holyheld-com/utils';
+import { backgroundTask, isNewValueForPath } from '@holyheld-com/utils';
 
 import logger from 'logger';
 
@@ -67,12 +62,12 @@ const HolySwapModalWrapper = ({ navigation, ...props }) => {
   android && useStatusBarManaging();
   const { params } = useRoute();
 
-  const { allAssets } = useAccountAssets();
+  // const { allAssets } = useAccountAssets();
 
   let defaultInputAsset = params?.inputAsset;
-  if (!defaultInputAsset) {
-    defaultInputAsset = ethereumUtils.getAsset(allAssets);
-  }
+  // if (!defaultInputAsset) {
+  //   defaultInputAsset = ethereumUtils.getAsset(allAssets);
+  // }
 
   // let defaultInputCurrency;
   // if (!defaultInputAsset) {
