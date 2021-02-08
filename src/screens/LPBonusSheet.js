@@ -46,7 +46,7 @@ const LPBonusSheet = () => {
   const {
     amountToClaim,
     dpy,
-    nativeAmountToclaim,
+    nativeAmountToClaim,
     dpyNativeAmount,
     dpyAmount,
     hhEthPrice,
@@ -56,7 +56,7 @@ const LPBonusSheet = () => {
 
   const {
     amountToClaimDisplay,
-    nativeAmountToclaimDisplay,
+    nativeAmountToClaimDisplay,
     dpyDisplay,
     dpyNativeAmountDisplay,
     dpyAmountDisplay,
@@ -64,18 +64,18 @@ const LPBonusSheet = () => {
   } = useMemo(() => {
     const isEmpty = !greaterThan(amountToClaim, '0');
     const amountToClaimDisplay = new BigNumber(amountToClaim).toFormat(2);
-    let nativeAmountToclaimDisplay = '0';
-    if (greaterThan(nativeAmountToclaim, '0')) {
-      nativeAmountToclaimDisplay = new BigNumber(nativeAmountToclaim).toFormat(
+    let nativeAmountToClaimDisplay = '0';
+    if (greaterThan(nativeAmountToClaim, '0')) {
+      nativeAmountToClaimDisplay = new BigNumber(nativeAmountToClaim).toFormat(
         2
       );
     } else {
-      nativeAmountToclaimDisplay = multiply(
+      nativeAmountToClaimDisplay = multiply(
         amountToClaim,
         multiply(hhEthPrice, ethNativePrice)
       );
-      nativeAmountToclaimDisplay = new BigNumber(
-        nativeAmountToclaimDisplay
+      nativeAmountToClaimDisplay = new BigNumber(
+        nativeAmountToClaimDisplay
       ).toFormat(2);
     }
 
@@ -104,7 +104,7 @@ const LPBonusSheet = () => {
       dpyDisplay,
       dpyNativeAmountDisplay,
       isEmpty,
-      nativeAmountToclaimDisplay,
+      nativeAmountToClaimDisplay,
     };
   }, [
     amountToClaim,
@@ -113,7 +113,7 @@ const LPBonusSheet = () => {
     dpyNativeAmount,
     ethNativePrice,
     hhEthPrice,
-    nativeAmountToclaim,
+    nativeAmountToClaim,
   ]);
 
   const onClaim = useCallback(() => {
@@ -140,7 +140,7 @@ const LPBonusSheet = () => {
       >
         <Fragment>
           <LPBonusSheetHeader
-            nativeBalance={nativeAmountToclaimDisplay}
+            nativeBalance={nativeAmountToClaimDisplay}
             nativeDPYBalance={dpyNativeAmountDisplay}
           />
           <SheetActionButtonRow>

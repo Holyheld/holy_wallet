@@ -351,6 +351,15 @@ export const getTitle = ({ protocol, status, type }) => {
       }
     }
   }
+  if (type === TransactionTypes.claim) {
+    if (status === TransactionStatusTypes.received) {
+      if (protocol === ProtocolTypes.holy.name) {
+        return 'Claim';
+      } else {
+        return get(ProtocolTypes, `${protocol}.displayName`);
+      }
+    }
+  }
   return upperFirst(status);
 };
 

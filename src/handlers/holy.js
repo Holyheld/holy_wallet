@@ -1,7 +1,6 @@
 import { Contract } from '@ethersproject/contracts';
 import { captureException } from '@sentry/react-native';
 import BigNumber from 'bignumber.js';
-import { get } from 'lodash';
 import networkTypes from '../helpers/networkTypes';
 import {
   convertRawAmountToDecimalFormat,
@@ -32,6 +31,7 @@ import {
   WETH_TOKEN_ADDRESS,
 } from '../references/holy';
 import { web3Provider } from './web3';
+import { ethereumUtils } from '@holyheld-com/utils';
 import logger from 'logger';
 
 const ERC20SimpleABI = [
@@ -139,6 +139,7 @@ const refreshHolyEarlyLPBonus = () => async (dispatch, getState) => {
 
 export const refreshHHPrice = () => async (dispatch, getState) => {
   const { network, accountAddress } = getState().settings;
+  const { assets } = getState().data;
 
   const contractAddressHH = HH_V2_ADDRESS(network);
   const contractAddressWETH = WETH_TOKEN_ADDRESS(network);
@@ -178,9 +179,8 @@ export const refreshHHPrice = () => async (dispatch, getState) => {
     uniswapWETHAmount = uniswapWETHAmount.toString();
     logger.log('sushiswapWETHAmount: ', uniswapWETHAmount);
 
-    const { eth } = getState().data.genericAssets;
+    const ethNativePrice = ethereumUtils.getEthPriceUnit(assets);
 
-    const ethNativePrice = String(get(eth, 'price.value', 0));
     logger.log('ethNativePrice: ', ethNativePrice);
 
     const HHinWETHPrice = divide(uniswapWETHAmount, uniswapHHAmount);

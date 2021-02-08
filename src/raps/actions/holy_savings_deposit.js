@@ -1,10 +1,4 @@
-import {
-  arrayify,
-  concat,
-  hexlify,
-  hexValue,
-  hexZeroPad,
-} from '@ethersproject/bytes';
+import { arrayify, concat, hexlify, hexZeroPad } from '@ethersproject/bytes';
 import { Contract } from '@ethersproject/contracts';
 import { captureException } from '@sentry/react-native';
 import BigNumber from 'bignumber.js';
@@ -211,7 +205,7 @@ export const holySavingsDeposit = async (
       );
 
       const valueBytes = arrayify(
-        hexZeroPad(hexValue(+transferData.value), 32)
+        hexZeroPad(convertStringToHexWithPrefix(transferData.value), 32)
       );
       logger.log('[holy savings deposit] valueBytes:', hexlify(valueBytes));
 

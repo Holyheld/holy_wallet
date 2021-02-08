@@ -48,7 +48,7 @@ const holyClaim = async (wallet, currentRap, index, parameters) => {
   const {
     accountAddress,
     amount,
-    currency,
+    inputCurrency,
     network,
     selectedGasPrice,
   } = parameters;
@@ -91,7 +91,7 @@ const holyClaim = async (wallet, currentRap, index, parameters) => {
   logger.log('[holy claim] adding a new holy claim txn', claiming.hash);
   const newTransaction = {
     amount: amount,
-    asset: currency,
+    asset: inputCurrency,
     from: accountAddress,
     hash: claiming.hash,
     nonce: get(claiming, 'nonce'),

@@ -28,6 +28,15 @@ export const holySavingsWithdrawEstimation = async ({
   logger.log('input amount: ', inputAmount);
   logger.log('input currency: ', inputCurrency);
 
+  if (!inputAmount) {
+    logger.log(
+      'Empty input amount, estimate as basic value: ' +
+        ethUnits.basic_holy_savings_withdraw
+    );
+
+    return ethUnits.basic_holy_savings_withdraw;
+  }
+
   const { accountAddress, network } = store.getState().settings;
 
   const poolAddress = HOLY_SAVINGS_POOL_ADDRESS(network);

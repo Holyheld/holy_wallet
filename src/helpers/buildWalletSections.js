@@ -231,7 +231,7 @@ const withBalanceHolyEarlyBonusSection = (
     assets: holyBonusAssets,
     holyEarlyBonusContainer: true,
     show: earlyBonus.showPanel,
-    totalValue: earlyBonus.amount,
+    totalValue: earlyBonus.nativeAmountToClaim,
   };
   return section;
 };

@@ -8,7 +8,7 @@ export const estimateHolySavingsWithdrawCompound = async ({
   inputAmount,
   inputCurrency,
 }) => {
-  const estimationGas = holySavingsWithdrawEstimation({
+  const estimationGas = await holySavingsWithdrawEstimation({
     inputAmount,
     inputCurrency,
   });

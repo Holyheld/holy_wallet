@@ -1,10 +1,4 @@
-import {
-  arrayify,
-  concat,
-  hexlify,
-  hexValue,
-  hexZeroPad,
-} from '@ethersproject/bytes';
+import { arrayify, concat, hexlify, hexZeroPad } from '@ethersproject/bytes';
 import { Contract } from '@ethersproject/contracts';
 import { captureException } from '@sentry/react-native';
 import BigNumber from 'bignumber.js';
@@ -180,7 +174,7 @@ export const holySwap = async (wallet, currentRap, index, parameters) => {
       );
 
       const valueBytes = arrayify(
-        hexZeroPad(hexValue(+transferData.value), 32)
+        hexZeroPad(convertStringToHexWithPrefix(transferData.value), 32)
       );
       logger.log('[holy swap] valueBytes:', hexlify(valueBytes));
 

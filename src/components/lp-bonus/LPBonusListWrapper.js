@@ -12,8 +12,8 @@ export default function LPBonusListWrapper({ totalValue = '0' }) {
       <LPBonusListHeader
         isOpen={isLPBonusOpen}
         onPress={toggleOpenLPBonus}
-        savingsSumValue={totalValue}
         showSumValue
+        sumValue={totalValue}
       />
       <OpacityToggler
         isVisible={!isLPBonusOpen}

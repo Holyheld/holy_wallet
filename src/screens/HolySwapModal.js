@@ -103,7 +103,7 @@ const HolySwapModal = ({ defaultInputCurrency, testID }) => {
 
   const defaultGasLimit = ethUnits.basic_holy_savings_deposit;
 
-  const type = exchangeModalTypes.holyDeposit;
+  const type = exchangeModalTypes.swap;
 
   let USDcAsset = getUSDCAsset(network);
 
@@ -184,9 +184,12 @@ const HolySwapModal = ({ defaultInputCurrency, testID }) => {
   });
 
   const { outputAmountDisplay } = useMemo(() => {
-    const outputAmountDisplay = new BigNumber(outputAmount)
+    let outputAmountDisplay = new BigNumber(outputAmount)
       .decimalPlaces(6)
       .toString();
+    if (isNaN(outputAmountDisplay)) {
+      outputAmountDisplay = '';
+    }
     return {
       outputAmountDisplay,
     };
@@ -493,9 +496,12 @@ const HolySwapModal = ({ defaultInputCurrency, testID }) => {
               width="100%"
             >
               <ConfirmExchangeButton
-                disabled={!Number(inputAmount) || isDepositMax}
+                disabled={
+                  !Number(inputAmount) ||
+                  isDepositMax ||
+                  !(inputCurrency && outputCurrency)
+                }
                 isAuthorizing={isAuthorizing}
-                isDeposit={false}
                 isSufficientBalance={isSufficientBalance}
                 isSufficientGas={isSufficientGas}
                 isSufficientLiquidity={isSufficientLiquidity}
