@@ -1,10 +1,10 @@
 {
   "name": "holy_wallet",
-  "version": "1.2.41-1",
+  "version": "1.2.46-16",
   "private": true,
   "scripts": {
     "android": "adb uninstall com.holyheld || true && react-native run-android",
-    "android:bundle": "cd android && ./gradlew bundleRelease && open app/build/outputs/bundle/release/",
+    "android:bundle": "cd android && ./gradlew bundleRelease",
     "android:apk": "cd android && ./gradlew assembleRelease && (adb uninstall com.holyheld || true) && adb install app/build/outputs/apk/release/app-release.apk",
     "clean": "react-native clean-project-auto",
     "detox:ios": "detox build -c ios.sim.debug && detox test -R 1 -c ios.sim.debug",
