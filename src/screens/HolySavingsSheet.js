@@ -18,13 +18,7 @@ import {
   SheetActionButtonRow,
   SlackSheet,
 } from '../components/sheet';
-import {
-  convertAmountToNativeAmount,
-  divide,
-  greaterThan,
-  multiply,
-} from '../helpers/utilities';
-import { useUSDcTokenPrice } from '../hooks/useGenericAssets';
+import { divide, greaterThan, multiply } from '../helpers/utilities';
 import { useHolySavings } from '../hooks/useHolyData';
 import { useNavigation } from '../navigation/Navigation';
 import { getUSDCAsset } from '../references/holy';
@@ -53,21 +47,17 @@ const HolySavingsSheet = () => {
   const { network } = useAccountSettings();
 
   const { balanceUSDC, apy, dpy } = useHolySavings();
-  const usdcPrice = useUSDcTokenPrice();
 
   const { balanceNative, ildBalanceNative, ildBalanceUSDC } = useMemo(() => {
-    const balanceNative = convertAmountToNativeAmount(balanceUSDC, usdcPrice);
+    const balanceNative = balanceUSDC;
     const ildBalanceUSDC = multiply(balanceUSDC, divide(dpy, '100'));
-    const ildBalanceNative = convertAmountToNativeAmount(
-      ildBalanceUSDC,
-      usdcPrice
-    );
+    const ildBalanceNative = ildBalanceUSDC;
     return {
       balanceNative,
       ildBalanceNative,
       ildBalanceUSDC,
     };
-  }, [balanceUSDC, dpy, usdcPrice]);
+  }, [balanceUSDC, dpy]);
 
   const { dpyNative } = useMemo(() => {
     const dpyNative = divide(

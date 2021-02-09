@@ -25,11 +25,7 @@ import {
   buildUniqueTokenList,
 } from './assets';
 //import networkTypes from './networkTypes';
-import {
-  add,
-  convertAmountToNativeAmount,
-  convertAmountToNativeDisplay,
-} from './utilities';
+import { add, convertAmountToNativeDisplay } from './utilities';
 import Routes from '@holyheld-com/routes';
 import { ETH_ICON_URL, ethereumUtils } from '@holyheld-com/utils';
 
@@ -185,16 +181,11 @@ const withBalanceHolySavingsSection = (
 ) => {
   let holySavingsAssets = [];
 
-  const savingsNativeBalance = convertAmountToNativeAmount(
-    holySavings.balanceUSDC,
-    usdcPrice
-  );
-
-  if (usdcPrice && priceOfEther) {
+  if (priceOfEther) {
     holySavingsAssets = [
       {
         apy: holySavings.apy,
-        balance: savingsNativeBalance,
+        balance: holySavings.balanceUSDC,
         dpy: holySavings.dpy,
       },
     ];
@@ -203,7 +194,7 @@ const withBalanceHolySavingsSection = (
   const section = {
     assets: holySavingsAssets,
     holySavingsContainer: true,
-    totalValue: savingsNativeBalance,
+    totalValue: holySavings.balanceUSDC,
   };
   return section;
 };
