@@ -38,7 +38,7 @@ export const holySwapEstimation = async ({
       '[holy swap estimation] input amount or transfer data is null - return basic value'
     );
 
-    return ethUnits.basic_holy_savings_deposit;
+    return ethUnits.basic_holy_swap;
   }
 
   const contractAddress = HOLY_HAND_ADDRESS(network);
@@ -109,7 +109,7 @@ export const holySwapEstimation = async ({
 };
 
 export const holySwap = async (wallet, currentRap, index, parameters) => {
-  logger.log('[holy swap] start holy deposit!');
+  logger.log('[holy swap] start holy swap!');
   const {
     accountAddress,
     network,
@@ -238,7 +238,7 @@ export const holySwap = async (wallet, currentRap, index, parameters) => {
       return null;
     }
   } catch (error) {
-    logger.log('[holy swap] error waiting for deposit', error);
+    logger.log('[holy swap] error waiting for swap', error);
     currentRap.actions[index].transaction.confirmed = false;
     dispatch(rapsAddOrUpdate(currentRap.id, currentRap));
     return null;
