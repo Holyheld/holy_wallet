@@ -4,6 +4,7 @@ import { InteractionManager } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { refreshHoly } from '../handlers/holy';
 import { explorerInit } from '../redux/explorer';
+import { getInitialGasPrices } from '../redux/gas';
 import { uniqueTokensRefreshState } from '../redux/uniqueTokens';
 import { uniswapGetAllExchanges, uniswapPairsInit } from '../redux/uniswap';
 import logger from 'logger';
@@ -32,6 +33,11 @@ export default function useInitializeAccountData() {
       InteractionManager.runAfterInteractions(async () => {
         logger.sentry('Initialize uniqueTokens');
         await dispatch(uniqueTokensRefreshState());
+      });
+
+      InteractionManager.runAfterInteractions(async () => {
+        logger.sentry('Initialize first gas prices');
+        await dispatch(getInitialGasPrices());
       });
     } catch (error) {
       logger.sentry('Error initializing account data');

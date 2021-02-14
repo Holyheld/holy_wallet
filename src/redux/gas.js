@@ -56,12 +56,67 @@ const getDefaultTxFees = () => (dispatch, getState) => {
   };
 };
 
+const getGasPrices = async existingGasPrice => {
+  try {
+    let adjustedGasPrices;
+    let source = 'etherscan';
+    try {
+      // Use etherscan as our Gas Price Oracle
+      const {
+        data: { result: etherscanGasPrices },
+      } = await etherscanGetGasPrices();
+
+      const priceData = {
+        average: Number(etherscanGasPrices.ProposeGasPrice),
+        fast: Number(etherscanGasPrices.FastGasPrice),
+        safeLow: Number(etherscanGasPrices.SafeGasPrice),
+      };
+      // Add gas estimates
+      adjustedGasPrices = await etherscanGetGasEstimates(priceData);
+    } catch (e) {
+      logger.log('falling back to eth gas station', e);
+      source = 'ethGasStation';
+      // Fallback to ETHGasStation if Etherscan fails
+      const { data: ethGasStationPrices } = await ethGasStationGetGasPrices();
+      // Only bumping for ETHGasStation
+      adjustedGasPrices = bumpGasPrices(ethGasStationPrices);
+    }
+
+    let gasPrices = parseGasPrices(adjustedGasPrices, source);
+    if (existingGasPrice[CUSTOM] !== null) {
+      // Preserve custom values while updating prices
+      gasPrices[CUSTOM] = existingGasPrice[CUSTOM];
+    }
+
+    return gasPrices;
+  } catch (error) {
+    captureException(error);
+    throw error;
+  }
+};
+
+export const getInitialGasPrices = () => async (dispatch, getState) => {
+  try {
+    const { gasPrices: oldGasPrices } = getState().gas;
+    const gasPrices = await getGasPrices(oldGasPrices);
+    dispatch({
+      payload: {
+        gasPrices,
+      },
+      type: GAS_PRICES_SUCCESS,
+    });
+  } catch (e) {
+    logger.log("can't load initial gas price");
+  }
+};
+
 export const gasPricesStartPolling = () => async (dispatch, getState) => {
   const { gasPrices } = getState().gas;
 
   const { fallbackGasPrices, selectedGasPrice, txFees } = dispatch(
     getDefaultTxFees()
   );
+
   // We only set the default if we don't have any price
   // The previous price will be always more accurate than our default values!
   if (isEmpty(gasPrices)) {
@@ -75,67 +130,22 @@ export const gasPricesStartPolling = () => async (dispatch, getState) => {
     });
   }
 
-  const getGasPrices = () =>
-    new Promise(async (fetchResolve, fetchReject) => {
-      try {
-        const { gasPrices: existingGasPrice } = getState().gas;
-
-        let adjustedGasPrices;
-        let source = 'etherscan';
-        try {
-          // Use etherscan as our Gas Price Oracle
-          const {
-            data: { result: etherscanGasPrices },
-          } = await etherscanGetGasPrices();
-
-          const priceData = {
-            average: Number(etherscanGasPrices.ProposeGasPrice),
-            fast: Number(etherscanGasPrices.FastGasPrice),
-            safeLow: Number(etherscanGasPrices.SafeGasPrice),
-          };
-          // Add gas estimates
-          adjustedGasPrices = await etherscanGetGasEstimates(priceData);
-        } catch (e) {
-          logger.log('falling back to eth gas station', e);
-          source = 'ethGasStation';
-          // Fallback to ETHGasStation if Etherscan fails
-          const {
-            data: ethGasStationPrices,
-          } = await ethGasStationGetGasPrices();
-          // Only bumping for ETHGasStation
-          adjustedGasPrices = bumpGasPrices(ethGasStationPrices);
-        }
-
-        let gasPrices = parseGasPrices(adjustedGasPrices, source);
-        if (existingGasPrice[CUSTOM] !== null) {
-          // Preserve custom values while updating prices
-          gasPrices[CUSTOM] = existingGasPrice[CUSTOM];
-        }
-
-        dispatch({
-          payload: {
-            gasPrices,
-          },
-          type: GAS_PRICES_SUCCESS,
-        });
-
-        fetchResolve(true);
-      } catch (error) {
-        dispatch({
-          payload: fallbackGasPrices,
-          type: GAS_PRICES_FAILURE,
-        });
-        captureException(error);
-        fetchReject(error);
-      }
-    });
-
   const watchGasPrices = async () => {
     gasPricesHandle && clearTimeout(gasPricesHandle);
     try {
-      await getGasPrices();
-      // eslint-disable-next-line no-empty
+      const { gasPrices: oldGasPrices } = getState().gas;
+      const gasPrices = await getGasPrices(oldGasPrices);
+      dispatch({
+        payload: {
+          gasPrices,
+        },
+        type: GAS_PRICES_SUCCESS,
+      });
     } catch (e) {
+      dispatch({
+        payload: fallbackGasPrices,
+        type: GAS_PRICES_FAILURE,
+      });
     } finally {
       gasPricesHandle = setTimeout(watchGasPrices, 15000); // 15 secs
     }
