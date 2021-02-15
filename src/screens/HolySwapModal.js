@@ -334,11 +334,12 @@ const HolySwapModal = ({ defaultInputCurrency, testID }) => {
   // Update input amount when max is set and the max input balance changed
   useEffect(() => {
     if (isMax) {
+      logger.log('updating input amount when max is set to true');
       let maxBalance = maxInputBalance;
       inputFieldRef?.current?.blur();
       updateInputAmount(maxBalance, true);
     }
-  }, [inputFieldRef, isMax, maxInputBalance, updateInputAmount]);
+  }, [inputFieldRef, isMax, maxInputBalance]);
 
   const handleSubmit = useCallback(() => {
     backgroundTask.execute(async () => {
