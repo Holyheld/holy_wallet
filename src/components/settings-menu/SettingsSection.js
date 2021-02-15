@@ -3,7 +3,7 @@ import React, { Fragment, useCallback, useMemo } from 'react';
 import { Linking, NativeModules, ScrollView, Share } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import styled from 'styled-components/primitives';
-import { REVIEW_ANDROID } from '../../config/experimental';
+import { REVIEW_AVAILABLE } from '../../config/experimental';
 import useExperimentalFlag from '../../config/experimentalHooks';
 // import { supportedLanguages } from '../../languages';
 import AppVersionStamp from '../AppVersionStamp';
@@ -120,7 +120,7 @@ export default function SettingsSection({
   onPressNetwork,
   onPressShowSecret,
 }) {
-  const isReviewAvailable = useExperimentalFlag(REVIEW_ANDROID) || ios;
+  const isReviewAvailable = useExperimentalFlag(REVIEW_AVAILABLE);
 
   const { wallets } = useWallets();
   const { /*language,*/ nativeCurrency, network } = useAccountSettings();
