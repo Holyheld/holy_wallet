@@ -37,9 +37,8 @@ export default function useHolySwapInputs({
       setInputAmount(newInputAmount);
       setIsMax(!!newInputAmount && newIsMax);
 
-      if (inputCurrency && outputCurrency) {
+      if (inputCurrency) {
         logger.log('inputCurrency:', inputCurrency);
-        logger.log('outputCurrency:', outputCurrency);
         logger.log('newInputAmount:', newInputAmount);
 
         const newIsSufficientBalance =
@@ -62,34 +61,36 @@ export default function useHolySwapInputs({
           );
           setNativeAmount(newNativeAmount);
 
-          const amountInWEI = convertAmountToRawAmount(
-            newInputAmount,
-            inputCurrency.decimals
-          );
-          logger.log('amountInWEI:', amountInWEI);
-
-          setTransferError(null);
-          const transferData = await getTransferData(
-            outputCurrency.address,
-            inputCurrency.address,
-            amountInWEI,
-            true,
-            network
-          );
-
-          if (transferData.data && !transferData.error) {
-            const newOutputAmount = convertRawAmountToDecimalFormat(
-              transferData.buyAmount,
-              outputCurrency.decimals
+          if (outputCurrency) {
+            const amountInWEI = convertAmountToRawAmount(
+              newInputAmount,
+              inputCurrency.decimals
             );
-            setTransferData(transferData);
-            setOutputAmount(newOutputAmount);
-            setIsSufficientLiquidity(true);
-          } else {
-            if ('INSUFFICIENT_ASSET_LIQUIDITY' === transferData.error) {
-              setIsSufficientLiquidity(false);
+            logger.log('amountInWEI:', amountInWEI);
+
+            setTransferError(null);
+            const transferData = await getTransferData(
+              outputCurrency.address,
+              inputCurrency.address,
+              amountInWEI,
+              true,
+              network
+            );
+
+            if (transferData.data && !transferData.error) {
+              const newOutputAmount = convertRawAmountToDecimalFormat(
+                transferData.buyAmount,
+                outputCurrency.decimals
+              );
+              setTransferData(transferData);
+              setOutputAmount(newOutputAmount);
+              setIsSufficientLiquidity(true);
             } else {
-              setTransferError(transferData.error);
+              if ('INSUFFICIENT_ASSET_LIQUIDITY' === transferData.error) {
+                setIsSufficientLiquidity(false);
+              } else {
+                setTransferError(transferData.error);
+              }
             }
           }
         } else {
@@ -110,9 +111,8 @@ export default function useHolySwapInputs({
       setNativeAmount(newNativeAmount);
       setIsMax(false);
 
-      if (inputCurrency && outputCurrency) {
+      if (inputCurrency) {
         logger.log('inputCurrency:', inputCurrency);
-        logger.log('outputCurrency:', outputCurrency);
         logger.log('newNativeAmount:', newNativeAmount);
 
         if (newNativeAmount && !isZero(newNativeAmount)) {
@@ -130,34 +130,38 @@ export default function useHolySwapInputs({
             greaterThanOrEqualTo(maxInputBalance, newInputAmount);
           setIsSufficientBalance(newIsSufficientBalance);
 
-          const amountInWEI = convertAmountToRawAmount(
-            newInputAmount,
-            inputCurrency.decimals
-          );
-          logger.log('amountInWEI:', amountInWEI);
+          if (outputCurrency) {
+            logger.log('outputCurrency:', outputCurrency);
 
-          setTransferError(null);
-          const transferData = await getTransferData(
-            outputCurrency.address,
-            inputCurrency.address,
-            amountInWEI,
-            true,
-            network
-          );
-
-          if (transferData.data && !transferData.error) {
-            const newOutputAmount = convertRawAmountToDecimalFormat(
-              transferData.buyAmount,
-              outputCurrency.decimals
+            const amountInWEI = convertAmountToRawAmount(
+              newInputAmount,
+              inputCurrency.decimals
             );
-            setTransferData(transferData);
-            setOutputAmount(newOutputAmount);
-            setIsSufficientLiquidity(true);
-          } else {
-            if ('INSUFFICIENT_ASSET_LIQUIDITY' === transferData.error) {
-              setIsSufficientLiquidity(false);
+            logger.log('amountInWEI:', amountInWEI);
+
+            setTransferError(null);
+            const transferData = await getTransferData(
+              outputCurrency.address,
+              inputCurrency.address,
+              amountInWEI,
+              true,
+              network
+            );
+
+            if (transferData.data && !transferData.error) {
+              const newOutputAmount = convertRawAmountToDecimalFormat(
+                transferData.buyAmount,
+                outputCurrency.decimals
+              );
+              setTransferData(transferData);
+              setOutputAmount(newOutputAmount);
+              setIsSufficientLiquidity(true);
             } else {
-              setTransferError(transferData.error);
+              if ('INSUFFICIENT_ASSET_LIQUIDITY' === transferData.error) {
+                setIsSufficientLiquidity(false);
+              } else {
+                setTransferError(transferData.error);
+              }
             }
           }
         } else {
