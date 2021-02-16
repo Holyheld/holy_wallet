@@ -291,6 +291,21 @@ export const getTransferData = async (
       value = json.value;
       buyAmount = json.buyAmount;
       sellAmount = json.sellAmount;
+
+      if (!isInputAmount) {
+        // in case of buyAmount we have to executethe second request with proper sellAmount
+        // coz 0x has strange behavior in case of buyAmount
+        logger.log('Performing a second request with sellAmount...');
+        const innerResult = await getTransferData(
+          buyTokenAddress,
+          sellTokenAddress,
+          sellAmount,
+          true,
+          network
+        );
+        logger.log('Returning inner result...');
+        return innerResult;
+      }
     }
   } catch (err) {
     logger.warn(`Error during 0x api call: ${err}`);
