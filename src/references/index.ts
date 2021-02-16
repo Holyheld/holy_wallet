@@ -69,7 +69,7 @@ export const AddCashCurrencyInfo = {
 export const DefaultUniswapFavorites = {
   mainnet: [
     '0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48', // USDC
-    '0x3FA729B4548beCBAd4EaB6EF18413470e6D5324C', // HH
+    '0x3fa729b4548becbad4eab6ef18413470e6d5324c', // HH
   ],
   rinkeby: [
     // Ethereum
