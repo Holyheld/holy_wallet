@@ -36,7 +36,7 @@ import AssetTypes from '../helpers/assetTypes';
 import DirectionTypes from '../helpers/transactionDirectionTypes';
 import TransactionStatusTypes from '../helpers/transactionStatusTypes';
 import TransactionTypes from '../helpers/transactionTypes';
-import { divide, isZero } from '../helpers/utilities';
+import { divide, greaterThan, isZero, multiply } from '../helpers/utilities';
 import WalletTypes from '../helpers/walletTypes';
 import { Navigation } from '../navigation';
 import { triggerOnSwipeLayout } from '../navigation/onNavigationStateChange';
@@ -48,10 +48,12 @@ import {
   parseTransactions,
 } from '../parsers/transactions';
 import { shitcoins } from '../references';
+import { getHHAsset } from '../references/holy';
 import { ethereumUtils, isLowerCaseMatch } from '../utils';
 
 /* eslint-disable-next-line import/no-cycle */
 import { addCashUpdatePurchases } from './addCash';
+import { updateHHNativePrice } from './holy';
 /* eslint-disable-next-line import/no-cycle */
 import { uniqueTokensRefreshState } from './uniqueTokens';
 import { uniswapUpdateLiquidityTokens } from './uniswapLiquidity';
@@ -260,6 +262,31 @@ export const addressAssetsReceived = (
   const { accountAddress, network } = getState().settings;
   const { uniqueTokens } = getState().uniqueTokens;
   const payload = values(get(message, 'payload.assets', {}));
+
+  const ethAsset = payload.find(el => el?.asset?.asset_code === 'eth');
+  const ethPrice = get(ethAsset, 'asset.price.value', '0');
+
+  const HHAssetData = getHHAsset(network);
+
+  const holyInd = payload.findIndex(
+    el => el?.asset?.symbol === HHAssetData.symbol && !el?.asset?.price
+  );
+
+  if (holyInd !== -1 && payload[holyInd].asset && greaterThan(ethPrice, '0')) {
+    const { inEth: HHInWETHPrice } = getState().holy.prices.HH;
+
+    const hhNativePrice = multiply(HHInWETHPrice, ethPrice);
+
+    payload[holyInd].asset.price = {
+      changed_at: 0,
+      relative_change_24h: 0,
+      value: hhNativePrice,
+    };
+
+    logger.log('HHNativePrice: ', hhNativePrice);
+    dispatch(updateHHNativePrice(hhNativePrice));
+  }
+
   let assets = filter(
     payload,
     asset =>
@@ -420,7 +447,7 @@ export const assetPricesReceived = message => dispatch => {
 };
 
 export const assetPricesChanged = message => (dispatch, getState) => {
-  const price = get(message, 'payload.prices[0]');
+  const price = get(message, 'payload.prices[0].price');
   const assetAddress = get(message, 'meta.asset_code');
   if (isNil(price) || isNil(assetAddress)) return;
   const { genericAssets } = getState().data;

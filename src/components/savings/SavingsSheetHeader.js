@@ -4,7 +4,7 @@ import { Centered, RowWithMargins } from '../layout';
 import { DollarFigure, Text } from '../text';
 import { colors, padding } from '@holyheld-com/styles';
 
-const SavingsSheetHeader = ({ balance, ildBalance }) => (
+const SavingsSheetHeader = ({ balance, ildBalance, nativeCurrencySymbol }) => (
   <Centered css={padding(17, 0, 8)} direction="column">
     <Text
       color={colors.textColorMuted}
@@ -15,7 +15,11 @@ const SavingsSheetHeader = ({ balance, ildBalance }) => (
     >
       Savings
     </Text>
-    <DollarFigure currencySymbol="$" decimals={2} value={balance} />
+    <DollarFigure
+      currencySymbol={nativeCurrencySymbol}
+      decimals={2}
+      value={balance}
+    />
     <RowWithMargins align="center" margin={4} marginTop={1}>
       <Text
         align="center"
@@ -25,7 +29,7 @@ const SavingsSheetHeader = ({ balance, ildBalance }) => (
         size="large"
         weight="semibold"
       >
-        􀁍 ${ildBalance}
+        􀁍 {`${nativeCurrencySymbol}${ildBalance}`}
       </Text>
     </RowWithMargins>
   </Centered>

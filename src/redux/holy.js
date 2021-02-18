@@ -11,7 +11,8 @@ const HOLY_UPDATE_EARLY_LP_BONUS_SHOW = 'holy/HOLY_UPDATE_EARLY_LP_BONUS_SHOW';
 const HOLY_UPDATE_BONUS_RATE = 'holy/HOLY_UPDATE_BONUS_RATE';
 const HOLY_UPDATE_BONUS_FULL_CAP = 'holy/HOLY_UPDATE_BONUS_FULL_CAP';
 const HOLY_UPDATE_BONUS_DPY = 'holy/HOLY_UPDATE_BONUS_DPY';
-const PRICE_HH_UPDATE = 'holy/PRICE_HH_UPDATE';
+const PRICE_HH_IN_WETH_UPDATE = 'holy/PRICE_HH_IN_WETH_UPDATE';
+const PRICE_HH_NATIVE_UPDATE = 'holy/PRICE_HH_NATIVE_UPDATE';
 
 // -- Actions --------------------------------------------------------------- //
 
@@ -64,13 +65,17 @@ export const holyUpdateBonusDPY = dpy => dispatch => {
   });
 };
 
-export const updateHHPrice = (nativePrice, priceInEth) => dispatch => {
+export const updateHHInWETHPrice = priceInEth => dispatch => {
   dispatch({
-    payload: {
-      inEth: priceInEth,
-      inNative: nativePrice,
-    },
-    type: PRICE_HH_UPDATE,
+    payload: priceInEth,
+    type: PRICE_HH_IN_WETH_UPDATE,
+  });
+};
+
+export const updateHHNativePrice = nativePrice => dispatch => {
+  dispatch({
+    payload: nativePrice,
+    type: PRICE_HH_NATIVE_UPDATE,
   });
 };
 
@@ -85,8 +90,8 @@ export const INITIAL_HOLY_STATE = {
   },
   prices: {
     HH: {
-      inEth: '1',
-      inNative: '1',
+      inEth: '0',
+      inNative: '0',
     },
     USDC: {
       inEth: '1',
@@ -134,8 +139,11 @@ export default (state = INITIAL_HOLY_STATE, action) =>
       case HOLY_UPDATE_BONUS_FULL_CAP:
         draft.earlyLPBonus.fullCap = action.payload;
         break;
-      case PRICE_HH_UPDATE:
-        draft.prices.HH = action.payload;
+      case PRICE_HH_NATIVE_UPDATE:
+        draft.prices.HH.inNative = action.payload;
+        break;
+      case PRICE_HH_IN_WETH_UPDATE:
+        draft.prices.HH.inEth = action.payload;
         break;
       case HOLY_UPDATE_BONUS_DPY:
         draft.earlyLPBonus.dpy = action.payload;

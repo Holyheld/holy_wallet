@@ -2,7 +2,11 @@ import { captureException } from '@sentry/react-native';
 import delay from 'delay';
 import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
-import { refreshHoly } from '../handlers/holy';
+import {
+  refreshHHinWETHPrice,
+  refreshHHNativePrice,
+  refreshHoly,
+} from '../handlers/holy';
 import NetworkTypes from '../helpers/networkTypes';
 import { explorerInit } from '../redux/explorer';
 import { uniqueTokensRefreshState } from '../redux/uniqueTokens';
@@ -20,6 +24,7 @@ export default function useRefreshAccountData() {
 
   const refreshAccountData = useCallback(async () => {
     const getHoly = dispatch(refreshHoly());
+    const getHHNativePrice = dispatch(refreshHHNativePrice());
 
     // Refresh unique tokens for Rinkeby
     if (network === NetworkTypes.rinkeby) {
@@ -29,10 +34,12 @@ export default function useRefreshAccountData() {
 
     // Nothing to refresh for other testnets
     if (network !== NetworkTypes.mainnet) {
-      return Promise.all([delay(1250), getHoly]);
+      await dispatch(refreshHHinWETHPrice());
+      return Promise.all([delay(1250), getHoly, getHHNativePrice]);
     }
 
     try {
+      await dispatch(refreshHHinWETHPrice());
       const getWalletNames = dispatch(fetchWalletNames());
       const getUniswapLiquidity = dispatch(uniswapUpdateLiquidityState());
       const getUniqueTokens = dispatch(uniqueTokensRefreshState());
@@ -43,6 +50,7 @@ export default function useRefreshAccountData() {
         getWalletNames,
         getUniswapLiquidity,
         getUniqueTokens,
+        getHHNativePrice,
         refetchSavings(true),
         explorer,
         getHoly,

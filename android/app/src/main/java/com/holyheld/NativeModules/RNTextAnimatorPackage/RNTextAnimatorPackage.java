@@ -91,7 +91,7 @@ public class RNTextAnimatorPackage implements ReactPackage {
             public void animate(final int viewId, @Nonnull ReadableMap config) {
                 double initialValue = config.getDouble("initialValue");
                 double stepPerDay = config.getDouble("stepPerDay");
-                boolean isStable = config.getBoolean("isStable");
+                boolean symbolAligmentLeft = config.getBoolean("symbolAligmentLeft");
                 String color = config.getString("color");
                 String baseColor = config.getString("baseColor");
                 String symbol = config.getString("symbol");
@@ -111,7 +111,7 @@ public class RNTextAnimatorPackage implements ReactPackage {
                         ReactEditText view = idsToViews.get(viewId);
                         long diff = System.currentTimeMillis() - date;
                         String text = padRight(String.valueOf((float) initialValue + (diff * stepPerDay) / 24 / 60 / 60 / 1000).replace(",", "."), 12).substring(0, 12);
-                        String parsedText = (isStable ? ('$' + text) : (text + ' ' + symbol)) + "      ";
+                        String parsedText = (symbolAligmentLeft ? (symbol + text) : (text + ' ' + symbol)) + "      ";
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                             view.setFontFeatureSettings("'tnum'");
                         }

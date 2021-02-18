@@ -25,7 +25,11 @@ import {
   buildUniqueTokenList,
 } from './assets';
 //import networkTypes from './networkTypes';
-import { add, convertAmountToNativeDisplay } from './utilities';
+import {
+  add,
+  convertAmountToNativeAmount,
+  convertAmountToNativeDisplay,
+} from './utilities';
 import Routes from '@holyheld-com/routes';
 import { ETH_ICON_URL, ethereumUtils } from '@holyheld-com/utils';
 
@@ -177,15 +181,22 @@ const withEthPrice = allAssets => {
 const withBalanceHolySavingsSection = (
   usdcPrice,
   holySavings,
-  priceOfEther
+  priceOfEther,
+  nativeCurrency
 ) => {
   let holySavingsAssets = [];
+
+  let balance = holySavings.balanceUSDC;
+
+  if (nativeCurrency !== 'USD') {
+    balance = convertAmountToNativeAmount(balance, usdcPrice);
+  }
 
   if (priceOfEther) {
     holySavingsAssets = [
       {
         apy: holySavings.apy,
-        balance: holySavings.balanceUSDC,
+        balance: balance,
         dpy: holySavings.dpy,
       },
     ];
@@ -194,7 +205,7 @@ const withBalanceHolySavingsSection = (
   const section = {
     assets: holySavingsAssets,
     holySavingsContainer: true,
-    totalValue: holySavings.balanceUSDC,
+    totalValue: balance,
   };
   return section;
 };
@@ -530,7 +541,12 @@ const ethPriceSelector = createSelector([allAssetsSelector], withEthPrice);
 // );
 
 const balanceHolySavingsSelector = createSelector(
-  [usdcPriceSelector, holySavingsSelector, ethPriceSelector],
+  [
+    usdcPriceSelector,
+    holySavingsSelector,
+    ethPriceSelector,
+    nativeCurrencySelector,
+  ],
   withBalanceHolySavingsSection
 );
 

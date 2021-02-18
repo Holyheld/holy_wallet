@@ -34,6 +34,7 @@ const SavingsListRowAnimatedNumber = ({
   interval,
   steps,
   symbol,
+  symbolAligmentLeft,
   value,
 }) => {
   const formatter = useCallback(
@@ -57,6 +58,7 @@ const SavingsListRowAnimatedNumber = ({
         isSymbolStablecoin: isSymbolStablecoin(symbol),
         stepPerDay: Number(value) - Number(initialValue),
         symbol: symbol,
+        symbolAligmentLeft: symbolAligmentLeft,
       }}
       formatter={formatter}
       initialValue={Number(initialValue)}
@@ -79,6 +81,7 @@ SavingsListRowAnimatedNumber.propTypes = {
   interval: PropTypes.number,
   steps: PropTypes.number,
   symbol: PropTypes.string,
+  symbolAligmentLeft: PropTypes.bool,
   value: PropTypes.string,
 };
 

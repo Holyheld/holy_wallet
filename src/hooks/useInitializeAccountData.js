@@ -2,7 +2,11 @@ import { captureException } from '@sentry/react-native';
 import { useCallback } from 'react';
 import { InteractionManager } from 'react-native';
 import { useDispatch } from 'react-redux';
-import { refreshHoly } from '../handlers/holy';
+import {
+  refreshHHinWETHPrice,
+  refreshHHNativePrice,
+  refreshHoly,
+} from '../handlers/holy';
 import { explorerInit } from '../redux/explorer';
 import { getInitialGasPrices } from '../redux/gas';
 import { uniqueTokensRefreshState } from '../redux/uniqueTokens';
@@ -14,14 +18,18 @@ export default function useInitializeAccountData() {
 
   const initializeAccountData = useCallback(async () => {
     try {
-      InteractionManager.runAfterInteractions(() => {
-        logger.sentry('Initialize account data');
-        dispatch(explorerInit());
+      InteractionManager.runAfterInteractions(async () => {
+        logger.sentry('Initialize holy data');
+        dispatch(refreshHoly());
       });
 
       InteractionManager.runAfterInteractions(async () => {
-        logger.sentry('Initialize holy data');
-        await dispatch(refreshHoly());
+        logger.sentry('Initialize HH in ETH price');
+        await dispatch(refreshHHinWETHPrice());
+        logger.sentry('Initialize HH native price');
+        dispatch(refreshHHNativePrice());
+        logger.sentry('Initialize account data');
+        dispatch(explorerInit());
       });
 
       InteractionManager.runAfterInteractions(async () => {

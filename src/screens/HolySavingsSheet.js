@@ -18,7 +18,13 @@ import {
   SheetActionButtonRow,
   SlackSheet,
 } from '../components/sheet';
-import { divide, greaterThan, multiply } from '../helpers/utilities';
+import {
+  convertAmountToNativeAmount,
+  divide,
+  greaterThan,
+  multiply,
+} from '../helpers/utilities';
+import { useUSDcTokenPrice } from '../hooks/useGenericAssets';
 import { useHolySavings } from '../hooks/useHolyData';
 import { useNavigation } from '../navigation/Navigation';
 import { getUSDCAsset } from '../references/holy';
@@ -44,20 +50,30 @@ const HolySavingsSheet = () => {
   const { navigate } = useNavigation();
   const insets = useSafeArea();
   const { isReadOnlyWallet } = useWallets();
-  const { network } = useAccountSettings();
+  const {
+    network,
+    nativeCurrency,
+    nativeCurrencySymbol,
+  } = useAccountSettings();
 
   const { balanceUSDC, apy, dpy } = useHolySavings();
+  const usdcPrice = useUSDcTokenPrice();
 
   const { balanceNative, ildBalanceNative, ildBalanceUSDC } = useMemo(() => {
-    const balanceNative = balanceUSDC;
     const ildBalanceUSDC = multiply(balanceUSDC, divide(dpy, '100'));
-    const ildBalanceNative = ildBalanceUSDC;
+
+    let balanceNative = balanceUSDC;
+    let ildBalanceNative = ildBalanceUSDC;
+    if (nativeCurrency !== 'USD') {
+      balanceNative = convertAmountToNativeAmount(balanceUSDC, usdcPrice);
+      ildBalanceNative = convertAmountToNativeAmount(ildBalanceUSDC, usdcPrice);
+    }
     return {
       balanceNative,
       ildBalanceNative,
       ildBalanceUSDC,
     };
-  }, [balanceUSDC, dpy]);
+  }, [balanceUSDC, dpy, nativeCurrency, usdcPrice]);
 
   const { dpyNative } = useMemo(() => {
     const dpyNative = divide(
@@ -95,7 +111,7 @@ const HolySavingsSheet = () => {
     };
   }, [apy, balanceNative, balanceUSDC, ildBalanceNative, ildBalanceUSDC]);
 
-  const usdcAsset = getUSDCAsset(network);
+  const usdcAssetStatic = getUSDCAsset(network);
 
   const onWithdraw = useCallback(() => {
     if (!isReadOnlyWallet) {
@@ -149,6 +165,7 @@ const HolySavingsSheet = () => {
             <SavingsSheetHeader
               balance={balanceNativeDisplay}
               ildBalance={ildBalanceNativeDisplay}
+              nativeCurrencySymbol={nativeCurrencySymbol}
             />
             <SheetActionButtonRow>
               <SheetActionButton
@@ -179,7 +196,7 @@ const HolySavingsSheet = () => {
                 additionalShare={ildBalanceUSDCDisplay}
                 apy={displayedApy}
                 balance={balanceUSDCDisplay}
-                symbol={usdcAsset.symbol}
+                symbol={usdcAssetStatic.symbol}
               />
             </Column>
 

@@ -1,4 +1,5 @@
 import BigNumber from 'bignumber.js';
+import { get } from 'lodash';
 import PropTypes from 'prop-types';
 import React, { useCallback, useMemo } from 'react';
 import { StyleSheet } from 'react-native';
@@ -6,7 +7,8 @@ import { StyleSheet } from 'react-native';
 import styled from 'styled-components/primitives';
 import { add, greaterThan, multiply } from '../../helpers/utilities';
 import Routes from '../../navigation/routesNames';
-import { getUSDCAsset } from '../../references/holy';
+import supportedNativeCurrencies from '../../references/native-currencies.json';
+
 import {
   SavingsSheetEmptyHeight,
   SavingsSheetHeight,
@@ -62,11 +64,20 @@ const HolySavingsListRow = ({ totalBalance, savings }) => {
   const { width: deviceWidth } = useDimensions();
   const { navigate } = useNavigation();
 
-  const { network } = useAccountSettings();
+  const { nativeCurrency, nativeCurrencySymbol } = useAccountSettings();
 
   const { apy, dpy } = savings;
 
-  const usdcAsset = getUSDCAsset(network);
+  const { symbolAligmentLeft } = useMemo(() => {
+    let symbolAligmentLeft = true;
+    const nativeSelected = get(supportedNativeCurrencies, `${nativeCurrency}`);
+    if (nativeSelected && nativeSelected.alignment !== 'left') {
+      symbolAligmentLeft = false;
+    }
+    return {
+      symbolAligmentLeft,
+    };
+  }, [nativeCurrency]);
 
   const { isEmpty, displayedApy } = useMemo(() => {
     const isEmpty = !greaterThan(totalBalance, '0');
@@ -128,7 +139,7 @@ const HolySavingsListRow = ({ totalBalance, savings }) => {
                     size="lmedium"
                     weight="bold"
                   >
-                    $0.00
+                    {nativeCurrencySymbol}0.00
                   </Text>
                   <ButtonPressAnimation
                     onPress={NOOP}
@@ -159,7 +170,8 @@ const HolySavingsListRow = ({ totalBalance, savings }) => {
                 <SavingsListRowAnimatedNumber
                   initialValue={totalBalance}
                   interval={ANIMATE_NUMBER_INTERVAL}
-                  symbol={usdcAsset.symbol}
+                  symbol={nativeCurrencySymbol}
+                  symbolAligmentLeft={symbolAligmentLeft}
                   value={valueFactor}
                 />
               )}

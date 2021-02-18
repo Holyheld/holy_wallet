@@ -16,7 +16,8 @@ import {
   holyUpdateFullCap,
   holyUpdateSavingsAPY,
   holyUpdateSavingsBalanceUCDS,
-  updateHHPrice,
+  updateHHInWETHPrice,
+  updateHHNativePrice,
 } from '../redux/holy';
 import {
   getUSDCAsset,
@@ -137,10 +138,7 @@ const refreshHolyEarlyLPBonus = () => async (dispatch, getState) => {
   }
 };
 
-export const refreshHHPrice = () => async (dispatch, getState) => {
-  const { network, accountAddress } = getState().settings;
-  const { assets } = getState().data;
-
+export const getHHPriceInWETH = async ({ network, accountAddress }) => {
   const contractAddressHH = HH_V2_ADDRESS(network);
   const contractAddressWETH = WETH_TOKEN_ADDRESS(network);
 
@@ -179,21 +177,58 @@ export const refreshHHPrice = () => async (dispatch, getState) => {
     uniswapWETHAmount = uniswapWETHAmount.toString();
     logger.log('sushiswapWETHAmount: ', uniswapWETHAmount);
 
-    const ethNativePrice = ethereumUtils.getEthPriceUnit(assets);
-
-    logger.log('ethNativePrice: ', ethNativePrice);
-
     const HHinWETHPrice = divide(uniswapWETHAmount, uniswapHHAmount);
     logger.log('HHinWETHPrice: ', HHinWETHPrice);
 
-    const HHNativePrice = multiply(HHinWETHPrice, ethNativePrice);
-    logger.log('HHNativePrice: ', HHNativePrice);
-    dispatch(updateHHPrice(HHNativePrice, HHinWETHPrice));
+    return { HHinWETHPrice };
   } catch (error) {
-    logger.log('error refreshing HH price from sushiswap HH-WETH pool');
+    logger.log('error getHHPriceInWETH HH price from sushiswap HH-WETH pool');
     logger.log(error);
-    dispatch(updateHHPrice('0', '0'));
+    throw error;
   }
+};
+
+export const refreshHHinWETHPrice = () => async (dispatch, getState) => {
+  const { network, accountAddress } = getState().settings;
+  try {
+    const { HHinWETHPrice } = await getHHPriceInWETH({
+      accountAddress,
+      network,
+    });
+    logger.log('refreshHHPrice: HHinWETHPrice: ', HHinWETHPrice);
+    dispatch(updateHHInWETHPrice(HHinWETHPrice));
+  } catch (error) {
+    logger.log('error refreshing HH price');
+    logger.log(error);
+    dispatch(updateHHInWETHPrice('0'));
+  }
+};
+
+export const refreshHHNativePrice = () => async (dispatch, getState) => {
+  const { assets } = getState().data;
+  logger.log('refreshHHNativePrice...');
+
+  const ethNativePrice = ethereumUtils.getEthPriceUnit(assets);
+  logger.log('ethNativePrice: ', ethNativePrice);
+
+  const { inEth: HHinWETHPrice } = getState().holy.prices.HH;
+
+  logger.log('refreshHHNativePrice: HHinWETHPrice: ', HHinWETHPrice);
+  const HHNativePrice = multiply(HHinWETHPrice, ethNativePrice);
+  logger.log('refreshHHNativePrice: HHNativePrice: ', HHNativePrice);
+  dispatch(updateHHNativePrice(HHNativePrice));
+};
+
+export const calculateHHNativePrice = ethNativePrice => async (
+  dispatch,
+  getState
+) => {
+  const { inEth: HHinWETHPrice } = getState().holy.prices.HH.inEth;
+
+  logger.log('calculateHHNativePrice: HHinWETHPrice: ', HHinWETHPrice);
+  const HHNativePrice = multiply(HHinWETHPrice, ethNativePrice);
+  logger.log('calculateHHNativePrice: HHNativePrice: ', HHNativePrice);
+  dispatch(updateHHNativePrice(HHNativePrice));
 };
 
 export const refreshHolySavings = () => async (dispatch, getState) => {
@@ -327,6 +362,5 @@ export const getTransferData = async (
 
 export const refreshHoly = () => async dispatch => {
   dispatch(refreshHolyEarlyLPBonus());
-  dispatch(refreshHHPrice());
   dispatch(refreshHolySavings());
 };
