@@ -153,6 +153,24 @@ const getUSDCAsset = (network: Network): asset => {
   };
 };
 
+const getHHWethPoolAsset = (network: Network): asset => {
+  return {
+    address: SUSHISWAP_HH_WETH_POOL_ADDRESS(network),
+    decimals: 18,
+    name: 'HH-ETH LP',
+    symbol: 'LP',
+  };
+};
+
+const getWethAsset = (network: Network): asset => {
+  return {
+    address: WETH_TOKEN_ADDRESS(network),
+    decimals: 18,
+    name: 'Wrapped ETH',
+    symbol: 'WETH',
+  };
+};
+
 const MAX_HOLY_DEPOSIT_AMOUNT_USDC = '10000';
 
 export {
@@ -173,4 +191,6 @@ export {
   WETH_TOKEN_ADDRESS,
   getHHAsset,
   getUSDCAsset,
+  getHHWethPoolAsset,
+  getWethAsset,
 };

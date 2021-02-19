@@ -77,12 +77,10 @@ const TreasuryBankListRow = ({ treasury }) => {
   }, [balance]);
 
   const onButtonPress = useCallback(() => {
-    if (!isEmpty) {
-      navigate(Routes.TREASURY_SHEET, {
-        balance: balance,
-      });
-    }
-  }, [navigate, isEmpty, balance]);
+    navigate(Routes.TREASURY_SHEET, {
+      balance: balance,
+    });
+  }, [navigate, balance]);
 
   return (
     <ButtonPressAnimation

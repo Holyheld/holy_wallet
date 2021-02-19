@@ -18,7 +18,7 @@ import {
 import Chart from '../value-chart/Chart';
 import { ChartPathProvider } from '@holyheld-com/animated-charts';
 
-const heightWithoutChart = 373 + (android && 80);
+const heightWithoutChart = 320 + (android && 50);
 const heightWithChart = heightWithoutChart + 292;
 
 export const initialLiquidityPoolExpandedStateSheetHeight =

@@ -60,7 +60,7 @@ const TreasurySheetEmptyState = ({ isReadOnlyWallet }) => {
     <Centered direction="column" paddingTop={9}>
       <TreasuryIcon size={51} />
       <Centered marginBottom={12} marginTop={15}>
-        <APYHeadingText>Get up to</APYHeadingText>
+        <APYHeadingText>Get up to </APYHeadingText>
         <GradientAPYHeadingText>4.00x</GradientAPYHeadingText>
         <APYHeadingText> bonus boost</APYHeadingText>
       </Centered>

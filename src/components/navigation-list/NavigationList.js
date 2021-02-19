@@ -7,15 +7,21 @@ import { USE_HOLY_SWAP } from '../../config/experimental';
 import networkInfo from '../../helpers/networkInfo';
 import networkTypes from '../../helpers/networkTypes';
 import { greaterThan } from '../../helpers/utilities';
-import { useHolyEarlyLPBonus, useHolySavings } from '../../hooks/useHolyData';
+import {
+  useHolyEarlyLPBonus,
+  useHolySavings,
+  useHolyTreasury,
+} from '../../hooks/useHolyData';
 import useOpenLPBonus from '../../hooks/useOpenLPBonus';
 import useOpenTreasuryBank from '../../hooks/useOpenTreasuryBank';
 import {
   SavingsSheetEmptyHeight,
   SavingsSheetHeight,
 } from '../../screens/HolySavingsSheet';
+import { TreasurySheetHeight } from '../../screens/TreasurySheet';
 import { Column } from '../layout';
 import { ListItemDivider } from '../list';
+import TreasurySheetEmptyState from '../treasury-bank/TreasurySheetEmptyState';
 import NavigationRow from './NavigationRow';
 import { useAccountSettings, useOpenSavings } from '@holyheld-com/hooks';
 import { useNavigation } from '@holyheld-com/navigation';
@@ -76,10 +82,15 @@ export default function NavigationList({
 
   const { showPanel: showHolyEarlyLPBonusPanel } = useHolyEarlyLPBonus();
   const { balanceUSDC: savingsBalance } = useHolySavings();
+  const { allBalanceUSDC: treasuryBalance } = useHolyTreasury();
 
   const isSavingsSectionEmpty = useMemo(() => {
     return !greaterThan(savingsBalance, 0);
   }, [savingsBalance]);
+
+  const isTreasurySectionEmpty = useMemo(() => {
+    return !greaterThan(treasuryBalance, 0);
+  }, [treasuryBalance]);
 
   const rows = useMemo(
     () => [
@@ -105,13 +116,23 @@ export default function NavigationList({
         disabled: false,
         height: rowHeight,
         id: 'treasuryItem',
+        // isVisible: network === networkTypes.mainnet,
         isVisible: false,
         name: 'Treasury',
         onPress: () => {
-          if (!isTreasuryBankOpen) {
-            toggleOpenTreasuryBank();
+          if (!isReadOnlyWallet) {
+            navigate(Routes.WALLET_SCREEN);
+            if (!isTreasuryBankOpen) {
+              toggleOpenTreasuryBank();
+            }
+            navigate(Routes.TREASURY_SHEET, {
+              longFormHeight: isTreasurySectionEmpty
+                ? TreasurySheetEmptyState
+                : TreasurySheetHeight,
+            });
+          } else {
+            Alert.alert(`You need to import the wallet in order to do this`);
           }
-          navigate(Routes.WALLET_SCREEN);
         },
       },
       {
@@ -183,6 +204,7 @@ export default function NavigationList({
       isSavingsOpen,
       isSavingsSectionEmpty,
       isTreasuryBankOpen,
+      isTreasurySectionEmpty,
       navigate,
       network,
       showHolyEarlyLPBonusPanel,

@@ -202,12 +202,11 @@ const withBalanceHolySavingsSection = (
     ];
   }
 
-  const section = {
+  return {
     assets: holySavingsAssets,
     holySavingsContainer: true,
     totalValue: balance,
   };
-  return section;
 };
 
 const withBalanceHolyEarlyBonusSection = (
@@ -229,32 +228,34 @@ const withBalanceHolyEarlyBonusSection = (
     ];
   }
 
-  const section = {
+  return {
     assets: holyBonusAssets,
     holyEarlyBonusContainer: true,
     show: earlyBonus.showPanel,
     totalValue: earlyBonus.nativeAmountToClaim,
   };
-  return section;
 };
 
-const withBalanceHolyTreasurySection = (holyTreasury, priceOfEther) => {
+const withBalanceHolyTreasurySection = (
+  usdcPrice,
+  holyTreasury,
+  priceOfEther
+) => {
   let holyTreasuryAssets = [];
 
   if (priceOfEther) {
     holyTreasuryAssets = [
       {
-        balance: holyTreasury.allBalanceNative,
+        balance: holyTreasury.allBalanceUSDC,
         rate: holyTreasury.rate,
       },
     ];
   }
-  const section = {
+  return {
     assets: holyTreasuryAssets,
     holyTreasuryContainer: true,
-    totalValue: holyTreasury.allBalanceNative,
+    totalValue: holyTreasury.allBalanceUSDC,
   };
-  return section;
 };
 
 // const withBalanceSavingsSection = (savings, priceOfEther) => {
@@ -551,7 +552,7 @@ const balanceHolySavingsSelector = createSelector(
 );
 
 const balanceHolyTreasurySelector = createSelector(
-  [holyTreasurySelector, ethPriceSelector],
+  [usdcPriceSelector, holyTreasurySelector, ethPriceSelector],
   withBalanceHolyTreasurySection
 );
 
