@@ -47,8 +47,15 @@ export const holySwapEstimation = async ({
   try {
     const holyHand = new Contract(contractAddress, contractABI, web3Provider);
 
+    let value = undefined;
+
+    if (transferData) {
+      value = toHex(transferData.value);
+    }
+
     const transactionParams = {
       from: accountAddress,
+      value: value,
     };
 
     const inputAmountInWEI = convertAmountToRawAmount(
@@ -86,9 +93,30 @@ export const holySwapEstimation = async ({
       logger.log('[holy swap estimation] bytesData:', hexlify(bytesData));
     }
 
+    logger.log('[holy swap estimation] transactionParams:', transactionParams);
+
+    let inputCurrencyAddress = inputCurrency.address;
+    if (inputCurrency.address === 'eth') {
+      inputCurrencyAddress = '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE';
+    }
+
+    let outputCurrencyAddress = outputCurrency.address;
+    if (outputCurrency.address === 'eth') {
+      outputCurrencyAddress = '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE';
+    }
+
+    logger.log(
+      '[holy swap estimation] inputCurrencyAddress:',
+      inputCurrencyAddress
+    );
+    logger.log(
+      '[holy swap estimation] outputCurrencyAddress:',
+      outputCurrencyAddress
+    );
+
     const gasLimit = await holyHand.estimateGas.executeSwap(
-      inputCurrency.address,
-      outputCurrency.address,
+      inputCurrencyAddress,
+      outputCurrencyAddress,
       inputAmountInWEI,
       expectedMinimumReceived,
       bytesData,
@@ -147,10 +175,17 @@ export const holySwap = async (wallet, currentRap, index, parameters) => {
 
     const holyHand = new Contract(contractAddress, contractABI, walletToUse);
 
+    let value = undefined;
+
+    if (transferData) {
+      value = toHex(transferData.value);
+    }
+
     const transactionParams = {
       from: accountAddress,
       gasLimit: toHex(gasLimit) || undefined,
       gasPrice: toHex(gasPrice) || undefined,
+      value: value,
     };
 
     const inputAmountInWEI = convertAmountToRawAmount(
@@ -188,9 +223,24 @@ export const holySwap = async (wallet, currentRap, index, parameters) => {
       logger.log('[holy swap] bytesData:', hexlify(bytesData));
     }
 
+    logger.log('[holy swap] transactionParams:', transactionParams);
+
+    let inputCurrencyAddress = inputCurrency.address;
+    if (inputCurrency.address === 'eth') {
+      inputCurrencyAddress = '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE';
+    }
+
+    let outputCurrencyAddress = outputCurrency.address;
+    if (outputCurrency.address === 'eth') {
+      outputCurrencyAddress = '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE';
+    }
+
+    logger.log('[holy swap] inputCurrencyAddress:', inputCurrencyAddress);
+    logger.log('[holy swap] outputCurrencyAddress:', outputCurrencyAddress);
+
     swap = await holyHand.executeSwap(
-      inputCurrency.address,
-      outputCurrency.address,
+      inputCurrencyAddress,
+      outputCurrencyAddress,
       inputAmountInWEI,
       expectedMinimumReceived,
       bytesData,

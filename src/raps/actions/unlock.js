@@ -148,6 +148,7 @@ export const assetNeedsUnlocking = async (
   logger.log('checking asset needs unlocking');
   const isInputEth = address === 'eth';
   if (isInputEth) {
+    logger.log("Eth doesn't need unlocking");
     return false;
   }
 
