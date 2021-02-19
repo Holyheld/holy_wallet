@@ -23,7 +23,7 @@
   float _initialValue;
   double _interval;
   float _stepPerDay;
-  BOOL _isSymbolStablecoin;
+  BOOL _isSymbolAligmentLeft;
   NSString* _symbol;
   NSNumberFormatter* _fmt;
   CFAbsoluteTime _time;
@@ -44,7 +44,7 @@
   _duration = ((NSNumber*) config[@"duration"]).intValue;
   NSString* color = ((NSString*) config[@"color"]);
   NSString* baseColor = ((NSString*) config[@"baseColor"]);
-  _isSymbolStablecoin = ((NSNumber*) config[@"isSymbolStablecoin"]).boolValue;
+  _isSymbolAligmentLeft = ((NSNumber*) config[@"symbolAligmentLeft"]).boolValue;
   _symbol = config[@"symbol"];
   _timer = [NSTimer scheduledTimerWithTimeInterval:_interval / 1000  target:self selector:@selector(animate) userInfo:nil repeats:YES];
   _fmt = [[NSNumberFormatter alloc] init];
@@ -103,7 +103,7 @@
   double diff = NSDate.date.timeIntervalSince1970 - _time;
   double value = _initialValue + _stepPerDay * diff / 24 / 60 / 60;
 
-  NSString *newValue = _isSymbolStablecoin ? [NSString stringWithFormat:@"$%@", [_fmt stringFromNumber:@(value)]] : [NSString stringWithFormat:@"%@ %@", [_fmt stringFromNumber:@(value)], _symbol];
+  NSString *newValue = _isSymbolAligmentLeft ? [NSString stringWithFormat:@"%@%@", _symbol, [_fmt stringFromNumber:@(value)]] : [NSString stringWithFormat:@"%@ %@", [_fmt stringFromNumber:@(value)], _symbol];
   
   newValue = [newValue stringByReplacingOccurrencesOfString:@"," withString:@"."];
 
@@ -129,7 +129,7 @@
     [_annealingColor addObject:whatHasChanged];
 
     NSUInteger queueLen = _annealingColor.count;
-    NSUInteger rightBound = len - (_isSymbolStablecoin ? 0 : _symbol.length);
+    NSUInteger rightBound = len - (_isSymbolAligmentLeft ? 0 : _symbol.length);
 
     for (int colorIdx = 0; colorIdx < queueLen; colorIdx++) {
       NSArray *changedIdxs = _annealingColor[colorIdx];
