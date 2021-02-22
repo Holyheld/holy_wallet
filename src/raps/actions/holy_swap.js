@@ -167,6 +167,19 @@ export const holySwap = async (wallet, currentRap, index, parameters) => {
   const walletToUse = wallet || (await loadWallet());
   if (!walletToUse) return null;
 
+  let value = undefined;
+
+  if (transferData) {
+    value = toHex(transferData.value);
+  }
+
+  const transactionParams = {
+    from: accountAddress,
+    gasLimit: toHex(gasLimit) || undefined,
+    gasPrice: toHex(gasPrice) || undefined,
+    value: value,
+  };
+
   try {
     logger.log('[holy swap] gas Limit and price:', {
       gasLimit,
@@ -174,19 +187,6 @@ export const holySwap = async (wallet, currentRap, index, parameters) => {
     });
 
     const holyHand = new Contract(contractAddress, contractABI, walletToUse);
-
-    let value = undefined;
-
-    if (transferData) {
-      value = toHex(transferData.value);
-    }
-
-    const transactionParams = {
-      from: accountAddress,
-      gasLimit: toHex(gasLimit) || undefined,
-      gasPrice: toHex(gasPrice) || undefined,
-      value: value,
-    };
 
     const inputAmountInWEI = convertAmountToRawAmount(
       inputAmount,
@@ -260,6 +260,8 @@ export const holySwap = async (wallet, currentRap, index, parameters) => {
     amount: inputAmount,
     asset: inputCurrency,
     from: accountAddress,
+    gasLimit: transactionParams.gasLimit,
+    gasPrice: transactionParams.gasPrice,
     hash: swap.hash,
     nonce: get(swap, 'nonce'),
     protocol: ProtocolTypes.holy.name,

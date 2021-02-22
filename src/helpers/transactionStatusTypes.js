@@ -1,6 +1,8 @@
 export default {
   approved: 'approved',
   approving: 'approving',
+  cancelled: 'cancelled',
+  cancelling: 'cancelling',
   claimed: 'claimed',
   claiming: 'claiming',
   deposited: 'deposited',
@@ -15,6 +17,7 @@ export default {
   self: 'self',
   sending: 'sending',
   sent: 'sent',
+  speeding_up: 'speeding up',
   swapped: 'swapped',
   swapping: 'swapping',
   unknown: 'unknown status',

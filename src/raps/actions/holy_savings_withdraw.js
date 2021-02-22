@@ -107,6 +107,12 @@ export const holySavingsWithdraw = async (
   const walletToUse = wallet || (await loadWallet());
   if (!walletToUse) return null;
 
+  const transactionParams = {
+    from: accountAddress,
+    gasLimit: toHex(gasLimit) || undefined,
+    gasPrice: toHex(gasPrice) || undefined,
+  };
+
   try {
     logger.log('[holy savings withdraw] executing holy withdraw', {
       gasLimit,
@@ -114,12 +120,6 @@ export const holySavingsWithdraw = async (
     });
 
     const holyHand = new Contract(contractAddress, contractABI, walletToUse);
-
-    const transactionParams = {
-      from: accountAddress,
-      gasLimit: toHex(gasLimit) || undefined,
-      gasPrice: toHex(gasPrice) || undefined,
-    };
 
     const inputAmountInWEI = convertAmountToRawAmount(
       inputAmount,
@@ -146,6 +146,8 @@ export const holySavingsWithdraw = async (
     amount: inputAmount,
     asset: inputCurrency,
     from: accountAddress,
+    gasLimit: transactionParams.gasLimit,
+    gasPrice: transactionParams.gasPrice,
     hash: withdraw.hash,
     nonce: get(withdraw, 'nonce'),
     protocol: ProtocolTypes.holy.name,

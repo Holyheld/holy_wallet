@@ -64,6 +64,11 @@ const holyClaim = async (wallet, currentRap, index, parameters) => {
   const walletToUse = wallet || (await loadWallet());
   if (!walletToUse) return null;
 
+  const transactionParams = {
+    gasLimit: toHex(gasLimit) || undefined,
+    gasPrice: toHex(gasPrice) || undefined,
+  };
+
   try {
     logger.sentry('[holy claim] executing holy claim', {
       gasLimit,
@@ -71,11 +76,6 @@ const holyClaim = async (wallet, currentRap, index, parameters) => {
     });
 
     const holyPassage = new Contract(contractAddress, contractABI, walletToUse);
-
-    const transactionParams = {
-      gasLimit: toHex(gasLimit) || undefined,
-      gasPrice: toHex(gasPrice) || undefined,
-    };
 
     claiming = await holyPassage.claimBonus(transactionParams);
   } catch (e) {
@@ -93,6 +93,8 @@ const holyClaim = async (wallet, currentRap, index, parameters) => {
     amount: amount,
     asset: inputCurrency,
     from: accountAddress,
+    gasLimit: transactionParams.gasLimit,
+    gasPrice: transactionParams.gasPrice,
     hash: claiming.hash,
     nonce: get(claiming, 'nonce'),
     protocol: ProtocolTypes.holy.name,

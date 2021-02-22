@@ -181,6 +181,15 @@ export const holySavingsDeposit = async (
   const walletToUse = wallet || (await loadWallet());
   if (!walletToUse) return null;
 
+  let value = undefined;
+
+  const transactionParams = {
+    from: accountAddress,
+    gasLimit: toHex(gasLimit) || undefined,
+    gasPrice: toHex(gasPrice) || undefined,
+    value: value,
+  };
+
   try {
     logger.log('[holy savings deposit] gas Limit and price:', {
       gasLimit,
@@ -189,18 +198,9 @@ export const holySavingsDeposit = async (
 
     const holyHand = new Contract(contractAddress, contractABI, walletToUse);
 
-    let value = undefined;
-
     if (transferData) {
       value = toHex(transferData.value);
     }
-
-    const transactionParams = {
-      from: accountAddress,
-      gasLimit: toHex(gasLimit) || undefined,
-      gasPrice: toHex(gasPrice) || undefined,
-      value: value,
-    };
 
     const poolAddress = HOLY_SAVINGS_POOL_ADDRESS(network);
 
@@ -275,6 +275,8 @@ export const holySavingsDeposit = async (
     amount: inputAmount,
     asset: inputCurrency,
     from: accountAddress,
+    gasLimit: transactionParams.gasLimit,
+    gasPrice: transactionParams.gasPrice,
     hash: deposit.hash,
     nonce: get(deposit, 'nonce'),
     protocol: ProtocolTypes.holy.name,

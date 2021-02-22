@@ -24,6 +24,7 @@ import ReceiveModal from '../screens/ReceiveModal';
 import RestoreSheet from '../screens/RestoreSheet';
 import SendSheet from '../screens/SendSheet';
 import SettingsModal from '../screens/SettingsModal';
+import SpeedUpAndCancelSheet from '../screens/SpeedUpAndCancelSheet';
 import TransactionConfirmationScreen from '../screens/TransactionConfirmationScreen';
 import TreasuryClaimModalWrapper from '../screens/TreasuryClaimModal';
 import TreasurySheet from '../screens/TreasurySheet';
@@ -264,6 +265,19 @@ function NativeStackNavigator() {
         component={ExpandedAssetSheet}
         name={Routes.EXPANDED_ASSET_SHEET}
         {...expandedAssetSheetConfig}
+      />
+      <NativeStack.Screen
+        component={SpeedUpAndCancelSheet}
+        name={Routes.SPEED_UP_AND_CANCEL_SHEET}
+        options={{
+          allowsDragToDismiss: true,
+          backgroundColor: '#25292E',
+          backgroundOpacity: 0.6,
+          customStack: true,
+          headerHeight: 0,
+          isShortFormEnabled: false,
+          topOffset: 0,
+        }}
       />
       <NativeStack.Screen
         component={ChangeWalletSheet}

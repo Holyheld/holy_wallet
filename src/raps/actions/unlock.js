@@ -54,10 +54,11 @@ const unlock = async (wallet, currentRap, index, parameters) => {
     throw e;
   }
   let approval;
+  let gasPrice;
   try {
     logger.log('[unlock] execute the unlock');
     // unlocks should always use fast gas or custom (whatever is faster)
-    let gasPrice = get(selectedGasPrice, 'value.amount');
+    gasPrice = get(selectedGasPrice, 'value.amount');
     const fastPrice = get(gasPrices, `[${gasUtils.FAST}].value.amount`);
     if (greaterThan(fastPrice, gasPrice)) {
       gasPrice = fastPrice;
@@ -102,6 +103,8 @@ const unlock = async (wallet, currentRap, index, parameters) => {
         amount: 0,
         asset: assetToUnlock,
         from: wallet.address,
+        gasLimit,
+        gasPrice,
         hash: approval.hash,
         nonce: get(approval, 'nonce'),
         status: TransactionStatusTypes.approving,

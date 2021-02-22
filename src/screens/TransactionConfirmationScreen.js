@@ -429,14 +429,21 @@ const TransactionConfirmationScreen = () => {
     }
     txPayloadLatestNonce = omit(txPayloadLatestNonce, ['from', 'gas']);
     let result = null;
-    if (sendInsteadOfSign) {
-      result = await sendTransaction({
-        transaction: txPayloadLatestNonce,
-      });
-    } else {
-      result = await signTransaction({
-        transaction: txPayloadLatestNonce,
-      });
+    try {
+      if (sendInsteadOfSign) {
+        result = await sendTransaction({
+          transaction: txPayloadLatestNonce,
+        });
+      } else {
+        result = await signTransaction({
+          transaction: txPayloadLatestNonce,
+        });
+      }
+    } catch (e) {
+      logger.log(
+        `Error while ${sendInsteadOfSign ? 'sending' : 'signing'} transaction`,
+        e
+      );
     }
 
     if (result) {

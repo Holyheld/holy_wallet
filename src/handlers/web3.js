@@ -117,6 +117,13 @@ export const toWei = ether => {
 };
 
 /**
+ * @desc get transaction info
+ * @param {String} hash
+ * @return {Promise}
+ */
+export const getTransaction = hash => web3Provider.getTransaction(hash);
+
+/**
  * @desc get address transaction count
  * @param {String} address
  * @return {Promise}

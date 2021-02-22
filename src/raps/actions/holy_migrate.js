@@ -66,6 +66,11 @@ const holyMigrate = async (wallet, currentRap, index, parameters) => {
   const walletToUse = wallet || (await loadWallet());
   if (!walletToUse) return null;
 
+  const transactionParams = {
+    gasLimit: toHex(gasLimit) || undefined,
+    gasPrice: toHex(gasPrice) || undefined,
+  };
+
   try {
     logger.sentry('[holy migrate] executing holy migration', {
       gasLimit,
@@ -73,11 +78,6 @@ const holyMigrate = async (wallet, currentRap, index, parameters) => {
     });
 
     const holyPassage = new Contract(contractAddress, contractABI, walletToUse);
-
-    const transactionParams = {
-      gasLimit: toHex(gasLimit) || undefined,
-      gasPrice: toHex(gasPrice) || undefined,
-    };
 
     migration = await holyPassage.migrate(transactionParams);
   } catch (e) {
@@ -98,6 +98,8 @@ const holyMigrate = async (wallet, currentRap, index, parameters) => {
     amount: amount,
     asset: currency,
     from: accountAddress,
+    gasLimit: transactionParams.gasLimit,
+    gasPrice: transactionParams.gasPrice,
     hash: migration.hash,
     nonce: get(migration, 'nonce'),
     protocol: ProtocolTypes.holy.name,
