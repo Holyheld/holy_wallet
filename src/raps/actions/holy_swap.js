@@ -10,6 +10,7 @@ import TransactionTypes from '../../helpers/transactionTypes';
 import {
   convertAmountToRawAmount,
   convertStringToHexWithPrefix,
+  divide,
   isZero,
   multiply,
 } from '../../helpers/utilities';
@@ -123,11 +124,20 @@ export const holySwapEstimation = async ({
       transactionParams
     );
 
-    const gasLimitString = gasLimit.toString();
+    let gasLimitString = gasLimit.toString();
     logger.log(
       '[holy swap estimation] gas estimation by ether.js: ' + gasLimitString
     );
-    return gasLimit ? gasLimitString : ethUnits.basic_holy_swap;
+    if (gasLimitString) {
+      gasLimitString = divide(multiply(gasLimitString, '120'), '100');
+      logger.log(
+        '[holy swap estimation] gas estimation by ether.js (with additional 20% as buffer): ' +
+          gasLimitString
+      );
+      return gasLimitString;
+    } else {
+      return ethUnits.basic_holy_swap;
+    }
   } catch (error) {
     logger.log('error holy swap estimate');
     logger.log(error);
