@@ -40,7 +40,7 @@ export const estimateHolySwapCompound = async ({
     logger.log('[holy swap estimation] gas for approval ', unlockGasLimit);
     gasLimits = concat(gasLimits, unlockGasLimit);
   } else {
-    swapGasEstimation = await holySwapEstimation({
+    const { gasLimitWithBuffer } = await holySwapEstimation({
       accountAddress,
       inputAmount,
       inputCurrency,
@@ -48,6 +48,7 @@ export const estimateHolySwapCompound = async ({
       outputCurrency,
       transferData,
     });
+    swapGasEstimation = gasLimitWithBuffer;
   }
   gasLimits = concat(gasLimits, swapGasEstimation);
 

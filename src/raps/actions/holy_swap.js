@@ -10,7 +10,7 @@ import TransactionTypes from '../../helpers/transactionTypes';
 import {
   convertAmountToRawAmount,
   convertStringToHexWithPrefix,
-  divide,
+  floorDivide,
   isZero,
   multiply,
 } from '../../helpers/utilities';
@@ -115,7 +115,7 @@ export const holySwapEstimation = async ({
       outputCurrencyAddress
     );
 
-    const gasLimit = await holyHand.estimateGas.executeSwap(
+    const gasLimitObj = await holyHand.estimateGas.executeSwap(
       inputCurrencyAddress,
       outputCurrencyAddress,
       inputAmountInWEI,
@@ -124,25 +124,31 @@ export const holySwapEstimation = async ({
       transactionParams
     );
 
-    let gasLimitString = gasLimit.toString();
+    const gasLimit = gasLimitObj.toString();
     logger.log(
-      '[holy swap estimation] gas estimation by ether.js: ' + gasLimitString
+      '[holy swap estimation] gas estimation by ether.js: ' + gasLimit
     );
-    if (gasLimitString) {
-      gasLimitString = divide(multiply(gasLimitString, '120'), '100');
+    if (gasLimit) {
+      const gasLimitWithBuffer = floorDivide(multiply(gasLimit, '120'), '100');
       logger.log(
         '[holy swap estimation] gas estimation by ether.js (with additional 20% as buffer): ' +
-          gasLimitString
+          gasLimitWithBuffer
       );
-      return gasLimitString;
+      return { gasLimit, gasLimitWithBuffer };
     } else {
-      return ethUnits.basic_holy_swap;
+      return {
+        gasLimit: ethUnits.basic_holy_swap,
+        gasLimitWithBuffer: ethUnits.basic_holy_swap,
+      };
     }
   } catch (error) {
     logger.log('error holy swap estimate');
     logger.log(error);
     captureException(error);
-    return ethUnits.basic_holy_swap;
+    return {
+      gasLimit: ethUnits.basic_holy_swap,
+      gasLimitWithBuffer: ethUnits.basic_holy_swap,
+    };
   }
 };
 
@@ -160,7 +166,10 @@ export const holySwap = async (wallet, currentRap, index, parameters) => {
   const { dispatch } = store;
 
   let gasPrice = get(selectedGasPrice, 'value.amount');
-  const gasLimit = await holySwapEstimation({
+  const {
+    gasLimit: gasLimitWithoutBuffer,
+    gasLimitWithBuffer,
+  } = await holySwapEstimation({
     accountAddress,
     inputAmount,
     inputCurrency,
@@ -168,6 +177,8 @@ export const holySwap = async (wallet, currentRap, index, parameters) => {
     outputCurrency,
     transferData,
   });
+
+  const gasLimit = gasLimitWithBuffer;
 
   const contractAddress = HOLY_HAND_ADDRESS(network);
   const contractABI = HOLY_HAND_ABI;
@@ -261,6 +272,10 @@ export const holySwap = async (wallet, currentRap, index, parameters) => {
     captureException(e);
     throw e;
   }
+
+  logger.sentry(
+    `New transaction with hash: ${swap.hash}, pure gas estimation: ${gasLimitWithoutBuffer}, gas estimation with buffer: ${gasLimitWithBuffer}`
+  );
 
   logger.log('[holy swap] response', swap);
   currentRap.actions[index].transaction.hash = swap.hash;

@@ -45,13 +45,14 @@ export const estimateHolySavingsDepositCompound = async ({
     );
     gasLimits = concat(gasLimits, unlockGasLimit);
   } else {
-    depositGasEstimation = await holySavingsDepositEstimation({
+    const { gasLimitWithBuffer } = await holySavingsDepositEstimation({
       accountAddress,
       inputAmount,
       inputCurrency,
       network,
       transferData,
     });
+    depositGasEstimation = gasLimitWithBuffer;
   }
   gasLimits = concat(gasLimits, depositGasEstimation);
   return reduce(gasLimits, (acc, limit) => add(acc, limit), '0');
