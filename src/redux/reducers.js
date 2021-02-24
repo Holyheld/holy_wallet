@@ -14,7 +14,6 @@ import holy from './holy';
 import imageMetadata from './imageMetadata';
 import keyboardHeight from './keyboardHeight';
 import multicall from './multicall';
-import nonce from './nonce';
 import openStateSettings from './openStateSettings';
 import raps from './raps';
 import requests from './requests';
@@ -41,7 +40,6 @@ export default combineReducers({
   imageMetadata,
   keyboardHeight,
   multicall,
-  nonce,
   openStateSettings,
   raps,
   requests,

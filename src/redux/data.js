@@ -33,6 +33,7 @@ import {
 } from '../handlers/localstorage/accountLocal';
 import { getTransactionReceipt } from '../handlers/web3';
 import AssetTypes from '../helpers/assetTypes';
+import networkTypes from '../helpers/networkTypes';
 import DirectionTypes from '../helpers/transactionDirectionTypes';
 import TransactionStatusTypes from '../helpers/transactionStatusTypes';
 import TransactionTypes from '../helpers/transactionTypes';
@@ -489,7 +490,7 @@ export const dataAddNewTransaction = (
       type: DATA_ADD_NEW_TRANSACTION_SUCCESS,
     });
     saveLocalTransactions(_transactions, accountAddress, network);
-    if (!disableTxnWatcher) {
+    if (!disableTxnWatcher || network !== networkTypes.mainnet) {
       dispatch(watchPendingTransactions(accountAddress));
     }
     return parsedTransaction;

@@ -1,9 +1,9 @@
 import { useRoute } from '@react-navigation/native';
 import { captureException } from '@sentry/react-native';
 import { BigNumber } from 'bignumber.js';
-import { get, isEmpty } from 'lodash';
+import { get, isEmpty, keys } from 'lodash';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { InteractionManager, TurboModuleRegistry } from 'react-native';
+import { Alert, InteractionManager, TurboModuleRegistry } from 'react-native';
 import Animated, {
   useAnimatedStyle,
   useSharedValue,
@@ -31,13 +31,16 @@ import {
   useGas,
   useKeyboardHeight,
 } from '../hooks';
-import { sendTransaction } from '../model/wallet';
+import { loadWallet, sendTransaction } from '../model/wallet';
 import { useNavigation } from '../navigation';
 import { gweiToWei, weiToGwei } from '../parsers/gas';
 import { getTitle } from '../parsers/transactions';
+import { executeRap } from '../raps/common';
 import { dataUpdateTransaction } from '../redux/data';
 import { explorerInit } from '../redux/explorer';
 import { updateGasPriceForSpeed } from '../redux/gas';
+import { rapsAddOrUpdate } from '../redux/raps';
+import store from '../redux/store';
 import { ethUnits } from '../references';
 import { colors, position } from '../styles';
 import { safeAreaInsetValues } from '../utils';
@@ -99,6 +102,8 @@ const text = {
   [SPEED_UP]: `This will speed up your pending transaction by replacing it. There’s still a chance your original transaction will confirm first!`,
 };
 
+let existingWallet;
+
 const calcMinGasPriceAllowed = prevGasPrice => {
   const prevGasPriceBN = new BigNumber(prevGasPrice);
 
@@ -132,9 +137,11 @@ export default function SpeedUpAndCancelSheet() {
   const [minGasPrice, setMinGasPrice] = useState(
     calcMinGasPriceAllowed(tx.gasPrice)
   );
+  const fetchedTx = useRef(false);
   const [gasLimit, setGasLimit] = useState(tx.gasLimit);
   const [data, setData] = useState(tx.data);
   const [value, setValue] = useState(tx.value);
+  const [nonce, setNonce] = useState(tx.nonce);
 
   const getNewGasPrice = useCallback(() => {
     const rawGasPrice = get(selectedGasPrice, 'value.amount');
@@ -148,11 +155,7 @@ export default function SpeedUpAndCancelSheet() {
 
   const reloadTransactions = useCallback(
     transaction => {
-      if (
-        (transaction.status === TransactionStatusTypes.speeding_up ||
-          transaction.status === TransactionStatusTypes.cancelling) &&
-        transaction.type !== TransactionTypes.send
-      ) {
+      if (transaction.type !== TransactionTypes.send) {
         logger.log('Reloading zerion in 5!');
         setTimeout(() => {
           logger.log('Reloading tx from zerion NOW!');
@@ -164,16 +167,43 @@ export default function SpeedUpAndCancelSheet() {
     [dispatch]
   );
 
+  const replaceRapActionTx = useCallback(
+    (originalHash, newTxData) => {
+      // 1 - Find the rap based on the orignal tx hash
+      let currentRap;
+      const { raps } = store.getState().raps;
+      keys(raps).forEach(rapId => {
+        const rap = raps[rapId];
+        rap.actions.forEach((action, index) => {
+          if (action.transaction?.hash === originalHash) {
+            // 2 - Set the new tx hash on the rap
+            if (!action.transaction?.confirmed) {
+              rap.actions[index].transaction = {
+                ...rap.actions[index].transaction,
+                ...newTxData,
+              };
+              // 3 - Update the rap on redux with the new tx hash
+              dispatch(rapsAddOrUpdate(rap.id, rap));
+              currentRap = rap;
+            }
+          }
+        });
+      });
+      return currentRap;
+    },
+    [dispatch]
+  );
+
   const handleCancellation = useCallback(async () => {
     try {
       const gasPrice = getNewGasPrice();
       const cancelTxPayload = {
         gasPrice,
-        nonce: tx.nonce,
+        nonce,
         to: accountAddress,
       };
       const originalHash = tx.hash;
-      const hash = await sendTransaction({
+      const { hash } = await sendTransaction({
         transaction: cancelTxPayload,
       });
       const updatedTx = { ...tx };
@@ -197,6 +227,7 @@ export default function SpeedUpAndCancelSheet() {
     dispatch,
     getNewGasPrice,
     goBack,
+    nonce,
     reloadTransactions,
     tx,
   ]);
@@ -208,12 +239,14 @@ export default function SpeedUpAndCancelSheet() {
         data,
         gasLimit,
         gasPrice,
-        nonce: tx.nonce,
+        nonce,
         to: tx.to,
         value,
       };
+      existingWallet = await loadWallet();
       const originalHash = tx.hash;
-      const hash = await sendTransaction({
+      const { hash } = await sendTransaction({
+        existingWallet,
         transaction: fasterTxPayload,
       });
       const updatedTx = { ...tx };
@@ -224,8 +257,36 @@ export default function SpeedUpAndCancelSheet() {
       }
       updatedTx.status = TransactionStatusTypes.speeding_up;
       updatedTx.title = getTitle(updatedTx);
+      const originalHashNormalized = originalHash.split('-')[0];
+      replaceRapActionTx(originalHashNormalized, { hash });
+
       dispatch(
-        dataUpdateTransaction(originalHash, updatedTx, true, reloadTransactions)
+        dataUpdateTransaction(
+          originalHash,
+          updatedTx,
+          true,
+          async transaction => {
+            const hashNormalized = transaction.hash.split('-')[0];
+            // The tx was confirmed
+            const currentRap = replaceRapActionTx(hashNormalized, {
+              confirmed: true,
+            });
+
+            // If there's a rap, we need to resume the execution
+            if (currentRap && existingWallet) {
+              logger.log('Resuming rap', currentRap);
+              try {
+                await executeRap(existingWallet, currentRap);
+              } catch (e) {
+                logger.log('Error resuming rap', e);
+              } finally {
+                existingWallet = null;
+              }
+            }
+            logger.log('reloading transactions');
+            reloadTransactions(transaction);
+          }
+        )
       );
     } catch (e) {
       logger.log('Error submitting speed up tx', e);
@@ -238,22 +299,26 @@ export default function SpeedUpAndCancelSheet() {
     gasLimit,
     getNewGasPrice,
     goBack,
+    nonce,
     reloadTransactions,
+    replaceRapActionTx,
     tx,
     value,
   ]);
 
   useEffect(() => {
     InteractionManager.runAfterInteractions(async () => {
-      if (!tx.gasPrice || !tx.gasLimit || !tx.data) {
+      if (!fetchedTx.current) {
         const txHash = tx.hash.split('-')[0];
         try {
+          fetchedTx.current = true;
           const txObj = await getTransaction(txHash);
           if (txObj) {
             const hexGasLimit = toHex(txObj.gasLimit.toString());
             const hexGasPrice = toHex(txObj.gasPrice.toString());
             const hexValue = toHex(txObj.value.toString());
             const hexData = txObj.data;
+            setNonce(txObj.nonce);
             setValue(hexValue);
             setData(hexData);
             setGasLimit(hexGasLimit);
@@ -262,22 +327,32 @@ export default function SpeedUpAndCancelSheet() {
         } catch (e) {
           logger.log('something went wrong while fetching tx info ', e);
           captureException(e);
+          if (type === SPEED_UP) {
+            Alert.alert(
+              'Unable to speed up transaction',
+              'There was a problem while fetching the transaction data. Please try again...'
+            );
+            goBack();
+          }
+          // We don't care about this for cancellations
         }
+        startPollingGasPrices();
+        // Always default to fast
+        updateGasPriceOption('fast');
       }
-      startPollingGasPrices();
-      // Always default to fast
-      updateGasPriceOption('fast');
     });
     return () => {
       stopPollingGasPrices();
     };
   }, [
+    goBack,
     startPollingGasPrices,
     stopPollingGasPrices,
     tx,
     tx.gasLimit,
     tx.gasPrice,
     tx.hash,
+    type,
     updateGasPriceOption,
   ]);
 
@@ -324,7 +399,7 @@ export default function SpeedUpAndCancelSheet() {
   }, [keyboardHeight, keyboardVisible, offset]);
   const sheetHeight = ios
     ? (type === CANCEL_TX ? 491 : 442) + safeAreaInsetValues.bottom
-    : (type === CANCEL_TX ? 770 : 770) + safeAreaInsetValues.bottom;
+    : 850 + safeAreaInsetValues.bottom;
 
   const marginTop = android
     ? deviceHeight - sheetHeight + (type === CANCEL_TX ? 290 : 340)
