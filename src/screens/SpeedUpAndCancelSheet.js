@@ -72,7 +72,7 @@ const CenteredSheet = styled(Centered)`
 `;
 
 const ExtendedSheetBackground = styled.View`
-  background-color: ${colors.white};
+  background-color: ${colors.modalBackground};
   height: 1000;
   position: absolute;
   bottom: -800;
@@ -419,7 +419,7 @@ export default function SpeedUpAndCancelSheet() {
       >
         <Column>
           <AnimatedSheet
-            backgroundColor={colors.white}
+            backgroundColor={colors.modalBackground}
             borderRadius={39}
             direction="column"
             marginTop={marginTop}
@@ -436,7 +436,7 @@ export default function SpeedUpAndCancelSheet() {
               <Column marginBottom={12}>
                 <Text
                   align="center"
-                  color={colors.dark}
+                  color={colors.textColorTitle}
                   size="big"
                   weight="bold"
                 >
@@ -446,7 +446,7 @@ export default function SpeedUpAndCancelSheet() {
               <Column marginBottom={30} maxWidth={375} paddingHorizontal={42}>
                 <Text
                   align="center"
-                  color={colors.alpha(colors.blueGreyDark, 0.5)}
+                  color={colors.textColorDescription}
                   lineHeight="looser"
                   size="large"
                   weight="regular"
@@ -456,7 +456,7 @@ export default function SpeedUpAndCancelSheet() {
               </Column>
               <Centered marginBottom={24}>
                 <Divider
-                  color={colors.rowDividerExtraLight}
+                  backgroundColor={colors.modalBackground}
                   inset={[0, 143.5]}
                 />
               </Centered>
@@ -469,17 +469,18 @@ export default function SpeedUpAndCancelSheet() {
                       label="􀎽 Attempt Cancellation"
                       onPress={handleCancellation}
                       size="big"
+                      textColor={colors.textColor}
                       weight="bold"
                     />
                   </SheetActionButtonRow>
                   <SheetActionButtonRow ignorePaddingBottom>
                     <SheetActionButton
-                      color={colors.white}
+                      color={colors.buttonSecondary}
                       fullWidth
                       label="Cancel"
                       onPress={goBack}
                       size="big"
-                      textColor={colors.alpha(colors.blueGreyDark, 0.8)}
+                      textColor={colors.textColorSecondaryButton}
                       weight="bold"
                     />
                   </SheetActionButtonRow>
@@ -488,18 +489,19 @@ export default function SpeedUpAndCancelSheet() {
               {type === SPEED_UP && (
                 <SheetActionButtonRow ignorePaddingBottom ignorePaddingTop>
                   <SheetActionButton
-                    color={colors.white}
+                    color={colors.buttonSecondary}
                     label="Cancel"
                     onPress={goBack}
                     size="big"
-                    textColor={colors.alpha(colors.blueGreyDark, 0.8)}
+                    textColor={colors.textColorSecondaryButton}
                     weight="bold"
                   />
                   <SheetActionButton
-                    color={colors.appleBlue}
+                    color={colors.buttonPrimary}
                     label="􀎽 Confirm"
                     onPress={handleSpeedUp}
                     size="big"
+                    textColor={colors.textColorPrimaryButton}
                     weight="bold"
                   />
                 </SheetActionButtonRow>
