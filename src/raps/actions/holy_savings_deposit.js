@@ -10,6 +10,7 @@ import TransactionTypes from '../../helpers/transactionTypes';
 import {
   convertAmountToRawAmount,
   convertStringToHexWithPrefix,
+  floorDivide,
   isZero,
   multiply,
 } from '../../helpers/utilities';
@@ -124,7 +125,7 @@ export const holySavingsDepositEstimation = async ({
       inputCurrencyAddress
     );
 
-    const gasLimit = await holyHand.estimateGas.depositToPool(
+    const gasLimitObj = await holyHand.estimateGas.depositToPool(
       poolAddress,
       inputCurrencyAddress,
       inputAmountInWEI,
@@ -133,17 +134,33 @@ export const holySavingsDepositEstimation = async ({
       transactionParams
     );
 
-    const gasLimitString = gasLimit.toString();
+    let gasLimit = gasLimitObj.toString();
     logger.log(
       '[holy savings deposit estimation] gas estimation by ether.js: ' +
-        gasLimitString
+        gasLimit
     );
-    return gasLimit ? gasLimitString : ethUnits.basic_holy_savings_deposit;
+
+    if (gasLimit) {
+      const gasLimitWithBuffer = floorDivide(multiply(gasLimit, '120'), '100');
+      logger.log(
+        '[holy swap estimation] gas estimation by ether.js (with additional 20% as buffer): ' +
+          gasLimitWithBuffer
+      );
+      return { gasLimit, gasLimitWithBuffer };
+    } else {
+      return {
+        gasLimit: ethUnits.basic_holy_savings_deposit,
+        gasLimitWithBuffer: ethUnits.basic_holy_savings_deposit,
+      };
+    }
   } catch (error) {
     logger.log('error holy_savings_deposit estimate');
     logger.log(error);
     captureException(error);
-    return ethUnits.basic_holy_savings_deposit;
+    return {
+      gasLimit: ethUnits.basic_holy_savings_deposit,
+      gasLimitWithBuffer: ethUnits.basic_holy_savings_deposit,
+    };
   }
 };
 
@@ -165,13 +182,18 @@ export const holySavingsDeposit = async (
   const { dispatch } = store;
 
   let gasPrice = get(selectedGasPrice, 'value.amount');
-  const gasLimit = await holySavingsDepositEstimation({
+  const {
+    gasLimit: gasLimitWithoutBuffer,
+    gasLimitWithBuffer,
+  } = await holySavingsDepositEstimation({
     accountAddress,
     inputAmount,
     inputCurrency,
     network,
     transferData,
   });
+
+  const gasLimit = gasLimitWithBuffer;
 
   const contractAddress = HOLY_HAND_ADDRESS(network);
   const contractABI = HOLY_HAND_ABI;
@@ -266,6 +288,10 @@ export const holySavingsDeposit = async (
     captureException(e);
     throw e;
   }
+
+  logger.sentry(
+    `New transaction with hash: ${deposit.hash}, pure gas estimation: ${gasLimitWithoutBuffer}, gas estimation with buffer: ${gasLimitWithBuffer}`
+  );
 
   logger.log('[holy savings deposit] response', deposit);
   currentRap.actions[index].transaction.hash = deposit.hash;
