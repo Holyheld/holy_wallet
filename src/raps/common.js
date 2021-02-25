@@ -122,6 +122,7 @@ export const executeRap = async (wallet, rap) => {
       }
     } catch (error) {
       logger.sentry('[5 INNER] error running action');
+      logger.log('error: ', error);
       captureException(error);
       analytics.track('Rap failed', {
         category: 'raps',

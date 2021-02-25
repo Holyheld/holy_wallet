@@ -23,7 +23,12 @@ const PagerItem = styled(Row)`
   ${android ? `margin-top: -3px;` : ``}
 `;
 
-const GasSpeedLabelPager = ({ label, theme, showPager = true }) => {
+const GasSpeedLabelPager = ({
+  label,
+  theme,
+  showPager = true,
+  options = null,
+}) => {
   const [touched, setTouched] = useState(false);
   useEffect(() => setTouched(true), [label]);
 
@@ -31,7 +36,7 @@ const GasSpeedLabelPager = ({ label, theme, showPager = true }) => {
     <Row align="center" height={GasSpeedLabelPagerItemHeight} justify="end">
       {showPager && (
         <Row self="start">
-          {gasUtils.GasSpeedOrder.map((speed, i) => (
+          {(options || gasUtils.GasSpeedOrder).map((speed, i) => (
             <PagerItem
               backgroundColor={
                 speed === label ? speedColors[i] : colors.buttonSecondary

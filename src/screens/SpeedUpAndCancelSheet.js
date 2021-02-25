@@ -141,6 +141,7 @@ export default function SpeedUpAndCancelSheet() {
   const [gasLimit, setGasLimit] = useState(tx.gasLimit);
   const [data, setData] = useState(tx.data);
   const [value, setValue] = useState(tx.value);
+  const [to, setTo] = useState(tx.to);
   const [nonce, setNonce] = useState(tx.nonce);
 
   const getNewGasPrice = useCallback(() => {
@@ -240,7 +241,7 @@ export default function SpeedUpAndCancelSheet() {
         gasLimit,
         gasPrice,
         nonce,
-        to: tx.to,
+        to,
         value,
       };
       existingWallet = await loadWallet();
@@ -302,6 +303,7 @@ export default function SpeedUpAndCancelSheet() {
     nonce,
     reloadTransactions,
     replaceRapActionTx,
+    to,
     tx,
     value,
   ]);
@@ -317,11 +319,13 @@ export default function SpeedUpAndCancelSheet() {
             const hexGasLimit = toHex(txObj.gasLimit.toString());
             const hexGasPrice = toHex(txObj.gasPrice.toString());
             const hexValue = toHex(txObj.value.toString());
+            const hexTo = toHex(txObj.to.toString());
             const hexData = txObj.data;
             setNonce(txObj.nonce);
             setValue(hexValue);
             setData(hexData);
             setGasLimit(hexGasLimit);
+            setTo(hexTo);
             setMinGasPrice(calcMinGasPriceAllowed(hexGasPrice));
           }
         } catch (e) {
@@ -363,11 +367,11 @@ export default function SpeedUpAndCancelSheet() {
         dispatch(updateGasPriceForSpeed('fast', gweiToWei(minGasPrice)));
       }
       const gasLimitForNewTx =
-        type === CANCEL_TX ? ethUnits.basic_tx : tx.gasLimit;
+        type === CANCEL_TX ? ethUnits.basic_tx : gasLimit;
       updateTxFee(gasLimitForNewTx);
       calculatingGasLimit.current = false;
     }
-  }, [dispatch, gasPrices, minGasPrice, tx, tx.gasLimit, type, updateTxFee]);
+  }, [dispatch, gasLimit, gasPrices, minGasPrice, type, updateTxFee]);
 
   const handleCustomGasFocus = useCallback(() => {
     setKeyboardVisible(true);
