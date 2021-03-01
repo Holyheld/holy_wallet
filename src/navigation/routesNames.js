@@ -48,7 +48,7 @@ const Routes = {
   SUPPORTED_COUNTRIES_MODAL_SCREEN: 'SupportedCountriesModalScreen',
   SWAP_DETAILS_SCREEN: 'SwapDetailsScreen',
   SWIPE_LAYOUT: 'SwipeLayout',
-  TREASURY_CLAIM_MODAL: 'TreasuryClaimModal',
+  TREASURY_BURN_MODAL: 'TreasuryBurnModal',
   TREASURY_SHEET: 'TreasurySheet',
   WALLET_CONNECT_APPROVAL_SHEET: 'WalletConnectApprovalSheet',
   WALLET_CONNECT_REDIRECT_SHEET: 'WalletConnectRedirectSheet',
@@ -71,7 +71,7 @@ export const NATIVE_ROUTES = [
   Routes.SAVINGS_SHEET,
   Routes.SAVINGS_WITHDRAW_MODAL,
   Routes.SAVINGS_DEPOSIT_MODAL,
-  Routes.TREASURY_CLAIM_MODAL,
+  Routes.TREASURY_BURN_MODAL,
   Routes.TREASURY_SHEET,
   ...(isNativeStackAvailable
     ? [

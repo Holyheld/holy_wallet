@@ -48,16 +48,16 @@ import logger from 'logger';
 const AnimatedFloatingPanels = Animated.createAnimatedComponent(FloatingPanels);
 const Wrapper = ios ? KeyboardFixedOpenLayout : Fragment;
 
-const TreasuryClaimModalWrapper = () => {
+const TreasuryBurnModalWrapper = () => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   android && useStatusBarManaging();
   const { params } = useRoute();
   const balance = params?.balance;
   const testID = params?.testID;
-  return <TreasuryClaimModal balance={balance} testID={testID} />;
+  return <TreasuryBurnModal balance={balance} testID={testID} />;
 };
 
-const TreasuryClaimModal = ({ balance, testID }) => {
+const TreasuryBurnModal = ({ balance, testID }) => {
   const {
     navigate,
     setParams,
@@ -361,4 +361,4 @@ const TreasuryClaimModal = ({ balance, testID }) => {
   );
 };
 
-export default TreasuryClaimModalWrapper;
+export default TreasuryBurnModalWrapper;

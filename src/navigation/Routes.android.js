@@ -25,7 +25,7 @@ import SendSheet from '../screens/SendSheet';
 import SettingsModal from '../screens/SettingsModal';
 import SpeedUpAndCancelSheet from '../screens/SpeedUpAndCancelSheet';
 import TransactionConfirmationScreen from '../screens/TransactionConfirmationScreen';
-import TreasuryClaimModalWrapper from '../screens/TreasuryClaimModal';
+import TreasuryBurnModalWrapper from '../screens/TreasuryBurnModal';
 import TreasurySheet from '../screens/TreasurySheet';
 import WalletConnectApprovalSheet from '../screens/WalletConnectApprovalSheet';
 import WalletConnectRedirectSheet from '../screens/WalletConnectRedirectSheet';
@@ -215,8 +215,8 @@ function MainNavigator() {
         options={bottomSheetPreset}
       />
       <Stack.Screen
-        component={TreasuryClaimModalWrapper}
-        name={Routes.TREASURY_CLAIM_MODAL}
+        component={TreasuryBurnModalWrapper}
+        name={Routes.TREASURY_BURN_MODAL}
         options={exchangePreset}
       />
       <Stack.Screen

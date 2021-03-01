@@ -157,7 +157,7 @@ const TreasurySheet = () => {
 
   const onClaim = useCallback(() => {
     if (!isReadOnlyWallet) {
-      navigate(Routes.TREASURY_CLAIM_MODAL, {
+      navigate(Routes.TREASURY_BURN_MODAL, {
         params: {
           screen: Routes.MAIN_EXCHANGE_SCREEN,
         },
