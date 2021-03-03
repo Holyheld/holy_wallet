@@ -130,7 +130,7 @@ TreasuryBankListHeader.propTypes = {
 TreasuryBankListHeader.defaultProps = {
   emoji: 'bank',
   showSumValue: false,
-  title: 'Treasury Bank',
+  title: 'Smart Treasury',
   treasuryBankSumValue: '0',
 };
 

@@ -10,9 +10,9 @@ import WalletOption from '../components/change-wallet/WalletOption';
 import TreasuryCoinRow from '../components/coin-row/TreasuryCoinRow';
 import TreasuryCoinRowSecondary from '../components/coin-row/TreasuryCoinRowSecondary';
 import { Centered, Column, RowWithMargins } from '../components/layout';
-import SavingsIcon from '../components/savings/SavingsIcon';
 import { SheetTitle, SlackSheet } from '../components/sheet';
 import { DollarFigure, Text } from '../components/text';
+import TreasuryIcon from '../components/treasury-bank/TreasuryIcon';
 import TreasuryPredictionStepper from '../components/treasury-bank/TreasuryPredictionStepper';
 import TreasurySheetEmptyState from '../components/treasury-bank/TreasurySheetEmptyState';
 import { greaterThan, multiply } from '../helpers/utilities';
@@ -244,7 +244,9 @@ const TreasurySheet = () => {
           <Fragment>
             {android && <Whitespace />}
             <Column height={headerHeight} justify="space-between">
-              <SheetTitle>TREASURY</SheetTitle>
+              <SheetTitle color={colors.textColorMuted}>
+                SMART TREASURY
+              </SheetTitle>
             </Column>
 
             <ManageButton
@@ -303,7 +305,7 @@ const TreasurySheet = () => {
                     address={usdcAsset.address}
                     coinIconRenderer={() => (
                       <RowWithMargins marginLeft={0} width={40}>
-                        <SavingsIcon size={35} />
+                        <TreasuryIcon size={35} />
                       </RowWithMargins>
                     )}
                     editMode

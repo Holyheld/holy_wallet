@@ -3,7 +3,8 @@ import styled from 'styled-components/primitives';
 import APYPill from '../APYPill';
 import { ButtonPressAnimation } from '../animations';
 import { Column, FlexItem, Row, RowWithMargins } from '../layout';
-import { Emoji, Text } from '../text';
+import { Text } from '../text';
+import TreasuryIcon from '../treasury-bank/TreasuryIcon';
 import BalanceText from './BalanceText';
 import CoinName from './CoinName';
 import { colors, padding } from '@holyheld-com/styles';
@@ -71,7 +72,9 @@ const TopRow = ({ balance, symbol }) => (
 const TreasuryCoinRow = ({ balance, symbol, share, additionalShare }) => (
   <ButtonPressAnimation disabled onPress={() => {}} scaleTo={1.02}>
     <Container>
-      <Emoji name="flag_united_states" size={25} />
+      <RowWithMargins width={31}>
+        <TreasuryIcon size={35} />
+      </RowWithMargins>
       <Content justify="center">
         <Row align="center" {...(android && { styles: { height: 50 } })}>
           <TopRow balance={balance} symbol={symbol} />

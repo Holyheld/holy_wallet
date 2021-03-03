@@ -345,7 +345,7 @@ function CurrencySelectModal() {
               isSearching={isSearching}
               onChangeText={setSearchQuery}
               onFocus={handleFocus}
-              placeholder="Search Uniswap"
+              placeholder="Search tokens"
               ref={searchInputRef}
               searchQuery={searchQuery}
               testID="currency-select-search"

@@ -4,7 +4,6 @@ import React, { useCallback, useMemo } from 'react';
 import { StyleSheet } from 'react-native';
 import styled from 'styled-components/primitives';
 import { greaterThan } from '../../helpers/utilities';
-import { useNavigation } from '../../navigation/Navigation';
 
 import Routes from '../../navigation/routesNames';
 import APYPill from '../APYPill';
@@ -13,6 +12,7 @@ import { Centered, InnerBorder, Row, RowWithMargins } from '../layout';
 import { GradientText, Text } from '../text';
 import TreasuryIcon from './TreasuryIcon';
 import { useDimensions } from '@holyheld-com/hooks';
+import { useNavigation } from '@holyheld-com/navigation';
 import { colors, padding, position, shadow } from '@holyheld-com/styles';
 import ShadowStack from 'react-native-shadow-stack';
 
