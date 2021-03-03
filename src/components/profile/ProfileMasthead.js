@@ -1,16 +1,12 @@
 import Clipboard from '@react-native-community/clipboard';
-import { find, get } from 'lodash';
-import React, { useCallback, useMemo, useRef } from 'react';
+import { find } from 'lodash';
+import React, { useCallback, useRef } from 'react';
 import ImagePicker from 'react-native-image-crop-picker';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components/primitives';
 import { walletsSetSelected, walletsUpdate } from '../../redux/wallets';
-import { HOLY_V1_ADDRESS } from '../../references/holy';
 import Divider from '../Divider';
-import { Alert } from '../alerts';
 import { ButtonPressAnimation } from '../animations';
-import { RainbowButton } from '../buttons';
-import RainbowButtonTypes from '../buttons/rainbow-button/RainbowButtonTypes';
 import { FloatingEmojis } from '../floating-emojis';
 import { Icon } from '../icons';
 import { Centered, Column, Row, RowWithMargins } from '../layout';
@@ -23,8 +19,6 @@ import useExperimentalFlag, {
 import showWalletErrorAlert from '@holyheld-com/helpers/support';
 import {
   useAccountProfile,
-  useAccountSettings,
-  useAsset,
   useDimensions,
   useWallets,
   //useWalletSectionsData,
@@ -66,15 +60,6 @@ const AccountName = styled(TruncatedText).attrs({
   padding-right: 6;
 `;
 
-const MigrateButton = styled(RainbowButton).attrs({
-  label: 'Migrate Holy',
-  overflowMargin: 30,
-  skipTopMargin: true,
-  width: 200,
-})`
-  margin-top: 16;
-`;
-
 const DropdownArrow = styled(Centered)`
   height: 9;
   margin-top: 11;
@@ -93,20 +78,7 @@ export default function ProfileMasthead({
   recyclerListRef,
   showBottomDivider = true,
 }) {
-  const { wallets, selectedWallet, isDamaged, isReadOnlyWallet } = useWallets();
-  const { network } = useAccountSettings();
-
-  const holyCoinV1 = {
-    address: HOLY_V1_ADDRESS(network), // from testnet
-    type: 'token',
-  };
-
-  const holyV1Asset = useAsset(holyCoinV1);
-
-  const isMigrationButton = useMemo(() => {
-    const holyV1Balance = get(holyV1Asset, 'balance.amount', '0');
-    return holyV1Balance !== '0';
-  }, [holyV1Asset]);
+  const { wallets, selectedWallet, isDamaged } = useWallets();
 
   const onNewEmoji = useRef();
   const setOnNewEmoji = useCallback(
@@ -227,16 +199,6 @@ export default function ProfileMasthead({
     navigate(Routes.RECEIVE_MODAL);
   }, [navigate, isDamaged]);
 
-  const handleMigrateHoly = useCallback(() => {
-    if (!isReadOnlyWallet) {
-      navigate(Routes.HOLY_MIGRATE_MODAL, {
-        holyV1Asset,
-      });
-    } else {
-      Alert.alert(`You need to import the wallet in order to do this`);
-    }
-  }, [navigate, isReadOnlyWallet, holyV1Asset]);
-
   const handlePressChangeWallet = useCallback(() => {
     navigate(Routes.CHANGE_WALLET_SHEET);
   }, [navigate]);
@@ -252,7 +214,7 @@ export default function ProfileMasthead({
   }, [accountAddress, isDamaged]);
 
   return (
-    <Column align="center" height={260} marginBottom={24} marginTop={0}>
+    <Column align="center" height={180} marginBottom={24} marginTop={0}>
       <AvatarCircle
         accountColor={accountColor}
         accountSymbol={accountSymbol}
@@ -301,12 +263,6 @@ export default function ProfileMasthead({
           }}
         />
       </RowWithMargins>
-
-      <MigrateButton
-        disabled={!isMigrationButton}
-        onPress={handleMigrateHoly}
-        type={RainbowButtonTypes.addCash}
-      />
 
       {showBottomDivider && <ProfileMastheadDivider />}
     </Column>
