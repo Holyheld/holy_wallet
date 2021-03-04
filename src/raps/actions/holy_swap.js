@@ -39,7 +39,10 @@ export const holySwapEstimation = async ({
       '[holy swap estimation] input amount or transfer data is null - return basic value'
     );
 
-    return ethUnits.basic_holy_swap;
+    return {
+      gasLimit: ethUnits.basic_holy_swap,
+      gasLimitWithBuffer: ethUnits.basic_holy_swap,
+    };
   }
 
   const contractAddress = HOLY_HAND_ADDRESS(network);

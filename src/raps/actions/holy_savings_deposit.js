@@ -42,7 +42,10 @@ export const holySavingsDepositEstimation = async ({
       '[holy savings deposit estimation] input amount or transfer data is null - return basic value'
     );
 
-    return ethUnits.basic_holy_savings_deposit;
+    return {
+      gasLimit: ethUnits.basic_holy_savings_deposit,
+      gasLimitWithBuffer: ethUnits.basic_holy_savings_deposit,
+    };
   }
 
   const contractAddress = HOLY_HAND_ADDRESS(network);

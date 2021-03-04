@@ -479,6 +479,7 @@ const HolySwapModal = ({ defaultInputCurrency, testID }) => {
               testID={testID + '-input'}
             />
             <ExchangeOutputField
+              debounce={700}
               onFocus={handleFocus}
               onPressSelectOutputCurrency={navigateToSelectOutputCurrency}
               outputAmount={outputAmountDisplay}

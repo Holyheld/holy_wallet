@@ -35,6 +35,7 @@ const FakeNotchThing = styled(ShadowStack).attrs({
 `;
 
 export default function ExchangeOutputField({
+  debounce,
   onFocus,
   onPressSelectOutputCurrency,
   outputAmount,
@@ -51,6 +52,7 @@ export default function ExchangeOutputField({
       <ExchangeField
         address={outputCurrencyAddress}
         amount={outputAmount}
+        debounce={debounce}
         disableCurrencySelection={disableCurrencySelection}
         onFocus={onFocus}
         onPressSelectCurrency={onPressSelectOutputCurrency}
