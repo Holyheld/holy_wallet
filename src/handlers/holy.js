@@ -5,14 +5,14 @@ import networkTypes from '../helpers/networkTypes';
 import {
   convertRawAmountToDecimalFormat,
   divide,
-  greaterThan,
+  // greaterThan,
   multiply,
 } from '../helpers/utilities';
 import {
   holyUpdateBonusDPY,
   holyUpdateBonusRate,
   holyUpdateEarlyLPBonusAmount,
-  holyUpdateEarlyLPBonusShow,
+  // holyUpdateEarlyLPBonusShow,
   holyUpdateFullCap,
   holyUpdateSavingsAPY,
   holyUpdateSavingsBalanceUCDS,
@@ -117,15 +117,15 @@ const refreshHolyEarlyLPBonus = () => async (dispatch, getState) => {
     logger.log('HOLY amount caps: ', amountCap);
     //dispatch(holyUpdateFullCap('500'));
     dispatch(holyUpdateFullCap(amountCap.toString()));
-    dispatch(
-      holyUpdateEarlyLPBonusShow(greaterThan(amountCap.toString(), '0'))
-    );
+    // dispatch(
+    //   holyUpdateEarlyLPBonusShow(greaterThan(amountCap.toString(), '0'))
+    // );
   } catch (error) {
     logger.log('error refreshing HOLY bonus amount caps');
     logger.log(error);
     captureException(error);
     dispatch(holyUpdateFullCap('0'));
-    dispatch(holyUpdateEarlyLPBonusShow(false));
+    // dispatch(holyUpdateEarlyLPBonusShow(false));
   }
 
   try {
