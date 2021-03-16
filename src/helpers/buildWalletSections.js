@@ -25,6 +25,7 @@ import {
   buildUniqueTokenList,
 } from './assets';
 //import networkTypes from './networkTypes';
+import networkTypes from './networkTypes';
 import {
   add,
   convertAmountToNativeAmount,
@@ -379,8 +380,7 @@ const withBalanceSection = (
   currentAction,
   uniswapTotal,
   holySavings,
-  holyTreasury,
-  holyBonus
+  holyTreasury
 ) => {
   const { assets, totalBalancesValue } = buildCoinsList(
     allAssets,
@@ -393,20 +393,23 @@ const withBalanceSection = (
 
   let balanceSectionData = [];
 
-  //if (networkTypes.mainnet === network) {
-  balanceSectionData.push(holySavings);
-  //}
-
-  //if (networkTypes.mainnet === network) {
-  const showTreasury = false;
-  if (showTreasury) {
-    balanceSectionData.push(holyTreasury);
+  if (networkTypes.mainnet === network) {
+    balanceSectionData.push(holySavings);
   }
-  //}
 
-  if (holyBonus.show) {
-    balanceSectionData.push(holyBonus);
+  if (networkTypes.mainnet === network) {
+    const showTreasury = false;
+    if (showTreasury) {
+      balanceSectionData.push(holyTreasury);
+    }
   }
+
+  // disabled Early LP bonus section
+  // if (networkTypes.mainnet === network) {
+  //   if (holyBonus.show) {
+  //     balanceSectionData.push(holyBonus);
+  //   }
+  // }
 
   balanceSectionData.push(...assets);
 

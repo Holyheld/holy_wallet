@@ -1,19 +1,11 @@
 import { Contract } from '@ethersproject/contracts';
-import { captureException } from '@sentry/react-native';
-import BigNumber from 'bignumber.js';
 import networkTypes from '../helpers/networkTypes';
 import {
   convertRawAmountToDecimalFormat,
   divide,
-  // greaterThan,
   multiply,
 } from '../helpers/utilities';
 import {
-  holyUpdateBonusDPY,
-  holyUpdateBonusRate,
-  holyUpdateEarlyLPBonusAmount,
-  // holyUpdateEarlyLPBonusShow,
-  holyUpdateFullCap,
   holyUpdateSavingsAPY,
   holyUpdateSavingsBalanceUCDS,
   updateHHInWETHPrice,
@@ -22,12 +14,8 @@ import {
 import {
   getUSDCAsset,
   HH_V2_ADDRESS,
-  HOLY_PASSAGE_ABI,
-  HOLY_PASSAGE_ADDRESS,
   HOLY_POOL_ABI,
   HOLY_SAVINGS_POOL_ADDRESS,
-  HOLY_VISOR_ABI,
-  HOLY_VISOR_ADDRESS,
   SUSHISWAP_HH_WETH_POOL_ADDRESS,
   WETH_TOKEN_ADDRESS,
 } from '../references/holy';
@@ -48,6 +36,7 @@ const ERC20SimpleABI = [
   'event Transfer(address indexed from, address indexed to, uint amount)',
 ];
 
+/*
 const refreshHolyEarlyLPBonus = () => async (dispatch, getState) => {
   const { network, accountAddress } = getState().settings;
 
@@ -117,15 +106,15 @@ const refreshHolyEarlyLPBonus = () => async (dispatch, getState) => {
     logger.log('HOLY amount caps: ', amountCap);
     //dispatch(holyUpdateFullCap('500'));
     dispatch(holyUpdateFullCap(amountCap.toString()));
-    // dispatch(
-    //   holyUpdateEarlyLPBonusShow(greaterThan(amountCap.toString(), '0'))
-    // );
+    dispatch(
+      holyUpdateEarlyLPBonusShow(greaterThan(amountCap.toString(), '0'))
+    );
   } catch (error) {
     logger.log('error refreshing HOLY bonus amount caps');
     logger.log(error);
     captureException(error);
     dispatch(holyUpdateFullCap('0'));
-    // dispatch(holyUpdateEarlyLPBonusShow(false));
+    dispatch(holyUpdateEarlyLPBonusShow(false));
   }
 
   try {
@@ -146,6 +135,7 @@ const refreshHolyEarlyLPBonus = () => async (dispatch, getState) => {
     dispatch(holyUpdateBonusDPY('0'));
   }
 };
+*/
 
 export const getHHPriceInWETH = async ({ network, accountAddress }) => {
   if (network !== networkTypes.mainnet) {
@@ -401,6 +391,7 @@ export const getTransferData = async (
 };
 
 export const refreshHoly = () => async dispatch => {
-  dispatch(refreshHolyEarlyLPBonus());
+  // disabled holy early bonus
+  //dispatch(refreshHolyEarlyLPBonus());
   dispatch(refreshHolySavings());
 };
