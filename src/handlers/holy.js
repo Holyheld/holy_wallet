@@ -50,6 +50,15 @@ const ERC20SimpleABI = [
 
 const refreshHolyEarlyLPBonus = () => async (dispatch, getState) => {
   const { network, accountAddress } = getState().settings;
+
+  if (network !== networkTypes.mainnet) {
+    logger.log(
+      'refresh Holy LP Bonus is disabled for not ethereum mainnet: ',
+      network
+    );
+    return;
+  }
+
   const contractAddress = HOLY_PASSAGE_ADDRESS(network);
   const contractABI = HOLY_PASSAGE_ABI;
 
@@ -139,6 +148,14 @@ const refreshHolyEarlyLPBonus = () => async (dispatch, getState) => {
 };
 
 export const getHHPriceInWETH = async ({ network, accountAddress }) => {
+  if (network !== networkTypes.mainnet) {
+    logger.log(
+      'get HH price in WETH is disabled for not ethereum mainnet: ',
+      network
+    );
+    throw new Error('no HH price in WETH in this network');
+  }
+
   const contractAddressHH = HH_V2_ADDRESS(network);
   const contractAddressWETH = WETH_TOKEN_ADDRESS(network);
 
@@ -190,6 +207,13 @@ export const getHHPriceInWETH = async ({ network, accountAddress }) => {
 
 export const refreshHHinWETHPrice = () => async (dispatch, getState) => {
   const { network, accountAddress } = getState().settings;
+  if (network !== networkTypes.mainnet) {
+    logger.log(
+      'refresh HH price is disabled for not ethereum mainnet: ',
+      network
+    );
+    return;
+  }
   try {
     const { HHinWETHPrice } = await getHHPriceInWETH({
       accountAddress,
@@ -206,6 +230,14 @@ export const refreshHHinWETHPrice = () => async (dispatch, getState) => {
 
 export const refreshHHNativePrice = () => async (dispatch, getState) => {
   const { assets } = getState().data;
+  const { network } = getState().settings;
+  if (network !== networkTypes.mainnet) {
+    logger.log(
+      'refresh HH native price is disabled for not ethereum mainnet: ',
+      network
+    );
+    return;
+  }
   logger.log('refreshHHNativePrice...');
 
   const ethNativePrice = ethereumUtils.getEthPriceUnit(assets);
@@ -235,6 +267,14 @@ export const refreshHolySavings = () => async (dispatch, getState) => {
   logger.log('refreshing Holy Savings');
 
   const { network, accountAddress } = getState().settings;
+
+  if (network !== networkTypes.mainnet) {
+    logger.log(
+      'refresh Holy savings is disabled for not ethereum mainnet: ',
+      network
+    );
+    return;
+  }
 
   const poolCurrency = getUSDCAsset(network);
 

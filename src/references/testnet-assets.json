@@ -210,5 +210,116 @@
         },
         "quantity": 0
       }
+    ],
+    "matic": [
+      {
+        "asset": {
+          "asset_code": "eth",
+          "coingecko_id": "ethereum",
+          "decimals": 18,
+          "icon_url": "https://s3.amazonaws.com/icons.assets/ETH.png",
+          "name": "Ether",
+          "price": {
+            "changed_at": 1582568575,
+            "relative_change_24h": -4.586615622469276,
+            "value": 259.2
+          },
+          "symbol": "ETH"
+        },
+        "quantity": 0
+      },
+      {
+        "asset": {
+          "asset_code": "0x8f3Cf7ad23Cd3CaDbD9735AFf958023239c6A063",
+          "coingecko_id": "DAI",
+          "decimals": 18,
+          "icon_url": "https://s3.amazonaws.com/icons.assets/DAI_mcd.png",
+          "name": "DAI stablecoin",
+          "price": {
+            "changed_at": 1582562452,
+            "relative_change_24h": 0.8470466197462612,
+            "value": 1
+          },
+          "symbol": "DAI"
+        }
+      },
+      {
+        "asset": {
+          "asset_code": "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174",
+          "coingecko_id": "usd-coin",
+          "decimals": 6,
+          "icon_url": "https://s3.amazonaws.com/icons.assets/USDC_mcd.png",
+          "name": "USDc stablecoin",
+          "price": {
+            "changed_at": 1582562452,
+            "relative_change_24h": 0.8470466197462612,
+            "value": 1
+          },
+          "symbol": "usdc"
+        }
+      },
+      {
+        "asset": {
+          "asset_code": "0x521CddC0CBa84F14c69C1E99249F781AA73Ee0BC",
+          "coingecko_id": "hh",
+          "decimals": 18,
+          "icon_url": "https://assets.coingecko.com/coins/images/13719/small/hh.png",
+          "name": "hh",
+          "price": {
+            "changed_at": 1582562452,
+            "relative_change_24h": 0.8470466197462612,
+            "value": 1
+          },
+          "symbol": "HH"
+        }
+      }
+    ],
+    "binance": [
+      {
+        "asset": {
+          "asset_code": "eth",
+          "coingecko_id": "ethereum",
+          "decimals": 18,
+          "icon_url": "https://s3.amazonaws.com/icons.assets/ETH.png",
+          "name": "Ether",
+          "price": {
+            "changed_at": 1582568575,
+            "relative_change_24h": -4.586615622469276,
+            "value": 259.2
+          },
+          "symbol": "ETH"
+        },
+        "quantity": 0
+      },
+      {
+        "asset": {
+          "asset_code": "0x1af3f329e8be154074d8769d1ffa4ee058b1dbc3",
+          "coingecko_id": "DAI",
+          "decimals": 18,
+          "icon_url": "https://s3.amazonaws.com/icons.assets/DAI_mcd.png",
+          "name": "DAI stablecoin",
+          "price": {
+            "changed_at": 1582562452,
+            "relative_change_24h": 0.8470466197462612,
+            "value": 1
+          },
+          "symbol": "DAI"
+        }
+      },
+      {
+        "asset": {
+          "asset_code": "0x8ac76a51cc950d9822d68b83fe1ad97b32cd580d",
+          "coingecko_id": "usd-coin",
+          "decimals": 6,
+          "icon_url": "https://s3.amazonaws.com/icons.assets/USDC_mcd.png",
+          "name": "USDc stablecoin",
+          "price": {
+            "changed_at": 1582562452,
+            "relative_change_24h": 0.8470466197462612,
+            "value": 1
+          },
+          "symbol": "usdc"
+        }
+      }
     ]
 }

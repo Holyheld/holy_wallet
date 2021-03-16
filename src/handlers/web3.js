@@ -36,10 +36,19 @@ export const web3SetHttpProvider = async network => {
   if (network.startsWith('http://')) {
     web3Provider = new JsonRpcProvider(network, NetworkTypes.mainnet);
   } else {
-    web3Provider = new JsonRpcProvider(
-      replace(infuraUrl, 'network', network),
-      network
-    );
+    switch (network) {
+      case NetworkTypes.matic:
+        web3Provider = new JsonRpcProvider('https://rpc-mainnet.matic.network');
+        break;
+      case NetworkTypes.binance:
+        web3Provider = new JsonRpcProvider('https://bsc-dataseed.binance.org');
+        break;
+      default:
+        web3Provider = new JsonRpcProvider(
+          replace(infuraUrl, 'network', network),
+          network
+        );
+    }
   }
   return web3Provider.ready;
 };

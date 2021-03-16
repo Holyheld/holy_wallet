@@ -2,8 +2,7 @@ import { get } from 'lodash';
 import React, { Fragment, useCallback } from 'react';
 import { Linking } from 'react-native';
 import styled from 'styled-components/primitives';
-import networkInfo from '../helpers/networkInfo';
-import networkTypes from '../helpers/networkTypes';
+import networkInfo, { isMainnet } from '../helpers/networkInfo';
 import showWalletErrorAlert from '../helpers/support';
 import { useDimensions, useWallets } from '../hooks';
 import { magicMemo } from '../utils';
@@ -108,7 +107,7 @@ const AddFundsInterstitial = ({ network, offsetY = 0 }) => {
   return (
     <Container style={buildInterstitialTransform(isSmallPhone, offsetY)}>
       <ButtonContainer>
-        {network === networkTypes.mainnet ? (
+        {isMainnet(network) ? (
           <Fragment>
             <Title>Fund your wallet with ETH</Title>
             <Paragraph>

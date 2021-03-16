@@ -47,6 +47,8 @@ const UNISWAP_V2_BASES = {
   [ChainId.RINKEBY]: [WETH[ChainId.RINKEBY]],
   [ChainId.GÖRLI]: [WETH[ChainId.GÖRLI]],
   [ChainId.KOVAN]: [WETH[ChainId.KOVAN]],
+  [ChainId.MATIC]: [WETH[ChainId.MATIC]],
+  [ChainId.BINANCE]: [WETH[ChainId.BINANCE]],
 };
 
 const PAIR_INTERFACE = new Interface(IUniswapV2PairABI);
@@ -61,6 +63,8 @@ const MULTICALL_NETWORKS: { [chainId in ChainId]: string } = {
   [ChainId.KOVAN]: '0x2cc8688C5f75E365aaEEb4ea8D6a480405A48D2A',
   [ChainId.RINKEBY]: '0x42Ad527de7d4e9d9d011aC45B31D8551f8Fe9821',
   [ChainId.GÖRLI]: '0x77dCa2C955b15e9dE4dbBCf1246B4B85b651e50e',
+  [ChainId.MATIC]: '0x', // todo: matic has no multicall yet
+  [ChainId.BINANCE]: '0x', // todo: binance has no multicall yet
 };
 
 export {

@@ -51,6 +51,32 @@ const networkInfo = {
     name: 'Goerli',
     value: networkTypes.goerli,
   },
+  [`${networkTypes.matic}`]: {
+    balance_checker_contract_address: '0x',
+    color: '#f6c343',
+    disabled: false,
+    exchange_enabled: false,
+    faucet_url: null,
+    name: 'MATIC',
+    value: networkTypes.matic,
+  },
+  [`${networkTypes.binance}`]: {
+    balance_checker_contract_address: '0x',
+    color: '#f6c343',
+    disabled: false,
+    exchange_enabled: false,
+    faucet_url: null,
+    name: 'Binance Smart Chain',
+    value: networkTypes.binance,
+  },
 };
 
 export default networkInfo;
+
+export const isMainnet = network => {
+  return (
+    network === networkTypes.mainnet ||
+    network === networkTypes.matic ||
+    network === networkTypes.binance
+  );
+};
