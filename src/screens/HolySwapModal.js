@@ -329,7 +329,10 @@ const HolySwapModal = ({ defaultInputCurrency, testID }) => {
 
   const handlePressMaxBalance = useCallback(async () => {
     updateInputAmount(maxInputBalance, true);
-  }, [updateInputAmount, maxInputBalance]);
+    if (inputFieldRef.current) {
+      inputFieldRef.current.setNativeProps({ selection: { end: 0, start: 0 } });
+    }
+  }, [updateInputAmount, maxInputBalance, inputFieldRef]);
 
   // Update input amount when max is set and the max input balance changed
   useEffect(() => {
